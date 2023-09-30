@@ -5,7 +5,7 @@ import '../../../app_data.dart';
 class TextThemeCollection {
   TextThemeCollection();
 
-  static const String _fontFamily = 'Montserrat';
+  static const String _fontFamily = 'Lato';
 
   String get fontFamily => _fontFamily;
 

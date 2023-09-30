@@ -38,8 +38,7 @@ class ButtonThemeCollection {
       );
 
   ButtonStyle get defaultTextButton => TextButton.styleFrom(
-        textStyle:
-            AppData.theme.text.s14w500.copyWith(color: AppData.colors.sky600),
+        textStyle: AppData.theme.text.s14w500.copyWith(color: Colors.white),
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       );

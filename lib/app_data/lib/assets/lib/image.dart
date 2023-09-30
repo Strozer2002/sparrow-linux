@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ImageCollection {
-  final String _defaultPath = 'assets/icons/';
+  final String _defaultPath = 'assets/';
 
   String _name(String name) => _defaultPath + name;
 
   // Example
-  Image authIcon({double? width, double? height, BoxFit? fit}) => Image.asset(
-        _name('auth_icon.png'),
+  Image rabbitBank({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('objects/rabbitBank.png'),
         width: width,
         height: height,
         fit: fit ?? BoxFit.contain,

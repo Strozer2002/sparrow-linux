@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 
 import '../app_data.dart';
 
@@ -13,7 +14,7 @@ class RoutesList {
 
   // Registration
 
-  String get _welcomeScreenName => 'welcomeScreen';
+  String get _welcomeScreenName => 'welcome';
   String get welcomeScreen => '/$_welcomeScreenName';
 }
 
@@ -77,7 +78,7 @@ class Routes {
     //     return null;
     //   }
     // },
-    initialLocation: AppData.routes.init,
+    initialLocation: AppData.routes.welcomeScreen,
 
     routes: [
       GoRoute(
@@ -85,6 +86,14 @@ class Routes {
         builder: (BuildContext context, GoRouterState state) {
           return const Scaffold();
         },
+        routes: [
+          GoRoute(
+            path: AppData.routes._welcomeScreenName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const WelcomeScreen();
+            },
+          ),
+        ],
       ),
     ],
   );
