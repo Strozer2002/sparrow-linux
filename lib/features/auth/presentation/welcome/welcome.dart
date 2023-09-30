@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome_bloc.dart';
@@ -99,14 +97,12 @@ class _WelcomeScreenState extends WelcomeBloc {
         return Padding(
           padding: const EdgeInsets.only(top: 9),
           child: GestureDetector(
-            onTap: () {
-              log("$selectedScreen");
-            },
-            child: const Text(
+            onTap: toManyMore,
+            child: Text(
               "and many more",
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.blue,
+                color: AppData.colors.middlePurple,
               ),
             ),
           ),
@@ -165,11 +161,7 @@ class _WelcomeScreenState extends WelcomeBloc {
                 ),
                 Expanded(
                   child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedScreen = 3;
-                      });
-                    },
+                    onPressed: toSkipScreens,
                     child: const Text(
                       "Skip",
                       style: TextStyle(
@@ -206,10 +198,7 @@ class _WelcomeScreenState extends WelcomeBloc {
                       fontWeight: FontWeight.bold,
                       color: AppData.colors.middlePurple,
                     ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        log("$selectedScreen");
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = toTermsOfUse,
                   ),
                 ],
               ),
@@ -220,11 +209,7 @@ class _WelcomeScreenState extends WelcomeBloc {
             child: MyElevatedButton(
               height: 48,
               width: double.infinity,
-              onPressed: () {
-                setState(() {
-                  selectedScreen = selectedScreen + 1;
-                });
-              },
+              onPressed: goNextScreen,
               child: const Text(
                 "Continue",
                 style: TextStyle(fontSize: 16),
@@ -239,26 +224,32 @@ class _WelcomeScreenState extends WelcomeBloc {
             padding: const EdgeInsets.symmetric(vertical: 26),
             child: Column(
               children: [
-                InfoButton(
-                  prefixIcon: AppData.assets.svg.plus,
-                  child: const Text(
-                    "Create New Address",
-                    style: TextStyle(fontSize: 16),
+                GestureDetector(
+                  onTap: toCreateNewAddress,
+                  child: InfoButton(
+                    prefixIcon: AppData.assets.svg.plus,
+                    child: const Text(
+                      "Create New Address",
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),
-                InfoButton(
-                    prefixIcon: AppData.assets.svg.import,
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Import Address",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        const SizedBox(width: 14),
-                        AppData.assets.svg.wallets,
-                      ],
-                    )),
+                GestureDetector(
+                  onTap: toImportAddress,
+                  child: InfoButton(
+                      prefixIcon: AppData.assets.svg.import,
+                      child: Row(
+                        children: [
+                          const Text(
+                            "Import Address",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          const SizedBox(width: 14),
+                          AppData.assets.svg.wallets,
+                        ],
+                      )),
+                ),
               ],
             ),
           )
