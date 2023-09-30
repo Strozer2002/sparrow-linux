@@ -36,6 +36,9 @@ dependencies:
   # Domain packages
   json_annotation: ^4.8.1
 
+  # App packages
+  hive_flutter: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
