@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/presentation/create_new_address/create_new_address.dart';
+import 'package:rabby/features/auth/presentation/created_success/created_success.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
@@ -29,6 +30,10 @@ class RoutesList {
   String get _seedPhraseScreenName => 'seedPhrase';
   String get seedPhraseScreen =>
       '$createNewAddressScreen/$_seedPhraseScreenName';
+
+  String get _createdSuccessScreenName => 'createdSuccess';
+  String get createdSuccessScreen =>
+      '$seedPhraseScreen/$_createdSuccessScreenName';
 }
 
 class Routes {
@@ -123,7 +128,18 @@ class Routes {
                         builder: (BuildContext context, GoRouterState state) {
                           return const SeedPhraseScreen();
                         },
-                        routes: const [],
+                        routes: [
+                          GoRoute(
+                            path: AppData.routes._createdSuccessScreenName,
+                            builder:
+                                (BuildContext context, GoRouterState state) {
+                              return CreatedSuccess(
+                                address: state.extra as String,
+                              );
+                            },
+                            routes: const [],
+                          ),
+                        ],
                       ),
                     ],
                   ),

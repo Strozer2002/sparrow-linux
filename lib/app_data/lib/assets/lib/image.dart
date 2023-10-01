@@ -12,4 +12,17 @@ class ImageCollection {
         height: height,
         fit: fit ?? BoxFit.contain,
       );
+
+  Image party({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('icons/party.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
+  Image pen({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('icons/pen.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
 }

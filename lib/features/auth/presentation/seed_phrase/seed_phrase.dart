@@ -16,7 +16,7 @@ class SeedPhraseScreen extends StatefulWidget {
 class _SeedPhraseScreenState extends SeedPhraseBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text("Create New Address"),
+      title: const Text("Backup Seed Phrase"),
       leading: IconButton(
         onPressed: () => context.pop(),
         icon: const Icon(
@@ -40,7 +40,7 @@ class _SeedPhraseScreenState extends SeedPhraseBloc {
         ),
       ),
       child: MainButton(
-        onPressed: () {},
+        onPressed: () => goNext(),
         child: const Text("I’ve Saved the Phrase"),
       ),
     );

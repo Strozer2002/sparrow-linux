@@ -8,12 +8,10 @@ part of 'user_auth_entity.dart';
 
 UserAuthEntity _$UserAuthEntityFromJson(Map<String, dynamic> json) =>
     UserAuthEntity(
-      token: json['token'] as String,
-      avatar: json['avatar'] as String?,
+      address: json['address'] as String,
     );
 
 Map<String, dynamic> _$UserAuthEntityToJson(UserAuthEntity instance) =>
     <String, dynamic>{
-      'token': instance.token,
-      'avatar': instance.avatar,
+      'address': instance.address,
     };

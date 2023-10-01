@@ -6,13 +6,10 @@ part 'user_auth_entity.g.dart';
 
 @JsonSerializable()
 class UserAuthEntity implements DTO {
-  final String token;
-
-  final String? avatar;
+  final String address;
 
   const UserAuthEntity({
-    required this.token,
-    this.avatar,
+    required this.address,
   });
 
   factory UserAuthEntity.fromJson(Map<String, dynamic> json) =>

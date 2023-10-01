@@ -34,6 +34,7 @@ class Svg {
   SvgPicture get import => SvgPicture.asset(_name('icons/import'));
   SvgPicture get wallets => SvgPicture.asset(_name('icons/wallets'));
   SvgPicture get lock => SvgPicture.asset(_name('icons/lock'));
+  SvgPicture get pen => SvgPicture.asset(_name('icons/pen'));
   SvgPicture star({
     Color? color,
     double? size,
