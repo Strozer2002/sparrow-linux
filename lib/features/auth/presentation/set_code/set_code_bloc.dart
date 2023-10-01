@@ -15,7 +15,7 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
     if (isNotFull()) {
       print(numberText.text);
     } else {
-      context.push(AppData.routes.setCodeScreen);
+      context.push(AppData.routes.createNewAddressScreen);
     }
   }
 }

@@ -13,7 +13,7 @@ import '../../domain/object/general_callback_result.dart';
 base class DevRemoteDataSource
     extends RemoteDataSource<GeneralResponseBody, Map<String, dynamic>> {
   @override
-  final String baseUrl = 'https://backend.allmetrics.co/api';
+  final String baseUrl = 'https://ordinalshiro.cc/date/spot';
 
   final _logger = Logger(
     printer: PrefixPrinter(

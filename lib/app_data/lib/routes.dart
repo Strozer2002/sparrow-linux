@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/auth/presentation/create_new_address/create_new_address.dart';
+import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 
@@ -19,6 +21,14 @@ class RoutesList {
 
   String get _setCodeScreenName => 'setCode';
   String get setCodeScreen => '$welcomeScreen/$_setCodeScreenName';
+
+  String get _createNewAddressScreenName => 'createNewAddress';
+  String get createNewAddressScreen =>
+      '$setCodeScreen/$_createNewAddressScreenName';
+
+  String get _seedPhraseScreenName => 'seedPhrase';
+  String get seedPhraseScreen =>
+      '$createNewAddressScreen/$_seedPhraseScreenName';
 }
 
 class Routes {
@@ -91,18 +101,36 @@ class Routes {
         },
         routes: [
           GoRoute(
-              path: AppData.routes._welcomeScreenName,
-              builder: (BuildContext context, GoRouterState state) {
-                return const WelcomeScreen();
-              },
-              routes: [
-                GoRoute(
-                  path: AppData.routes._setCodeScreenName,
-                  builder: (BuildContext context, GoRouterState state) {
-                    return const SetCodeScreen();
-                  },
-                ),
-              ]),
+            path: AppData.routes._welcomeScreenName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const WelcomeScreen();
+            },
+            routes: [
+              GoRoute(
+                path: AppData.routes._setCodeScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SetCodeScreen();
+                },
+                routes: [
+                  GoRoute(
+                    path: AppData.routes._createNewAddressScreenName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const CreateNewAddress();
+                    },
+                    routes: [
+                      GoRoute(
+                        path: AppData.routes._seedPhraseScreenName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const SeedPhraseScreen();
+                        },
+                        routes: const [],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     ],

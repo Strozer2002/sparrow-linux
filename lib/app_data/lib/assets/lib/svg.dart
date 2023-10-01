@@ -34,6 +34,15 @@ class Svg {
   SvgPicture get import => SvgPicture.asset(_name('icons/import'));
   SvgPicture get wallets => SvgPicture.asset(_name('icons/wallets'));
   SvgPicture get lock => SvgPicture.asset(_name('icons/lock'));
+  SvgPicture star({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/star'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
 
   SvgPicture rabbit({
     Color? color,

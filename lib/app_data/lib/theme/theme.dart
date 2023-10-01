@@ -49,7 +49,7 @@ class AppTheme {
         ),
         appBarTheme: AppBarTheme(
           surfaceTintColor: AppData.colors.backgroundColor,
-          backgroundColor: AppData.colors.sky600,
+          backgroundColor: AppData.colors.middlePurple,
           titleTextStyle: AppData.theme.text.s14w700.copyWith(
             color: Colors.white,
             fontSize: 20,
