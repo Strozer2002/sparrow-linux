@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:rabby/app_data/app_data.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 
 abstract class WelcomeBloc extends State<WelcomeScreen> {
@@ -34,6 +36,6 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
   }
 
   // logic for wallets
-  void toCreateNewAddress() {}
+  void toCreateNewAddress() => context.go(AppData.routes.setCodeScreen);
   void toImportAddress() {}
 }

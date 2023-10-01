@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyElevatedButton extends StatelessWidget {
+class MainButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final double? width;
   final double height;
@@ -8,7 +8,7 @@ class MyElevatedButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget child;
 
-  const MyElevatedButton({
+  const MainButton({
     Key? key,
     required this.onPressed,
     required this.child,

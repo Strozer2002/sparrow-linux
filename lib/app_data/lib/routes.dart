@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 
 import '../app_data.dart';
@@ -13,9 +14,11 @@ class RoutesList {
   final String init = '/';
 
   // Registration
-
   String get _welcomeScreenName => 'welcome';
-  String get welcomeScreen => '/$_welcomeScreenName';
+  String get welcomeScreen => '$init$_welcomeScreenName';
+
+  String get _setCodeScreenName => 'setCode';
+  String get setCodeScreen => '$welcomeScreen/$_setCodeScreenName';
 }
 
 class Routes {
@@ -88,11 +91,18 @@ class Routes {
         },
         routes: [
           GoRoute(
-            path: AppData.routes._welcomeScreenName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const WelcomeScreen();
-            },
-          ),
+              path: AppData.routes._welcomeScreenName,
+              builder: (BuildContext context, GoRouterState state) {
+                return const WelcomeScreen();
+              },
+              routes: [
+                GoRoute(
+                  path: AppData.routes._setCodeScreenName,
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const SetCodeScreen();
+                  },
+                ),
+              ]),
         ],
       ),
     ],

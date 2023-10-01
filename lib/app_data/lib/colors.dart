@@ -15,6 +15,7 @@ class ColorsCollection {
   Color get red040 => const Color(0xFFD94040);
 
   /// Основные цвета
+  Color get lightPurple50 => const Color(0xFFAAB5FF);
   Color get lightPurple => const Color(0xFF88ABFF);
   Color get middlePurple => const Color(0xFF7983FF);
   Color get sky700 => const Color(0xFF0369A1);

@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome_bloc.dart';
-import 'package:rabby/features/auth/widgets/custom_button.dart';
+import 'package:rabby/features/auth/widgets/main_button.dart';
 import 'package:rabby/features/auth/widgets/info_button.dart';
 
 import '../../../../app_data/app_data.dart';
@@ -206,7 +206,7 @@ class _WelcomeScreenState extends WelcomeBloc {
           )
         : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            child: MyElevatedButton(
+            child: MainButton(
               height: 48,
               width: double.infinity,
               onPressed: goNextScreen,
