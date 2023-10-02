@@ -1,3 +1,4 @@
+import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +8,11 @@ import '../../widgets/main_button.dart';
 import 'seed_phrase_bloc.dart';
 
 class SeedPhraseScreen extends StatefulWidget {
-  const SeedPhraseScreen({super.key});
+  final Mnemonic mnemonic;
+  const SeedPhraseScreen({
+    super.key,
+    required this.mnemonic,
+  });
 
   @override
   State<SeedPhraseScreen> createState() => _SeedPhraseScreenState();
@@ -40,7 +45,7 @@ class _SeedPhraseScreenState extends SeedPhraseBloc {
         ),
       ),
       child: MainButton(
-        onPressed: () => goNext(),
+        onPressed: () {},
         child: const Text("I’ve Saved the Phrase"),
       ),
     );
@@ -130,7 +135,7 @@ class _SeedPhraseScreenState extends SeedPhraseBloc {
   Widget get copyPhrase {
     return TextButton(
       onPressed: () {
-        Clipboard.setData(ClipboardData(text: mnemonic.sentence)).then((_) {
+        Clipboard.setData(ClipboardData(text: widget.mnemonic.sentence)).then((_) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Seed phrase was copied"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../app_data/app_data.dart';
 import '../../widgets/main_button.dart';
@@ -54,7 +55,7 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
         ),
       ),
       child: MainButton(
-        onPressed: () {},
+        onPressed: () => context.push(AppData.routes.createWalletScreenScreen),
         child: const Text("Done"),
       ),
     );

@@ -1,11 +1,7 @@
 class AuthCredentials {
-  final String token;
-  final String subdomain;
-  final String role;
+  final String address;
 
   const AuthCredentials({
-    required this.token,
-    required this.subdomain,
-    required this.role,
+    required this.address,
   });
 }

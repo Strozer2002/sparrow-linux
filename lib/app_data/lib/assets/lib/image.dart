@@ -25,4 +25,17 @@ class ImageCollection {
         height: height,
         fit: fit ?? BoxFit.contain,
       );
+
+  Image walletIcon({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('icons/walletIcon.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
+  Image rabbyIcon({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('icons/rabbyIcon.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
 }

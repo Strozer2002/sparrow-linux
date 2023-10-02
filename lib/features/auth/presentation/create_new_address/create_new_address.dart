@@ -38,22 +38,31 @@ class _CreateNewAddressState extends CreateNewAddressBloc {
         ),
         SizedBox(height: 24),
         Option(
-          text: "If i lose my seed phrase, my assets will be lost forever.",
+          child: Text(
+            "If i lose my seed phrase, my assets will be lost forever.",
+            style: TextStyle(fontSize: 14),
+          ),
         ),
         SizedBox(height: 10),
         Option(
-          text:
-              "If share my seed phrase with others, my assets will be stolen.",
+          child: Text(
+            "If share my seed phrase with others, my assets will be stolen.",
+            style: TextStyle(fontSize: 14),
+          ),
         ),
         SizedBox(height: 10),
         Option(
-          text:
-              "The seed phrase is only stored on my computer, and Rabby has no access to it.",
+          child: Text(
+            "The seed phrase is only stored on my computer, and Rabby has no access to it.",
+            style: TextStyle(fontSize: 14),
+          ),
         ),
         SizedBox(height: 10),
         Option(
-          text:
-              "If I uninstall Rabby without backing up the seed phrase, Rabby cannot retrive it for me.",
+          child: Text(
+            "If I uninstall Rabby without backing up the seed phrase, Rabby cannot retrive it for me.",
+            style: TextStyle(fontSize: 14),
+          ),
         ),
       ],
     );

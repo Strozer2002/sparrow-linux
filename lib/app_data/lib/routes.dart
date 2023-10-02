@@ -1,6 +1,8 @@
+import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/presentation/create_new_address/create_new_address.dart';
+import 'package:rabby/features/auth/presentation/create_wallet/create_wallet.dart';
 import 'package:rabby/features/auth/presentation/created_success/created_success.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
@@ -16,12 +18,18 @@ final GlobalKey<NavigatorState> shellNavigator = GlobalKey(debugLabel: 'shell');
 class RoutesList {
   final String init = '/';
 
-  // Registration
+  // WelcomeScreens
   String get _welcomeScreenName => 'welcome';
   String get welcomeScreen => '$init$_welcomeScreenName';
 
+  // Create new wallet
+
+  String get _createWalletScreenName => 'createWallet';
+  String get createWalletScreenScreen =>
+      '$welcomeScreen/$_createWalletScreenName';
+
   String get _setCodeScreenName => 'setCode';
-  String get setCodeScreen => '$welcomeScreen/$_setCodeScreenName';
+  String get setCodeScreen => '$createWalletScreenScreen/$_setCodeScreenName';
 
   String get _createNewAddressScreenName => 'createNewAddress';
   String get createNewAddressScreen =>
@@ -112,32 +120,43 @@ class Routes {
             },
             routes: [
               GoRoute(
-                path: AppData.routes._setCodeScreenName,
+                path: AppData.routes._createWalletScreenName,
                 builder: (BuildContext context, GoRouterState state) {
-                  return const SetCodeScreen();
+                  return const CreateWalletScreen();
                 },
                 routes: [
                   GoRoute(
-                    path: AppData.routes._createNewAddressScreenName,
+                    path: AppData.routes._setCodeScreenName,
                     builder: (BuildContext context, GoRouterState state) {
-                      return const CreateNewAddress();
+                      return const SetCodeScreen();
                     },
                     routes: [
                       GoRoute(
-                        path: AppData.routes._seedPhraseScreenName,
+                        path: AppData.routes._createNewAddressScreenName,
                         builder: (BuildContext context, GoRouterState state) {
-                          return const SeedPhraseScreen();
+                          return const CreateNewAddress();
                         },
                         routes: [
                           GoRoute(
-                            path: AppData.routes._createdSuccessScreenName,
+                            path: AppData.routes._seedPhraseScreenName,
                             builder:
                                 (BuildContext context, GoRouterState state) {
-                              return CreatedSuccess(
-                                address: state.extra as String,
+                              return SeedPhraseScreen(
+                                mnemonic: state.extra as Mnemonic,
                               );
                             },
-                            routes: const [],
+                            routes: [
+                              GoRoute(
+                                path: AppData.routes._createdSuccessScreenName,
+                                builder: (BuildContext context,
+                                    GoRouterState state) {
+                                  return CreatedSuccess(
+                                    address: state.extra as String,
+                                  );
+                                },
+                                routes: const [],
+                              ),
+                            ],
                           ),
                         ],
                       ),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:rabby/features/auth/adapters/user.dart';
 
 import 'app_data/app_data.dart';
 import 'features/localization/domain/base/app_locale.dart';
@@ -10,6 +11,8 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   await Hive.initFlutter();
+  Hive.registerAdapter(UserAdapter());
+  await Hive.openBox<User>('user');
 
   runApp(
     EasyLocalization(

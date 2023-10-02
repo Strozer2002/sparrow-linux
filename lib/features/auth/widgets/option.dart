@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../app_data/app_data.dart';
 
 class Option extends StatelessWidget {
-  final String text;
+  final Color? bgColor;
+  final Color? borderColor;
+  final Widget child;
+  final Gradient? gradient;
   const Option({
     super.key,
-    required this.text,
+    this.bgColor = Colors.white,
+    required this.child,
+    this.borderColor,
+    this.gradient,
   });
 
   @override
@@ -15,23 +21,21 @@ class Option extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: bgColor,
         border: Border.all(
           width: 1,
-          color: AppData.colors.middlePurple.withOpacity(0.5),
+          color: borderColor ?? AppData.colors.middlePurple.withOpacity(0.5),
         ),
         borderRadius: BorderRadius.circular(13),
+        gradient: gradient,
       ),
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 14),
-            ),
+            child: child,
           ),
           const SizedBox(width: 36),
-          AppData.assets.svg.star()
+          AppData.assets.svg.star(color: borderColor)
         ],
       ),
     );

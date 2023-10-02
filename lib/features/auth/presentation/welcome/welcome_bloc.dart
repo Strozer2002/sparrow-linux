@@ -36,6 +36,6 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
   }
 
   // logic for wallets
-  void toCreateNewAddress() => context.go(AppData.routes.setCodeScreen);
+  void toCreateNewAddress() => context.go(AppData.routes.createWalletScreenScreen);
   void toImportAddress() {}
 }
