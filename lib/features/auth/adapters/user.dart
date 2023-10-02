@@ -10,6 +10,7 @@ class User {
     this.positions,
     this.nft,
     this.portfolio,
+    required this.mnemonicSentence,
   });
 
   @HiveField(0)
@@ -26,4 +27,7 @@ class User {
 
   @HiveField(4)
   List<String>? portfolio;
+
+  @HiveField(5)
+  String mnemonicSentence;
 }

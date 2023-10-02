@@ -64,8 +64,13 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
       _authService.put(
         User(
           address: result.data!.address,
+          mnemonicSentence: mnemonic!.sentence,
         ),
       );
+      print(
+          "box.get ${_authService.get() != null ? _authService.get()!.address : null}");
+      print(
+          "box.mnemonicSentence ${_authService.get() != null ? _authService.get()!.mnemonicSentence : null}");
       loading.value += 1;
     }
   }

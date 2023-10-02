@@ -8,10 +8,8 @@ import '../../widgets/main_button.dart';
 import 'seed_phrase_bloc.dart';
 
 class SeedPhraseScreen extends StatefulWidget {
-  final Mnemonic mnemonic;
   const SeedPhraseScreen({
     super.key,
-    required this.mnemonic,
   });
 
   @override
@@ -45,7 +43,7 @@ class _SeedPhraseScreenState extends SeedPhraseBloc {
         ),
       ),
       child: MainButton(
-        onPressed: () {},
+        onPressed: next,
         child: const Text("I’ve Saved the Phrase"),
       ),
     );
@@ -135,7 +133,7 @@ class _SeedPhraseScreenState extends SeedPhraseBloc {
   Widget get copyPhrase {
     return TextButton(
       onPressed: () {
-        Clipboard.setData(ClipboardData(text: widget.mnemonic.sentence)).then((_) {
+        Clipboard.setData(ClipboardData(text: mnemonic!)).then((_) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Seed phrase was copied"),

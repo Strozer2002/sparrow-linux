@@ -13,6 +13,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
   await Hive.openBox<User>('user');
+  // box.clear();
 
   runApp(
     EasyLocalization(
