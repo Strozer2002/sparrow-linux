@@ -8,7 +8,7 @@ part of 'total.dart';
 
 class TotalAdapter extends TypeAdapter<Total> {
   @override
-  final int typeId = 5;
+  final int typeId = 6;
 
   @override
   Total read(BinaryReader reader) {

@@ -14,8 +14,9 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       positions: (json['positions'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      nft: (json['nft'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      portfolio: json['portfolio'] as String?,
+      nft: json['nft'] as Map<String, dynamic>?,
+      portfolio:
+          PortfolioEntity.fromJson(json['portfolio'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>

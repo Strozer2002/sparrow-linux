@@ -74,40 +74,36 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
             id: result.data!.portfolio.id,
             attributes: Attributes(
               positionsDistributionByType: PositionByType(
-                wallet: result.data!.portfolio.attributes
-                    .positionsDistributionByType.wallet,
-                deposited: result.data!.portfolio.attributes
-                    .positionsDistributionByType.deposited,
-                borrowed: result.data!.portfolio.attributes
-                    .positionsDistributionByType.borrowed,
-                locked: result.data!.portfolio.attributes
-                    .positionsDistributionByType.locked,
-                staked: result.data!.portfolio.attributes
-                    .positionsDistributionByType.staked,
+                wallet: result.data!.portfolio.attributes.positionByType.wallet,
+                deposited:
+                    result.data!.portfolio.attributes.positionByType.deposited,
+                borrowed:
+                    result.data!.portfolio.attributes.positionByType.borrowed,
+                locked: result.data!.portfolio.attributes.positionByType.locked,
+                staked: result.data!.portfolio.attributes.positionByType.staked,
               ),
               positionsDistributionByChain: PositionByChain(
-                arbitrum: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.arbitrum,
-                aurora: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.aurora,
-                avalanche: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.avalanche,
+                arbitrum:
+                    result.data!.portfolio.attributes.positionByChain.arbitrum,
+                aurora:
+                    result.data!.portfolio.attributes.positionByChain.aurora,
+                avalanche:
+                    result.data!.portfolio.attributes.positionByChain.avalanche,
                 binanceSmartChain: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.binanceSmartChain,
-                ethereum: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.ethereum,
-                fantom: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.fantom,
-                loopring: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.loopring,
-                optimism: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.optimism,
-                polygon: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.polygon,
-                solana: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.solana,
-                xdai: result.data!.portfolio.attributes
-                    .positionsDistributionByChain.xdai,
+                    .positionByChain.binanceSmartChain,
+                ethereum:
+                    result.data!.portfolio.attributes.positionByChain.ethereum,
+                fantom:
+                    result.data!.portfolio.attributes.positionByChain.fantom,
+                loopring:
+                    result.data!.portfolio.attributes.positionByChain.loopring,
+                optimism:
+                    result.data!.portfolio.attributes.positionByChain.optimism,
+                polygon:
+                    result.data!.portfolio.attributes.positionByChain.polygon,
+                solana:
+                    result.data!.portfolio.attributes.positionByChain.solana,
+                xdai: result.data!.portfolio.attributes.positionByChain.xdai,
               ),
               total: Total(
                 positions: result.data!.portfolio.attributes.total.positions,

@@ -5,7 +5,7 @@ import 'package:rabby/features/auth/domain/models/portfolio.dart';
 
 part 'user_entity.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: true)
 class UserEntity implements DTO {
   final String address;
 
@@ -13,7 +13,7 @@ class UserEntity implements DTO {
 
   final List<String>? positions;
 
-  final List<String>? nft;
+  final Map<String, dynamic>? nft;
 
   final PortfolioEntity portfolio;
 

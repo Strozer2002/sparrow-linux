@@ -1,20 +1,25 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rabby/features/auth/domain/models/changes.dart';
+import 'package:rabby/features/auth/domain/models/position_by_type.dart';
+import 'package:rabby/features/auth/domain/models/total.dart';
+
+import 'position_by_chain.dart';
 
 part 'attributes.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: true)
 class AttributesEntity implements DTO {
   @JsonKey(name: 'positions_distribution_by_type')
-  final String positionByType;
+  final PositionByTypeEntity positionByType;
 
   @JsonKey(name: 'positions_distribution_by_chain')
-  final String positionByChain;
+  final PositionByChainEntity positionByChain;
 
-  final String total;
+  final TotalEntity total;
 
-  final String changes;
+  final ChangesEntity changes;
 
   const AttributesEntity({
     required this.positionByType,
