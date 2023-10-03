@@ -1,44 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'crypt.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserAdapter extends TypeAdapter<User> {
+class CryptAdapter extends TypeAdapter<Crypt> {
   @override
-  final int typeId = 1;
+  final int typeId = 8;
 
   @override
-  User read(BinaryReader reader) {
+  Crypt read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return User(
-      address: fields[0] as String,
-      transactions: (fields[1] as List?)?.cast<String>(),
-      positions: (fields[2] as List?)?.cast<String>(),
-      nft: (fields[3] as List?)?.cast<String>(),
-      portfolio: fields[4] as Portfolio,
+    return Crypt(
+      amount: fields[3] as int?,
+      name: fields[1] as String,
+      shortName: fields[2] as String,
+      isChoose: fields[4] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, User obj) {
+  void write(BinaryWriter writer, Crypt obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.address)
-      ..writeByte(1)
-      ..write(obj.transactions)
-      ..writeByte(2)
-      ..write(obj.positions)
-      ..writeByte(3)
-      ..write(obj.nft)
       ..writeByte(4)
-      ..write(obj.portfolio);
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.shortName)
+      ..writeByte(3)
+      ..write(obj.amount)
+      ..writeByte(4)
+      ..write(obj.isChoose);
   }
 
   @override
@@ -47,7 +44,7 @@ class UserAdapter extends TypeAdapter<User> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserAdapter &&
+      other is CryptAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

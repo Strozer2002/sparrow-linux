@@ -146,7 +146,7 @@ class _CreateWalletScreenState extends CreateWalletBloc {
               width: double.infinity,
               onPressed: loading.value < 3
                   ? null
-                  : () => context.go(AppData.routes.manageCryptScreen),
+                  : () => context.push(AppData.routes.manageCryptScreen),
               child: Text(
                 "Continue",
                 style: TextStyle(

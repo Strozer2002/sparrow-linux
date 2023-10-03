@@ -1,4 +1,3 @@
-import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/presentation/create_new_address/create_new_address.dart';
@@ -6,6 +5,7 @@ import 'package:rabby/features/auth/presentation/create_wallet/create_wallet.dar
 import 'package:rabby/features/auth/presentation/created_success/created_success.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/manage_crypt.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
+import 'package:rabby/features/auth/presentation/select_import/select_import.dart';
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 
@@ -48,6 +48,14 @@ class RoutesList {
   String get _createdSuccessScreenName => 'createdSuccess';
   String get createdSuccessScreen =>
       '$seedPhraseScreen/$_createdSuccessScreenName';
+
+  // Import wallet
+  String get _setCodeScreenForImportName => 'setCodeFroImport';
+  String get setCodeScreenForImport =>
+      '$welcomeScreen/$_setCodeScreenForImportName';
+
+  String get _selectImportName => 'selectImport';
+  String get selectImport => '$setCodeScreenForImport/$_selectImportName';
 }
 
 class Routes {
@@ -125,6 +133,7 @@ class Routes {
               return const WelcomeScreen();
             },
             routes: [
+              // create wallet
               GoRoute(
                 path: AppData.routes._createWalletScreenName,
                 builder: (BuildContext context, GoRouterState state) {
@@ -140,7 +149,9 @@ class Routes {
                       GoRoute(
                         path: AppData.routes._setCodeScreenName,
                         builder: (BuildContext context, GoRouterState state) {
-                          return const SetCodeScreen();
+                          return SetCodeScreen(
+                            nextRoute: state.extra as String,
+                          );
                         },
                         routes: [
                           GoRoute(
@@ -162,9 +173,7 @@ class Routes {
                                         .routes._createdSuccessScreenName,
                                     builder: (BuildContext context,
                                         GoRouterState state) {
-                                      return CreatedSuccess(
-                                        address: state.extra as String,
-                                      );
+                                      return const CreatedSuccess();
                                     },
                                     routes: const [],
                                   ),
@@ -175,6 +184,23 @@ class Routes {
                         ],
                       ),
                     ],
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppData.routes._setCodeScreenForImportName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return SetCodeScreen(
+                    nextRoute: state.extra as String,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: AppData.routes._selectImportName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const SelectImport();
+                    },
+                    routes: const [],
                   ),
                 ],
               ),

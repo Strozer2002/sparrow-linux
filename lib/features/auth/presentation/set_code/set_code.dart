@@ -7,7 +7,11 @@ import 'package:rabby/features/widgets/numpad.dart';
 import 'set_code_bloc.dart';
 
 class SetCodeScreen extends StatefulWidget {
-  const SetCodeScreen({super.key});
+  final String nextRoute;
+  const SetCodeScreen({
+    super.key,
+    required this.nextRoute,
+  });
 
   @override
   State<SetCodeScreen> createState() => _SetCodeScreenState();

@@ -7,6 +7,8 @@ import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
+import 'package:rabby/features/settings/domain/settings.dart';
+import 'package:rabby/features/settings/settings_service.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 
@@ -23,6 +25,7 @@ import 'create_wallet.dart';
 abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   final AuthRepository _authRepo = AuthRepository();
   final AuthService _authService = AuthService();
+  final SettingsService _settingsService = SettingsService();
 
   Rv<int> loading = Rv(0);
   bool isInit = false;
@@ -62,13 +65,9 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
     final result = await _authRepo.register(RegisterBody(data: bytes));
 
     if (result.isSuccess) {
-      print(
-          "box.get ${_authService.get() != null ? _authService.get()!.address : null}");
-      print("result.data!.address ${result.data!.address}");
-      _authService.put(
+      _authService.putUser(
         User(
           address: result.data!.address,
-          mnemonicSentence: mnemonic!.sentence,
           portfolio: Portfolio(
             type: result.data!.portfolio.type,
             id: result.data!.portfolio.id,
@@ -116,10 +115,12 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
           ),
         ),
       );
-      print(
-          "box.get ${_authService.get() != null ? _authService.get()!.address : null}");
-      print(
-          "box.mnemonicSentence ${_authService.get() != null ? _authService.get()!.mnemonicSentence : null}");
+      _settingsService.putSettings(
+        Settings(
+          mnemonicSentence: mnemonic!.sentence,
+          hexSeedMnemonic: hexSeed,
+        ),
+      );
       loading.value += 1;
     }
   }

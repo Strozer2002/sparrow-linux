@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,11 @@ import 'package:rabby/app_data/app_data.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 
 abstract class WelcomeBloc extends State<WelcomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   // selected screen (0,3)
   int selectedScreen = 0;
 
@@ -36,6 +42,8 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
   }
 
   // logic for wallets
-  void toCreateNewAddress() => context.go(AppData.routes.createWalletScreenScreen);
-  void toImportAddress() {}
+  void toCreateNewAddress() =>
+      context.push(AppData.routes.createWalletScreenScreen);
+  void toImportAddress() => context.push(AppData.routes.setCodeScreenForImport,
+      extra: AppData.routes.selectImport);
 }

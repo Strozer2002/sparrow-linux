@@ -65,7 +65,7 @@ class _ManageCryptState extends ManageCryptBloc {
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: icons.length,
+                  itemCount: crypts!.length,
                   itemBuilder: (context, index) => Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -74,19 +74,19 @@ class _ManageCryptState extends ManageCryptBloc {
                       children: [
                         Row(
                           children: [
-                            icons[index].icon,
+                            crypts![index].icon!,
                             const SizedBox(width: 16),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${icons[index].name[0].toUpperCase()}${icons[index].name.substring(1)}",
+                                  "${crypts![index].name[0].toUpperCase()}${crypts![index].name.substring(1)}",
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                                 Text(
-                                  '0 ${icons[index].shortName.toUpperCase()}',
+                                  '${crypts![index].amount} ${crypts![index].shortName.toUpperCase()}',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: AppData.colors.middlePurple
@@ -98,10 +98,10 @@ class _ManageCryptState extends ManageCryptBloc {
                           ],
                         ),
                         Switch(
-                          value: icons[index].isChoose,
+                          value: crypts![index].isChoose,
                           onChanged: (value) {
                             setState(() {
-                              icons[index].isChoose = value;
+                              crypts![index].isChoose = value;
                             });
                           },
                           activeColor: Colors.white,
@@ -125,7 +125,7 @@ class _ManageCryptState extends ManageCryptBloc {
         child: MainButton(
           height: 48,
           width: double.infinity,
-          onPressed: () => context.go(AppData.routes.setCodeScreen),
+          onPressed: onSave,
           child: const Text(
             "Save",
             style: TextStyle(

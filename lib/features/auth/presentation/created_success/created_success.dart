@@ -7,8 +7,7 @@ import '../../widgets/main_button.dart';
 import 'created_succes_bloc.dart';
 
 class CreatedSuccess extends StatefulWidget {
-  final String address;
-  const CreatedSuccess({super.key, required this.address});
+  const CreatedSuccess({super.key});
 
   @override
   State<CreatedSuccess> createState() => _CreatedSuccessState();
@@ -84,7 +83,7 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      formatText(widget.address),
+                      formatText(authService.getUser()!.address),
                       style: TextStyle(
                         fontSize: 14,
                         color: AppData.colors.middlePurple,
@@ -93,7 +92,8 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
                     const SizedBox(width: 6),
                     TextButton(
                       onPressed: () {
-                        Clipboard.setData(ClipboardData(text: widget.address))
+                        Clipboard.setData(ClipboardData(
+                                text: authService.getUser()!.address))
                             .then((_) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

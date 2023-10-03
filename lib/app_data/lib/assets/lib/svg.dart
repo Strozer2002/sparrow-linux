@@ -31,10 +31,13 @@ class Svg {
   SvgPicture get logo => SvgPicture.asset(_name('icons/logo'));
   SvgPicture get chevron => SvgPicture.asset(_name('icons/chevron'));
   SvgPicture get plus => SvgPicture.asset(_name('icons/plus'));
+  SvgPicture get importPlus => SvgPicture.asset(_name('icons/importPlus'));
   SvgPicture get import => SvgPicture.asset(_name('icons/import'));
   SvgPicture get wallets => SvgPicture.asset(_name('icons/wallets'));
   SvgPicture get lock => SvgPicture.asset(_name('icons/lock'));
   SvgPicture get pen => SvgPicture.asset(_name('icons/pen'));
+  SvgPicture get phrase => SvgPicture.asset(_name('icons/phrase'));
+  SvgPicture get key => SvgPicture.asset(_name('icons/key'));
   SvgPicture star({
     Color? color,
     double? size,
