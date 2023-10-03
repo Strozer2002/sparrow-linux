@@ -19,7 +19,7 @@ class _AuthClient implements AuthClient {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<SingleResponseBody<UserAuthEntity>>> register(
+  Future<HttpResponse<SingleResponseBody<UserEntity>>> register(
       RegisterBody body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -27,26 +27,25 @@ class _AuthClient implements AuthClient {
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<SingleResponseBody<UserAuthEntity>>>(
-            Options(
+        _setStreamType<HttpResponse<SingleResponseBody<UserEntity>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-                .compose(
-                  _dio.options,
-                  '/board',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(
-                    baseUrl: _combineBaseUrls(
-                  _dio.options.baseUrl,
-                  baseUrl,
-                ))));
-    final value = SingleResponseBody<UserAuthEntity>.fromJson(
+            .compose(
+              _dio.options,
+              '/board',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SingleResponseBody<UserEntity>.fromJson(
       _result.data!,
-      (json) => UserAuthEntity.fromJson(json as Map<String, dynamic>),
+      (json) => UserEntity.fromJson(json as Map<String, dynamic>),
     );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
