@@ -26,7 +26,7 @@ dependencies:
   get_it: ^7.6.4
   data_source:
     version: ^0.1.1
-    git: git@github.com:dronn1k-org/data_source.git
+    git: https://github.com/dronn1k-org/data_source.git
   reactive_variables:
     version: ^0.0.2
     git:
@@ -67,6 +67,7 @@ flutter:
     - assets/icons/
     - assets/objects/
     - assets/translations/
+    - assets/crypto/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

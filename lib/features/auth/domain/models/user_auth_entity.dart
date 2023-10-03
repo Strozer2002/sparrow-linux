@@ -8,8 +8,20 @@ part 'user_auth_entity.g.dart';
 class UserAuthEntity implements DTO {
   final String address;
 
+  final List<String>? transactions;
+
+  final List<String>? positions;
+
+  final List<String>? nft;
+
+  final String? portfolio;
+
   const UserAuthEntity({
     required this.address,
+    this.transactions,
+    this.positions,
+    this.nft,
+    this.portfolio,
   });
 
   factory UserAuthEntity.fromJson(Map<String, dynamic> json) =>

@@ -38,4 +38,12 @@ class ImageCollection {
         height: height,
         fit: fit ?? BoxFit.contain,
       );
+
+  Image crypto({String? value, double? width, double? height, BoxFit? fit}) =>
+      Image.asset(
+        _name('crypto/$value.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
 }

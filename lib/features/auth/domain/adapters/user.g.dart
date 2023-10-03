@@ -21,7 +21,7 @@ class UserAdapter extends TypeAdapter<User> {
       transactions: (fields[1] as List?)?.cast<String>(),
       positions: (fields[2] as List?)?.cast<String>(),
       nft: (fields[3] as List?)?.cast<String>(),
-      portfolio: (fields[4] as List?)?.cast<String>(),
+      portfolio: fields[4] as Portfolio,
       mnemonicSentence: fields[5] as String,
     );
   }

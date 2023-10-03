@@ -1,18 +1,11 @@
 import 'package:hive/hive.dart';
 
+import 'portfolio.dart';
+
 part 'user.g.dart';
 
 @HiveType(typeId: 1)
 class User {
-  User({
-    required this.address,
-    this.transactions,
-    this.positions,
-    this.nft,
-    this.portfolio,
-    required this.mnemonicSentence,
-  });
-
   @HiveField(0)
   String address;
 
@@ -26,8 +19,17 @@ class User {
   List<String>? nft;
 
   @HiveField(4)
-  List<String>? portfolio;
+  Portfolio portfolio;
 
   @HiveField(5)
   String mnemonicSentence;
+
+  User({
+    required this.address,
+    this.transactions,
+    this.positions,
+    this.nft,
+    required this.portfolio,
+    required this.mnemonicSentence,
+  });
 }

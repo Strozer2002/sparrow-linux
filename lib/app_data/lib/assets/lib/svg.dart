@@ -54,4 +54,17 @@ class Svg {
         colorFilter: _getColorFilterFromColor(color),
         width: size,
       );
+
+  SvgPicture get arbitrum => SvgPicture.asset(_name('crypto/arbitrum'));
+
+  SvgPicture crypto({
+    String? value,
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('crypto/$value'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
 }

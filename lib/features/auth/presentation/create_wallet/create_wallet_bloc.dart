@@ -5,14 +5,18 @@ import 'dart:math';
 import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:rabby/features/auth/adapters/user.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
-import 'package:rabby/features/auth/domain/models/auth_credentials.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 
+import '../../domain/adapters/attributes.dart';
+import '../../domain/adapters/changes.dart';
+import '../../domain/adapters/portfolio.dart';
+import '../../domain/adapters/position_by_chain.dart';
+import '../../domain/adapters/position_by_type.dart';
+import '../../domain/adapters/total.dart';
+import '../../domain/adapters/user.dart';
 import '../../repository/auth_repository.dart';
 import 'create_wallet.dart';
 
@@ -65,6 +69,55 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
         User(
           address: result.data!.address,
           mnemonicSentence: mnemonic!.sentence,
+          portfolio: Portfolio(
+            type: result.data!.portfolio.type,
+            id: result.data!.portfolio.id,
+            attributes: Attributes(
+              positionsDistributionByType: PositionByType(
+                wallet: result.data!.portfolio.attributes
+                    .positionsDistributionByType.wallet,
+                deposited: result.data!.portfolio.attributes
+                    .positionsDistributionByType.deposited,
+                borrowed: result.data!.portfolio.attributes
+                    .positionsDistributionByType.borrowed,
+                locked: result.data!.portfolio.attributes
+                    .positionsDistributionByType.locked,
+                staked: result.data!.portfolio.attributes
+                    .positionsDistributionByType.staked,
+              ),
+              positionsDistributionByChain: PositionByChain(
+                arbitrum: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.arbitrum,
+                aurora: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.aurora,
+                avalanche: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.avalanche,
+                binanceSmartChain: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.binanceSmartChain,
+                ethereum: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.ethereum,
+                fantom: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.fantom,
+                loopring: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.loopring,
+                optimism: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.optimism,
+                polygon: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.polygon,
+                solana: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.solana,
+                xdai: result.data!.portfolio.attributes
+                    .positionsDistributionByChain.xdai,
+              ),
+              total: Total(
+                positions: result.data!.portfolio.attributes.total.positions,
+              ),
+              changes: Changes(
+                absoluteId:
+                    result.data!.portfolio.attributes.changes.absoluteId,
+              ),
+            ),
+          ),
         ),
       );
       print(

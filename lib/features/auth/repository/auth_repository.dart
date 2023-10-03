@@ -5,11 +5,11 @@ import 'package:rabby/features/auth/repository/domain/register/register_body.dar
 
 import '../../../core/data_source/dev_remote_data_source.dart';
 import '../../../domain/object/general_callback_result.dart';
-import '../domain/models/user_auth_entity.dart';
+import '../domain/adapters/user.dart';
 
 final class AuthRepository extends DevRemoteDataSource {
   late final _client = AuthClient(dio);
 
-  Future<RemoteCbResult<UserAuthEntity?>> register(RegisterBody body) =>
+  Future<RemoteCbResult<User?>> register(RegisterBody body) =>
       request(() => _client.register(body));
 }

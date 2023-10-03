@@ -1,9 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:rabby/features/auth/adapters/user.dart';
 
 import 'app_data/app_data.dart';
+import 'features/auth/domain/adapters/attributes.dart';
+import 'features/auth/domain/adapters/changes.dart';
+import 'features/auth/domain/adapters/portfolio.dart';
+import 'features/auth/domain/adapters/position_by_chain.dart';
+import 'features/auth/domain/adapters/position_by_type.dart';
+import 'features/auth/domain/adapters/total.dart';
+import 'features/auth/domain/adapters/user.dart';
 import 'features/localization/domain/base/app_locale.dart';
 
 Future<void> main() async {
@@ -12,6 +18,12 @@ Future<void> main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(PortfolioAdapter());
+  Hive.registerAdapter(AttributesAdapter());
+  Hive.registerAdapter(PositionByTypeAdapter());
+  Hive.registerAdapter(PositionByChainAdapter());
+  Hive.registerAdapter(TotalAdapter());
+  Hive.registerAdapter(ChangesAdapter());
   await Hive.openBox<User>('user');
   // box.clear();
 
