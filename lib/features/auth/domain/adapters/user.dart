@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 
 import 'portfolio.dart';
 
@@ -22,14 +21,11 @@ class User {
   @HiveField(4)
   Portfolio portfolio;
 
-
-
   User({
     required this.address,
     this.transactions,
     this.positions,
     this.nft,
     required this.portfolio,
-   
   });
 }

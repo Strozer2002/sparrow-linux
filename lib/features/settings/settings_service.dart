@@ -52,6 +52,46 @@ class SettingsService {
     return null;
   }
 
+  void putMnemonicSentence(String mnemonicSentence) {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      settings.mnemonicSentence = mnemonicSentence;
+      putSettings(settings);
+    } else {
+      putSettings(
+        Settings(mnemonicSentence: mnemonicSentence),
+      );
+    }
+  }
+
+  String? getMnemonicSentence() {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      return settings.mnemonicSentence;
+    }
+    return null;
+  }
+
+  void putHexSeedMnemonic(String hexSeedMnemonic) {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      settings.hexSeedMnemonic = hexSeedMnemonic;
+      putSettings(settings);
+    } else {
+      putSettings(
+        Settings(hexSeedMnemonic: hexSeedMnemonic),
+      );
+    }
+  }
+
+  String? getHexSeedMnemonic() {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      return settings.hexSeedMnemonic;
+    }
+    return null;
+  }
+
   SettingsService._() {
     box = Hive.box<Settings>('settings');
   }

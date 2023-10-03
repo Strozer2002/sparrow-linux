@@ -2,7 +2,6 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rabby/features/auth/domain/adapters/position_by_chain.dart';
 
-import '../presentation/manage_crypt/domain/crypt.dart';
 import 'adapters/user.dart';
 
 class AuthService {

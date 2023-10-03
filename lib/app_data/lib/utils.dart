@@ -5,6 +5,13 @@ class Utils {
   //   if (phone == null) return false;
   //   return RegExp(r'^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{4}$').hasMatch(phone);
   // }
+  String formatText(String input) {
+    if (input.length <= 14) {
+      return input;
+    } else {
+      return '${input.substring(0, 6)}....${input.substring(input.length - 4)}';
+    }
+  }
 
   String formatTime(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');

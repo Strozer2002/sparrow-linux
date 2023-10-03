@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -44,6 +43,8 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
   // logic for wallets
   void toCreateNewAddress() =>
       context.push(AppData.routes.createWalletScreenScreen);
-  void toImportAddress() => context.push(AppData.routes.setCodeScreenForImport,
-      extra: AppData.routes.selectImport);
+  void toImportAddress() => context.push(
+        AppData.routes.setCodeScreenForImport,
+        extra: AppData.routes.selectImport,
+      );
 }

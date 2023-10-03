@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app_data/app_data.dart';
-import '../../widgets/main_button.dart';
 
 class SelectImport extends StatefulWidget {
   const SelectImport({super.key});
@@ -75,7 +74,10 @@ class _SelectImportState extends State<SelectImport> {
         children: [
           topImage,
           const SizedBox(height: 34),
-          phrase(AppData.assets.svg.phrase, "Import Seed Phrase"),
+          GestureDetector(
+            onTap: () => context.push(AppData.routes.importSeedPhrase),
+            child: phrase(AppData.assets.svg.phrase, "Import Seed Phrase"),
+          ),
           const SizedBox(height: 8),
           phrase(AppData.assets.svg.key, "Import Private Key"),
         ],

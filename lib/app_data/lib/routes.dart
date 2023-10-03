@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/presentation/create_new_address/create_new_address.dart';
 import 'package:rabby/features/auth/presentation/create_wallet/create_wallet.dart';
 import 'package:rabby/features/auth/presentation/created_success/created_success.dart';
+import 'package:rabby/features/auth/presentation/import_address/import_adress.dart';
+import 'package:rabby/features/auth/presentation/import_seed_phrase/import_seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/manage_crypt.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/select_import/select_import.dart';
@@ -56,6 +58,13 @@ class RoutesList {
 
   String get _selectImportName => 'selectImport';
   String get selectImport => '$setCodeScreenForImport/$_selectImportName';
+
+  //Import seed phrase
+  String get _importSeedPhraseName => 'importSeedPhrase';
+  String get importSeedPhrase => '$selectImport/$_importSeedPhraseName';
+
+  String get _importAddressName => 'importAddress';
+  String get importAddress => '$importSeedPhrase/$_importAddressName';
 }
 
 class Routes {
@@ -118,7 +127,7 @@ class Routes {
     //     return null;
     //   }
     // },
-    initialLocation: AppData.routes.welcomeScreen,
+    initialLocation: AppData.routes.importSeedPhrase,
 
     routes: [
       GoRoute(
@@ -200,7 +209,24 @@ class Routes {
                     builder: (BuildContext context, GoRouterState state) {
                       return const SelectImport();
                     },
-                    routes: const [],
+                    routes: [
+                      GoRoute(
+                        path: AppData.routes._importSeedPhraseName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const ImportSeedPhrase();
+                        },
+                        routes: [
+                          GoRoute(
+                            path: AppData.routes._importAddressName,
+                            builder:
+                                (BuildContext context, GoRouterState state) {
+                              return const ImportAddress();
+                            },
+                            routes: const [],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
