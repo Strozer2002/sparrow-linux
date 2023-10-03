@@ -65,6 +65,9 @@ class RoutesList {
 
   String get _importAddressName => 'importAddress';
   String get importAddress => '$importSeedPhrase/$_importAddressName';
+
+  String get _importSuccessName => 'importSuccess';
+  String get importSuccess => '$importAddress/$_importSuccessName';
 }
 
 class Routes {
@@ -127,7 +130,7 @@ class Routes {
     //     return null;
     //   }
     // },
-    initialLocation: AppData.routes.importSeedPhrase,
+    initialLocation: AppData.routes.welcomeScreen,
 
     routes: [
       GoRoute(
@@ -182,7 +185,9 @@ class Routes {
                                         .routes._createdSuccessScreenName,
                                     builder: (BuildContext context,
                                         GoRouterState state) {
-                                      return const CreatedSuccess();
+                                      return CreatedSuccess(
+                                        topText: state.extra as String,
+                                      );
                                     },
                                     routes: const [],
                                   ),
@@ -222,7 +227,18 @@ class Routes {
                                 (BuildContext context, GoRouterState state) {
                               return const ImportAddress();
                             },
-                            routes: const [],
+                            routes: [
+                              GoRoute(
+                                path: AppData.routes._importSuccessName,
+                                builder: (BuildContext context,
+                                    GoRouterState state) {
+                                  return CreatedSuccess(
+                                    topText: state.extra as String,
+                                  );
+                                },
+                                routes: const [],
+                              ),
+                            ],
                           ),
                         ],
                       ),

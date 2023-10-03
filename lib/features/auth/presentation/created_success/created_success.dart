@@ -7,7 +7,8 @@ import '../../widgets/main_button.dart';
 import 'created_succes_bloc.dart';
 
 class CreatedSuccess extends StatefulWidget {
-  const CreatedSuccess({super.key});
+  final String topText;
+  const CreatedSuccess({super.key, required this.topText});
 
   @override
   State<CreatedSuccess> createState() => _CreatedSuccessState();
@@ -28,9 +29,9 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
           const SizedBox(height: 75),
           AppData.assets.image.party(),
           const SizedBox(height: 12),
-          const Text(
-            "Created Successfully",
-            style: TextStyle(
+          Text(
+            widget.topText,
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
             ),
@@ -83,7 +84,8 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      AppData.utils.formatText(authService.getUser()!.address),
+                      AppData.utils
+                          .formatText(authService.getUser()?.address ?? " "),
                       style: TextStyle(
                         fontSize: 14,
                         color: AppData.colors.middlePurple,
@@ -92,9 +94,10 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
                     const SizedBox(width: 6),
                     TextButton(
                       onPressed: () {
-                        Clipboard.setData(ClipboardData(
-                                text: authService.getUser()!.address))
-                            .then((_) {
+                        Clipboard.setData(
+                          ClipboardData(
+                              text: authService.getUser()?.address ?? " "),
+                        ).then((_) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text("Address was copied"),

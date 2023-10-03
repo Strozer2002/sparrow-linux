@@ -21,5 +21,6 @@ abstract class SeedPhraseBloc extends State<SeedPhraseScreen> {
 
   void next() => context.push(
         AppData.routes.createdSuccessScreen,
+        extra: "Created Successfully",
       );
 }
