@@ -72,25 +72,6 @@ class SettingsService {
     return null;
   }
 
-  void putHexSeedMnemonic(String hexSeedMnemonic) {
-    Settings? settings = getSettings();
-    if (settings != null) {
-      settings.hexSeedMnemonic = hexSeedMnemonic;
-      putSettings(settings);
-    } else {
-      putSettings(
-        Settings(hexSeedMnemonic: hexSeedMnemonic),
-      );
-    }
-  }
-
-  String? getHexSeedMnemonic() {
-    Settings? settings = getSettings();
-    if (settings != null) {
-      return settings.hexSeedMnemonic;
-    }
-    return null;
-  }
 
   SettingsService._() {
     box = Hive.box<Settings>('settings');

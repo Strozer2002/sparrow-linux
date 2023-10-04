@@ -49,9 +49,7 @@ class _ImportKeyState extends ImportKeyBloc {
                 AppData.colors.middlePurple,
                 AppData.colors.middlePurple,
               ]),
-        onPressed: keyCtrl.text.isEmpty
-            ? null
-            : () => context.push(AppData.routes.importAddress),
+        onPressed: keyCtrl.text.isEmpty ? null : next,
         child: const Text(
           "Confirm",
           style: TextStyle(color: Colors.white),

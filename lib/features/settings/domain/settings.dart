@@ -9,9 +9,6 @@ class Settings {
   @HiveField(0)
   String? mnemonicSentence;
 
-  @HiveField(1)
-  String? hexSeedMnemonic;
-
   @HiveField(2)
   List<Crypt>? crypts;
 
@@ -19,7 +16,6 @@ class Settings {
   String? userPassCode;
 
   Settings({
-    this.hexSeedMnemonic,
     this.mnemonicSentence,
     this.crypts,
     this.userPassCode,

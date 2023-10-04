@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app_data/app_data.dart';
+import '../settings/settings_service.dart';
 
 // ignore: must_be_immutable
 class NumPad extends StatefulWidget {
@@ -23,7 +24,9 @@ class NumPad extends StatefulWidget {
 }
 
 class _NumPadState extends State<NumPad> {
+  final SettingsService _settingsService = SettingsService();
   final List<int> numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  String errorText = '';
   int? selectedIndex;
   Color? _buttonColor;
   Color? _textColor;
@@ -32,6 +35,13 @@ class _NumPadState extends State<NumPad> {
     _buttonColor = widget.bgButtonColor ?? AppData.colors.middlePurple;
     _textColor = widget.textButtonColor ?? AppData.colors.middlePurple;
     super.initState();
+  }
+
+  bool checkPassword() {
+    if (_settingsService.getPassCode() != null) {
+      return _settingsService.getPassCode()! == widget.numberCode.text;
+    }
+    return true;
   }
 
   @override
@@ -75,6 +85,10 @@ class _NumPadState extends State<NumPad> {
             itemCount: 6,
           ),
         ),
+        Text(
+          errorText,
+          style: const TextStyle(color: Colors.red),
+        ),
         GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -99,7 +113,7 @@ class _NumPadState extends State<NumPad> {
                           }
                           widget.numberCode.text = widget.numberCode.text
                               .substring(0, widget.numberCode.text.length - 1);
-                        } else if (widget.numberCode.text.length >= 6) {
+                        } else if (widget.numberCode.text.length > 5) {
                           widget.numberCode.text = widget.numberCode.text
                                   .substring(
                                       0, widget.numberCode.text.length - 1) +
@@ -124,6 +138,17 @@ class _NumPadState extends State<NumPad> {
                           });
                         });
                       });
+                      if (widget.numberCode.text.length == 6) {
+                        setState(() {
+                          if (!checkPassword()) {
+                            errorText = "Password uncorrected";
+                          } else {
+                            errorText = ' ';
+                          }
+                        });
+                      } else if (widget.numberCode.text.length < 6) {
+                        errorText = ' ';
+                      }
                       print(widget.numberCode.text);
                     },
                     style: selectedIndex != index

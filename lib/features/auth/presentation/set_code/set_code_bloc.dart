@@ -7,7 +7,6 @@ import 'set_code.dart';
 abstract class SetCodeBloc extends State<SetCodeScreen> {
   final SettingsService _settingsService = SettingsService();
   final TextEditingController numberText = TextEditingController();
-
   bool isNotFull() {
     setState(() {});
     return numberText.text.length < 6;
@@ -17,9 +16,16 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
     if (isNotFull()) {
       print(numberText.text);
     } else {
-      _settingsService.putPassCode(numberText.text);
-      print("_authService.getPassCode() ${_settingsService.getPassCode()}");
-      context.go(AppData.routes.homeScreen);
+      if (_settingsService.getPassCode() == null) {
+        _settingsService.putPassCode(numberText.text);
+        print("_authService.getPassCode() ${_settingsService.getPassCode()}");
+        context.go(AppData.routes.homeScreen);
+      } else {
+        print("_authService.getPassCode() ${_settingsService.getPassCode()}");
+        if (numberText.text == _settingsService.getPassCode()!) {
+          context.go(AppData.routes.homeScreen);
+        }
+      }
     }
   }
 }

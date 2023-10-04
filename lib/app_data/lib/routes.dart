@@ -12,6 +12,7 @@ import 'package:rabby/features/auth/presentation/select_import/select_import.dar
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
 import 'package:rabby/features/home/presentation/home_screen.dart';
+import 'package:rabby/features/init/presentation/init.dart';
 
 import '../app_data.dart';
 
@@ -144,13 +145,13 @@ class Routes {
     //     return null;
     //   }
     // },
-    initialLocation: AppData.routes.welcomeScreen,
+    initialLocation: AppData.routes.init,
 
     routes: [
       GoRoute(
         path: AppData.routes.init,
         builder: (BuildContext context, GoRouterState state) {
-          return const Scaffold();
+          return const InitPage();
         },
         routes: [
           GoRoute(
