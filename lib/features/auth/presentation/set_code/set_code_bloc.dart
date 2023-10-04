@@ -5,7 +5,7 @@ import 'package:rabby/features/settings/settings_service.dart';
 import 'set_code.dart';
 
 abstract class SetCodeBloc extends State<SetCodeScreen> {
-  final SettingsService _settingsService = SettingsService();
+  final SettingsService settingsService = SettingsService();
   final TextEditingController numberText = TextEditingController();
   bool isNotFull() {
     setState(() {});
@@ -16,13 +16,13 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
     if (isNotFull()) {
       print(numberText.text);
     } else {
-      if (_settingsService.getPassCode() == null) {
-        _settingsService.putPassCode(numberText.text);
-        print("_authService.getPassCode() ${_settingsService.getPassCode()}");
+      if (settingsService.getPassCode() == null) {
+        settingsService.putPassCode(numberText.text);
+        print("_authService.getPassCode() ${settingsService.getPassCode()}");
         context.go(AppData.routes.homeScreen);
       } else {
-        print("_authService.getPassCode() ${_settingsService.getPassCode()}");
-        if (numberText.text == _settingsService.getPassCode()!) {
+        print("_authService.getPassCode() ${settingsService.getPassCode()}");
+        if (numberText.text == settingsService.getPassCode()!) {
           context.go(AppData.routes.homeScreen);
         }
       }

@@ -28,19 +28,21 @@ class _SetCodeScreenState extends SetCodeBloc {
           const SizedBox(height: 75),
           AppData.assets.svg.lock,
           const SizedBox(height: 8),
-          const Text(
-            "Set Passcode",
-            style: TextStyle(
+          Text(
+            settingsService.getPassCode() != null ? "Confirm" : "Set Passcode",
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
             ),
           ),
           const SizedBox(height: 6),
-          const SizedBox(
+          SizedBox(
             width: 270,
             child: Text(
-              "It will be used to unlock your wallet and encrypt local data",
-              style: TextStyle(
+              settingsService.getPassCode() != null
+                  ? ""
+                  : "It will be used to unlock your wallet and encrypt local data",
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
               ),
