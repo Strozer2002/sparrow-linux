@@ -4,12 +4,14 @@ import 'package:rabby/features/auth/presentation/create_new_address/create_new_a
 import 'package:rabby/features/auth/presentation/create_wallet/create_wallet.dart';
 import 'package:rabby/features/auth/presentation/created_success/created_success.dart';
 import 'package:rabby/features/auth/presentation/import_address/import_adress.dart';
+import 'package:rabby/features/auth/presentation/import_key/import_key.dart';
 import 'package:rabby/features/auth/presentation/import_seed_phrase/import_seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/manage_crypt.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/select_import/select_import.dart';
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
+import 'package:rabby/features/home/presentation/home_screen.dart';
 
 import '../app_data.dart';
 
@@ -60,6 +62,10 @@ class RoutesList {
   String get _importSeedPhraseName => 'importSeedPhrase';
   String get importSeedPhrase => '$selectImport/$_importSeedPhraseName';
 
+  // Import key
+  String get _importKeyName => 'importKey';
+  String get importKey => '$selectImport/$_importKeyName';
+
   String get _importAddressName => 'importAddress';
   String get importAddress => '$importSeedPhrase/$_importAddressName';
 
@@ -67,7 +73,15 @@ class RoutesList {
   String get importManageCrypt => '$importAddress/$_importManageCryptName';
 
   String get _importSetCodeScreenName => 'importSetCodeScreen';
-  String get importSetCodeScreen => '$importManageCrypt/$_setCodeScreenName';
+  String get importSetCodeScreen =>
+      '$importManageCrypt/$_importSetCodeScreenName';
+
+  // Home screen
+  String get _setCodeName => 'mainSetCode';
+  String get setCode => '$init$_setCodeName';
+
+  String get _homeScreenName => 'homeScreen';
+  String get homeScreen => '$setCode/$_homeScreenName';
 }
 
 class Routes {
@@ -182,9 +196,7 @@ class Routes {
                                     path: AppData.routes._setCodeScreenName,
                                     builder: (BuildContext context,
                                         GoRouterState state) {
-                                      return SetCodeScreen(
-                                        nextRoute: state.extra as String,
-                                      );
+                                      return const SetCodeScreen();
                                     },
                                     routes: const [],
                                   ),
@@ -204,6 +216,7 @@ class Routes {
                   return const SelectImport();
                 },
                 routes: [
+                  // Import phrase
                   GoRoute(
                     path: AppData.routes._importSeedPhraseName,
                     builder: (BuildContext context, GoRouterState state) {
@@ -227,9 +240,41 @@ class Routes {
                                 path: AppData.routes._importSetCodeScreenName,
                                 builder: (BuildContext context,
                                     GoRouterState state) {
-                                  return SetCodeScreen(
-                                    nextRoute: state.extra as String,
-                                  );
+                                  return const SetCodeScreen();
+                                },
+                                routes: const [],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // Import Key
+                  GoRoute(
+                    path: AppData.routes._importKeyName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const ImportKey();
+                    },
+                    routes: [
+                      GoRoute(
+                        path: AppData.routes._importAddressName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const ImportAddress();
+                        },
+                        routes: [
+                          GoRoute(
+                            path: AppData.routes._importManageCryptName,
+                            builder:
+                                (BuildContext context, GoRouterState state) {
+                              return const ManageCrypt();
+                            },
+                            routes: [
+                              GoRoute(
+                                path: AppData.routes._importSetCodeScreenName,
+                                builder: (BuildContext context,
+                                    GoRouterState state) {
+                                  return const SetCodeScreen();
                                 },
                                 routes: const [],
                               ),
@@ -240,6 +285,21 @@ class Routes {
                     ],
                   ),
                 ],
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppData.routes._setCodeName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const SetCodeScreen();
+            },
+            routes: [
+              GoRoute(
+                path: AppData.routes._homeScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const HomeScreen();
+                },
+                routes: const [],
               ),
             ],
           ),

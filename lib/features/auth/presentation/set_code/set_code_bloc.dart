@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/app_data/app_data.dart';
 import 'package:rabby/features/settings/settings_service.dart';
 import 'set_code.dart';
 
@@ -18,7 +19,7 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
     } else {
       _settingsService.putPassCode(numberText.text);
       print("_authService.getPassCode() ${_settingsService.getPassCode()}");
-      context.push(widget.nextRoute);
+      context.go(AppData.routes.homeScreen);
     }
   }
 }

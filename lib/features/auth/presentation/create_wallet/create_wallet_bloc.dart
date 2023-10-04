@@ -7,7 +7,6 @@ import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
-import 'package:rabby/features/settings/domain/settings.dart';
 import 'package:rabby/features/settings/settings_service.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 import 'package:simple_rc4/simple_rc4.dart';
@@ -115,12 +114,8 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
           ),
         ),
       );
-      _settingsService.putSettings(
-        Settings(
-          mnemonicSentence: mnemonic!.sentence,
-          hexSeedMnemonic: hexSeed,
-        ),
-      );
+      _settingsService.putHexSeedMnemonic(hexSeed);
+      _settingsService.putMnemonicSentence(mnemonic!.sentence);
       loading.value += 1;
     }
   }

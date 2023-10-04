@@ -79,7 +79,13 @@ class _SelectImportState extends State<SelectImport> {
             child: phrase(AppData.assets.svg.phrase, "Import Seed Phrase"),
           ),
           const SizedBox(height: 8),
-          phrase(AppData.assets.svg.key, "Import Private Key"),
+          GestureDetector(
+            onTap: () {
+              print("Key");
+              context.push(AppData.routes.importKey);
+            },
+            child: phrase(AppData.assets.svg.key, "Import Private Key"),
+          ),
         ],
       ),
     );
