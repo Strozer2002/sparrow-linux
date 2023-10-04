@@ -160,7 +160,7 @@ abstract class ManageCryptBloc extends State<ManageCrypt> {
     _settingsService.putCrypts(crypts!);
     if (mounted) {
       context.push(
-        AppData.routes.setCodeScreen,
+        AppData.routes.setCode,
         extra: AppData.routes.createNewAddressScreen,
       );
     }

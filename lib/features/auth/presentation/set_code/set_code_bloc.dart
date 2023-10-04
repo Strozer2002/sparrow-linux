@@ -23,7 +23,9 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
       } else {
         print("_authService.getPassCode() ${settingsService.getPassCode()}");
         if (numberText.text == settingsService.getPassCode()!) {
-          context.go(AppData.routes.homeScreen);
+          if (context.canPop()) {
+            context.pop(true);
+          }
         }
       }
     }

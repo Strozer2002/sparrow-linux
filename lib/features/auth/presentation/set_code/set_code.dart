@@ -79,22 +79,25 @@ class _SetCodeScreenState extends SetCodeBloc {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          topImage,
-          const SizedBox(height: 26),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 45),
-            child: NumPad(
-              numberCode: numberText,
-              goNext: goNext,
-              checkOnFull: isNotFull,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Column(
+          children: [
+            topImage,
+            const SizedBox(height: 26),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 45),
+              child: NumPad(
+                numberCode: numberText,
+                goNext: goNext,
+                checkOnFull: isNotFull,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        bottomNavigationBar: next,
       ),
-      bottomNavigationBar: next,
     );
   }
 }

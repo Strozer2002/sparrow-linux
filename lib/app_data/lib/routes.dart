@@ -51,9 +51,6 @@ class RoutesList {
   String get manageCryptScreen =>
       '$createdSuccessScreen/$_createWalletScreenName';
 
-  String get _setCodeScreenName => 'setCode';
-  String get setCodeScreen => '$manageCryptScreen/$_setCodeScreenName';
-
   // Import wallet
 
   String get _selectImportName => 'selectImport';
@@ -73,16 +70,12 @@ class RoutesList {
   String get _importManageCryptName => 'importManageCrypt';
   String get importManageCrypt => '$importAddress/$_importManageCryptName';
 
-  String get _importSetCodeScreenName => 'importSetCodeScreen';
-  String get importSetCodeScreen =>
-      '$importManageCrypt/$_importSetCodeScreenName';
-
   // Home screen
   String get _setCodeName => 'mainSetCode';
   String get setCode => '$init$_setCodeName';
 
   String get _homeScreenName => 'homeScreen';
-  String get homeScreen => '$setCode/$_homeScreenName';
+  String get homeScreen => '$init$_homeScreenName';
 }
 
 class Routes {
@@ -155,6 +148,13 @@ class Routes {
         },
         routes: [
           GoRoute(
+            path: AppData.routes._setCodeName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const SetCodeScreen();
+            },
+            routes: const [],
+          ),
+          GoRoute(
             path: AppData.routes._welcomeScreenName,
             builder: (BuildContext context, GoRouterState state) {
               return const WelcomeScreen();
@@ -192,16 +192,7 @@ class Routes {
                                     GoRouterState state) {
                                   return const ManageCrypt();
                                 },
-                                routes: [
-                                  GoRoute(
-                                    path: AppData.routes._setCodeScreenName,
-                                    builder: (BuildContext context,
-                                        GoRouterState state) {
-                                      return const SetCodeScreen();
-                                    },
-                                    routes: const [],
-                                  ),
-                                ],
+                                routes: const [],
                               ),
                             ],
                           ),
@@ -236,16 +227,7 @@ class Routes {
                                 (BuildContext context, GoRouterState state) {
                               return const ManageCrypt();
                             },
-                            routes: [
-                              GoRoute(
-                                path: AppData.routes._importSetCodeScreenName,
-                                builder: (BuildContext context,
-                                    GoRouterState state) {
-                                  return const SetCodeScreen();
-                                },
-                                routes: const [],
-                              ),
-                            ],
+                            routes: const [],
                           ),
                         ],
                       ),
@@ -270,16 +252,7 @@ class Routes {
                                 (BuildContext context, GoRouterState state) {
                               return const ManageCrypt();
                             },
-                            routes: [
-                              GoRoute(
-                                path: AppData.routes._importSetCodeScreenName,
-                                builder: (BuildContext context,
-                                    GoRouterState state) {
-                                  return const SetCodeScreen();
-                                },
-                                routes: const [],
-                              ),
-                            ],
+                            routes: const [],
                           ),
                         ],
                       ),
@@ -290,19 +263,11 @@ class Routes {
             ],
           ),
           GoRoute(
-            path: AppData.routes._setCodeName,
+            path: AppData.routes._homeScreenName,
             builder: (BuildContext context, GoRouterState state) {
-              return const SetCodeScreen();
+              return const HomeScreen();
             },
-            routes: [
-              GoRoute(
-                path: AppData.routes._homeScreenName,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const HomeScreen();
-                },
-                routes: const [],
-              ),
-            ],
+            routes: const [],
           ),
         ],
       ),

@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         print("resume");
         // Приложение в фокусе
         if (_settingsService.getPassCode() != null) {
-          AppData.routesConfig.routerConfig.go(AppData.routes.setCode);
+          AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
         }
         break;
       case AppLifecycleState.inactive:

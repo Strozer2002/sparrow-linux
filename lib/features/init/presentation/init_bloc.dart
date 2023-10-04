@@ -15,12 +15,15 @@ abstract class InitBloc extends State<InitPage> {
     });
   }
 
-  void relocate() {
+  Future<void> relocate() async {
     if (mounted) {
       if (_settingsService.getPassCode() == null) {
         context.push(AppData.routes.welcomeScreen);
       } else {
-        context.push(AppData.routes.setCode);
+        final result = await context.push<bool?>(AppData.routes.setCode);
+        if (result == true && mounted) {
+          context.go(AppData.routes.homeScreen);
+        }
       }
     }
   }
