@@ -17,6 +17,22 @@ class AuthService {
     return box!.get('user');
   }
 
+  void putAddress(String address) {
+    User? user = getUser();
+    if (user != null) {
+      user.address = address;
+      putUser(user);
+    }
+  }
+
+  String? getAddress() {
+    User? user = getUser();
+    if (user != null) {
+      return user.address;
+    }
+    return null;
+  }
+
   PositionByChain? getPositionByChain() {
     User? user = getUser();
     if (user != null) {

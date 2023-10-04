@@ -24,10 +24,10 @@ class _ImportAddressState extends ImportAddressBloc {
       child: Column(
         children: [
           const SizedBox(height: 75),
-          AppData.assets.svg.importPlus,
+          AppData.assets.image.party(),
           const SizedBox(height: 12),
           const Text(
-            "Select Import Method",
+            "Imported Successfull",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -55,21 +55,9 @@ class _ImportAddressState extends ImportAddressBloc {
               style: TextStyle(fontSize: 16, color: Colors.black26),
             ),
             const SizedBox(width: 12),
-            Expanded(
-              child: TextField(
-                onChanged: (value) {
-                  setState(() {
-                    addressCtrl.text = value;
-                  });
-                },
-                onSubmitted: onSubmitted,
-                controller: addressCtrl,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.zero,
-                  border: InputBorder.none,
-                ),
-              ),
-            )
+            Text(
+              AppData.utils.formatText(addressString),
+            ),
           ],
         ),
       ),
@@ -90,7 +78,7 @@ class _ImportAddressState extends ImportAddressBloc {
         ),
       ),
       child: MainButton(
-        gradient: addressCtrl.text.isEmpty
+        gradient: addressString.isEmpty
             ? LinearGradient(colors: [
                 AppData.colors.middlePurple.withOpacity(0.5),
                 AppData.colors.middlePurple.withOpacity(0.5)
@@ -99,9 +87,9 @@ class _ImportAddressState extends ImportAddressBloc {
                 AppData.colors.middlePurple,
                 AppData.colors.middlePurple,
               ]),
-        onPressed: addressCtrl.text.isEmpty ? null : next,
+        onPressed: addressString.isEmpty ? null : next,
         child: const Text(
-          "Confirm",
+          "Next",
           style: TextStyle(color: Colors.white),
         ),
       ),

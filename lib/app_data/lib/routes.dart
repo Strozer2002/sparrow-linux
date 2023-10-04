@@ -31,17 +31,10 @@ class RoutesList {
   String get createWalletScreenScreen =>
       '$welcomeScreen/$_createWalletScreenName';
 
-  String get _manageCryptScreenName => 'createWallet';
-  String get manageCryptScreen =>
-      '$createWalletScreenScreen/$_createWalletScreenName';
-
   // Create new address
-  String get _setCodeScreenName => 'setCode';
-  String get setCodeScreen => '$manageCryptScreen/$_setCodeScreenName';
-
   String get _createNewAddressScreenName => 'createNewAddress';
   String get createNewAddressScreen =>
-      '$setCodeScreen/$_createNewAddressScreenName';
+      '$createWalletScreenScreen/$_createNewAddressScreenName';
 
   String get _seedPhraseScreenName => 'seedPhrase';
   String get seedPhraseScreen =>
@@ -51,13 +44,17 @@ class RoutesList {
   String get createdSuccessScreen =>
       '$seedPhraseScreen/$_createdSuccessScreenName';
 
+  String get _manageCryptScreenName => 'createWallet';
+  String get manageCryptScreen =>
+      '$createdSuccessScreen/$_createWalletScreenName';
+
+  String get _setCodeScreenName => 'setCode';
+  String get setCodeScreen => '$manageCryptScreen/$_setCodeScreenName';
+
   // Import wallet
-  String get _setCodeScreenForImportName => 'setCodeFroImport';
-  String get setCodeScreenForImport =>
-      '$welcomeScreen/$_setCodeScreenForImportName';
 
   String get _selectImportName => 'selectImport';
-  String get selectImport => '$setCodeScreenForImport/$_selectImportName';
+  String get selectImport => '$welcomeScreen/$_selectImportName';
 
   //Import seed phrase
   String get _importSeedPhraseName => 'importSeedPhrase';
@@ -66,8 +63,11 @@ class RoutesList {
   String get _importAddressName => 'importAddress';
   String get importAddress => '$importSeedPhrase/$_importAddressName';
 
-  String get _importSuccessName => 'importSuccess';
-  String get importSuccess => '$importAddress/$_importSuccessName';
+  String get _importManageCryptName => 'importManageCrypt';
+  String get importManageCrypt => '$importAddress/$_importManageCryptName';
+
+  String get _importSetCodeScreenName => 'importSetCodeScreen';
+  String get importSetCodeScreen => '$importManageCrypt/$_setCodeScreenName';
 }
 
 class Routes {
@@ -153,40 +153,37 @@ class Routes {
                 },
                 routes: [
                   GoRoute(
-                    path: AppData.routes._manageCryptScreenName,
+                    path: AppData.routes._createNewAddressScreenName,
                     builder: (BuildContext context, GoRouterState state) {
-                      return const ManageCrypt();
+                      return const CreateNewAddress();
                     },
                     routes: [
                       GoRoute(
-                        path: AppData.routes._setCodeScreenName,
+                        path: AppData.routes._seedPhraseScreenName,
                         builder: (BuildContext context, GoRouterState state) {
-                          return SetCodeScreen(
-                            nextRoute: state.extra as String,
-                          );
+                          return const SeedPhraseScreen();
                         },
                         routes: [
                           GoRoute(
-                            path: AppData.routes._createNewAddressScreenName,
+                            path: AppData.routes._createdSuccessScreenName,
                             builder:
                                 (BuildContext context, GoRouterState state) {
-                              return const CreateNewAddress();
+                              return const CreatedSuccess();
                             },
                             routes: [
                               GoRoute(
-                                path: AppData.routes._seedPhraseScreenName,
+                                path: AppData.routes._manageCryptScreenName,
                                 builder: (BuildContext context,
                                     GoRouterState state) {
-                                  return const SeedPhraseScreen();
+                                  return const ManageCrypt();
                                 },
                                 routes: [
                                   GoRoute(
-                                    path: AppData
-                                        .routes._createdSuccessScreenName,
+                                    path: AppData.routes._setCodeScreenName,
                                     builder: (BuildContext context,
                                         GoRouterState state) {
-                                      return CreatedSuccess(
-                                        topText: state.extra as String,
+                                      return SetCodeScreen(
+                                        nextRoute: state.extra as String,
                                       );
                                     },
                                     routes: const [],
@@ -202,38 +199,36 @@ class Routes {
                 ],
               ),
               GoRoute(
-                path: AppData.routes._setCodeScreenForImportName,
+                path: AppData.routes._selectImportName,
                 builder: (BuildContext context, GoRouterState state) {
-                  return SetCodeScreen(
-                    nextRoute: state.extra as String,
-                  );
+                  return const SelectImport();
                 },
                 routes: [
                   GoRoute(
-                    path: AppData.routes._selectImportName,
+                    path: AppData.routes._importSeedPhraseName,
                     builder: (BuildContext context, GoRouterState state) {
-                      return const SelectImport();
+                      return const ImportSeedPhrase();
                     },
                     routes: [
                       GoRoute(
-                        path: AppData.routes._importSeedPhraseName,
+                        path: AppData.routes._importAddressName,
                         builder: (BuildContext context, GoRouterState state) {
-                          return const ImportSeedPhrase();
+                          return const ImportAddress();
                         },
                         routes: [
                           GoRoute(
-                            path: AppData.routes._importAddressName,
+                            path: AppData.routes._importManageCryptName,
                             builder:
                                 (BuildContext context, GoRouterState state) {
-                              return const ImportAddress();
+                              return const ManageCrypt();
                             },
                             routes: [
                               GoRoute(
-                                path: AppData.routes._importSuccessName,
+                                path: AppData.routes._importSetCodeScreenName,
                                 builder: (BuildContext context,
                                     GoRouterState state) {
-                                  return CreatedSuccess(
-                                    topText: state.extra as String,
+                                  return SetCodeScreen(
+                                    nextRoute: state.extra as String,
                                   );
                                 },
                                 routes: const [],

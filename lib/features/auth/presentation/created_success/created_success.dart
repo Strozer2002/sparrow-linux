@@ -7,8 +7,7 @@ import '../../widgets/main_button.dart';
 import 'created_succes_bloc.dart';
 
 class CreatedSuccess extends StatefulWidget {
-  final String topText;
-  const CreatedSuccess({super.key, required this.topText});
+  const CreatedSuccess({super.key});
 
   @override
   State<CreatedSuccess> createState() => _CreatedSuccessState();
@@ -29,9 +28,9 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
           const SizedBox(height: 75),
           AppData.assets.image.party(),
           const SizedBox(height: 12),
-          Text(
-            widget.topText,
-            style: const TextStyle(
+          const Text(
+            "Created Successfully",
+            style: TextStyle(
               fontSize: 20,
               color: Colors.white,
             ),
@@ -55,7 +54,7 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
         ),
       ),
       child: MainButton(
-        onPressed: () => context.push(AppData.routes.createWalletScreenScreen),
+        onPressed: () => context.push(AppData.routes.importManageCrypt),
         child: const Text("Done"),
       ),
     );
