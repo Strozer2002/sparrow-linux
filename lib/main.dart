@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
+import 'package:rabby/features/dashboard/domain/dashboard_service.dart';
 import 'package:rabby/features/settings/domain/settings.dart';
 import 'package:rabby/features/settings/settings_service.dart';
 
@@ -19,7 +21,6 @@ import 'features/localization/domain/base/app_locale.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(PortfolioAdapter());
@@ -30,12 +31,13 @@ Future<void> main() async {
   Hive.registerAdapter(ChangesAdapter());
   Hive.registerAdapter(CryptAdapter());
   Hive.registerAdapter(SettingsAdapter());
-  await Hive.openBox<User>('user');
-  await Hive.openBox<Settings>('settings');
-  // Box box = await Hive.openBox<User>('user');
-  // Box box2 = await Hive.openBox<Settings>('settings');
-  // box.clear();
-  // box2.clear();
+
+  // await Hive.openBox<User>('user');
+  // await Hive.openBox<Settings>('settings');
+  Box box = await Hive.openBox<User>('user');
+  Box box2 = await Hive.openBox<Settings>('settings');
+  box.clear();
+  box2.clear();
   runApp(
     EasyLocalization(
       path: 'assets/translations',

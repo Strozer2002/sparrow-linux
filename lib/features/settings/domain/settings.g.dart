@@ -18,20 +18,17 @@ class SettingsAdapter extends TypeAdapter<Settings> {
     };
     return Settings(
       mnemonicSentence: fields[0] as String?,
-      crypts: (fields[2] as List?)?.cast<Crypt>(),
-      userPassCode: fields[3] as String?,
+      userPassCode: fields[1] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(2)
       ..writeByte(0)
       ..write(obj.mnemonicSentence)
-      ..writeByte(2)
-      ..write(obj.crypts)
-      ..writeByte(3)
+      ..writeByte(1)
       ..write(obj.userPassCode);
   }
 

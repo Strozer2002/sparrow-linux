@@ -38,6 +38,33 @@ class Svg {
   SvgPicture get pen => SvgPicture.asset(_name('icons/pen'));
   SvgPicture get phrase => SvgPicture.asset(_name('icons/phrase'));
   SvgPicture get key => SvgPicture.asset(_name('icons/key'));
+  // bottom nav bar
+  SvgPicture get clearAll => SvgPicture.asset(_name('icons/clearAll'));
+  SvgPicture settings({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/settings'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
+  SvgPicture wallet({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/wallet'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
+  SvgPicture get walletSend => SvgPicture.asset(_name('icons/walletSend'));
+  SvgPicture get walletPlus => SvgPicture.asset(_name('icons/walletPlus'));
+  //home
+  SvgPicture get upper => SvgPicture.asset(_name('icons/upper'));
+  SvgPicture get vector => SvgPicture.asset(_name('icons/vector'));
+  SvgPicture get recive => SvgPicture.asset(_name('icons/recive'));
+
   SvgPicture star({
     Color? color,
     double? size,

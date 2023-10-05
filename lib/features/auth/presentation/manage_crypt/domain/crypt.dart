@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 part 'crypt.g.dart';
 
 @HiveType(typeId: 8)
 class Crypt {
-  final Widget? icon;
+  @HiveField(0)
+  final String iconName;
   @HiveField(1)
   final String name;
   @HiveField(2)
   final String shortName;
   @HiveField(3)
-  int? amount;
+  final int amount;
   @HiveField(4)
   bool isChoose;
 
   Crypt({
-    this.amount,
-    this.icon,
+    required this.amount,
+    required this.iconName,
     required this.name,
     required this.shortName,
-    required this.isChoose,
+    this.isChoose = false,
   });
 }

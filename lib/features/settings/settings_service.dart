@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
-import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 import 'package:rabby/features/settings/domain/settings.dart';
 
 class SettingsService {
@@ -14,22 +13,6 @@ class SettingsService {
 
   Settings? getSettings() {
     return box!.get('settings');
-  }
-
-  void putCrypts(List<Crypt> crypts) {
-    Settings? settings = getSettings();
-    if (settings != null) {
-      settings.crypts = crypts;
-      putSettings(settings);
-    }
-  }
-
-  List<Crypt>? getCrypt() {
-    Settings? settings = getSettings();
-    if (settings != null) {
-      return settings.crypts;
-    }
-    return null;
   }
 
   void putPassCode(String passcode) {
@@ -71,7 +54,6 @@ class SettingsService {
     }
     return null;
   }
-
 
   SettingsService._() {
     box = Hive.box<Settings>('settings');

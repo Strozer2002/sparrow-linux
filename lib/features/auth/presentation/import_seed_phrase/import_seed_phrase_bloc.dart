@@ -16,6 +16,7 @@ import '../../domain/adapters/position_by_type.dart';
 import '../../domain/adapters/total.dart';
 import '../../domain/adapters/user.dart';
 import '../../repository/domain/register/register_body.dart';
+import '../manage_crypt/domain/crypt.dart';
 import 'import_seed_phrase.dart';
 
 abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
@@ -79,27 +80,85 @@ abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
                 staked: result.data!.portfolio.attributes.positionByType.staked,
               ),
               positionsDistributionByChain: PositionByChain(
-                arbitrum:
-                    result.data!.portfolio.attributes.positionByChain.arbitrum,
-                aurora:
-                    result.data!.portfolio.attributes.positionByChain.aurora,
-                avalanche:
-                    result.data!.portfolio.attributes.positionByChain.avalanche,
-                binanceSmartChain: result.data!.portfolio.attributes
-                    .positionByChain.binanceSmartChain,
-                ethereum:
-                    result.data!.portfolio.attributes.positionByChain.ethereum,
-                fantom:
-                    result.data!.portfolio.attributes.positionByChain.fantom,
-                loopring:
-                    result.data!.portfolio.attributes.positionByChain.loopring,
-                optimism:
-                    result.data!.portfolio.attributes.positionByChain.optimism,
-                polygon:
-                    result.data!.portfolio.attributes.positionByChain.polygon,
-                solana:
-                    result.data!.portfolio.attributes.positionByChain.solana,
-                xdai: result.data!.portfolio.attributes.positionByChain.xdai,
+                crypts: [
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.arbitrum,
+                    iconName: "arbitrum",
+                    name: 'Arbitrum',
+                    shortName: 'ARB',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.aurora,
+                    iconName: "aurora",
+                    name: 'Aurora',
+                    shortName: 'AUR',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.avalanche,
+                    iconName: "avalanche",
+                    name: 'Avalanche',
+                    shortName: 'AVA',
+                  ),
+                  Crypt(
+                    amount: result.data!.portfolio.attributes.positionByChain
+                        .binanceSmartChain,
+                    iconName: "binance-smart-chain",
+                    name: 'Binance',
+                    shortName: 'BIN',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.ethereum,
+                    iconName: "ethereum",
+                    name: 'Ethereum',
+                    shortName: 'ETH',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.fantom,
+                    iconName: "fantom",
+                    name: 'Fantom',
+                    shortName: 'FAN',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.loopring,
+                    iconName: "loopring",
+                    name: 'Loopring',
+                    shortName: 'LOOP',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.optimism,
+                    iconName: "optimism",
+                    name: 'Optimism',
+                    shortName: 'OPT',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.polygon,
+                    iconName: "polygon",
+                    name: 'Polygon',
+                    shortName: 'POL',
+                  ),
+                  Crypt(
+                    amount: result
+                        .data!.portfolio.attributes.positionByChain.solana,
+                    iconName: "solana",
+                    name: 'Solana',
+                    shortName: 'SOL',
+                  ),
+                  Crypt(
+                    amount:
+                        result.data!.portfolio.attributes.positionByChain.xdai,
+                    iconName: "xdai",
+                    name: 'Xdai',
+                    shortName: 'XDA',
+                  ),
+                ],
               ),
               total: Total(
                 positions: result.data!.portfolio.attributes.total.positions,

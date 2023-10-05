@@ -17,7 +17,8 @@ class CryptAdapter extends TypeAdapter<Crypt> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Crypt(
-      amount: fields[3] as int?,
+      amount: fields[3] as int,
+      iconName: fields[0] as String,
       name: fields[1] as String,
       shortName: fields[2] as String,
       isChoose: fields[4] as bool,
@@ -27,7 +28,9 @@ class CryptAdapter extends TypeAdapter<Crypt> {
   @override
   void write(BinaryWriter writer, Crypt obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.iconName)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)

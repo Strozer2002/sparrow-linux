@@ -73,7 +73,11 @@ class _ManageCryptState extends ManageCryptBloc {
                       children: [
                         Row(
                           children: [
-                            crypts![index].icon!,
+                            AppData.assets.image.crypto(
+                              value: crypts![index].iconName,
+                              width: 30,
+                              height: 30,
+                            ),
                             const SizedBox(width: 16),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

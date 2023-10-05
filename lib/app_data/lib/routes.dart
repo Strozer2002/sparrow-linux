@@ -11,9 +11,12 @@ import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/select_import/select_import.dart';
 import 'package:rabby/features/auth/presentation/set_code/set_code.dart';
 import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
+import 'package:rabby/features/buy/presentation/buy_cash.dart';
+import 'package:rabby/features/dashboard/dashboard_page.dart';
 import 'package:rabby/features/home/presentation/home_screen.dart';
 import 'package:rabby/features/init/presentation/init.dart';
 
+import '../../core/navigator_observer.dart';
 import '../app_data.dart';
 
 final _routes = RoutesList();
@@ -76,6 +79,9 @@ class RoutesList {
 
   String get _homeScreenName => 'homeScreen';
   String get homeScreen => '$init$_homeScreenName';
+
+  String get _buyCashScreenName => 'buyCashScreen';
+  String get buyCashScreen => '$homeScreen/$_buyCashScreenName';
 }
 
 class Routes {
@@ -262,12 +268,32 @@ class Routes {
               ),
             ],
           ),
-          GoRoute(
-            path: AppData.routes._homeScreenName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const HomeScreen();
-            },
-            routes: const [],
+          ShellRoute(
+            navigatorKey: shellNavigator,
+            builder: (context, state, child) => DashboardPage(
+              key: state.pageKey,
+              child: child,
+            ),
+            observers: [
+              BottomBarNavObserver(),
+            ],
+            routes: [
+              GoRoute(
+                path: AppData.routes._homeScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const HomeScreen();
+                },
+                routes: [
+                  GoRoute(
+                    path: AppData.routes._buyCashScreenName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const BuyCashScreen();
+                    },
+                    routes: const [],
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
