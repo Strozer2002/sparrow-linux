@@ -83,13 +83,13 @@ class _ManageCryptState extends ManageCryptBloc {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${crypts![index].name[0].toUpperCase()}${crypts![index].name.substring(1)}",
+                                  crypts![index].name,
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                                 Text(
-                                  '${crypts![index].amount} ${crypts![index].shortName.toUpperCase()}',
+                                  '${crypts![index].amount} ${crypts![index].shortName}',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: AppData.colors.middlePurple

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rabby/features/home/domain/home_screen_enum.dart';
 import 'package:rabby/features/home/domain/wallet_type_enum.dart';
+import 'package:rabby/features/widgets/icon_button.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
 import '../../../app_data/app_data.dart';
@@ -398,22 +399,9 @@ class _HomeScreenState extends HomeBloc {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: AppData.colors.middlePurple,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey
-                                      .withOpacity(0.5), // Color of the shadow
-                                  spreadRadius: 4, // Spread radius
-                                  blurRadius: 7, // Blur radius
-                                  offset: const Offset(
-                                      0, 3), // Offset in the x, y axis
-                                ),
-                              ],
-                            ),
+                          CustomIconButton(
+                            onPressed: () {},
+                            isPressed: false,
                             child: const Icon(
                               Icons.add,
                               color: Colors.white,

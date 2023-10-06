@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/buy/presentation/buy_bloc.dart';
+import 'package:rabby/features/widgets/icon_button.dart';
+import 'package:rabby/features/widgets/numpad.dart';
 
 import '../../../app_data/app_data.dart';
 import '../../auth/widgets/main_button.dart';
@@ -27,8 +29,78 @@ class _BuyCashScreenState extends BuyCashBloc {
   }
 
   Widget get child {
-    return const Column(
-      children: [],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: errorText.isEmpty
+                  ? AppData.colors.middlePurple.withOpacity(0.2)
+                  : Colors.red,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    amountCtrl.text,
+                    style: TextStyle(
+                      color: errorText.isEmpty ? null : Colors.red,
+                      fontSize: 36,
+                    ),
+                  ),
+                  Text(
+                    "\$",
+                    style: TextStyle(
+                      fontSize: 36,
+                      color: AppData.colors.middlePurple.withOpacity(0.4),
+                    ),
+                  ),
+                ],
+              ),
+              CustomIconButton(
+                onPressed: toMax,
+                isPressed: isMax,
+                child: const Text(
+                  "MAX",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 4, left: 10),
+          child: Text(
+            errorText,
+            style: const TextStyle(
+              color: Colors.red,
+            ),
+          ),
+        ),
+        DropdownButton<String>(
+          value: 'One',
+          onChanged: (String? newValue) {
+            print('Selected value: $newValue');
+          },
+          items: <String>['One', 'Two', 'Three', 'Four']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+        NumPad(numberCode: amountCtrl),
+      ],
     );
   }
 
@@ -36,17 +108,22 @@ class _BuyCashScreenState extends BuyCashBloc {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 82, vertical: 20),
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            width: 1,
-            color: AppData.colors.middlePurple.withOpacity(0.5),
-          ),
-        ),
-      ),
       child: MainButton(
-        onPressed: () => context.push(AppData.routes.seedPhraseScreen),
-        child: const Text("Show Seed Phrase"),
+        gradient: errorText.isEmpty
+            ? const LinearGradient(colors: [
+                Color.fromARGB(255, 136, 171, 255),
+                Color.fromARGB(255, 121, 131, 255),
+                Color.fromARGB(255, 121, 131, 255)
+              ])
+            : const LinearGradient(colors: [
+                Color.fromARGB(125, 136, 171, 255),
+                Color.fromARGB(125, 121, 131, 255),
+                Color.fromARGB(125, 121, 131, 255)
+              ]),
+        onPressed: errorText.isNotEmpty
+            ? () {}
+            : () => context.go(AppData.routes.homeScreen),
+        child: const Text("Buy"),
       ),
     );
   }
@@ -56,10 +133,10 @@ class _BuyCashScreenState extends BuyCashBloc {
     return Scaffold(
       appBar: appBar,
       body: Padding(
-        padding: const EdgeInsets.only(top: 36, right: 20, left: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 34),
         child: child,
       ),
-      bottomSheet: bottomButton,
+      bottomNavigationBar: bottomButton,
     );
   }
 }

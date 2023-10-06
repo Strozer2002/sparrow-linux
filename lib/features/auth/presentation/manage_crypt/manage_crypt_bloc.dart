@@ -12,7 +12,7 @@ abstract class ManageCryptBloc extends State<ManageCrypt> {
 
   @override
   void initState() {
-    crypts = _authService.getPositionByChain()!.crypts;
+    crypts = _authService.getCrypts();
 
     super.initState();
   }

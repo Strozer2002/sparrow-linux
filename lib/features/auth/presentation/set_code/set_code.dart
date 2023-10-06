@@ -77,6 +77,46 @@ class _SetCodeScreenState extends SetCodeBloc {
     );
   }
 
+  Widget get passCode {
+    return SizedBox(
+      height: 40,
+      child: ListView.separated(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            height: 40,
+            width: 40,
+            decoration: numberText.text.length > index
+                ? null
+                : BoxDecoration(
+                    border: Border.all(
+                      color: numberText.text.length == index
+                          ? AppData.colors.middlePurple
+                          : AppData.colors.lightPurple,
+                      width: numberText.text.length == index ? 2 : 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+            child: numberText.text.length <= index
+                ? const Text("")
+                : Center(
+                    child: Text(
+                      numberText.text[index],
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 8),
+        itemCount: 6,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -86,12 +126,16 @@ class _SetCodeScreenState extends SetCodeBloc {
           children: [
             topImage,
             const SizedBox(height: 26),
+            passCode,
+            const SizedBox(height: 26),
+            Text(
+              errorText,
+              style: TextStyle(color: AppData.colors.middlePurple),
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 45),
               child: NumPad(
                 numberCode: numberText,
-                goNext: goNext,
-                checkOnFull: isNotFull,
               ),
             ),
           ],

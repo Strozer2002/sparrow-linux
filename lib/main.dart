@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
-import 'package:rabby/features/dashboard/domain/dashboard_service.dart';
+
 import 'package:rabby/features/settings/domain/settings.dart';
 import 'package:rabby/features/settings/settings_service.dart';
 
@@ -32,12 +31,14 @@ Future<void> main() async {
   Hive.registerAdapter(CryptAdapter());
   Hive.registerAdapter(SettingsAdapter());
 
-  // await Hive.openBox<User>('user');
-  // await Hive.openBox<Settings>('settings');
-  Box box = await Hive.openBox<User>('user');
-  Box box2 = await Hive.openBox<Settings>('settings');
-  box.clear();
-  box2.clear();
+  await Hive.openBox<User>('user');
+  await Hive.openBox<Settings>('settings');
+  // Box box = await Hive.openBox<User>('user');
+  // Box box2 = await Hive.openBox<Settings>('settings');
+  final SettingsService settingsService = SettingsService();
+  settingsService.putPassCode("111111");
+  // box.clear();
+  // box2.clear();
   runApp(
     EasyLocalization(
       path: 'assets/translations',
