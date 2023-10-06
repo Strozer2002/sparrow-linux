@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/app_data/app_data.dart';
-import 'package:rabby/features/settings/settings_service.dart';
+import 'package:rabby/features/settings/domain/settings_service.dart';
 import 'set_code.dart';
 
 abstract class SetCodeBloc extends State<SetCodeScreen> {
-  final SettingsService settingsService = SettingsService();
+  final SettingsService settingsService = SettingsService.instance;
   final TextEditingController numberText = TextEditingController();
   @override
   void initState() {
+    settingsService.isRelocate = false;
     numberText.addListener(() {
       setState(() {
         print("Text field value: ${numberText.text}");
@@ -25,7 +26,9 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
     if (isNotFull()) {
       print(numberText.value.text);
     } else {
-      if (settingsService.getPassCode() == null) {
+      settingsService.isRelocate = true;
+      if (settingsService.getPassCode() == null ||
+          widget.changePassword == true) {
         settingsService.putPassCode(numberText.value.text);
         print("_authService.getPassCode() ${settingsService.getPassCode()}");
         context.go(AppData.routes.homeScreen);
@@ -48,7 +51,6 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
   }
 
   String get errorText {
-    
     if (numberText.value.text.length == 6) {
       if (!checkPassword()) {
         return "Password uncorrected";

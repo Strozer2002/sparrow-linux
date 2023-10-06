@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/repository/auth_repository.dart';
-import 'package:rabby/features/settings/settings_service.dart';
+import 'package:rabby/features/settings/domain/settings_service.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 
 import '../../../../app_data/app_data.dart';

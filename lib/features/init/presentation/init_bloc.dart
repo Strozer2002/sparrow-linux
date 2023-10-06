@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/app_data/app_data.dart';
-import 'package:rabby/features/settings/settings_service.dart';
+import 'package:rabby/features/settings/domain/settings_service.dart';
 
 import 'init.dart';
 
@@ -10,6 +10,14 @@ abstract class InitBloc extends State<InitPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      relocate();
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       relocate();
     });

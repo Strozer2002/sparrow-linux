@@ -14,6 +14,7 @@ abstract class HomeBloc extends State<HomeScreen> {
   Rv<HomeScreenEnum> selectedScreen = Rv(HomeScreenEnum.wallet);
   Rv<WalletTypeEnum> selectedWalletType = Rv(WalletTypeEnum.send);
   List<Crypt> crypts = [];
+  int transactionsLength = 20;
   @override
   void initState() {
     setState(() {

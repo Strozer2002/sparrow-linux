@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
-import 'package:rabby/features/settings/settings_service.dart';
+import 'package:rabby/features/settings/domain/settings_service.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 

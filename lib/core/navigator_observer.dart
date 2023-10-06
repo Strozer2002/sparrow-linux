@@ -19,9 +19,14 @@ class BottomBarNavObserver extends NavigatorObserver {
       final currentLocation =
           GoRouterState.of(route.navigator!.context).uri.toString();
       if (currentLocation != AppData.routes.homeScreen) {
-        print('_dashboardService.shouldShowBottomBar(false);');
         _dashboardService.shouldShowBottomBar(false);
+        print('_dashboardService.shouldShowBottomBar(false);');
       } else if (currentLocation == AppData.routes.homeScreen) {
+        if (_dashboardService.shouldShowBottomBar.value == true) {
+          _dashboardService.shouldShowBottomBar(false);
+        } else {
+          _dashboardService.shouldShowBottomBar(true);
+        }
         _dashboardService.selectIndex.value = 0;
       }
     }

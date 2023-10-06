@@ -32,9 +32,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
       // case 2:
       //   context.go(AppData.routes.homeScreen);
       //   break;
-      // case 3:
-      //   context.go(AppData.routes.homeScreen);
-      //   break;
+      case 3:
+        context.go(AppData.routes.settingsScreen);
+        break;
       default:
         break;
     }

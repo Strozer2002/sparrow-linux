@@ -7,7 +7,7 @@ import 'package:rabby/features/auth/repository/auth_repository.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 
 import '../../../../app_data/app_data.dart';
-import '../../../settings/settings_service.dart';
+import '../../../settings/domain/settings_service.dart';
 import '../../domain/adapters/attributes.dart';
 import '../../domain/adapters/changes.dart';
 import '../../domain/adapters/portfolio.dart';

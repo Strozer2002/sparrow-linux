@@ -7,7 +7,11 @@ import 'package:rabby/features/widgets/numpad.dart';
 import 'set_code_bloc.dart';
 
 class SetCodeScreen extends StatefulWidget {
-  const SetCodeScreen({super.key});
+  final bool? changePassword;
+  const SetCodeScreen({
+    super.key,
+    this.changePassword,
+  });
 
   @override
   State<SetCodeScreen> createState() => _SetCodeScreenState();
@@ -29,7 +33,10 @@ class _SetCodeScreenState extends SetCodeBloc {
           AppData.assets.svg.lock,
           const SizedBox(height: 8),
           Text(
-            settingsService.getPassCode() != null ? "Confirm" : "Set Passcode",
+            settingsService.getPassCode() != null &&
+                    widget.changePassword != true
+                ? "Confirm"
+                : "Set Passcode",
             style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -39,7 +46,8 @@ class _SetCodeScreenState extends SetCodeBloc {
           SizedBox(
             width: 270,
             child: Text(
-              settingsService.getPassCode() != null
+              settingsService.getPassCode() != null &&
+                      widget.changePassword != true
                   ? ""
                   : "It will be used to unlock your wallet and encrypt local data",
               style: const TextStyle(
@@ -128,10 +136,13 @@ class _SetCodeScreenState extends SetCodeBloc {
             const SizedBox(height: 26),
             passCode,
             const SizedBox(height: 26),
-            Text(
-              errorText,
-              style: TextStyle(color: AppData.colors.middlePurple),
-            ),
+            settingsService.getPassCode() != null &&
+                    widget.changePassword != true
+                ? Text(
+                    errorText,
+                    style: TextStyle(color: AppData.colors.middlePurple),
+                  )
+                : Container(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 45),
               child: NumPad(

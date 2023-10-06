@@ -10,8 +10,16 @@ class Settings {
   @HiveField(1)
   String? userPassCode;
 
+  @HiveField(2)
+  bool? isAutoLock;
+
+  @HiveField(3)
+  int? autoLockDuration;
+
   Settings({
+    this.isAutoLock = false,
     this.mnemonicSentence,
     this.userPassCode,
+    this.autoLockDuration = 30,
   });
 }

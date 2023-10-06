@@ -15,6 +15,7 @@ import 'package:rabby/features/buy/presentation/buy_cash.dart';
 import 'package:rabby/features/dashboard/dashboard_page.dart';
 import 'package:rabby/features/home/presentation/home_screen.dart';
 import 'package:rabby/features/init/presentation/init.dart';
+import 'package:rabby/features/settings/presentation/settings_screen.dart';
 
 import '../../core/navigator_observer.dart';
 import '../app_data.dart';
@@ -82,6 +83,12 @@ class RoutesList {
 
   String get _buyCashScreenName => 'buyCashScreen';
   String get buyCashScreen => '$homeScreen/$_buyCashScreenName';
+
+  String get _settingsScreenName => 'settingsScreen';
+  String get settingsScreen => '$homeScreen/$_settingsScreenName';
+
+  String get _newPassScreenName => 'newPassScreen';
+  String get newPassScreen => '$settingsScreen/$_newPassScreenName';
 }
 
 class Routes {
@@ -147,53 +154,126 @@ class Routes {
     initialLocation: AppData.routes.init,
 
     routes: [
-      GoRoute(
-        path: AppData.routes.init,
-        builder: (BuildContext context, GoRouterState state) {
-          return const InitPage();
-        },
+      ShellRoute(
+        navigatorKey: shellNavigator,
+        builder: (context, state, child) => DashboardPage(
+          key: state.pageKey,
+          child: child,
+        ),
+        observers: [
+          BottomBarNavObserver(),
+        ],
         routes: [
           GoRoute(
-            path: AppData.routes._setCodeName,
+            path: AppData.routes.init,
             builder: (BuildContext context, GoRouterState state) {
-              return const SetCodeScreen();
-            },
-            routes: const [],
-          ),
-          GoRoute(
-            path: AppData.routes._welcomeScreenName,
-            builder: (BuildContext context, GoRouterState state) {
-              return const WelcomeScreen();
+              return const InitPage();
             },
             routes: [
-              // create wallet
               GoRoute(
-                path: AppData.routes._createWalletScreenName,
+                path: AppData.routes._setCodeName,
                 builder: (BuildContext context, GoRouterState state) {
-                  return const CreateWalletScreen();
+                  return const SetCodeScreen();
+                },
+                routes: const [],
+              ),
+              GoRoute(
+                path: AppData.routes._welcomeScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const WelcomeScreen();
                 },
                 routes: [
+                  // create wallet
                   GoRoute(
-                    path: AppData.routes._createNewAddressScreenName,
+                    path: AppData.routes._createWalletScreenName,
                     builder: (BuildContext context, GoRouterState state) {
-                      return const CreateNewAddress();
+                      return const CreateWalletScreen();
                     },
                     routes: [
                       GoRoute(
-                        path: AppData.routes._seedPhraseScreenName,
+                        path: AppData.routes._createNewAddressScreenName,
                         builder: (BuildContext context, GoRouterState state) {
-                          return const SeedPhraseScreen();
+                          return const CreateNewAddress();
                         },
                         routes: [
                           GoRoute(
-                            path: AppData.routes._createdSuccessScreenName,
+                            path: AppData.routes._seedPhraseScreenName,
                             builder:
                                 (BuildContext context, GoRouterState state) {
-                              return const CreatedSuccess();
+                              return const SeedPhraseScreen();
                             },
                             routes: [
                               GoRoute(
-                                path: AppData.routes._manageCryptScreenName,
+                                path: AppData.routes._createdSuccessScreenName,
+                                builder: (BuildContext context,
+                                    GoRouterState state) {
+                                  return const CreatedSuccess();
+                                },
+                                routes: [
+                                  GoRoute(
+                                    path: AppData.routes._manageCryptScreenName,
+                                    builder: (BuildContext context,
+                                        GoRouterState state) {
+                                      return const ManageCrypt();
+                                    },
+                                    routes: const [],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: AppData.routes._selectImportName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const SelectImport();
+                    },
+                    routes: [
+                      // Import phrase
+                      GoRoute(
+                        path: AppData.routes._importSeedPhraseName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const ImportSeedPhrase();
+                        },
+                        routes: [
+                          GoRoute(
+                            path: AppData.routes._importAddressName,
+                            builder:
+                                (BuildContext context, GoRouterState state) {
+                              return const ImportAddress();
+                            },
+                            routes: [
+                              GoRoute(
+                                path: AppData.routes._importManageCryptName,
+                                builder: (BuildContext context,
+                                    GoRouterState state) {
+                                  return const ManageCrypt();
+                                },
+                                routes: const [],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      // Import Key
+                      GoRoute(
+                        path: AppData.routes._importKeyName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return const ImportKey();
+                        },
+                        routes: [
+                          GoRoute(
+                            path: AppData.routes._importAddressName,
+                            builder:
+                                (BuildContext context, GoRouterState state) {
+                              return const ImportAddress();
+                            },
+                            routes: [
+                              GoRoute(
+                                path: AppData.routes._importManageCryptName,
                                 builder: (BuildContext context,
                                     GoRouterState state) {
                                   return const ManageCrypt();
@@ -209,76 +289,6 @@ class Routes {
                 ],
               ),
               GoRoute(
-                path: AppData.routes._selectImportName,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const SelectImport();
-                },
-                routes: [
-                  // Import phrase
-                  GoRoute(
-                    path: AppData.routes._importSeedPhraseName,
-                    builder: (BuildContext context, GoRouterState state) {
-                      return const ImportSeedPhrase();
-                    },
-                    routes: [
-                      GoRoute(
-                        path: AppData.routes._importAddressName,
-                        builder: (BuildContext context, GoRouterState state) {
-                          return const ImportAddress();
-                        },
-                        routes: [
-                          GoRoute(
-                            path: AppData.routes._importManageCryptName,
-                            builder:
-                                (BuildContext context, GoRouterState state) {
-                              return const ManageCrypt();
-                            },
-                            routes: const [],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // Import Key
-                  GoRoute(
-                    path: AppData.routes._importKeyName,
-                    builder: (BuildContext context, GoRouterState state) {
-                      return const ImportKey();
-                    },
-                    routes: [
-                      GoRoute(
-                        path: AppData.routes._importAddressName,
-                        builder: (BuildContext context, GoRouterState state) {
-                          return const ImportAddress();
-                        },
-                        routes: [
-                          GoRoute(
-                            path: AppData.routes._importManageCryptName,
-                            builder:
-                                (BuildContext context, GoRouterState state) {
-                              return const ManageCrypt();
-                            },
-                            routes: const [],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          ShellRoute(
-            navigatorKey: shellNavigator,
-            builder: (context, state, child) => DashboardPage(
-              key: state.pageKey,
-              child: child,
-            ),
-            observers: [
-              BottomBarNavObserver(),
-            ],
-            routes: [
-              GoRoute(
                 path: AppData.routes._homeScreenName,
                 builder: (BuildContext context, GoRouterState state) {
                   return const HomeScreen();
@@ -290,6 +300,23 @@ class Routes {
                       return const BuyCashScreen();
                     },
                     routes: const [],
+                  ),
+                  GoRoute(
+                    path: AppData.routes._settingsScreenName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const SettingsScreen();
+                    },
+                    routes: [
+                      GoRoute(
+                        path: AppData.routes._newPassScreenName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return SetCodeScreen(
+                            changePassword: state.extra as bool,
+                          );
+                        },
+                        routes: const [],
+                      ),
+                    ],
                   ),
                 ],
               ),

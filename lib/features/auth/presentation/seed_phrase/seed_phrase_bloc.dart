@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rabby/features/settings/settings_service.dart';
+import 'package:rabby/features/settings/domain/settings_service.dart';
 
 import '../../../../app_data/app_data.dart';
 import 'seed_phrase.dart';
