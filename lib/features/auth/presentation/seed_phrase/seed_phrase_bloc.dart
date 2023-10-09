@@ -13,7 +13,7 @@ abstract class SeedPhraseBloc extends State<SeedPhraseScreen> {
   @override
   void initState() {
     if (_settingsService.getSettings() != null) {
-      mnemonic = _settingsService.getSettings()?.mnemonicSentence;
+      mnemonic = _settingsService.getMnemonicSentence();
       mnemonicList = mnemonic!.split(' ');
     }
     super.initState();

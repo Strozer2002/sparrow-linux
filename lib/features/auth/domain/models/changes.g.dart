@@ -8,8 +8,8 @@ part of 'changes.dart';
 
 ChangesEntity _$ChangesEntityFromJson(Map<String, dynamic> json) =>
     ChangesEntity(
-      absoluteId: json['absolute_1d'] as int,
-      percentId: json['percent_1d'] as int?,
+      absoluteId: (json['absolute_1d'] as num).toDouble(),
+      percentId: (json['percent_1d'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ChangesEntityToJson(ChangesEntity instance) =>

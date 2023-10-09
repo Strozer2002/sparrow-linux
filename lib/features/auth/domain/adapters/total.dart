@@ -5,7 +5,7 @@ part 'total.g.dart';
 @HiveType(typeId: 6)
 class Total {
   @HiveField(0)
-  int positions;
+  double positions;
 
   Total({
     required this.positions,

@@ -17,11 +17,11 @@ class PositionByTypeAdapter extends TypeAdapter<PositionByType> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PositionByType(
-      wallet: fields[0] as int,
-      deposited: fields[1] as int,
-      borrowed: fields[2] as int,
-      locked: fields[3] as int,
-      staked: fields[4] as int,
+      wallet: fields[0] as double,
+      deposited: fields[1] as double,
+      borrowed: fields[2] as double,
+      locked: fields[3] as double,
+      staked: fields[4] as double,
     );
   }
 

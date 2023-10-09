@@ -6,7 +6,7 @@ part 'total.g.dart';
 
 @JsonSerializable()
 class TotalEntity implements DTO {
-  final int positions;
+  final double positions;
 
   const TotalEntity({
     required this.positions,

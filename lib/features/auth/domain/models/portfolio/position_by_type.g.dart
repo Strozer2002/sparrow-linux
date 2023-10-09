@@ -9,11 +9,11 @@ part of 'position_by_type.dart';
 PositionByTypeEntity _$PositionByTypeEntityFromJson(
         Map<String, dynamic> json) =>
     PositionByTypeEntity(
-      wallet: json['wallet'] as int,
-      deposited: json['deposited'] as int,
-      borrowed: json['borrowed'] as int,
-      locked: json['locked'] as int,
-      staked: json['staked'] as int,
+      wallet: (json['wallet'] as num).toDouble(),
+      deposited: (json['deposited'] as num).toDouble(),
+      borrowed: (json['borrowed'] as num).toDouble(),
+      locked: (json['locked'] as num).toDouble(),
+      staked: (json['staked'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PositionByTypeEntityToJson(

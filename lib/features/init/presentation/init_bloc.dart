@@ -11,16 +11,28 @@ abstract class InitBloc extends State<InitPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      relocate();
+      syncData();
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      relocate();
-    });
+  Future<void> syncData() async {
+    if (_settingsService.getMnemonicSentence() != null &&
+        _settingsService.getPrivateKey() == null) {
+      await AppData.utils
+          .getPrivateKey(_settingsService.getMnemonicSentence()!);
+      await AppData.utils.importData(
+        public: _settingsService.getMnemonicSentence()!,
+        isNew: false,
+      );
+    } else if (_settingsService.getPrivateKey() != null) {
+      await AppData.utils.importData(
+        public: _settingsService.getPrivateKey()!,
+        isNew: false,
+      );
+      await AppData.utils.web3(_settingsService.getPrivateKey()!);
+    }
+
+    relocate();
   }
 
   Future<void> relocate() async {

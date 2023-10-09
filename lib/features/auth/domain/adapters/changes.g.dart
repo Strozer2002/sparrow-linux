@@ -17,8 +17,8 @@ class ChangesAdapter extends TypeAdapter<Changes> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Changes(
-      absoluteId: fields[0] as int,
-      percentId: fields[1] as int?,
+      absoluteId: fields[0] as double?,
+      percentId: fields[1] as double?,
     );
   }
 

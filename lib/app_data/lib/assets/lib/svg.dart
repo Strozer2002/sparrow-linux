@@ -61,10 +61,18 @@ class Svg {
   SvgPicture get walletSend => SvgPicture.asset(_name('icons/walletSend'));
   SvgPicture get walletPlus => SvgPicture.asset(_name('icons/walletPlus'));
   //home
-  SvgPicture get upper => SvgPicture.asset(_name('icons/upper'));
   SvgPicture get vector => SvgPicture.asset(_name('icons/vector'));
   SvgPicture get recive => SvgPicture.asset(_name('icons/recive'));
 
+  SvgPicture upper({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/upper'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
   SvgPicture star({
     Color? color,
     double? size,

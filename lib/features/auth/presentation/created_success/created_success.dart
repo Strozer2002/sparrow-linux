@@ -83,8 +83,8 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      AppData.utils
-                          .formatText(authService.getUser()?.address ?? " "),
+                      AppData.utils.formatAddressWallet(
+                          authService.getUser()?.address ?? " "),
                       style: TextStyle(
                         fontSize: 14,
                         color: AppData.colors.middlePurple,

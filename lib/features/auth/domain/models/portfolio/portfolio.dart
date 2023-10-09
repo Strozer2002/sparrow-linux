@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rabby/features/auth/domain/models/attributes.dart';
+import 'package:rabby/features/auth/domain/models/portfolio/attributes.dart';
 
 part 'portfolio.g.dart';
 

@@ -40,22 +40,32 @@ class _HomeScreenState extends HomeBloc {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: authService.getChangesAbsoluteWallet()! < 0
+                      ? Colors.red.withOpacity(0.2)
+                      : Colors.white.withOpacity(0.2),
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.4),
+                    color: authService.getChangesAbsoluteWallet()! < 0
+                        ? Colors.red.withOpacity(0.4)
+                        : Colors.white.withOpacity(0.4),
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   children: [
-                    AppData.assets.svg.upper,
+                    AppData.assets.svg.upper(
+                      color: authService.getChangesAbsoluteWallet()! < 0
+                          ? Colors.red
+                          : Colors.white,
+                    ),
                     const SizedBox(width: 4),
-                    const Text(
-                      "+7.5%",
+                    Text(
+                      "${AppData.utils.doubleToTwoValues(authService.getChangesAbsoluteWallet()!)} %",
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.white,
+                        color: authService.getChangesAbsoluteWallet()! < 0
+                            ? Colors.red
+                            : Colors.white,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -63,7 +73,9 @@ class _HomeScreenState extends HomeBloc {
                       "Today’s Profit",
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white.withOpacity(0.8),
+                        color: authService.getChangesAbsoluteWallet()! < 0
+                            ? Colors.red.withOpacity(0.8)
+                            : Colors.white.withOpacity(0.8),
                       ),
                     ),
                   ],
@@ -76,9 +88,9 @@ class _HomeScreenState extends HomeBloc {
             ],
           ),
           const SizedBox(height: 22),
-          const Text(
-            "\$174.669",
-            style: TextStyle(
+          Text(
+            "\$${AppData.utils.doubleToTwoValues(authService.getWallet()!)}",
+            style: const TextStyle(
               fontSize: 36,
               color: Colors.white,
             ),
@@ -134,7 +146,7 @@ class _HomeScreenState extends HomeBloc {
     );
   }
 
-  Widget get walletBody {
+  Widget get walletHead {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -224,19 +236,24 @@ class _HomeScreenState extends HomeBloc {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const Text("\$29"),
+                    Text(
+                        "\$${AppData.utils.doubleToTwoValues(crypts[index].amountInCurrency)}"),
                     const SizedBox(height: 2),
                     Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: AppData.colors.middlePurple.withOpacity(0.2),
+                        color: crypts[index].changesCrypt.absoluteId! < 0
+                            ? Colors.red.withOpacity(0.2)
+                            : AppData.colors.middlePurple.withOpacity(0.2),
                       ),
                       child: Text(
-                        "+7.5%",
+                        "${AppData.utils.doubleToTwoValues(crypts[index].changesCrypt.absoluteId!)}%",
                         style: TextStyle(
                           fontSize: 10,
-                          color: AppData.colors.middlePurple.withOpacity(0.6),
+                          color: crypts[index].changesCrypt.absoluteId! < 0
+                              ? Colors.red.withOpacity(0.6)
+                              : AppData.colors.middlePurple.withOpacity(0.6),
                         ),
                       ),
                     ),
@@ -260,208 +277,8 @@ class _HomeScreenState extends HomeBloc {
             selectedWalletType: selectedWalletType,
             crypt: crypts[index],
           );
-          // return Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: Column(
-          //     mainAxisSize: MainAxisSize.min,
-          //     children: <Widget>[
-          //       Container(
-          //         margin: const EdgeInsets.symmetric(vertical: 16),
-          //         width: 32,
-          //         height: 4,
-          //         decoration: BoxDecoration(
-          //           color: AppData.colors.middlePurple.withOpacity(0.5),
-          //           borderRadius: BorderRadius.circular(
-          //             5,
-          //           ),
-          //         ),
-          //       ),
-          //       const SizedBox(height: 16),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           Container(
-          //             padding: const EdgeInsets.symmetric(
-          //                 horizontal: 20, vertical: 8),
-          //             decoration: BoxDecoration(
-          //               border: Border.all(
-          //                 color: AppData.colors.middlePurple.withOpacity(0.2),
-          //                 width: 1,
-          //               ),
-          //               borderRadius: BorderRadius.circular(4),
-          //             ),
-          //             child: Row(
-          //               children: [
-          //                 AppData.assets.image.crypto(
-          //                   value: crypts[index].iconName,
-          //                   width: 30,
-          //                   height: 30,
-          //                 ),
-          //                 const SizedBox(width: 16),
-          //                 Expanded(
-          //                   child: Column(
-          //                     crossAxisAlignment: CrossAxisAlignment.start,
-          //                     children: [
-          //                       Text(crypts[index].name),
-          //                       Text(
-          //                         crypts[index].shortName,
-          //                         style: TextStyle(
-          //                           fontSize: 14,
-          //                           color: AppData.colors.middlePurple
-          //                               .withOpacity(0.6),
-          //                         ),
-          //                       ),
-          //                     ],
-          //                   ),
-          //                 ),
-          //                 const SizedBox(width: 16),
-          //                 CustomIconButton(
-          //                   onPressed: () {},
-          //                   isPressed: false,
-          //                   child: const Icon(
-          //                     Icons.add,
-          //                     color: Colors.white,
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           const SizedBox(height: 22),
-          //           cryptDiagram,
-          //           const SizedBox(height: 26),
-          //           const Text(
-          //             'Balance',
-          //             style: TextStyle(
-          //               fontSize: 18,
-          //             ),
-          //           ),
-          //           const SizedBox(height: 16),
-          //           Container(
-          //             padding: const EdgeInsets.symmetric(
-          //                 horizontal: 20, vertical: 13),
-          //             decoration: BoxDecoration(
-          //               color: Colors.white,
-          //               border: Border.all(
-          //                 color: AppData.colors.middlePurple.withOpacity(0.2),
-          //                 width: 1,
-          //               ),
-          //               borderRadius: BorderRadius.circular(8),
-          //             ),
-          //             child: Row(
-          //               children: [
-          //                 AppData.assets.svg.walletPlus,
-          //                 const SizedBox(width: 16),
-          //                 Expanded(
-          //                   child: Column(
-          //                     crossAxisAlignment: CrossAxisAlignment.start,
-          //                     children: [
-          //                       const Text(
-          //                         "Available",
-          //                       ),
-          //                       Row(
-          //                         children: [
-          //                           Text(
-          //                             "${crypts[index].amount} ${crypts[index].shortName}",
-          //                             style: TextStyle(
-          //                               fontSize: 14,
-          //                               color: AppData.colors.middlePurple
-          //                                   .withOpacity(0.6),
-          //                             ),
-          //                           ),
-          //                         ],
-          //                       )
-          //                     ],
-          //                   ),
-          //                 ),
-          //                 const SizedBox(width: 16),
-          //                 const Text(
-          //                   "\$0,0",
-          //                   style: TextStyle(
-          //                     fontSize: 16,
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       const SizedBox(height: 20),
-          //     ],
-          //   ),
-          // );
         });
   }
-
-  // Widget get cryptDiagram {
-  //   return Column(
-  //     children: [
-  //       Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               const Text(
-  //                 'Price',
-  //                 style: TextStyle(
-  //                   fontSize: 12,
-  //                   color: Colors.grey,
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 5),
-  //               Row(
-  //                 children: [
-  //                   const Text(
-  //                     '\$10,945.00 ',
-  //                     style: TextStyle(
-  //                       fontSize: 16,
-  //                     ),
-  //                   ),
-  //                   Text(
-  //                     '+7.5%',
-  //                     style: TextStyle(
-  //                       fontSize: 10,
-  //                       color: AppData.colors.middlePurple,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //           Obs(
-  //             rvList: [selectedWalletType],
-  //             builder: () => Row(
-  //               children: [
-  //                 CryptTab(
-  //                   selectWallet: WalletTypeEnum.send,
-  //                   icon: AppData.assets.svg.vector,
-  //                   text: "Send",
-  //                   selectedWalletType: selectedWalletType,
-  //                   borderRadiusGeometry: const BorderRadius.only(
-  //                     topLeft: Radius.circular(12),
-  //                   ),
-  //                 ),
-  //                 CryptTab(
-  //                   selectWallet: WalletTypeEnum.resive,
-  //                   icon: AppData.assets.svg.recive,
-  //                   text: "Resive",
-  //                   selectedWalletType: selectedWalletType,
-  //                   borderRadiusGeometry: const BorderRadius.only(
-  //                     topRight: Radius.circular(12),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           )
-  //         ],
-  //       ),
-  //       Container(
-  //         height: 300,
-  //         color: Colors.white,
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget get activityBody {
     return Container(
@@ -498,7 +315,7 @@ class _HomeScreenState extends HomeBloc {
                   physics: const NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: 20,
+                  itemCount: authService.getTransactions()!.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -506,14 +323,40 @@ class _HomeScreenState extends HomeBloc {
                       children: [
                         Row(
                           children: [
-                            AppData.assets.svg.vector,
+                            operationType(
+                              transaction:
+                                  authService.getTransactions()![index],
+                              send: AppData.assets.svg.vector,
+                              receive: AppData.assets.svg.recive,
+                              swap: const Icon(Icons.swap_vert),
+                            ),
                             const SizedBox(width: 16),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Send"),
+                                operationType(
+                                  transaction:
+                                      authService.getTransactions()![index],
+                                  send: const Text("Send"),
+                                  receive: const Text("Receive"),
+                                  swap: const Text("Swap"),
+                                ),
                                 Text(
-                                  AppData.utils
-                                      .formatText("0xDAdawdawdadadadad6B4"),
+                                  AppData.utils.formatAddressWallet(
+                                    operationTypeString(
+                                      transaction:
+                                          authService.getTransactions()![index],
+                                      send: authService
+                                          .getTransactions()![index]
+                                          .sentTo,
+                                      receive: authService
+                                          .getTransactions()![index]
+                                          .sentFrom,
+                                      swap: authService
+                                          .getTransactions()![index]
+                                          .sentTo,
+                                    ),
+                                  ),
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: AppData.colors.middlePurple
@@ -525,10 +368,24 @@ class _HomeScreenState extends HomeBloc {
                           ],
                         ),
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            const Text("+0.0800 BTC"),
                             Text(
-                              '4 days ago',
+                              operationTypeString(
+                                transaction:
+                                    authService.getTransactions()![index],
+                                send:
+                                    "-${authService.getTransactions()![index].price} ${authService.getTransactions()![index].cryptSymbol}",
+                                receive:
+                                    "+${authService.getTransactions()![index].price} ${authService.getTransactions()![index].cryptSymbol}",
+                                swap:
+                                    "-${authService.getTransactions()![index].price} ${authService.getTransactions()![index].cryptSymbol}",
+                              ),
+                            ),
+                            Text(
+                              AppData.utils.formatDateTime(
+                                authService.getTransactions()![index].minedAt,
+                              ),
                               style: TextStyle(
                                 fontSize: 14,
                                 color: AppData.colors.middlePurple
@@ -549,7 +406,7 @@ class _HomeScreenState extends HomeBloc {
   Widget body(HomeScreenEnum homeScreenEnum) {
     switch (homeScreenEnum) {
       case HomeScreenEnum.wallet:
-        return walletBody;
+        return walletHead;
 
       case HomeScreenEnum.settings:
       case HomeScreenEnum.activity:

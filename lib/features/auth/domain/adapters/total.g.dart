@@ -17,7 +17,7 @@ class TotalAdapter extends TypeAdapter<Total> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Total(
-      positions: fields[0] as int,
+      positions: fields[0] as double,
     );
   }
 

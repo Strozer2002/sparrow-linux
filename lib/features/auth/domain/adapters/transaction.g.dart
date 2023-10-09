@@ -1,53 +1,50 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'crypt.dart';
+part of 'transaction.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CryptAdapter extends TypeAdapter<Crypt> {
+class TransactionAdapter extends TypeAdapter<Transaction> {
   @override
-  final int typeId = 8;
+  final int typeId = 10;
 
   @override
-  Crypt read(BinaryReader reader) {
+  Transaction read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Crypt(
-      amount: fields[3] as double,
-      amountInCurrency: fields[4] as double,
-      priceForOne: fields[5] as double,
-      changesCrypt: fields[7] as Changes,
-      iconName: fields[0] as String,
-      name: fields[1] as String,
-      shortName: fields[2] as String,
-      isChoose: fields[6] as bool,
+    return Transaction(
+      cryptSymbol: fields[7] as String,
+      minedAt: fields[1] as String,
+      operationType: fields[0] as String,
+      price: fields[6] as double,
+      sentFrom: fields[3] as String,
+      sentTo: fields[4] as String,
+      status: fields[5] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Crypt obj) {
+  void write(BinaryWriter writer, Transaction obj) {
     writer
-      ..writeByte(8)
-      ..writeByte(0)
-      ..write(obj.iconName)
-      ..writeByte(1)
-      ..write(obj.name)
-      ..writeByte(2)
-      ..write(obj.shortName)
-      ..writeByte(3)
-      ..write(obj.amount)
-      ..writeByte(4)
-      ..write(obj.amountInCurrency)
-      ..writeByte(5)
-      ..write(obj.priceForOne)
-      ..writeByte(6)
-      ..write(obj.isChoose)
       ..writeByte(7)
-      ..write(obj.changesCrypt);
+      ..writeByte(0)
+      ..write(obj.operationType)
+      ..writeByte(1)
+      ..write(obj.minedAt)
+      ..writeByte(3)
+      ..write(obj.sentFrom)
+      ..writeByte(4)
+      ..write(obj.sentTo)
+      ..writeByte(5)
+      ..write(obj.status)
+      ..writeByte(6)
+      ..write(obj.price)
+      ..writeByte(7)
+      ..write(obj.cryptSymbol);
   }
 
   @override
@@ -56,7 +53,7 @@ class CryptAdapter extends TypeAdapter<Crypt> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CryptAdapter &&
+      other is TransactionAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

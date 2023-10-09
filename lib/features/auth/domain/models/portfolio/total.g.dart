@@ -7,7 +7,7 @@ part of 'total.dart';
 // **************************************************************************
 
 TotalEntity _$TotalEntityFromJson(Map<String, dynamic> json) => TotalEntity(
-      positions: json['positions'] as int,
+      positions: (json['positions'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$TotalEntityToJson(TotalEntity instance) =>

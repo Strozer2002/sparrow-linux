@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rabby/app_data/app_data.dart';
 
 import '../../widgets/main_button.dart';
@@ -22,6 +23,16 @@ class _ManageCryptState extends ManageCryptBloc {
           color: Colors.black,
         ),
       ),
+      leading: IconButton(
+        onPressed: () {
+          if (settingsService.getPassCode() != null) {
+            context.go(AppData.routes.homeScreen);
+          } else {
+            context.pop();
+          }
+        },
+        icon: const Icon(Icons.arrow_back),
+      ),
     );
   }
 
@@ -29,6 +40,16 @@ class _ManageCryptState extends ManageCryptBloc {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
+        onChanged: (query) {
+          setState(() {
+            searchQuery = query;
+            filterCrypts = crypts!
+                .where((crypt) => crypt.name
+                    .toLowerCase()
+                    .contains(searchQuery.toLowerCase()))
+                .toList();
+          });
+        },
         decoration: InputDecoration(
           prefixIcon: IconButton(
             onPressed: () {},
@@ -64,7 +85,7 @@ class _ManageCryptState extends ManageCryptBloc {
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: crypts!.length,
+                  itemCount: filterCrypts!.length,
                   itemBuilder: (context, index) => Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -74,7 +95,7 @@ class _ManageCryptState extends ManageCryptBloc {
                         Row(
                           children: [
                             AppData.assets.image.crypto(
-                              value: crypts![index].iconName,
+                              value: filterCrypts![index].iconName,
                               width: 30,
                               height: 30,
                             ),
@@ -83,13 +104,13 @@ class _ManageCryptState extends ManageCryptBloc {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  crypts![index].name,
+                                  filterCrypts![index].name,
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                                 Text(
-                                  '${crypts![index].amount} ${crypts![index].shortName}',
+                                  '${filterCrypts![index].amount} ${filterCrypts![index].shortName}',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: AppData.colors.middlePurple
@@ -101,10 +122,10 @@ class _ManageCryptState extends ManageCryptBloc {
                           ],
                         ),
                         Switch(
-                          value: crypts![index].isChoose,
+                          value: filterCrypts![index].isChoose,
                           onChanged: (value) {
                             setState(() {
-                              crypts![index].isChoose = value;
+                              filterCrypts![index].isChoose = value;
                             });
                           },
                           activeColor: Colors.white,

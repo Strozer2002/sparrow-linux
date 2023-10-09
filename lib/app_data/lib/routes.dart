@@ -51,9 +51,9 @@ class RoutesList {
   String get createdSuccessScreen =>
       '$seedPhraseScreen/$_createdSuccessScreenName';
 
-  String get _manageCryptScreenName => 'createWallet';
-  String get manageCryptScreen =>
-      '$createdSuccessScreen/$_createWalletScreenName';
+  String get _authManageCryptScreenName => 'authManageCryptScreen';
+  String get authManageCryptScreen =>
+      '$createdSuccessScreen/$_authManageCryptScreenName';
 
   // Import wallet
 
@@ -86,6 +86,9 @@ class RoutesList {
 
   String get _settingsScreenName => 'settingsScreen';
   String get settingsScreen => '$homeScreen/$_settingsScreenName';
+
+  String get _manageCryptScreenName => 'manageCryptScreen';
+  String get manageCryptScreen => '$init$_manageCryptScreenName';
 
   String get _newPassScreenName => 'newPassScreen';
   String get newPassScreen => '$settingsScreen/$_newPassScreenName';
@@ -211,7 +214,8 @@ class Routes {
                                 },
                                 routes: [
                                   GoRoute(
-                                    path: AppData.routes._manageCryptScreenName,
+                                    path: AppData
+                                        .routes._authManageCryptScreenName,
                                     builder: (BuildContext context,
                                         GoRouterState state) {
                                       return const ManageCrypt();
@@ -319,6 +323,13 @@ class Routes {
                     ],
                   ),
                 ],
+              ),
+              GoRoute(
+                path: AppData.routes._manageCryptScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const ManageCrypt();
+                },
+                routes: const [],
               ),
             ],
           ),

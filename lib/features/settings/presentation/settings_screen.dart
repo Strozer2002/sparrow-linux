@@ -181,7 +181,8 @@ class _SettingsScreenState extends SettingsBloc {
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
-            onTap: () => context.push(AppData.routes.newPassScreen, extra: true),
+            onTap: () =>
+                context.push(AppData.routes.newPassScreen, extra: true),
           ),
           settingField(
             leftPart: const Row(
@@ -260,7 +261,10 @@ class _SettingsScreenState extends SettingsBloc {
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            onTap: () {
+              appService.clearAllBox();
+              context.go(AppData.routes.welcomeScreen);
+            },
           ),
         ],
       ),

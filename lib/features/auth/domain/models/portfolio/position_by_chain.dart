@@ -6,28 +6,28 @@ part 'position_by_chain.g.dart';
 
 @JsonSerializable()
 class PositionByChainEntity implements DTO {
-  final int arbitrum;
+  final double arbitrum;
 
-  final int aurora;
+  final double aurora;
 
-  final int avalanche;
+  final double avalanche;
 
   @JsonKey(name: "binance-smart-chain")
-  final int binanceSmartChain;
+  final double binanceSmartChain;
 
-  final int ethereum;
+  final double ethereum;
 
-  final int fantom;
+  final double fantom;
 
-  final int loopring;
+  final double loopring;
 
-  final int optimism;
+  final double optimism;
 
-  final int polygon;
+  final double polygon;
 
-  final int solana;
+  final double solana;
 
-  final int xdai;
+  final double xdai;
 
   const PositionByChainEntity({
     required this.arbitrum,

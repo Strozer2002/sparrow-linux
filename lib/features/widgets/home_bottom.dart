@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
 import '../../app_data/app_data.dart';
@@ -40,17 +41,20 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    const Text(
-                      '\$10,945.00 ',
-                      style: TextStyle(
+                    Text(
+                      '\$${AppData.utils.doubleToTwoValues(widget.crypt.priceForOne)}',
+                      style: const TextStyle(
                         fontSize: 16,
                       ),
                     ),
+                    const SizedBox(width: 5),
                     Text(
-                      '+7.5%',
+                      '${AppData.utils.doubleToTwoValues(widget.crypt.changesCrypt.absoluteId!)}%',
                       style: TextStyle(
                         fontSize: 10,
-                        color: AppData.colors.middlePurple,
+                        color: widget.crypt.changesCrypt.absoluteId! < 0
+                            ? Colors.red
+                            : AppData.colors.middlePurple,
                       ),
                     ),
                   ],
@@ -150,7 +154,8 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                     ),
                     const SizedBox(width: 16),
                     CustomIconButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          context.push(AppData.routes.buyCashScreen),
                       isPressed: false,
                       child: const Icon(
                         Icons.add,
@@ -195,7 +200,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                           Row(
                             children: [
                               Text(
-                                "${widget.crypt.amount} ${widget.crypt.shortName}",
+                                "${AppData.utils.doubleToTwoValues(widget.crypt.amount)} ${widget.crypt.shortName}",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: AppData.colors.middlePurple
@@ -208,9 +213,9 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    const Text(
-                      "\$0,0",
-                      style: TextStyle(
+                    Text(
+                      "\$${AppData.utils.doubleToTwoValues(widget.crypt.amountInCurrency)}",
+                      style: const TextStyle(
                         fontSize: 16,
                       ),
                     ),

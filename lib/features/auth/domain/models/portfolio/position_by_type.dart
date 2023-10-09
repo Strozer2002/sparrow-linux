@@ -6,15 +6,15 @@ part 'position_by_type.g.dart';
 
 @JsonSerializable()
 class PositionByTypeEntity implements DTO {
-  final int wallet;
+  final double wallet;
 
-  final int deposited;
+  final double deposited;
 
-  final int borrowed;
+  final double borrowed;
 
-  final int locked;
+  final double locked;
 
-  final int staked;
+  final double staked;
 
   const PositionByTypeEntity({
     required this.wallet,

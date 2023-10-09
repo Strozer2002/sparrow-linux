@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:rabby/features/buy/presentation/buy_bloc.dart';
 import 'package:rabby/features/widgets/icon_button.dart';
 import 'package:rabby/features/widgets/numpad.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app_data/app_data.dart';
 import '../../auth/widgets/main_button.dart';
@@ -122,7 +123,7 @@ class _BuyCashScreenState extends BuyCashBloc {
               ]),
         onPressed: errorText.isNotEmpty
             ? () {}
-            : () => context.go(AppData.routes.homeScreen),
+            : () => launchUrlString("https://www.moonpay.com/"),
         child: const Text("Buy"),
       ),
     );

@@ -7,10 +7,10 @@ part 'changes.g.dart';
 @JsonSerializable()
 class ChangesEntity implements DTO {
   @JsonKey(name: 'absolute_1d')
-  final int absoluteId;
+  final double absoluteId;
 
   @JsonKey(name: 'percent_1d')
-  final int? percentId;
+  final double? percentId;
 
   const ChangesEntity({
     required this.absoluteId,

@@ -5,19 +5,19 @@ part 'position_by_type.g.dart';
 @HiveType(typeId: 5)
 class PositionByType {
   @HiveField(0)
-  int wallet;
+  double wallet;
 
   @HiveField(1)
-  int deposited;
+  double deposited;
 
   @HiveField(2)
-  int borrowed;
+  double borrowed;
 
   @HiveField(3)
-  int locked;
+  double locked;
 
   @HiveField(4)
-  int staked;
+  double staked;
 
   PositionByType({
     required this.wallet,

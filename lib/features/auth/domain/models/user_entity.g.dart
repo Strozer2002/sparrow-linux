@@ -9,10 +9,12 @@ part of 'user_entity.dart';
 UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       address: json['address'] as String,
       transactions: (json['transactions'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => TransactionEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       positions: (json['positions'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => e == null
+              ? null
+              : PositionEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       nft: json['nft'] as Map<String, dynamic>?,
       portfolio:

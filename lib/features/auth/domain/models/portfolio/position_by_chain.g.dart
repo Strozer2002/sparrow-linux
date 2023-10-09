@@ -9,17 +9,17 @@ part of 'position_by_chain.dart';
 PositionByChainEntity _$PositionByChainEntityFromJson(
         Map<String, dynamic> json) =>
     PositionByChainEntity(
-      arbitrum: json['arbitrum'] as int,
-      aurora: json['aurora'] as int,
-      avalanche: json['avalanche'] as int,
-      binanceSmartChain: json['binance-smart-chain'] as int,
-      ethereum: json['ethereum'] as int,
-      fantom: json['fantom'] as int,
-      loopring: json['loopring'] as int,
-      optimism: json['optimism'] as int,
-      polygon: json['polygon'] as int,
-      solana: json['solana'] as int,
-      xdai: json['xdai'] as int,
+      arbitrum: (json['arbitrum'] as num).toDouble(),
+      aurora: (json['aurora'] as num).toDouble(),
+      avalanche: (json['avalanche'] as num).toDouble(),
+      binanceSmartChain: (json['binance-smart-chain'] as num).toDouble(),
+      ethereum: (json['ethereum'] as num).toDouble(),
+      fantom: (json['fantom'] as num).toDouble(),
+      loopring: (json['loopring'] as num).toDouble(),
+      optimism: (json['optimism'] as num).toDouble(),
+      polygon: (json['polygon'] as num).toDouble(),
+      solana: (json['solana'] as num).toDouble(),
+      xdai: (json['xdai'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PositionByChainEntityToJson(

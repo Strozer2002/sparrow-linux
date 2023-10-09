@@ -2,8 +2,8 @@
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:rabby/features/auth/domain/models/changes.dart';
-import 'package:rabby/features/auth/domain/models/position_by_type.dart';
-import 'package:rabby/features/auth/domain/models/total.dart';
+import 'package:rabby/features/auth/domain/models/portfolio/position_by_type.dart';
+import 'package:rabby/features/auth/domain/models/portfolio/total.dart';
 
 import 'position_by_chain.dart';
 

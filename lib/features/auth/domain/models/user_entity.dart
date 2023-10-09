@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rabby/features/auth/domain/models/portfolio.dart';
+import 'package:rabby/features/auth/domain/models/portfolio/portfolio.dart';
+import 'package:rabby/features/auth/domain/models/position/position.dart';
+import 'package:rabby/features/auth/domain/models/transaction/transaction.dart';
 
 part 'user_entity.g.dart';
 
@@ -9,9 +11,9 @@ part 'user_entity.g.dart';
 class UserEntity implements DTO {
   final String address;
 
-  final List<String>? transactions;
+  final List<TransactionEntity>? transactions;
 
-  final List<String>? positions;
+  final List<PositionEntity?>? positions;
 
   final Map<String, dynamic>? nft;
 

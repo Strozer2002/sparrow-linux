@@ -17,24 +17,27 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Settings(
-      isAutoLock: fields[2] as bool?,
+      isAutoLock: fields[3] as bool?,
       mnemonicSentence: fields[0] as String?,
-      userPassCode: fields[1] as String?,
-      autoLockDuration: fields[3] as int?,
+      privateKey: fields[1] as String?,
+      userPassCode: fields[2] as String?,
+      autoLockDuration: fields[4] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.mnemonicSentence)
       ..writeByte(1)
-      ..write(obj.userPassCode)
+      ..write(obj.privateKey)
       ..writeByte(2)
-      ..write(obj.isAutoLock)
+      ..write(obj.userPassCode)
       ..writeByte(3)
+      ..write(obj.isAutoLock)
+      ..writeByte(4)
       ..write(obj.autoLockDuration);
   }
 

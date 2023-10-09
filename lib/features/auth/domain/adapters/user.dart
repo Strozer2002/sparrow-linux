@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:rabby/features/auth/domain/adapters/transaction.dart';
 
 import 'portfolio.dart';
 
@@ -10,10 +11,7 @@ class User {
   String address;
 
   @HiveField(1)
-  List<String>? transactions;
-
-  @HiveField(2)
-  List<String>? positions;
+  List<Transaction>? transactions;
 
   @HiveField(3)
   List<String>? nft;
@@ -24,7 +22,6 @@ class User {
   User({
     required this.address,
     this.transactions,
-    this.positions,
     this.nft,
     required this.portfolio,
   });

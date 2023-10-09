@@ -61,6 +61,10 @@ class SettingsService {
     }
   }
 
+  void boxClear() {
+    box!.clear();
+  }
+
   void putSettings(Settings settings) {
     box!.put('settings', settings);
   }
@@ -145,6 +149,26 @@ class SettingsService {
     Settings? settings = getSettings();
     if (settings != null) {
       return settings.mnemonicSentence;
+    }
+    return null;
+  }
+
+  void putPrivateKey(String privateKey) {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      settings.privateKey = privateKey;
+      putSettings(settings);
+    } else {
+      putSettings(
+        Settings(privateKey: privateKey),
+      );
+    }
+  }
+
+  String? getPrivateKey() {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      return settings.privateKey;
     }
     return null;
   }

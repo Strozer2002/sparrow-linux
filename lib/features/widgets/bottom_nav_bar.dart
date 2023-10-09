@@ -27,7 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         context.go(AppData.routes.homeScreen);
         break;
       case 1:
-        context.go(AppData.routes.buyCashScreen);
+        context.go(AppData.routes.manageCryptScreen);
         break;
       // case 2:
       //   context.go(AppData.routes.homeScreen);

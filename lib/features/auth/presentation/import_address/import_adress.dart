@@ -56,7 +56,7 @@ class _ImportAddressState extends ImportAddressBloc {
             ),
             const SizedBox(width: 12),
             Text(
-              AppData.utils.formatText(addressString),
+              AppData.utils.formatAddressWallet(addressString),
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:rabby/features/auth/domain/adapters/transaction.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 
 import 'package:rabby/features/settings/domain/settings.dart';
@@ -32,11 +33,13 @@ Future<void> main() async {
   Hive.registerAdapter(ChangesAdapter());
   Hive.registerAdapter(CryptAdapter());
   Hive.registerAdapter(SettingsAdapter());
+   Hive.registerAdapter(TransactionAdapter());
 
   await Hive.openBox<User>('user');
   await Hive.openBox<Settings>('settings');
-  final SettingsService settingsService = SettingsService();
-  settingsService.putPassCode("111111");
+
+  // final SettingsService settingsService = SettingsService();
+  // settingsService.putPassCode("111111");
 
   // Box box = await Hive.openBox<User>('user');
   // Box box2 = await Hive.openBox<Settings>('settings');

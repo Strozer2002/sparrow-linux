@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:rabby/features/auth/domain/auth_service.dart';
 
 import 'buy_cash.dart';
 
 abstract class BuyCashBloc extends State<BuyCashScreen> {
+  final AuthService _authService = AuthService();
   final TextEditingController amountCtrl = TextEditingController();
-  int max = 1000;
+  int max = 0;
   String errorText = "";
   @override
   void initState() {
+    max = _authService.getWallet()!.toInt();
     amountCtrl.text += "1";
     amountCtrl.addListener(() {
       setState(() {
@@ -37,27 +40,4 @@ abstract class BuyCashBloc extends State<BuyCashScreen> {
       return false;
     }
   }
-  // bool isNotFull() {
-  //   setState(() {});
-  //   return numberText.text.length < 6;
-  // }
-
-  // void goNext() {
-  //   if (isNotFull()) {
-  //     print(numberText.text);
-  //   } else {
-  //     if (settingsService.getPassCode() == null) {
-  //       settingsService.putPassCode(numberText.text);
-  //       print("_authService.getPassCode() ${settingsService.getPassCode()}");
-  //       context.go(AppData.routes.homeScreen);
-  //     } else {
-  //       print("_authService.getPassCode() ${settingsService.getPassCode()}");
-  //       if (numberText.text == settingsService.getPassCode()!) {
-  //         if (context.canPop()) {
-  //           context.pop(true);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 }

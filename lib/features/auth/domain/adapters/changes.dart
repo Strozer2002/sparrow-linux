@@ -5,12 +5,12 @@ part 'changes.g.dart';
 @HiveType(typeId: 7)
 class Changes {
   @HiveField(0)
-  int absoluteId;
+  double? absoluteId;
 
   @HiveField(1)
-  int? percentId;
+  double? percentId;
   Changes({
-    required this.absoluteId,
-    this.percentId,
+    this.absoluteId = 0,
+    this.percentId = 0,
   });
 }
