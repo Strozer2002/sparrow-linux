@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rabby/features/auth/domain/adapters/position_by_chain.dart';
 import 'package:rabby/features/auth/domain/adapters/transaction.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
+import 'package:rabby/features/currency/domain/custom_currency.dart';
 
 import 'adapters/user.dart';
 
@@ -37,6 +38,22 @@ class AuthService {
       return user.address;
     }
     return null;
+  }
+
+  void putCurrency(List<CustomCurrency> currencies) {
+    User? user = getUser();
+    if (user != null) {
+      user.currencies = currencies;
+      putUser(user);
+    }
+  }
+
+  List<CustomCurrency> getCurrencies() {
+    User? user = getUser();
+    if (user != null) {
+      return user.currencies;
+    }
+    return [];
   }
 
   PositionByChain? getPositionByChain() {

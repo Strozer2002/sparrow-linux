@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rabby/features/auth/domain/adapters/transaction.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
+import 'package:rabby/features/currency/domain/custom_currency.dart';
 
 import 'package:rabby/features/settings/domain/settings.dart';
 import 'package:rabby/features/settings/domain/settings_service.dart';
@@ -34,6 +35,7 @@ Future<void> main() async {
   Hive.registerAdapter(CryptAdapter());
   Hive.registerAdapter(SettingsAdapter());
   Hive.registerAdapter(TransactionAdapter());
+  Hive.registerAdapter(CustomCurrencyAdapter());
 
   await Hive.openBox<User>('user');
   await Hive.openBox<Settings>('settings');

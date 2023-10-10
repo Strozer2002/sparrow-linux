@@ -15,6 +15,7 @@ import 'package:bip39/bip39.dart' as bip39;
 import 'package:bip32/bip32.dart' as bip32;
 import 'package:web3dart/credentials.dart';
 import 'package:web3dart/web3dart.dart';
+import 'package:http/http.dart' as http;
 
 import '../../features/auth/domain/adapters/attributes.dart';
 import '../../features/auth/domain/adapters/changes.dart';
@@ -45,6 +46,12 @@ class Utils {
     final AuthRepository authRepo = AuthRepository();
     final AuthService authService = AuthService();
     final SettingsService settingsService = SettingsService();
+
+    Future<void> init() async {
+      Map<String, dynamic> rates = await getExchangeRates("USD");
+
+      double result = authService.getWallet()! * rates['rates']["USD"];
+    }
 
     String r = Random().nextInt(999999).toString().padLeft(6, '0');
     print(r);
@@ -307,6 +314,19 @@ class Utils {
       print(error);
     }
     return null;
+  }
+
+  Future<Map<String, dynamic>> getExchangeRates(String baseCurrency) async {
+    var url = Uri.https('api.exchangerate-api.com', '/v4/latest/$baseCurrency',
+        {'q': '{https}'});
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load exchange rates');
+    }
   }
 
   String formatAddressWallet(String input) {

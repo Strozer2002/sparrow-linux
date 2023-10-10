@@ -65,7 +65,7 @@ class _SettingsScreenState extends SettingsBloc {
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
-            onTap: () => settingsService.relocate(),
+            onTap: () => settingsService.relocateChild(),
           ),
           settingField(
             leftPart: const Row(
@@ -112,7 +112,7 @@ class _SettingsScreenState extends SettingsBloc {
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
-            onTap: () => settingsService.relocate(),
+            onTap: () {},
           ),
           settingField(
             leftPart: const Row(

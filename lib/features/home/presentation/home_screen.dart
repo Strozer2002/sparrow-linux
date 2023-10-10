@@ -91,7 +91,7 @@ class _HomeScreenState extends HomeBloc {
           ),
           const SizedBox(height: 22),
           Text(
-            "\$${AppData.utils.doubleToTwoValues(result)}",
+            "\$${AppData.utils.doubleToTwoValues(authService.getWallet()!)}",
             style: const TextStyle(
               fontSize: 36,
               color: Colors.white,

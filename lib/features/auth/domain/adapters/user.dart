@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:rabby/features/auth/domain/adapters/transaction.dart';
+import 'package:rabby/features/currency/domain/custom_currency.dart';
 
 import 'portfolio.dart';
 
@@ -13,6 +14,9 @@ class User {
   @HiveField(1)
   List<Transaction>? transactions;
 
+  @HiveField(2)
+  List<CustomCurrency> currencies;
+
   @HiveField(3)
   List<String>? nft;
 
@@ -24,5 +28,6 @@ class User {
     this.transactions,
     this.nft,
     required this.portfolio,
+    required this.currencies,
   });
 }
