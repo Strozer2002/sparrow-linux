@@ -15,6 +15,7 @@ import 'package:rabby/features/buy/presentation/buy_cash.dart';
 import 'package:rabby/features/dashboard/dashboard_page.dart';
 import 'package:rabby/features/home/presentation/home_screen.dart';
 import 'package:rabby/features/init/presentation/init.dart';
+import 'package:rabby/features/send/presentation/send_address/send_address.dart';
 import 'package:rabby/features/settings/presentation/settings_screen.dart';
 
 import '../../core/navigator_observer.dart';
@@ -86,6 +87,9 @@ class RoutesList {
 
   String get _settingsScreenName => 'settingsScreen';
   String get settingsScreen => '$homeScreen/$_settingsScreenName';
+
+  String get _sendScreenName => 'sendScreen';
+  String get sendScreen => '$homeScreen/$_sendScreenName';
 
   String get _manageCryptScreenName => 'manageCryptScreen';
   String get manageCryptScreen => '$init$_manageCryptScreenName';
@@ -302,6 +306,13 @@ class Routes {
                     path: AppData.routes._buyCashScreenName,
                     builder: (BuildContext context, GoRouterState state) {
                       return const BuyCashScreen();
+                    },
+                    routes: const [],
+                  ),
+                  GoRoute(
+                    path: AppData.routes._sendScreenName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const SendAddressScreen();
                     },
                     routes: const [],
                   ),

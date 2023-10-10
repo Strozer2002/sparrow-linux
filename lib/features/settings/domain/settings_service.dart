@@ -39,9 +39,12 @@ class SettingsService {
     if (getPassCode() != null && isRelocate == true) {
       print("Relocate resume");
       isRelocate = false;
-      AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
+      AppData.routesConfig.routerConfig.go(AppData.routes.setCode);
     }
   }
+
+  void relocateChild() =>
+      AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
 
   void lockApp(bool value) {
     print("Relocate $value");

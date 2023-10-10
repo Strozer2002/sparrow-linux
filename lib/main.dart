@@ -33,7 +33,7 @@ Future<void> main() async {
   Hive.registerAdapter(ChangesAdapter());
   Hive.registerAdapter(CryptAdapter());
   Hive.registerAdapter(SettingsAdapter());
-   Hive.registerAdapter(TransactionAdapter());
+  Hive.registerAdapter(TransactionAdapter());
 
   await Hive.openBox<User>('user');
   await Hive.openBox<Settings>('settings');
@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         print("resume");
         // Приложение в фокусе
-        _settingsService.relocate();
+        AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
         break;
       case AppLifecycleState.inactive:
 

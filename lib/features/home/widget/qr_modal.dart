@@ -142,7 +142,11 @@ class _QrCodeModalState extends State<QrCodeModal> {
               ),
             ),
             IconButton(
-              onPressed: null,
+              onPressed: () {
+                Clipboard.setData(
+                  ClipboardData(text: authService.getAddress()!),
+                );
+              },
               icon: Row(
                 children: [
                   Icon(

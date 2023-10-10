@@ -193,8 +193,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                     ),
                     const SizedBox(width: 16),
                     CustomIconButton(
-                      onPressed: () =>
-                          context.push(AppData.routes.buyCashScreen),
+                      onPressed: () => context.go(AppData.routes.buyCashScreen),
                       isPressed: false,
                       child: const Icon(
                         Icons.add,

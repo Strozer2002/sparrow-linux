@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/home/domain/home_screen_enum.dart';
@@ -93,7 +91,7 @@ class _HomeScreenState extends HomeBloc {
           ),
           const SizedBox(height: 22),
           Text(
-            "\$${AppData.utils.doubleToTwoValues(authService.getWallet()!)}",
+            "\$${AppData.utils.doubleToTwoValues(result)}",
             style: const TextStyle(
               fontSize: 36,
               color: Colors.white,
@@ -176,7 +174,7 @@ class _HomeScreenState extends HomeBloc {
                       borderRadiusGeometry: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                       ),
-                      onTap: () => log("HI"),
+                      onTap: () => context.push(AppData.routes.sendScreen),
                     ),
                     CryptTab(
                       onTap: () => showReceiveBottomDialog(),
