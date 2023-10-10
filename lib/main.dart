@@ -40,7 +40,8 @@ Future<void> main() async {
   await Hive.openBox<User>('user');
   await Hive.openBox<Settings>('settings');
 
-  // final SettingsService settingsService = SettingsService();
+  final SettingsService settingsService = SettingsService();
+  settingsService.putSettings(Settings());
   // settingsService.putPassCode("111111");
 
   // Box box = await Hive.openBox<User>('user');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/home/widget/qr_modal.dart';
 
 import '../../../app_data/app_data.dart';
@@ -17,6 +18,7 @@ class ReceiveShowModal extends StatefulWidget {
 }
 
 class _ReceiveShowModalState extends State<ReceiveShowModal> {
+  final AuthService authService = AuthService();
   List<Crypt> filterCrypts = [];
   String searchQuery = '';
 
@@ -57,7 +59,7 @@ class _ReceiveShowModalState extends State<ReceiveShowModal> {
                 icon: const Icon(Icons.close),
               ), // Suffix icon
 
-              hintText: 'Enter your username',
+              hintText: 'Enter crypt username',
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
             ),
@@ -124,7 +126,7 @@ class _ReceiveShowModalState extends State<ReceiveShowModal> {
                               ),
                             ),
                             Text(
-                              '\$${AppData.utils.doubleToTwoValues(filterCrypts[index].amountInCurrency)}',
+                              '${authService.getSelectCurrency()!.symbol}${AppData.utils.doubleToTwoValues(filterCrypts[index].amountInCurrency * authService.getSelectCurrency()!.rate)}',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: AppData.colors.middlePurple
@@ -135,9 +137,9 @@ class _ReceiveShowModalState extends State<ReceiveShowModal> {
                         )
                       ],
                     ),
-                    const Text(
-                      '\$0',
-                      style: TextStyle(
+                    Text(
+                      '${authService.getSelectCurrency()!.symbol}0',
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
 import '../../app_data/app_data.dart';
@@ -25,6 +26,7 @@ class HomeBottomDialog extends StatefulWidget {
 }
 
 class _HomeBottomDialogState extends State<HomeBottomDialog> {
+  final AuthService authService = AuthService();
   Widget get cryptDiagram {
     return Column(
       children: [
@@ -45,7 +47,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                 Row(
                   children: [
                     Text(
-                      '\$${AppData.utils.doubleToTwoValues(widget.crypt.priceForOne)}',
+                      '${authService.getSelectCurrency()!.symbol}${AppData.utils.doubleToTwoValues(widget.crypt.priceForOne * authService.getSelectCurrency()!.rate)}',
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -252,7 +254,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      "\$${AppData.utils.doubleToTwoValues(widget.crypt.amountInCurrency)}",
+                      "${authService.getSelectCurrency()!.symbol}${AppData.utils.doubleToTwoValues(widget.crypt.amountInCurrency * authService.getSelectCurrency()!.rate)}",
                       style: const TextStyle(
                         fontSize: 16,
                       ),

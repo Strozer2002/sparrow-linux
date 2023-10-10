@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rabby/features/settings/domain/settings_service.dart';
 
 import '../../app_data.dart';
 import 'lib/box_decoration.dart';
@@ -6,6 +7,7 @@ import 'lib/button_theme.dart';
 import 'lib/text_theme.dart';
 
 class AppTheme {
+  final SettingsService settingsService = SettingsService();
   AppTheme();
 
   TextThemeCollection get text => TextThemeCollection();
@@ -24,13 +26,17 @@ class AppTheme {
 
   ThemeData themeData(BuildContext context) => ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: AppData.colors.gray100,
+        scaffoldBackgroundColor: settingsService.getTheme() == true
+            ? AppData.colors.gray100
+            : AppData.colors.gray900,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppData.colors.sky600,
           secondary: Colors.white,
         ),
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: AppData.colors.textColor,
+              bodyColor: settingsService.getTheme() == true
+                  ? AppData.colors.textColor
+                  : AppData.colors.whiteTextColor,
               displayColor: AppData.colors.textColor,
               fontFamily: AppData.theme.text.fontFamily,
             ),

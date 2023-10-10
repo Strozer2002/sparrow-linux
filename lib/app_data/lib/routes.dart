@@ -86,7 +86,7 @@ class RoutesList {
   String get buyCashScreen => '$homeScreen/$_buyCashScreenName';
 
   String get _settingsScreenName => 'settingsScreen';
-  String get settingsScreen => '$homeScreen/$_settingsScreenName';
+  String get settingsScreen => '$init$_settingsScreenName';
 
   String get _sendScreenName => 'sendScreen';
   String get sendScreen => '$homeScreen/$_sendScreenName';
@@ -316,23 +316,6 @@ class Routes {
                     },
                     routes: const [],
                   ),
-                  GoRoute(
-                    path: AppData.routes._settingsScreenName,
-                    builder: (BuildContext context, GoRouterState state) {
-                      return const SettingsScreen();
-                    },
-                    routes: [
-                      GoRoute(
-                        path: AppData.routes._newPassScreenName,
-                        builder: (BuildContext context, GoRouterState state) {
-                          return SetCodeScreen(
-                            changePassword: state.extra as bool,
-                          );
-                        },
-                        routes: const [],
-                      ),
-                    ],
-                  ),
                 ],
               ),
               GoRoute(
@@ -341,6 +324,23 @@ class Routes {
                   return const ManageCrypt();
                 },
                 routes: const [],
+              ),
+              GoRoute(
+                path: AppData.routes._settingsScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SettingsScreen();
+                },
+                routes: [
+                  GoRoute(
+                    path: AppData.routes._newPassScreenName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return SetCodeScreen(
+                        changePassword: state.extra as bool,
+                      );
+                    },
+                    routes: const [],
+                  ),
+                ],
               ),
             ],
           ),

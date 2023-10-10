@@ -9,6 +9,7 @@ import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/domain/models/transaction/transaction.dart';
 import 'package:rabby/features/auth/repository/auth_repository.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
+import 'package:rabby/features/currency/domain/custom_currency.dart';
 import 'package:rabby/features/settings/domain/settings_service.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 import 'package:bip39/bip39.dart' as bip39;
@@ -46,13 +47,58 @@ class Utils {
     final AuthRepository authRepo = AuthRepository();
     final AuthService authService = AuthService();
     final SettingsService settingsService = SettingsService();
-
+    List<CustomCurrency> currencies = authService.getCurrencies();
     Future<void> init() async {
       Map<String, dynamic> rates = await getExchangeRates("USD");
-
-      double result = authService.getWallet()! * rates['rates']["USD"];
+      int rateUSD = rates['rates']["USD"];
+      double rateEUR = rates['rates']["EUR"];
+      double rateCNY = rates['rates']["CNY"];
+      double rateJPY = rates['rates']["JPY"];
+      double rateHKD = rates['rates']["HKD"];
+      if (currencies.isEmpty) {
+        currencies.addAll([
+          CustomCurrency(
+            name: "USD",
+            rate: rateUSD.toDouble(),
+            symbol: "\$",
+            isChoose: true,
+          ),
+          CustomCurrency(
+            name: "EUR",
+            rate: rateEUR,
+            symbol: "€",
+          ),
+          CustomCurrency(
+            name: "CNY",
+            rate: rateCNY,
+            symbol: "¥",
+          ),
+          CustomCurrency(
+            name: "JPY",
+            rate: rateJPY,
+            symbol: "JP¥",
+          ),
+          CustomCurrency(
+            name: "HKD",
+            rate: rateHKD,
+            symbol: "HK\$",
+          ),
+        ]);
+      } else {
+        currencies.firstWhere((element) => element.name == "USD").rate =
+            rateUSD.toDouble();
+        currencies.firstWhere((element) => element.name == "EUR").rate =
+            rateEUR;
+        currencies.firstWhere((element) => element.name == "CNY").rate =
+            rateCNY;
+        currencies.firstWhere((element) => element.name == "JPY").rate =
+            rateJPY;
+        currencies.firstWhere((element) => element.name == "HKD").rate =
+            rateHKD;
+      }
     }
 
+    await init();
     String r = Random().nextInt(999999).toString().padLeft(6, '0');
     print(r);
 
@@ -157,6 +203,7 @@ class Utils {
 
       authService.putUser(
         User(
+          currencies: currencies,
           address: result.data!.address,
           transactions: transactionEntity() == null
               ? null

@@ -19,11 +19,15 @@ class Settings {
   @HiveField(4)
   int? autoLockDuration;
 
+  @HiveField(5)
+  bool isLightTheme;
+
   Settings({
     this.isAutoLock = false,
     this.mnemonicSentence,
     this.privateKey,
     this.userPassCode,
     this.autoLockDuration = 30,
+    this.isLightTheme = true,
   });
 }

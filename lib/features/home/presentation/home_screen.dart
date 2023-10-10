@@ -91,7 +91,7 @@ class _HomeScreenState extends HomeBloc {
           ),
           const SizedBox(height: 22),
           Text(
-            "\$${AppData.utils.doubleToTwoValues(authService.getWallet()!)}",
+            "${authService.getSelectCurrency()!.symbol} ${AppData.utils.doubleToTwoValues(authService.getSelectCurrency()!.rate * authService.getWallet()!)}",
             style: const TextStyle(
               fontSize: 36,
               color: Colors.white,
@@ -241,7 +241,7 @@ class _HomeScreenState extends HomeBloc {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                        "\$${AppData.utils.doubleToTwoValues(crypts[index].amountInCurrency)}"),
+                        "${authService.getSelectCurrency()!.symbol}${AppData.utils.doubleToTwoValues(crypts[index].amountInCurrency * authService.getSelectCurrency()!.rate)}"),
                     const SizedBox(height: 2),
                     Container(
                       padding: const EdgeInsets.all(5),

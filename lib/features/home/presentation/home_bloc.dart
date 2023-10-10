@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 import 'package:rabby/features/home/domain/home_screen_enum.dart';
 import 'package:rabby/features/home/domain/wallet_type_enum.dart';
 import 'package:reactive_variables/reactive_variables.dart';
-
 
 import '../../auth/domain/adapters/transaction.dart';
 import '../../dashboard/domain/dashboard_service.dart';
@@ -19,6 +17,22 @@ abstract class HomeBloc extends State<HomeScreen> {
   List<Crypt> crypts = [];
 
   int transactionsLength = 0;
+
+  @override
+  void didChangeDependencies() {
+    setState(() {
+      print("hello");
+    });
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant HomeScreen oldWidget) {
+    setState(() {
+      print("hello");
+    });
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   void initState() {

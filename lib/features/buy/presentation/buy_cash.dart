@@ -57,7 +57,7 @@ class _BuyCashScreenState extends BuyCashBloc {
                     ),
                   ),
                   Text(
-                    "\$",
+                    authService.getSelectCurrency()!.symbol,
                     style: TextStyle(
                       fontSize: 36,
                       color: AppData.colors.middlePurple.withOpacity(0.4),

@@ -136,6 +136,26 @@ class SettingsService {
     return null;
   }
 
+  void putTheme(bool isLightTheme) {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      settings.isLightTheme = isLightTheme;
+      putSettings(settings);
+    } else {
+      putSettings(
+        Settings(isLightTheme: isLightTheme),
+      );
+    }
+  }
+
+  bool? getTheme() {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      return settings.isLightTheme;
+    }
+    return null;
+  }
+
   void putMnemonicSentence(String mnemonicSentence) {
     Settings? settings = getSettings();
     if (settings != null) {

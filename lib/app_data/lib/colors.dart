@@ -10,6 +10,7 @@ class ColorsCollection {
 
   /// Цвет текста
   Color get textColor => gray700;
+  Color get whiteTextColor => gray100;
 
   /// Цвет ошибок
   Color get red040 => const Color(0xFFD94040);
@@ -27,7 +28,7 @@ class ColorsCollection {
   Color get gray400 => const Color(0xFF9CA3AF);
   Color get gray500 => const Color(0xFF6B7280);
   Color get gray600 => const Color(0xFF4B5563);
-  Color get gray900 => const Color(0xFF111827);
+  Color get gray900 => const Color.fromARGB(255, 42, 61, 100);
 
   Color get gray6F6 => const Color(0xFFF6F6F6);
   Color get grayCEE => const Color(0xFFEAECEE);

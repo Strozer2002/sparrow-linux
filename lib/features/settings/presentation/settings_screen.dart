@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:rabby/features/widgets/duartion.dart';
 
 import '../../../app_data/app_data.dart';
+import '../../widgets/currency_dialog.dart';
 import 'settings_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -18,7 +19,9 @@ class _SettingsScreenState extends SettingsBloc {
     return AppBar(
       title: const Text("Settings"),
       leading: IconButton(
-        onPressed: () => context.go(AppData.routes.homeScreen),
+        onPressed: () {
+          context.go(AppData.routes.homeScreen);
+        },
         icon: const Icon(
           Icons.arrow_back,
           color: Colors.white,
@@ -144,8 +147,14 @@ class _SettingsScreenState extends SettingsBloc {
                 Text("Default Currency"),
               ],
             ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            rightPart: Row(
+              children: [
+                Text(authService.getSelectCurrency()!.name),
+                const SizedBox(width: 8),
+                AppData.assets.svg.chevron,
+              ],
+            ),
+            onTap: () => showCurrencyDialog(context),
           ),
           settingField(
             leftPart: const Row(
@@ -239,7 +248,7 @@ class _SettingsScreenState extends SettingsBloc {
                 AppData.assets.svg.chevron,
               ],
             ),
-            onTap: () => showBottomDialog,
+            onTap: () => showAutoLockDialog(context),
           ),
           settingField(
             leftPart: const Row(
@@ -357,10 +366,9 @@ class _SettingsScreenState extends SettingsBloc {
     );
   }
 
-  Future<dynamic> get showBottomDialog {
-    return showModalBottomSheet(
+  Future<dynamic> showCurrencyDialog(BuildContext context) async {
+    final result = await showModalBottomSheet(
         context: context,
-        enableDrag: false,
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -385,9 +393,56 @@ class _SettingsScreenState extends SettingsBloc {
                       children: [
                         IconButton(
                           onPressed: () {
-                            setState(() {
-                              selectedDuration = settingsService.getDuration()!;
-                            });
+                            setState(() {});
+                            context.pop();
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        const Text("Default Currency"),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const CurrencyDialogWidget(),
+                    const SizedBox(height: 20),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+
+    if (result == null && mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<dynamic> showAutoLockDialog(BuildContext context) async {
+    final result = await showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppData.colors.middlePurple.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
                             context.pop();
                           },
                           icon: const Icon(Icons.arrow_back),
@@ -404,6 +459,10 @@ class _SettingsScreenState extends SettingsBloc {
             ),
           );
         });
+
+    if (result == null) {
+      setState(() {});
+    }
   }
 
   @override

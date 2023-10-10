@@ -13,9 +13,13 @@ class CustomCurrency {
   @HiveField(3)
   double rate;
 
+  @HiveField(4)
+  bool isChoose;
+
   CustomCurrency({
     required this.name,
     required this.rate,
     required this.symbol,
+    this.isChoose = false,
   });
 }

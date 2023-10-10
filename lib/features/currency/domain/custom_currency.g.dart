@@ -20,19 +20,22 @@ class CustomCurrencyAdapter extends TypeAdapter<CustomCurrency> {
       name: fields[0] as String,
       rate: fields[3] as double,
       symbol: fields[1] as String,
+      isChoose: fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, CustomCurrency obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.symbol)
       ..writeByte(3)
-      ..write(obj.rate);
+      ..write(obj.rate)
+      ..writeByte(4)
+      ..write(obj.isChoose);
   }
 
   @override

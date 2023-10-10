@@ -31,7 +31,7 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
           widget.changePassword == true) {
         settingsService.putPassCode(numberText.value.text);
         print("_authService.getPassCode() ${settingsService.getPassCode()}");
-        if (widget.changePassword! == true) {
+        if (widget.changePassword == true) {
           context.pop();
         } else {
           context.go(AppData.routes.homeScreen);

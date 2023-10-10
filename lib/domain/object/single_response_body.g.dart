@@ -12,7 +12,7 @@ SingleResponseBody<T> _$SingleResponseBodyFromJson<T extends DTO>(
 ) =>
     SingleResponseBody<T>(
       message: json['message'] as String?,
-      data: _$nullableGenericFromJson(json['data'], fromJsonT),
+      data: _$nullableGenericFromJson(json, fromJsonT),
       success: json['success'] as bool?,
       errors: (json['errors'] as Map<String, dynamic>?)?.map(
         (k, e) =>

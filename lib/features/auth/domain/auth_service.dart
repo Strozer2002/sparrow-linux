@@ -40,6 +40,21 @@ class AuthService {
     return null;
   }
 
+  CustomCurrency? getSelectCurrency() {
+    List<CustomCurrency>? currencies = getCurrencies();
+    return currencies.firstWhere((element) => element.isChoose == true);
+  }
+
+  void setSelectCurrency(CustomCurrency currency) {
+    User? user = getUser();
+    if (user != null) {
+      CustomCurrency oldCurrency = getSelectCurrency()!;
+      oldCurrency.isChoose = false;
+      currency.isChoose = true;
+      putUser(user);
+    }
+  }
+
   void putCurrency(List<CustomCurrency> currencies) {
     User? user = getUser();
     if (user != null) {

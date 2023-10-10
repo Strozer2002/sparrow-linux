@@ -4,13 +4,14 @@ import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'buy_cash.dart';
 
 abstract class BuyCashBloc extends State<BuyCashScreen> {
-  final AuthService _authService = AuthService();
+  final AuthService authService = AuthService();
   final TextEditingController amountCtrl = TextEditingController();
   int max = 0;
   String errorText = "";
   @override
   void initState() {
-    max = _authService.getWallet()!.toInt();
+    max = (authService.getWallet()! * authService.getSelectCurrency()!.rate)
+        .toInt();
     amountCtrl.text += "1";
     amountCtrl.addListener(() {
       setState(() {
