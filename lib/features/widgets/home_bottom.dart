@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_variables/reactive_variables.dart';
@@ -6,6 +8,7 @@ import '../../app_data/app_data.dart';
 import '../auth/presentation/manage_crypt/domain/crypt.dart';
 import '../home/domain/wallet_type_enum.dart';
 import '../home/widget/crypt_tab.dart';
+import '../home/widget/qr_modal.dart';
 import 'icon_button.dart';
 
 class HomeBottomDialog extends StatefulWidget {
@@ -66,6 +69,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
               builder: () => Row(
                 children: [
                   CryptTab(
+                    onTap: () => log("HI"),
                     selectWallet: WalletTypeEnum.send,
                     icon: AppData.assets.svg.vector,
                     text: "Send",
@@ -75,6 +79,41 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                     ),
                   ),
                   CryptTab(
+                    onTap: () {
+                      context.pop();
+                      showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          isDismissible: true,
+                          builder: (BuildContext context) {
+                            return SingleChildScrollView(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      width: 32,
+                                      height: 4,
+                                      decoration: BoxDecoration(
+                                        color: AppData.colors.middlePurple
+                                            .withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(
+                                          5,
+                                        ),
+                                      ),
+                                    ),
+                                    const QrCodeModal(),
+                                    const SizedBox(height: 30),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
                     selectWallet: WalletTypeEnum.resive,
                     icon: AppData.assets.svg.recive,
                     text: "Resive",

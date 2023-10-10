@@ -15,12 +15,10 @@ class ManageCrypt extends StatefulWidget {
 class _ManageCryptState extends ManageCryptBloc {
   AppBar get appBar {
     return AppBar(
-      backgroundColor: Colors.transparent,
       title: const Text(
         "Manage cryptos",
         style: TextStyle(
           fontSize: 18,
-          color: Colors.black,
         ),
       ),
       leading: IconButton(
@@ -31,7 +29,10 @@ class _ManageCryptState extends ManageCryptBloc {
             context.pop();
           }
         },
-        icon: const Icon(Icons.arrow_back),
+        icon: const Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+        ),
       ),
     );
   }

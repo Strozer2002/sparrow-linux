@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
@@ -8,6 +9,7 @@ class CryptTab extends StatefulWidget {
   final WalletTypeEnum selectWallet;
   final Widget icon;
   final String text;
+  final Function onTap;
   final BorderRadiusGeometry? borderRadiusGeometry;
   final Rv<WalletTypeEnum> selectedWalletType;
   const CryptTab({
@@ -17,6 +19,7 @@ class CryptTab extends StatefulWidget {
     required this.text,
     this.borderRadiusGeometry,
     required this.selectedWalletType,
+    required this.onTap,
   });
 
   @override
@@ -27,7 +30,10 @@ class _CryptTabState extends State<CryptTab> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => widget.selectedWalletType.value = widget.selectWallet,
+      onTap: () {
+        widget.selectedWalletType.value = widget.selectWallet;
+        widget.onTap();
+      },
       child: Container(
         decoration: BoxDecoration(
           color: widget.selectedWalletType.value == widget.selectWallet

@@ -48,6 +48,7 @@ dependencies:
   bip39: ^1.0.6
   web3dart: ^2.7.1
   http: ^1.1.0
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:

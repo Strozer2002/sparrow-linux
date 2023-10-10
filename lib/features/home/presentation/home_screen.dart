@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rabby/features/home/domain/home_screen_enum.dart';
 import 'package:rabby/features/home/domain/wallet_type_enum.dart';
 import 'package:rabby/features/home/widget/crypt_tab.dart';
 import 'package:rabby/features/home/widget/home_button.dart';
+import 'package:rabby/features/home/widget/receive_modal.dart';
 import 'package:rabby/features/widgets/home_bottom.dart';
 import 'package:rabby/features/widgets/icon_button.dart';
 import 'package:reactive_variables/reactive_variables.dart';
@@ -172,8 +176,10 @@ class _HomeScreenState extends HomeBloc {
                       borderRadiusGeometry: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                       ),
+                      onTap: () => log("HI"),
                     ),
                     CryptTab(
+                      onTap: () => showReceiveBottomDialog(),
                       selectWallet: WalletTypeEnum.resive,
                       icon: AppData.assets.svg.recive,
                       text: "Resive",
@@ -276,6 +282,53 @@ class _HomeScreenState extends HomeBloc {
           return HomeBottomDialog(
             selectedWalletType: selectedWalletType,
             crypt: crypts[index],
+          );
+        });
+  }
+
+  Future<dynamic> showReceiveBottomDialog() {
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        isDismissible: true,
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    width: 32,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppData.colors.middlePurple.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(
+                        5,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => context.pop(),
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      const Text(
+                        'Choose a crypto to receive',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ReceiveShowModal(crypts: crypts),
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ),
           );
         });
   }
