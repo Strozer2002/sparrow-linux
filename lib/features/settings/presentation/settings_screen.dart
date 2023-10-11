@@ -5,6 +5,7 @@ import 'package:rabby/features/widgets/duartion.dart';
 
 import '../../../app_data/app_data.dart';
 import '../../widgets/currency_dialog.dart';
+import '../../widgets/theme_dialog.dart';
 import 'settings_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -53,7 +54,7 @@ class _SettingsScreenState extends SettingsBloc {
   Widget get topSettings {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -100,7 +101,7 @@ class _SettingsScreenState extends SettingsBloc {
   Widget get generalSettings {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -125,8 +126,14 @@ class _SettingsScreenState extends SettingsBloc {
                 Text("Theme"),
               ],
             ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            rightPart: Row(
+              children: [
+                Text(settingsService.getTheme()! ? "Light" : "Dark"),
+                const SizedBox(width: 8),
+                AppData.assets.svg.chevron,
+              ],
+            ),
+            onTap: () => showThemeDialog(context),
           ),
           settingField(
             leftPart: const Row(
@@ -175,7 +182,7 @@ class _SettingsScreenState extends SettingsBloc {
   Widget get securitySettings {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -283,7 +290,7 @@ class _SettingsScreenState extends SettingsBloc {
   Widget get alertSettings {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -304,7 +311,7 @@ class _SettingsScreenState extends SettingsBloc {
   Widget get aboutSettings {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -369,6 +376,7 @@ class _SettingsScreenState extends SettingsBloc {
   Future<dynamic> showCurrencyDialog(BuildContext context) async {
     final result = await showModalBottomSheet(
         context: context,
+        backgroundColor: AppData.colors.nightBgColor,
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -419,6 +427,7 @@ class _SettingsScreenState extends SettingsBloc {
   Future<dynamic> showAutoLockDialog(BuildContext context) async {
     final result = await showModalBottomSheet(
         context: context,
+        backgroundColor: AppData.colors.nightBgColor,
         builder: (BuildContext context) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -452,6 +461,56 @@ class _SettingsScreenState extends SettingsBloc {
                     ),
                     const SizedBox(height: 30),
                     const DurationWidget(),
+                    const SizedBox(height: 20),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+
+    if (result == null) {
+      setState(() {});
+    }
+  }
+
+  Future<dynamic> showThemeDialog(BuildContext context) async {
+    final result = await showModalBottomSheet(
+        context: context,
+        backgroundColor: AppData.colors.nightBgColor,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppData.colors.middlePurple.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        const Text("Auto-Lock Timer"),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const ThemeDialogWidget(),
                     const SizedBox(height: 20),
                   ],
                 )

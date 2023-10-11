@@ -62,7 +62,7 @@ class _QrCodeModalState extends State<QrCodeModal> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppData.colors.nightBottomNavColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(

@@ -139,7 +139,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -219,7 +219,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppData.colors.nightBottomNavColor,
                   border: Border.all(
                     color: AppData.colors.middlePurple.withOpacity(0.2),
                     width: 1,

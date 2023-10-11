@@ -77,7 +77,7 @@ class _ManageCryptState extends ManageCryptBloc {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppData.colors.nightBottomNavColor,
             borderRadius: BorderRadius.circular(18),
           ),
           child: Column(

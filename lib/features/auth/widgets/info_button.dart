@@ -25,7 +25,7 @@ class _InfoButtonState extends State<InfoButton> {
       height: widget.height,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

@@ -56,6 +56,17 @@ class ButtonThemeCollection {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       );
 
+  ButtonStyle get defaultIconButton => IconButton.styleFrom(
+        elevation: 0,
+        foregroundColor: AppData.colors.iconColor,
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        alignment: Alignment.center,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+
   ButtonStyle get whiteElevatedButton => ElevatedButton.styleFrom(
         elevation: 0,
         backgroundColor: Colors.white,

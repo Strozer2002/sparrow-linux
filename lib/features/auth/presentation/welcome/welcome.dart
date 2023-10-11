@@ -291,6 +291,10 @@ class _WelcomeScreenState extends WelcomeBloc {
             padding: bgPaddings,
             decoration: BoxDecoration(
               image: DecorationImage(
+                colorFilter: ColorFilter.mode(
+                  AppData.colors.topImageColor,
+                  BlendMode.darken,
+                ),
                 image: backgroundImage,
                 fit: BoxFit.cover,
               ),

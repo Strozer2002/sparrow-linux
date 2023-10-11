@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rabby/app_data/app_data.dart';
 
 import '../settings/domain/settings_service.dart';
 
@@ -23,7 +24,7 @@ class _DurationWidgetState extends State<DurationWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(5),
       ),
       padding: const EdgeInsets.symmetric(vertical: 8),

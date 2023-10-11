@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rabby/app_data/app_data.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 
 class CurrencyDialogWidget extends StatefulWidget {
@@ -15,7 +16,7 @@ class _CurrencyDialogWidgetState extends State<CurrencyDialogWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(5),
       ),
       padding: const EdgeInsets.symmetric(vertical: 8),

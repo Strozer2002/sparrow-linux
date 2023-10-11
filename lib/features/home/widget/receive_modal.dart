@@ -32,7 +32,7 @@ class _ReceiveShowModalState extends State<ReceiveShowModal> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -73,6 +73,7 @@ class _ReceiveShowModalState extends State<ReceiveShowModal> {
                 showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
+                    backgroundColor: AppData.colors.nightBgColor,
                     isDismissible: true,
                     builder: (BuildContext context) {
                       return SingleChildScrollView(

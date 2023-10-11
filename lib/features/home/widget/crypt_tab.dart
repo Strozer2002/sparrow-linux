@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
@@ -37,7 +36,7 @@ class _CryptTabState extends State<CryptTab> {
       child: Container(
         decoration: BoxDecoration(
           color: widget.selectedWalletType.value == widget.selectWallet
-              ? Colors.white
+              ? AppData.colors.nightBottomNavColor
               : null,
           border: widget.selectedWalletType.value == widget.selectWallet
               ? null

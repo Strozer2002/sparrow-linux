@@ -32,7 +32,7 @@ class _SendAddressScreenState extends SendBloc {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 82, vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         border: Border(
           top: BorderSide(
             width: 1,
@@ -79,7 +79,6 @@ class _SendAddressScreenState extends SendBloc {
                   decoration: InputDecoration(
                     hintText: 'Address',
                     labelText: "Address",
-                    labelStyle: const TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppData.colors.middlePurple,

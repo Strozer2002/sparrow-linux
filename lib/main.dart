@@ -21,6 +21,7 @@ import 'features/auth/domain/adapters/total.dart';
 import 'features/auth/domain/adapters/user.dart';
 import 'features/localization/domain/base/app_locale.dart';
 
+StreamController<bool> setTheme = StreamController();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -40,8 +41,7 @@ Future<void> main() async {
   await Hive.openBox<User>('user');
   await Hive.openBox<Settings>('settings');
 
-  final SettingsService settingsService = SettingsService();
-  settingsService.putSettings(Settings());
+  // final SettingsService settingsService = SettingsService();
   // settingsService.putPassCode("111111");
 
   // Box box = await Hive.openBox<User>('user');
@@ -89,6 +89,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   final SettingsService _settingsService = SettingsService.instance;
+
   @override
   void initState() {
     super.initState();
@@ -136,13 +137,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      routerConfig: AppData.routesConfig.routerConfig,
-      title: 'Flutter Demo',
-      theme: AppData.theme.themeData(context),
-    );
+    return StreamBuilder<bool>(
+        initialData: true,
+        stream: setTheme.stream,
+        builder: (context, snapshot) {
+          return MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            routerConfig: AppData.routesConfig.routerConfig,
+            title: 'Flutter Demo',
+            theme: snapshot.data!
+                ? AppData.theme.themeData(context)
+                : AppData.theme.themeData(context),
+          );
+        });
   }
 }

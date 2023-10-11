@@ -26,9 +26,15 @@ class _HomeScreenState extends HomeBloc {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 64),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/layouts/BG2.png"),
+          colorFilter: ColorFilter.mode(
+            AppData.colors.topImageColor,
+            BlendMode.darken,
+          ),
+          image: const AssetImage(
+            "assets/layouts/BG2.png",
+          ),
           fit: BoxFit.cover,
         ),
       ),
@@ -200,7 +206,7 @@ class _HomeScreenState extends HomeBloc {
   Widget get cryptsWidget {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: ListView.builder(
@@ -275,6 +281,7 @@ class _HomeScreenState extends HomeBloc {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        backgroundColor: AppData.colors.nightBgColor,
         isDismissible: true,
         builder: (BuildContext context) {
           return HomeBottomDialog(
@@ -288,6 +295,7 @@ class _HomeScreenState extends HomeBloc {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        backgroundColor: AppData.colors.nightBgColor,
         isDismissible: true,
         builder: (BuildContext context) {
           return SingleChildScrollView(

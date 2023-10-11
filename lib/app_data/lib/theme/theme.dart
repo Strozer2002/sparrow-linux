@@ -26,17 +26,13 @@ class AppTheme {
 
   ThemeData themeData(BuildContext context) => ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: settingsService.getTheme() == true
-            ? AppData.colors.gray100
-            : AppData.colors.gray900,
+        scaffoldBackgroundColor: AppData.colors.nightBgColor,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppData.colors.sky600,
           secondary: Colors.white,
         ),
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: settingsService.getTheme() == true
-                  ? AppData.colors.textColor
-                  : AppData.colors.whiteTextColor,
+              bodyColor: AppData.colors.textColor,
               displayColor: AppData.colors.textColor,
               fontFamily: AppData.theme.text.fontFamily,
             ),
@@ -55,7 +51,7 @@ class AppTheme {
         ),
         appBarTheme: AppBarTheme(
           surfaceTintColor: AppData.colors.backgroundColor,
-          backgroundColor: AppData.colors.middlePurple,
+          backgroundColor: AppData.colors.appBarColor,
           titleTextStyle: AppData.theme.text.s14w700.copyWith(
             color: Colors.white,
             fontSize: 20,
@@ -65,6 +61,22 @@ class AppTheme {
         ),
         checkboxTheme: const CheckboxThemeData(
           side: BorderSide(color: Colors.grey),
+        ),
+        iconTheme: IconThemeData(
+          color: AppData.colors.iconColor,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: AppData.colors.textColor,
+          ),
+          hintStyle: TextStyle(
+            color: AppData.colors.textColor,
+          ),
+          prefixIconColor: AppData.colors.textColor,
+          suffixIconColor: AppData.colors.textColor,
+        ),
+        iconButtonTheme: IconButtonThemeData(
+          style: AppData.theme.button.defaultIconButton,
         ),
       );
 }

@@ -71,7 +71,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.white,
+      color: AppData.colors.nightBottomNavColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

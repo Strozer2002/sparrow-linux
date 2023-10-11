@@ -21,9 +21,13 @@ class _SetCodeScreenState extends SetCodeBloc {
   Widget get topImage {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/layouts/BG2.png"),
+          colorFilter: ColorFilter.mode(
+            AppData.colors.topImageColor,
+            BlendMode.darken,
+          ),
+          image: const AssetImage("assets/layouts/BG2.png"),
           fit: BoxFit.cover,
         ),
       ),
