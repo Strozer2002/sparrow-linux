@@ -5,7 +5,10 @@ import '../../features/settings/domain/settings_service.dart';
 class ColorsCollection {
   final SettingsService settingsService = SettingsService();
   bool isLightTheme() {
-    return settingsService.getTheme() == true;
+    if (settingsService.getTheme() != null) {
+      return settingsService.getTheme() == true;
+    }
+    return true;
   }
 
   /// Цвет фона страниц

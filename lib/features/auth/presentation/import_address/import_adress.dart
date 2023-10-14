@@ -15,9 +15,13 @@ class _ImportAddressState extends ImportAddressBloc {
   Widget get topImage {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/layouts/BG2.png"),
+          colorFilter: ColorFilter.mode(
+            AppData.colors.topImageColor,
+            BlendMode.darken,
+          ),
+          image: const AssetImage("assets/layouts/BG2.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -45,7 +49,7 @@ class _ImportAddressState extends ImportAddressBloc {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppData.colors.nightBottomNavColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -69,7 +73,7 @@ class _ImportAddressState extends ImportAddressBloc {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 82, vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         border: Border(
           top: BorderSide(
             width: 1,

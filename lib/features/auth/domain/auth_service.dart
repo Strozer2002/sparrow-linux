@@ -104,6 +104,14 @@ class AuthService {
     return null;
   }
 
+  Crypt? getETH() {
+    User? user = getUser();
+    if (user != null) {
+      return user.portfolio.attributes.positionsDistributionByChain.crypts.firstWhere((eth) => eth.name == "Ethereum");
+    }
+    return null;
+  }
+
   List<Crypt>? getTrueCrypts() {
     User? user = getUser();
     if (user != null) {

@@ -22,6 +22,12 @@ class Settings {
   @HiveField(5)
   bool isLightTheme;
 
+  @HiveField(6)
+  bool confirmTransaction;
+
+  @HiveField(7)
+  bool isTouchId;
+
   Settings({
     this.isAutoLock = false,
     this.mnemonicSentence,
@@ -29,5 +35,7 @@ class Settings {
     this.userPassCode,
     this.autoLockDuration = 30,
     this.isLightTheme = true,
+    this.confirmTransaction = true,
+    this.isTouchId = false,
   });
 }

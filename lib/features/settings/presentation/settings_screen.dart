@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:rabby/features/widgets/duartion.dart';
 
 import '../../../app_data/app_data.dart';
+import '../../protection/widget/protection_sheet.dart';
 import '../../widgets/currency_dialog.dart';
 import '../../widgets/theme_dialog.dart';
 import 'settings_bloc.dart';
@@ -208,8 +209,19 @@ class _SettingsScreenState extends SettingsBloc {
                 Text("Touch ID"),
               ],
             ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            rightPart: Switch(
+              value: settingsService.getTouchId()!,
+              onChanged: (value) {
+                setState(() {
+                  settingsService.putTouchId(value);
+                });
+              },
+              activeColor: Colors.white,
+              inactiveThumbColor: AppData.colors.middlePurple.withOpacity(0.5),
+              activeTrackColor: AppData.colors.middlePurple,
+              inactiveTrackColor: AppData.colors.middlePurple.withOpacity(0.2),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
           ),
           settingField(
             leftPart: const Row(
@@ -266,7 +278,7 @@ class _SettingsScreenState extends SettingsBloc {
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            onTap: () => showProtectionDialog(context),
           ),
           settingField(
             leftPart: const Row(
@@ -278,8 +290,7 @@ class _SettingsScreenState extends SettingsBloc {
             ),
             rightPart: AppData.assets.svg.chevron,
             onTap: () {
-              appService.clearAllBox();
-              context.go(AppData.routes.welcomeScreen);
+              showAlertDialog(context);
             },
           ),
         ],
@@ -325,8 +336,12 @@ class _SettingsScreenState extends SettingsBloc {
                 Text("Version"),
               ],
             ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () => settingsService.relocate(),
+            rightPart: Text(
+              "1.0.0-2022010100",
+              style: TextStyle(
+                color: AppData.colors.middlePurple,
+              ),
+            ),
           ),
           settingField(
             leftPart: const Row(
@@ -336,8 +351,13 @@ class _SettingsScreenState extends SettingsBloc {
                 Text("State Logs"),
               ],
             ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () => settingsService.relocate(),
+            rightPart: Text(
+              "Export",
+              style: TextStyle(
+                color: AppData.colors.middlePurple,
+              ),
+            ),
+            onTap: () {},
           ),
         ],
       ),
@@ -522,6 +542,132 @@ class _SettingsScreenState extends SettingsBloc {
     if (result == null) {
       setState(() {});
     }
+  }
+
+  Future<dynamic> showProtectionDialog(BuildContext context) async {
+    final result = await showModalBottomSheet(
+        context: context,
+        backgroundColor: AppData.colors.nightBgColor,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppData.colors.middlePurple.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        const Text("Protection"),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const ProtectionSheetWidget(),
+                    const SizedBox(height: 20),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+
+    if (result == null) {
+      setState(() {});
+    }
+  }
+
+  void showAlertDialog(BuildContext context) {
+    final TextEditingController resetCtrl = TextEditingController();
+    Widget cancelButton = TextButton(
+      child: Text(
+        "Cancel",
+        style: TextStyle(
+          color: AppData.colors.middlePurple,
+        ),
+      ),
+      onPressed: () {
+        context.pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(
+        "Continue",
+        style: TextStyle(
+          color: AppData.colors.middlePurple,
+        ),
+      ),
+      onPressed: () {
+        if (resetCtrl.text.toLowerCase() == "reset") {
+          context.pop();
+          appService.clearAllBox();
+          context.go(AppData.routes.welcomeScreen);
+        } else {
+          context.pop();
+        }
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor: AppData.colors.nightBgColor,
+      title: const Center(
+        child: Column(
+          children: [
+            Icon(Icons.restart_alt),
+            Text("Reset App"),
+          ],
+        ),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+              "This will delete all the data you have created on Arbitrum. After making sure that you have a proper backup, ENTER “RESET” to reset the App"),
+          const SizedBox(height: 10),
+          TextField(
+            controller: resetCtrl,
+            onChanged: (value) => setState(() {
+              resetCtrl.text = value;
+            }),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override

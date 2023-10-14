@@ -17,8 +17,12 @@ class _CreatedSuccessState extends CreatedSuccessBloc {
   Widget get topImage {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
         image: DecorationImage(
+          colorFilter: ColorFilter.mode(
+            AppData.colors.topImageColor,
+            BlendMode.darken,
+          ),
           image: AssetImage("assets/layouts/BG2.png"),
           fit: BoxFit.cover,
         ),

@@ -31,7 +31,7 @@ class _ImportKeyState extends ImportKeyBloc {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 82, vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         border: Border(
           top: BorderSide(
             width: 1,

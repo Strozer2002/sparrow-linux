@@ -186,7 +186,7 @@ class _HomeScreenState extends HomeBloc {
                       onTap: () => showReceiveBottomDialog(),
                       selectWallet: WalletTypeEnum.resive,
                       icon: AppData.assets.svg.recive,
-                      text: "Resive",
+                      text: "Receive",
                       selectedWalletType: selectedWalletType,
                       borderRadiusGeometry: const BorderRadius.only(
                         topRight: Radius.circular(12),
@@ -231,7 +231,8 @@ class _HomeScreenState extends HomeBloc {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(crypts[index].amount.toString()),
+                      Text(AppData.utils
+                          .doubleToFourthValues(crypts[index].amount)),
                       Text(
                         crypts[index].shortName,
                         style: TextStyle(
@@ -347,7 +348,7 @@ class _HomeScreenState extends HomeBloc {
           ? Container(
               padding: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppData.colors.nightBottomNavColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               width: double.infinity,
@@ -427,18 +428,18 @@ class _HomeScreenState extends HomeBloc {
                           ],
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               operationTypeString(
                                 transaction:
                                     authService.getTransactions()![index],
                                 send:
-                                    "-${authService.getTransactions()![index].price} ${authService.getTransactions()![index].cryptSymbol}",
+                                    "-${AppData.utils.doubleToFourthValues(authService.getTransactions()![index].price)} ${authService.getTransactions()![index].cryptSymbol}",
                                 receive:
-                                    "+${authService.getTransactions()![index].price} ${authService.getTransactions()![index].cryptSymbol}",
+                                    "+${AppData.utils.doubleToFourthValues(authService.getTransactions()![index].price)} ${authService.getTransactions()![index].cryptSymbol}",
                                 swap:
-                                    "-${authService.getTransactions()![index].price} ${authService.getTransactions()![index].cryptSymbol}",
+                                    "-${AppData.utils.doubleToFourthValues(authService.getTransactions()![index].price)} ${authService.getTransactions()![index].cryptSymbol}",
                               ),
                             ),
                             Text(

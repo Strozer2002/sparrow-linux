@@ -333,18 +333,37 @@ class Utils {
     dev.log(
         "balance.getValueInUnit(EtherUnit.ether) = ${balance.getValueInUnit(EtherUnit.ether)}");
 
-    await getGasLimit();
+    // await getGasLimit();
     await getGasPrice();
   }
 
-  Future<BlockInformation?> getGasLimit() async {
+  Future<double?> getGasLimit({
+    required EtherAmount gasPrice,
+    required EthereumAddress to,
+    required EtherAmount value,
+    required double precent,
+  }) async {
     try {
-      BlockInformation latestBlock = await ethClient!.getBlockInformation();
-      dev.log(
-          "latestBlock.baseFeePerGas= ${latestBlock.baseFeePerGas!.getInWei}");
-      dev.log("latestBlock.isSupportEIP1559= ${latestBlock.isSupportEIP1559}");
-      dev.log("latestBlock.timestamp= ${latestBlock.timestamp}");
-      return latestBlock;
+      final AuthService authService = AuthService();
+      BigInt latestBlock = await ethClient!
+          .estimateGas(gasPrice: gasPrice, to: to, value: value);
+      // dev.log("estimateGas= $latestBlock");
+
+      BlockInformation block = await ethClient!.getBlockInformation();
+      // dev.log(
+      //     "block = ${block.baseFeePerGas!.getValueInUnit(EtherUnit.ether)}");
+      // dev.log(
+      //     "blockPrec = ${block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) * 0.2}");
+
+      // dev.log(
+      //     "Price = ${latestBlock.toDouble() * (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) + (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) * precent)) * authService.getETH()!.priceForOne * authService.getSelectCurrency()!.rate}");
+      double amount = latestBlock.toDouble() *
+          (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) +
+              (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) *
+                  precent)) *
+          authService.getETH()!.priceForOne *
+          authService.getSelectCurrency()!.rate;
+      return amount;
     } catch (error) {
       print(error);
     }
@@ -354,8 +373,13 @@ class Utils {
   Future<EtherAmount?> getGasPrice() async {
     try {
       EtherAmount gasPrice = await ethClient!.getGasPrice();
-      dev.log("gasPrice.getInWei = ${gasPrice.getInWei}");
-      dev.log("gasPrice.getInEther = ${gasPrice.getInEther}");
+      final gasPriceInEther =
+          EtherAmount.fromUnitAndValue(EtherUnit.wei, gasPrice.getInEther);
+      // Отображаем результат
+      // print(
+      //     'Текущая газовая цена: ${gasPriceInEther.getValueInUnit(EtherUnit.ether)} ETH');
+      // dev.log("gasPrice.getInWei = ${gasPrice.getInWei}");
+      // dev.log("gasPrice.getInEther = ${gasPrice.getInEther}");
       return gasPrice;
     } catch (error) {
       print(error);
@@ -386,6 +410,22 @@ class Utils {
 
   String doubleToTwoValues(double money) {
     return money.toStringAsFixed(2);
+  }
+
+  String doubleToFourthValues(double money) {
+    if (money == 0) {
+      return "0";
+    }
+    return money.toStringAsFixed(4);
+  }
+
+  String doubleToSixValues(double money) {
+    return money.toStringAsFixed(6);
+  }
+
+  int convertEtherToWei(double etherAmount) {
+    const int etherInWei = 1000000000000000000; // 10^18
+    return (etherAmount * etherInWei).toInt();
   }
 
   String formatDateTime(String dateString) {

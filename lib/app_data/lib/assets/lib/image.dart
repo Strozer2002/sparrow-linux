@@ -38,6 +38,18 @@ class ImageCollection {
         height: height,
         fit: fit ?? BoxFit.contain,
       );
+  Image light({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('icons/light.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
+  Image eco({double? width, double? height, BoxFit? fit}) => Image.asset(
+        _name('icons/eco.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
 
   Image crypto({String? value, double? width, double? height, BoxFit? fit}) =>
       Image.asset(

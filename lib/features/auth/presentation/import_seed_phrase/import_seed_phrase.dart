@@ -32,7 +32,7 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 82, vertical: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppData.colors.nightBottomNavColor,
         border: Border(
           top: BorderSide(
             width: 1,
@@ -115,7 +115,7 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
         ),
         itemBuilder: (context, index) => Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppData.colors.nightBottomNavColor,
             borderRadius: BorderRadius.only(
               topLeft: index == 0 ? const Radius.circular(8) : Radius.zero,
               topRight: index == 2 ? const Radius.circular(8) : Radius.zero,

@@ -18,7 +18,7 @@ class _SendAddressScreenState extends SendBloc {
     return AppBar(
       title: const Text("Send to address"),
       leading: IconButton(
-        onPressed: () => context.pop(),
+        onPressed: () => context.go(AppData.routes.homeScreen),
         icon: const Icon(
           Icons.arrow_back,
           color: Colors.white,
@@ -50,7 +50,9 @@ class _SendAddressScreenState extends SendBloc {
                 AppData.colors.middlePurple,
                 AppData.colors.middlePurple,
               ]),
-        onPressed: addressCtrl.text.isEmpty ? null : () {},
+        onPressed: addressCtrl.text.isEmpty
+            ? null
+            : () => context.go(AppData.routes.transactionScreen , extra: addressCtrl.text),
         child: const Text(
           "Preview transaction",
           style: TextStyle(color: Colors.white),

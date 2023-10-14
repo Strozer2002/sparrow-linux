@@ -86,6 +86,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                       showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
+                          backgroundColor: AppData.colors.nightBgColor,
                           isDismissible: true,
                           builder: (BuildContext context) {
                             return SingleChildScrollView(
@@ -240,7 +241,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                           Row(
                             children: [
                               Text(
-                                "${AppData.utils.doubleToTwoValues(widget.crypt.amount)} ${widget.crypt.shortName}",
+                                "${AppData.utils.doubleToFourthValues(widget.crypt.amount)} ${widget.crypt.shortName}",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: AppData.colors.middlePurple

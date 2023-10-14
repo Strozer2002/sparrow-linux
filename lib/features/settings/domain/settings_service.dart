@@ -116,6 +116,26 @@ class SettingsService {
     return null;
   }
 
+  void putTouchId(bool isTouchId) {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      settings.isTouchId = isTouchId;
+      putSettings(settings);
+    } else {
+      putSettings(
+        Settings(isTouchId: isTouchId),
+      );
+    }
+  }
+
+  bool? getTouchId() {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      return settings.isTouchId;
+    }
+    return null;
+  }
+
   void putDuration(int duration) {
     Settings? settings = getSettings();
     if (settings != null) {
@@ -152,6 +172,26 @@ class SettingsService {
     Settings? settings = getSettings();
     if (settings != null) {
       return settings.isLightTheme;
+    }
+    return null;
+  }
+
+  void putConfirmTransaction(bool confirmTransaction) {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      settings.confirmTransaction = confirmTransaction;
+      putSettings(settings);
+    } else {
+      putSettings(
+        Settings(confirmTransaction: confirmTransaction),
+      );
+    }
+  }
+
+  bool? getConfirmTransaction() {
+    Settings? settings = getSettings();
+    if (settings != null) {
+      return settings.confirmTransaction;
     }
     return null;
   }

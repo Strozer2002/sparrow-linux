@@ -14,9 +14,13 @@ class _SelectImportState extends State<SelectImport> {
   Widget get topImage {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/layouts/BG2.png"),
+          colorFilter: ColorFilter.mode(
+            AppData.colors.topImageColor,
+            BlendMode.darken,
+          ),
+          image: const AssetImage("assets/layouts/BG2.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -44,7 +48,7 @@ class _SelectImportState extends State<SelectImport> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppData.colors.nightBottomNavColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(

@@ -61,7 +61,7 @@ class _ManageCryptState extends ManageCryptBloc {
             icon: const Icon(Icons.close),
           ), // Suffix icon
 
-          hintText: 'Enter your username',
+          hintText: 'Enter cryptname',
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
         ),
@@ -111,7 +111,7 @@ class _ManageCryptState extends ManageCryptBloc {
                                   ),
                                 ),
                                 Text(
-                                  '${filterCrypts![index].amount} ${filterCrypts![index].shortName}',
+                                  '${AppData.utils.doubleToFourthValues(filterCrypts![index].amount)} ${filterCrypts![index].shortName}',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: AppData.colors.middlePurple

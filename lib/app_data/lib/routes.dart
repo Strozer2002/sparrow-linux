@@ -16,6 +16,8 @@ import 'package:rabby/features/dashboard/dashboard_page.dart';
 import 'package:rabby/features/home/presentation/home_screen.dart';
 import 'package:rabby/features/init/presentation/init.dart';
 import 'package:rabby/features/send/presentation/send_address/send_address.dart';
+import 'package:rabby/features/send/presentation/success_transaction/succes_transaction.dart';
+import 'package:rabby/features/send/presentation/transaction/transaction.dart';
 import 'package:rabby/features/settings/presentation/settings_screen.dart';
 
 import '../../core/navigator_observer.dart';
@@ -90,6 +92,17 @@ class RoutesList {
 
   String get _sendScreenName => 'sendScreen';
   String get sendScreen => '$homeScreen/$_sendScreenName';
+
+  String get _transactionScreenName => 'transactionScreen';
+  String get transactionScreen => '$sendScreen/$_transactionScreenName';
+
+  String get _confirmTransactionScreenName => 'confirmTransactionScreen';
+  String get confirmTransactionScreen =>
+      '$transactionScreen/$_confirmTransactionScreenName';
+
+  String get _codeTransactionScreenName => 'codeTransactionScreen';
+  String get codeTransactionScreen =>
+      '$confirmTransactionScreen/$_codeTransactionScreenName';
 
   String get _manageCryptScreenName => 'manageCryptScreen';
   String get manageCryptScreen => '$init$_manageCryptScreenName';
@@ -314,7 +327,38 @@ class Routes {
                     builder: (BuildContext context, GoRouterState state) {
                       return const SendAddressScreen();
                     },
-                    routes: const [],
+                    routes: [
+                      GoRoute(
+                        path: AppData.routes._transactionScreenName,
+                        builder: (BuildContext context, GoRouterState state) {
+                          return TransactionWidget(
+                            address: state.extra as String,
+                          );
+                        },
+                        routes: [
+                          GoRoute(
+                            path: AppData.routes._confirmTransactionScreenName,
+                            builder:
+                                (BuildContext context, GoRouterState state) {
+                              return SuccessTransaction(
+                                createTransaction:
+                                    state.extra as Future<void> Function(),
+                              );
+                            },
+                            routes: [
+                              GoRoute(
+                                path: AppData.routes._codeTransactionScreenName,
+                                builder: (BuildContext context,
+                                    GoRouterState state) {
+                                  return const SetCodeScreen();
+                                },
+                                routes: const [],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
