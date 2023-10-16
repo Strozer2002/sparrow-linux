@@ -23,13 +23,15 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       userPassCode: fields[2] as String?,
       autoLockDuration: fields[4] as int?,
       isLightTheme: fields[5] as bool,
+      confirmTransaction: fields[6] as bool,
+      isTouchId: fields[7] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.mnemonicSentence)
       ..writeByte(1)
@@ -41,7 +43,11 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       ..writeByte(4)
       ..write(obj.autoLockDuration)
       ..writeByte(5)
-      ..write(obj.isLightTheme);
+      ..write(obj.isLightTheme)
+      ..writeByte(6)
+      ..write(obj.confirmTransaction)
+      ..writeByte(7)
+      ..write(obj.isTouchId);
   }
 
   @override

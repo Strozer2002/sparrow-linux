@@ -25,13 +25,15 @@ class CryptAdapter extends TypeAdapter<Crypt> {
       name: fields[1] as String,
       shortName: fields[2] as String,
       isChoose: fields[6] as bool,
+      tokenAddress: fields[8] as String,
+      swapAddress: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Crypt obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.iconName)
       ..writeByte(1)
@@ -47,7 +49,11 @@ class CryptAdapter extends TypeAdapter<Crypt> {
       ..writeByte(6)
       ..write(obj.isChoose)
       ..writeByte(7)
-      ..write(obj.changesCrypt);
+      ..write(obj.changesCrypt)
+      ..writeByte(8)
+      ..write(obj.tokenAddress)
+      ..writeByte(9)
+      ..write(obj.swapAddress);
   }
 
   @override

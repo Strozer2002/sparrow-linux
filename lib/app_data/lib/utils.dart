@@ -1,20 +1,24 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart';
+import 'package:rabby/core/data_source/inch_api.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/domain/models/transaction/transaction.dart';
 import 'package:rabby/features/auth/repository/auth_repository.dart';
 import 'package:rabby/features/auth/repository/domain/register/register_body.dart';
+import 'package:rabby/features/auth/repository/inch_repo.dart';
 import 'package:rabby/features/currency/domain/custom_currency.dart';
 import 'package:rabby/features/settings/domain/settings_service.dart';
+import 'package:rabby/features/swap/domain/model/swap_model.dart';
+import 'package:rabby/features/swap/domain/model/tx.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:bip32/bip32.dart' as bip32;
-import 'package:web3dart/credentials.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,13 +34,21 @@ import '../../features/auth/domain/models/position/position.dart';
 import '../../features/auth/presentation/manage_crypt/domain/crypt.dart';
 
 class Utils {
-  final String apiUrl =
-      "https://mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569"; //Replace with your API
+  final String ethUrl =
+      "https://mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569";
+  final String polygonUrl =
+      "https://polygon-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569";
+  final String optimismUrl =
+      "https://optimism-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569";
 
   final Client httpClient = Client();
   Web3Client? ethClient;
+  Web3Client? polygonClient;
+  Web3Client? optimismClient;
   Utils() {
-    ethClient = Web3Client(apiUrl, httpClient);
+    ethClient = Web3Client(ethUrl, Client());
+    polygonClient = Web3Client(polygonUrl, Client());
+    optimismClient = Web3Client(optimismUrl, Client());
   }
 
   Future<void> importData({
@@ -143,6 +155,8 @@ class Utils {
         required String iconName,
         required String name,
         required String shortName,
+        String? tokenAddress,
+        String? swapAddress,
       }) {
         return positionEntity(name) != null
             ? Crypt(
@@ -160,6 +174,8 @@ class Utils {
                 isChoose: authService.getCryptByName(name) == null
                     ? false
                     : authService.getCryptByName(name)!.isChoose,
+                tokenAddress: tokenAddress ?? '',
+                swapAddress: swapAddress ?? '',
               )
             : Crypt(
                 iconName: iconName,
@@ -169,6 +185,8 @@ class Utils {
                 isChoose: authService.getCryptByName(name) == null
                     ? false
                     : authService.getCryptByName(name)!.isChoose,
+                tokenAddress: tokenAddress ?? '',
+                swapAddress: swapAddress ?? '',
               );
       }
 
@@ -229,11 +247,15 @@ class Utils {
                     iconName: "arbitrum",
                     name: 'Arbitrum',
                     shortName: 'ARB',
+                    tokenAddress: "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
+                    swapAddress: "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
                   ),
                   createCrypt(
                     iconName: "aurora",
                     name: 'Aurora',
                     shortName: 'AUR',
+                    tokenAddress: "0xAaAAAA20D9E0e2461697782ef11675f668207961",
+                    swapAddress: "0xAaAAAA20D9E0e2461697782ef11675f668207961",
                   ),
                   createCrypt(
                     iconName: "avalanche",
@@ -249,6 +271,8 @@ class Utils {
                     iconName: "ethereum",
                     name: 'Ethereum',
                     shortName: 'ETH',
+                    tokenAddress: "0xc0829421C1d260BD3cB3E0F06cfE2D52db2cE315",
+                    swapAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
                   ),
                   createCrypt(
                     iconName: "fantom",
@@ -264,6 +288,8 @@ class Utils {
                     iconName: "optimism",
                     name: 'Optimism',
                     shortName: 'OPT',
+                    tokenAddress: "0x4200000000000000000000000000000000000042",
+                    swapAddress: "0x4200000000000000000000000000000000000042",
                   ),
                   createCrypt(
                     iconName: "polygon",
@@ -326,15 +352,87 @@ class Utils {
   }
 
   Future<void> web3(String privateKey) async {
+    final InchRepository inchRepository = InchRepository();
     var credentials = EthPrivateKey.fromHex(privateKey);
     var address = credentials.address;
 
-    EtherAmount balance = await ethClient!.getBalance(address);
+    EtherAmount ethBalance = await ethClient!.getBalance(address);
     dev.log(
-        "balance.getValueInUnit(EtherUnit.ether) = ${balance.getValueInUnit(EtherUnit.ether)}");
+        "balance.getValueInUnit(EtherUnit.ether) = ${ethBalance.getValueInUnit(EtherUnit.ether)}");
 
-    // await getGasLimit();
-    await getGasPrice();
+    EtherAmount optBalance = await optimismClient!.getBalance(address);
+    dev.log(
+        "balance.getValueInUnit(EtherUnit.ether) = ${optBalance.getValueInUnit(EtherUnit.ether)}");
+
+    Credentials ethCredentials =
+        await ethClient!.credentialsFromPrivateKey(privateKey);
+    Credentials optimismCredentials =
+        await optimismClient!.credentialsFromPrivateKey(privateKey);
+
+    EthereumAddress ethTokenAddress =
+        EthereumAddress.fromHex(ethCredentials.address.hex);
+    EthereumAddress optimismTokenAddress =
+        EthereumAddress.fromHex(optimismCredentials.address.hex);
+    BigInt addressOPt = await optimismClient!.getChainId();
+    dev.log("ethTokenAddress = $ethTokenAddress");
+    dev.log("optimismTokenAddress = $optimismTokenAddress");
+    dev.log("addressOPt = $addressOPt");
+    dev.log(convertEtherToWei(0.000128).toString());
+
+    var response = await inchRepository.linch(
+      fromToken: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      toToken: "0xAaAAAA20D9E0e2461697782ef11675f668207961",
+      amount: 10000000000000,
+      fromAddress: "0x4218125a19B8C189354892D77b210A7A2f21E86C",
+      slippage: 0.1,
+      disableEstimate: true,
+    );
+    Tx? tx;
+    if (response.isSuccess) {
+      tx = Tx(
+        data: response.data!.tx.data,
+        from: response.data!.tx.from,
+        gas: 1000000,
+        gasPrice: response.data!.tx.gasPrice,
+        to: response.data!.tx.to,
+        value: response.data!.tx.value,
+      );
+      SwapModel model = SwapModel(
+        toAmount: response.data!.toAmount,
+        tx: tx,
+      );
+
+      dev.log("tx.from ${tx.from}");
+      dev.log("tx.to ${tx.to}");
+      List<int> list = tx.data.codeUnits;
+      Uint8List data = Uint8List.fromList(list);
+      String string = String.fromCharCodes(data);
+
+      try {
+        // await ethClient!.sendTransaction(
+        //   ethCredentials,
+        //   Transaction(
+        //     from: EthereumAddress.fromHex(tx.from),
+        //     to: EthereumAddress.fromHex(tx.to),
+        //     data: data,
+        //     value: EtherAmount.fromUnitAndValue(
+        //       EtherUnit.wei,
+        //       tx.value,
+        //     ),
+        //     gasPrice: EtherAmount.fromUnitAndValue(
+        //       EtherUnit.wei,
+        //       tx.gasPrice,
+        //     ),
+        //     maxGas: tx.gas,
+        //   ),
+        // );
+        print("Success transaction ");
+      } catch (e) {
+        print("Error $e");
+      }
+    } else {
+      print("error ${response.errors}");
+    }
   }
 
   Future<double?> getGasLimit({

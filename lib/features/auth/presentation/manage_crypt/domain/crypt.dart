@@ -22,15 +22,21 @@ class Crypt {
   bool isChoose;
   @HiveField(7)
   Changes changesCrypt;
+  @HiveField(8)
+  String tokenAddress;
+  @HiveField(9)
+  String swapAddress;
 
   Crypt({
     this.amount = 0,
     this.amountInCurrency = 0,
     this.priceForOne = 0,
-     required this.changesCrypt,
+    required this.changesCrypt,
     required this.iconName,
     required this.name,
     required this.shortName,
     this.isChoose = false,
+    required this.tokenAddress,
+    required this.swapAddress,
   });
 }

@@ -34,7 +34,7 @@ class _AuthClient implements AuthClient {
     )
             .compose(
               _dio.options,
-              '/board',
+              '/date/spot/board',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -46,6 +46,86 @@ class _AuthClient implements AuthClient {
     final value = SingleResponseBody<UserEntity>.fromJson(
       _result.data!,
       (json) => UserEntity.fromJson(json as Map<String, dynamic>),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<SingleResponseBody<DiagramEntity>>> periods(
+    String address,
+    String period,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<SingleResponseBody<DiagramEntity>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/${address}/getChart/${period}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SingleResponseBody<DiagramEntity>.fromJson(
+      _result.data!,
+      (json) => DiagramEntity.fromJson(json as Map<String, dynamic>),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<SingleResponseBody<DataSwapEntity>>> linch(
+    String fromToken,
+    String toToken,
+    int amount,
+    String fromAddress,
+    double slippage,
+    bool disableEstimate,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'src': fromToken,
+      r'dst': toToken,
+      r'amount': amount,
+      r'from': fromAddress,
+      r'slippage': slippage,
+      r'disableEstimate': disableEstimate,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<SingleResponseBody<DataSwapEntity>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/swap',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value = SingleResponseBody<DataSwapEntity>.fromJson(
+      _result.data!,
+      (json) => DataSwapEntity.fromJson(json as Map<String, dynamic>),
     );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;

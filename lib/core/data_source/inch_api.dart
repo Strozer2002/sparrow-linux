@@ -10,10 +10,10 @@ import 'package:logger/logger.dart';
 import '../../domain/interface/general_ressponse_body.dart';
 import '../../domain/object/general_callback_result.dart';
 
-base class OrdinalRemoteDataSource
+base class InchApiRemoteDataSource
     extends RemoteDataSource<GeneralResponseBody, Map<String, dynamic>> {
   @override
-  final String baseUrl = 'https://ordinalshiro.cc';
+  final String baseUrl = 'https://api.1inch.dev/swap/v5.2/1';
 
   final _logger = Logger(
     printer: PrefixPrinter(
@@ -39,15 +39,12 @@ base class OrdinalRemoteDataSource
   @override
   late OnRequestDioInterceptor onRequest = (request, handler) {
     final requestData = request.data;
-    // final authService = AuthService.instance;
-    // if (authService.isLoggedIn) {
-    //   final initialHeader = {
-    //     'Authorization': 'Bearer ${authService.authCreds()?.token}',
-    //     'role': '${authService.authCreds()?.role}',
-    //     'subdomain': '${authService.authCreds()?.subdomain}'
-    //   };
-    //   request.headers.addAll(initialHeader);
-    // }
+
+    final initialHeader = {
+      "Authorization": "Bearer UVzszIzZnbVNYfr2FjtHuvwcjPyXyuxB",
+      "accept": "application/json",
+    };
+    request.headers.addAll(initialHeader);
 
     List<String> filesNames = [];
     String? bodyString;

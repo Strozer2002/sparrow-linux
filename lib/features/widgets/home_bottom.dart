@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
+import 'package:rabby/features/auth/repository/auth_repository.dart';
+import 'package:rabby/features/diagrammes/domain/model/diagram_model.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
 import '../../app_data/app_data.dart';
@@ -27,6 +29,32 @@ class HomeBottomDialog extends StatefulWidget {
 
 class _HomeBottomDialogState extends State<HomeBottomDialog> {
   final AuthService authService = AuthService();
+  final AuthRepository authRepository = AuthRepository();
+  DiagramModel? diagramModel;
+  int numberToShow = 0;
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  Future<void> init({String period = "day"}) async {
+    final response = await authRepository.periods(
+      widget.crypt.tokenAddress,
+      period,
+    );
+    if (response.isSuccess) {
+      setState(() {
+        diagramModel = DiagramModel(
+          last: response.data!.attributes.stats.last,
+          max: response.data!.attributes.stats.max,
+          min: response.data!.attributes.stats.min,
+          points: response.data!.attributes.points,
+        );
+      });
+    }
+  }
+
   Widget get cryptDiagram {
     return Column(
       children: [
@@ -47,7 +75,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                 Row(
                   children: [
                     Text(
-                      '${authService.getSelectCurrency()!.symbol}${AppData.utils.doubleToTwoValues(widget.crypt.priceForOne * authService.getSelectCurrency()!.rate)}',
+                      '${authService.getSelectCurrency()!.symbol}${diagramModel != null ? AppData.utils.doubleToTwoValues(diagramModel!.last * authService.getSelectCurrency()!.rate) : "0"}',
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -98,7 +126,8 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                                   children: <Widget>[
                                     Container(
                                       margin: const EdgeInsets.symmetric(
-                                          vertical: 16),
+                                        vertical: 16,
+                                      ),
                                       width: 32,
                                       height: 4,
                                       decoration: BoxDecoration(
@@ -131,8 +160,108 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
           ],
         ),
         Container(
-          height: 300,
-          color: Colors.white,
+          color: AppData.colors.nightBottomNavColor,
+          child: Column(
+            children: [
+              diagramModel == null
+                  ? Container()
+                  : Container(
+                      height: 300,
+                      padding:
+                          const EdgeInsets.only(left: 14, right: 14, top: 16),
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          print(diagramModel!.points[index][1] /
+                              diagramModel!.max);
+                          return Container(
+                            margin: EdgeInsets.only(
+                              top: 290 *
+                                  (1.01 -
+                                      (diagramModel!.points[index][1] /
+                                          diagramModel!.max)),
+                            ),
+                            width: 8,
+                            color: AppData.colors.middlePurple.withOpacity(0.4),
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(width: 4),
+                        itemCount: diagramModel!.points.length,
+                      ),
+                    ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        numberToShow = 0;
+                      });
+                      init(period: "day");
+                    },
+                    icon: Text(
+                      "1D",
+                      style: TextStyle(
+                        color: numberToShow == 0
+                            ? AppData.colors.middlePurple
+                            : null,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        numberToShow = 1;
+                      });
+                      init(period: "week");
+                    },
+                    icon: Text(
+                      "1W",
+                      style: TextStyle(
+                        color: numberToShow == 1
+                            ? AppData.colors.middlePurple
+                            : null,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        numberToShow = 2;
+                      });
+                      init(period: "month");
+                    },
+                    icon: Text(
+                      "1M",
+                      style: TextStyle(
+                        color: numberToShow == 2
+                            ? AppData.colors.middlePurple
+                            : null,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        numberToShow = 3;
+                      });
+                      init(period: "year");
+                    },
+                    icon: Text(
+                      "1Y",
+                      style: TextStyle(
+                        color: numberToShow == 3
+                            ? AppData.colors.middlePurple
+                            : null,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ],
     );
