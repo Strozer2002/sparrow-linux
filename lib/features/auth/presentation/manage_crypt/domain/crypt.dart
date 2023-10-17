@@ -25,7 +25,7 @@ class Crypt {
   @HiveField(8)
   String tokenAddress;
   @HiveField(9)
-  String swapAddress;
+  String? swapAddress;
 
   Crypt({
     this.amount = 0,

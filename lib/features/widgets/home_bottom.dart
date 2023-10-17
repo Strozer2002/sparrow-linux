@@ -172,20 +172,16 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          print(diagramModel!.points[index][1] /
-                              diagramModel!.max);
-                          return Container(
-                            margin: EdgeInsets.only(
-                              top: 290 *
-                                  (1.01 -
-                                      (diagramModel!.points[index][1] /
-                                          diagramModel!.max)),
-                            ),
-                            width: 8,
-                            color: AppData.colors.middlePurple.withOpacity(0.4),
-                          );
-                        },
+                        itemBuilder: (context, index) => Container(
+                          margin: EdgeInsets.only(
+                            top: 290 *
+                                (1.01 -
+                                    (diagramModel!.points[index][1] /
+                                        diagramModel!.max)),
+                          ),
+                          width: 8,
+                          color: AppData.colors.middlePurple.withOpacity(0.4),
+                        ),
                         separatorBuilder: (context, index) =>
                             const SizedBox(width: 4),
                         itemCount: diagramModel!.points.length,

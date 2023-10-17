@@ -369,30 +369,33 @@ class Utils {
     Credentials optimismCredentials =
         await optimismClient!.credentialsFromPrivateKey(privateKey);
 
+    Credentials polygonCredentials =
+        await polygonClient!.credentialsFromPrivateKey(privateKey);
+
     EthereumAddress ethTokenAddress =
         EthereumAddress.fromHex(ethCredentials.address.hex);
     EthereumAddress optimismTokenAddress =
         EthereumAddress.fromHex(optimismCredentials.address.hex);
     BigInt addressOPt = await optimismClient!.getChainId();
+
     dev.log("ethTokenAddress = $ethTokenAddress");
     dev.log("optimismTokenAddress = $optimismTokenAddress");
     dev.log("addressOPt = $addressOPt");
-    dev.log(convertEtherToWei(0.000128).toString());
 
     var response = await inchRepository.linch(
-      fromToken: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-      toToken: "0xAaAAAA20D9E0e2461697782ef11675f668207961",
-      amount: 10000000000000,
-      fromAddress: "0x4218125a19B8C189354892D77b210A7A2f21E86C",
-      slippage: 0.1,
-      disableEstimate: true,
+      fromToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // polygon
+      toToken: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063", // dai token
+      amount: 500000000000000000, // 0.5
+      fromAddress: "0x4218125a19B8C189354892D77b210A7A2f21E86C", // address
+      slippage: 1,
+      disableEstimate: false,
     );
     Tx? tx;
     if (response.isSuccess) {
       tx = Tx(
         data: response.data!.tx.data,
         from: response.data!.tx.from,
-        gas: 1000000,
+        gas: 1000000, // maxGas
         gasPrice: response.data!.tx.gasPrice,
         to: response.data!.tx.to,
         value: response.data!.tx.value,
@@ -409,8 +412,8 @@ class Utils {
       String string = String.fromCharCodes(data);
 
       try {
-        // await ethClient!.sendTransaction(
-        //   ethCredentials,
+        // await polygonClient!.sendTransaction(
+        //   polygonCredentials,
         //   Transaction(
         //     from: EthereumAddress.fromHex(tx.from),
         //     to: EthereumAddress.fromHex(tx.to),
@@ -425,6 +428,7 @@ class Utils {
         //     ),
         //     maxGas: tx.gas,
         //   ),
+        //   chainId: 137,
         // );
         print("Success transaction ");
       } catch (e) {
@@ -486,8 +490,10 @@ class Utils {
   }
 
   Future<Map<String, dynamic>> getExchangeRates(String baseCurrency) async {
-    var url = Uri.https('api.exchangerate-api.com', '/v4/latest/$baseCurrency',
-        {'q': '{https}'});
+    var url = Uri.https(
+      'api.exchangerate-api.com',
+      '/v4/latest/$baseCurrency',
+    );
 
     final response = await http.get(url);
 
