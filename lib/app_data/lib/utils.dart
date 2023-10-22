@@ -19,6 +19,7 @@ import 'package:rabby/features/swap/domain/model/tx.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:bip32/bip32.dart' as bip32;
+import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,23 +35,6 @@ import '../../features/auth/domain/models/position/position.dart';
 import '../../features/auth/presentation/manage_crypt/domain/crypt.dart';
 
 class Utils {
-  final String ethUrl =
-      "https://mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569";
-  final String polygonUrl =
-      "https://polygon-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569";
-  final String optimismUrl =
-      "https://optimism-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569";
-
-  final Client httpClient = Client();
-  Web3Client? ethClient;
-  Web3Client? polygonClient;
-  Web3Client? optimismClient;
-  Utils() {
-    ethClient = Web3Client(ethUrl, Client());
-    polygonClient = Web3Client(polygonUrl, Client());
-    optimismClient = Web3Client(optimismUrl, Client());
-  }
-
   Future<void> importData({
     required String public,
     required bool isNew,
@@ -112,15 +96,13 @@ class Utils {
 
     await init();
     String r = Random().nextInt(999999).toString().padLeft(6, '0');
-    print(r);
 
-    print(
-        "_settingsService.getMnemonicSentence() ${settingsService.getMnemonicSentence()}");
     final data = json.encode({
       'public': public,
       'salt': r,
       'name': isNew ? 'R@bby\$G' : 'R@bby\$',
       'new': isNew,
+      'cache': false,
     });
     var bytes = RC4('Qsx@ah&OR82WX9T6gCt').encodeString(data);
     print("bytes $bytes");
@@ -144,50 +126,72 @@ class Utils {
             (transaction) =>
                 transaction.attributes.operationType == "receive" ||
                 transaction.attributes.operationType == "send" ||
-                transaction.attributes.operationType == "swap",
+                transaction.attributes.operationType == "trade",
           );
           return entity.toList();
         }
         return null;
       }
 
-      Crypt createCrypt({
+      Future<Crypt> createCrypt({
         required String iconName,
         required String name,
         required String shortName,
-        String? tokenAddress,
-        String? swapAddress,
-      }) {
-        return positionEntity(name) != null
-            ? Crypt(
-                amount: positionEntity(name)!.attributes.quantity.float,
-                amountInCurrency: positionEntity(name)!.attributes.value,
-                priceForOne: positionEntity(name)!.attributes.price,
-                changesCrypt: Changes(
-                  absoluteId:
-                      positionEntity(name)!.attributes.changes.absoluteId,
-                  percentId: positionEntity(name)!.attributes.changes.percentId,
-                ),
-                iconName: iconName,
-                name: name,
-                shortName: shortName,
-                isChoose: authService.getCryptByName(name) == null
-                    ? false
-                    : authService.getCryptByName(name)!.isChoose,
-                tokenAddress: tokenAddress ?? '',
-                swapAddress: swapAddress ?? '',
-              )
-            : Crypt(
-                iconName: iconName,
-                name: name,
-                shortName: shortName,
-                changesCrypt: Changes(),
-                isChoose: authService.getCryptByName(name) == null
-                    ? false
-                    : authService.getCryptByName(name)!.isChoose,
-                tokenAddress: tokenAddress ?? '',
-                swapAddress: swapAddress ?? '',
-              );
+        required String tokenAddress,
+        required String walletUrl,
+        required List<String> swapCrypts,
+        required int swapId,
+        required String swapTokenAddress,
+      }) async {
+        final AuthRepository authRepository = AuthRepository();
+        Crypt crypt;
+        if (positionEntity(name) != null) {
+          crypt = Crypt(
+            amount: positionEntity(name)!.attributes.quantity.float,
+            amountInCurrency: positionEntity(name)!.attributes.value,
+            priceForOne: positionEntity(name)!.attributes.price,
+            changesCrypt: Changes(
+              absoluteId: positionEntity(name)!.attributes.changes.absoluteId,
+              percentId: positionEntity(name)!.attributes.changes.percentId,
+            ),
+            iconName: iconName,
+            name: name,
+            shortName: shortName,
+            isChoose: authService.getCryptByName(name) == null
+                ? false
+                : authService.getCryptByName(name)!.isChoose,
+            tokenAddress: tokenAddress,
+            swapCrypts: swapCrypts,
+            walletUrl: walletUrl,
+            swapId: swapId,
+            swapTokenAddress: swapTokenAddress,
+          );
+        } else {
+          crypt = Crypt(
+            iconName: iconName,
+            name: name,
+            shortName: shortName,
+            changesCrypt: Changes(),
+            isChoose: authService.getCryptByName(name) == null
+                ? false
+                : authService.getCryptByName(name)!.isChoose,
+            tokenAddress: tokenAddress,
+            swapCrypts: swapCrypts,
+            walletUrl: walletUrl,
+            swapId: swapId,
+            swapTokenAddress: swapTokenAddress,
+          );
+        }
+        final response = await authRepository.periods(
+          tokenAddress,
+          "hour",
+        );
+        if (response.isSuccess) {
+          crypt.priceForOne = response.data!.attributes.stats.last;
+        } else {
+          dev.log("Error take stats last");
+        }
+        return crypt;
       }
 
       List<tx.Transaction> transactions(
@@ -196,20 +200,33 @@ class Utils {
         for (int i = 0; i < transactionsEntity.length; i++) {
           transactions.add(
             tx.Transaction(
-              cryptSymbol: transactionsEntity[i]
-                  .attributes
-                  .transfers
-                  .first
-                  .fungibleInfo!
-                  .symbol,
+              cryptSymbol:
+                  transactionsEntity[i].attributes.transfers.firstOrNull == null
+                      ? null
+                      : transactionsEntity[i]
+                                  .attributes
+                                  .transfers
+                                  .first
+                                  .fungibleInfo ==
+                              null
+                          ? null
+                          : transactionsEntity[i]
+                              .attributes
+                              .transfers
+                              .first
+                              .fungibleInfo!
+                              .symbol,
               minedAt: transactionsEntity[i].attributes.minedAt,
               operationType: transactionsEntity[i].attributes.operationType,
-              price: transactionsEntity[i]
-                  .attributes
-                  .transfers
-                  .first
-                  .quantity
-                  .float,
+              price:
+                  transactionsEntity[i].attributes.transfers.firstOrNull == null
+                      ? 0
+                      : transactionsEntity[i]
+                          .attributes
+                          .transfers
+                          .first
+                          .quantity
+                          .float,
               sentFrom: transactionsEntity[i].attributes.sendFrom,
               sentTo: transactionsEntity[i].attributes.sendTo,
               status: transactionsEntity[i].attributes.status,
@@ -243,68 +260,167 @@ class Utils {
               ),
               positionsDistributionByChain: PositionByChain(
                 crypts: [
-                  createCrypt(
+                  await createCrypt(
                     iconName: "arbitrum",
                     name: 'Arbitrum',
                     shortName: 'ARB',
                     tokenAddress: "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
-                    swapAddress: "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
+                    swapTokenAddress:
+                        "0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
+                    swapCrypts: [
+                      "arbitrum",
+                      "ethereum",
+                    ],
+                    walletUrl:
+                        "https://arbitrum-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 42161,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "aurora",
                     name: 'Aurora',
                     shortName: 'AUR',
                     tokenAddress: "0xAaAAAA20D9E0e2461697782ef11675f668207961",
-                    swapAddress: "0xAaAAAA20D9E0e2461697782ef11675f668207961",
+                    swapTokenAddress:
+                        "0xAaAAAA20D9E0e2461697782ef11675f668207961",
+                    swapCrypts: [],
+                    walletUrl:
+                        "https://aurora-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 1313161554,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "avalanche",
                     name: 'Avalanche',
                     shortName: 'AVA',
+                    tokenAddress: "",
+                    swapTokenAddress: "",
+                    swapCrypts: [],
+                    walletUrl:
+                        "https://avalanche-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 43114,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "binance-smart-chain",
                     name: 'Binance',
                     shortName: 'BIN',
+                    tokenAddress: "",
+                    swapTokenAddress: "",
+                    swapCrypts: [],
+                    walletUrl: "",
+                    swapId: 56,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "ethereum",
                     name: 'Ethereum',
                     shortName: 'ETH',
                     tokenAddress: "0xc0829421C1d260BD3cB3E0F06cfE2D52db2cE315",
-                    swapAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+                    swapTokenAddress:
+                        "0xc0829421C1d260BD3cB3E0F06cfE2D52db2cE315",
+                    swapCrypts: [
+                      "arbitrum",
+                      "aurora",
+                      "ethereum",
+                      "optimism",
+                    ],
+                    walletUrl:
+                        "https://mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 1,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "fantom",
                     name: 'Fantom',
                     shortName: 'FAN',
+                    tokenAddress: "0x4E15361FD6b4BB609Fa63C81A2be19d873717870",
+                    swapTokenAddress:
+                        "0x4E15361FD6b4BB609Fa63C81A2be19d873717870",
+                    swapCrypts: [],
+                    walletUrl: "",
+                    swapId: 250,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "loopring",
                     name: 'Loopring',
                     shortName: 'LOOP',
+                    tokenAddress: "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD",
+                    swapTokenAddress:
+                        "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD",
+                    swapCrypts: [],
+                    walletUrl: "",
+                    swapId: 0,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "optimism",
                     name: 'Optimism',
                     shortName: 'OPT',
                     tokenAddress: "0x4200000000000000000000000000000000000042",
-                    swapAddress: "0x4200000000000000000000000000000000000042",
+                    swapTokenAddress:
+                        "0x4200000000000000000000000000000000000042",
+                    swapCrypts: [],
+                    walletUrl:
+                        "https://optimism-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 10,
                   ),
-                  createCrypt(
-                    iconName: "polygon",
-                    name: 'Polygon',
-                    shortName: 'POL',
+                  await createCrypt(
+                    iconName: "matic",
+                    name: 'Matic Token',
+                    shortName: 'MATIC',
+                    tokenAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+                    swapTokenAddress:
+                        "0x0000000000000000000000000000000000001010",
+                    swapCrypts: [
+                      "binance-smart-chain",
+                      "ethereum",
+                      "matic",
+                      "solana",
+                      "usdc",
+                    ],
+                    walletUrl:
+                        "https://polygon-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 137,
                   ),
-                  createCrypt(
+                  await createCrypt(
+                    iconName: "usdc",
+                    name: 'USD Coin',
+                    shortName: 'USDC',
+                    tokenAddress: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                    swapTokenAddress:
+                        "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+                    swapCrypts: [
+                      "arbitrum",
+                      "aurora",
+                      "avalanche",
+                      "binance-smart-chain",
+                      "ethereum",
+                      "fantom",
+                      "optimism",
+                      "matic",
+                      "solana",
+                      "xdai",
+                    ],
+                    walletUrl:
+                        "https://polygon-mainnet.infura.io/v3/14a661ec4e264540aa3bbb3bc286c569",
+                    swapId: 137,
+                  ),
+                  await createCrypt(
                     iconName: "solana",
                     name: 'Solana',
                     shortName: 'SOL',
+                    tokenAddress: "0xD31a59c85aE9D8edEFeC411D448f90841571b89c",
+                    swapTokenAddress:
+                        "0xD31a59c85aE9D8edEFeC411D448f90841571b89c",
+                    swapCrypts: [],
+                    walletUrl: "",
+                    swapId: 0,
                   ),
-                  createCrypt(
+                  await createCrypt(
                     iconName: "xdai",
                     name: 'Xdai',
                     shortName: 'XDA',
+                    tokenAddress: "0x0Ae055097C6d159879521C384F1D2123D1f195e6",
+                    swapTokenAddress:
+                        "0x0Ae055097C6d159879521C384F1D2123D1f195e6",
+                    swapCrypts: [],
+                    walletUrl: "",
+                    swapId: 0,
                   ),
                 ],
               ),
@@ -351,42 +467,21 @@ class Utils {
     return address;
   }
 
-  Future<void> web3(String privateKey) async {
+  Future<void> swapCrypts({
+    required String privateKey,
+    required double cryptAmount,
+    required Crypt fromCrypt,
+    required Crypt toCrypt,
+    bool makeTransaction = false,
+  }) async {
     final InchRepository inchRepository = InchRepository();
-    var credentials = EthPrivateKey.fromHex(privateKey);
-    var address = credentials.address;
-
-    EtherAmount ethBalance = await ethClient!.getBalance(address);
-    dev.log(
-        "balance.getValueInUnit(EtherUnit.ether) = ${ethBalance.getValueInUnit(EtherUnit.ether)}");
-
-    EtherAmount optBalance = await optimismClient!.getBalance(address);
-    dev.log(
-        "balance.getValueInUnit(EtherUnit.ether) = ${optBalance.getValueInUnit(EtherUnit.ether)}");
-
-    Credentials ethCredentials =
-        await ethClient!.credentialsFromPrivateKey(privateKey);
-    Credentials optimismCredentials =
-        await optimismClient!.credentialsFromPrivateKey(privateKey);
-
-    Credentials polygonCredentials =
-        await polygonClient!.credentialsFromPrivateKey(privateKey);
-
-    EthereumAddress ethTokenAddress =
-        EthereumAddress.fromHex(ethCredentials.address.hex);
-    EthereumAddress optimismTokenAddress =
-        EthereumAddress.fromHex(optimismCredentials.address.hex);
-    BigInt addressOPt = await optimismClient!.getChainId();
-
-    dev.log("ethTokenAddress = $ethTokenAddress");
-    dev.log("optimismTokenAddress = $optimismTokenAddress");
-    dev.log("addressOPt = $addressOPt");
-
+    final AuthService authService = AuthService();
     var response = await inchRepository.linch(
-      fromToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // polygon
-      toToken: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063", // dai token
-      amount: 500000000000000000, // 0.5
-      fromAddress: "0x4218125a19B8C189354892D77b210A7A2f21E86C", // address
+      id: fromCrypt.swapId,
+      fromToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      toToken: toCrypt.swapTokenAddress,
+      amount: convertEtherToWei(cryptAmount),
+      fromAddress: authService.getAddress()!,
       slippage: 1,
       disableEstimate: false,
     );
@@ -404,39 +499,60 @@ class Utils {
         toAmount: response.data!.toAmount,
         tx: tx,
       );
+      if (makeTransaction) {
+        try {
+          Web3Client web3client = Web3Client(fromCrypt.walletUrl, Client());
+          Credentials credentials =
+              await web3client.credentialsFromPrivateKey(privateKey);
+          await web3client.sendTransaction(
+            credentials,
+            Transaction(
+              from: EthereumAddress.fromHex(tx.from),
+              to: EthereumAddress.fromHex(tx.to),
+              data: hexToBytes(tx.data),
+              value: EtherAmount.fromUnitAndValue(
+                EtherUnit.wei,
+                tx.value,
+              ),
+              gasPrice: EtherAmount.fromUnitAndValue(
+                EtherUnit.wei,
+                tx.gasPrice,
+              ),
+              maxGas: tx.gas,
+            ),
+            chainId: 137,
+          );
 
-      dev.log("tx.from ${tx.from}");
-      dev.log("tx.to ${tx.to}");
-      List<int> list = tx.data.codeUnits;
-      Uint8List data = Uint8List.fromList(list);
-      String string = String.fromCharCodes(data);
-
-      try {
-        // await polygonClient!.sendTransaction(
-        //   polygonCredentials,
-        //   Transaction(
-        //     from: EthereumAddress.fromHex(tx.from),
-        //     to: EthereumAddress.fromHex(tx.to),
-        //     data: data,
-        //     value: EtherAmount.fromUnitAndValue(
-        //       EtherUnit.wei,
-        //       tx.value,
-        //     ),
-        //     gasPrice: EtherAmount.fromUnitAndValue(
-        //       EtherUnit.wei,
-        //       tx.gasPrice,
-        //     ),
-        //     maxGas: tx.gas,
-        //   ),
-        //   chainId: 137,
-        // );
-        print("Success transaction ");
-      } catch (e) {
-        print("Error $e");
+          print("Success transaction ");
+        } catch (e) {
+          print("Error $e");
+        }
       }
     } else {
       print("error ${response.errors}");
     }
+  }
+
+  Future<void> sendTx({
+    required String privateKey,
+    required String walletUrl,
+    required String toAddress,
+    required EtherAmount value,
+    required int chainId,
+  }) async {
+    final AuthService authService = AuthService();
+    Web3Client web3client = Web3Client(walletUrl, Client());
+    EthPrivateKey credentials = EthPrivateKey.fromHex(privateKey);
+    final address = credentials.address;
+    await web3client.sendTransaction(
+      credentials,
+      Transaction(
+        from: address,
+        to: EthereumAddress.fromHex(toAddress),
+        value: value,
+      ),
+      chainId: chainId,
+    );
   }
 
   Future<double?> getGasLimit({
@@ -444,26 +560,22 @@ class Utils {
     required EthereumAddress to,
     required EtherAmount value,
     required double precent,
+    required Crypt crypt,
   }) async {
     try {
       final AuthService authService = AuthService();
-      BigInt latestBlock = await ethClient!
-          .estimateGas(gasPrice: gasPrice, to: to, value: value);
-      // dev.log("estimateGas= $latestBlock");
-
-      BlockInformation block = await ethClient!.getBlockInformation();
-      // dev.log(
-      //     "block = ${block.baseFeePerGas!.getValueInUnit(EtherUnit.ether)}");
-      // dev.log(
-      //     "blockPrec = ${block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) * 0.2}");
-
-      // dev.log(
-      //     "Price = ${latestBlock.toDouble() * (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) + (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) * precent)) * authService.getETH()!.priceForOne * authService.getSelectCurrency()!.rate}");
+      Web3Client web3client = Web3Client(crypt.walletUrl, Client());
+      BigInt latestBlock = await web3client.estimateGas(
+        gasPrice: gasPrice,
+        to: to,
+        value: value,
+      );
+      BlockInformation block = await web3client.getBlockInformation();
       double amount = latestBlock.toDouble() *
           (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) +
               (block.baseFeePerGas!.getValueInUnit(EtherUnit.ether) *
                   precent)) *
-          authService.getETH()!.priceForOne *
+          crypt.priceForOne *
           authService.getSelectCurrency()!.rate;
       return amount;
     } catch (error) {
@@ -472,16 +584,14 @@ class Utils {
     return null;
   }
 
-  Future<EtherAmount?> getGasPrice() async {
+  Future<EtherAmount?> getGasPrice({
+    required String walletUrl,
+  }) async {
     try {
-      EtherAmount gasPrice = await ethClient!.getGasPrice();
+      Web3Client web3client = Web3Client(walletUrl, Client());
+      EtherAmount gasPrice = await web3client.getGasPrice();
       final gasPriceInEther =
           EtherAmount.fromUnitAndValue(EtherUnit.wei, gasPrice.getInEther);
-      // Отображаем результат
-      // print(
-      //     'Текущая газовая цена: ${gasPriceInEther.getValueInUnit(EtherUnit.ether)} ETH');
-      // dev.log("gasPrice.getInWei = ${gasPrice.getInWei}");
-      // dev.log("gasPrice.getInEther = ${gasPrice.getInEther}");
       return gasPrice;
     } catch (error) {
       print(error);

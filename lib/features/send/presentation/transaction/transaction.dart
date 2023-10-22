@@ -7,10 +7,10 @@ import '../../../auth/widgets/main_button.dart';
 import 'transaction_bloc.dart';
 
 class TransactionWidget extends StatefulWidget {
-  final String address;
+  final List<String> extra;
   const TransactionWidget({
     super.key,
-    required this.address,
+    required this.extra,
   });
 
   @override
@@ -184,7 +184,7 @@ class _TransactionWidgetState extends TransactionBloc {
                             suffix: Text(
                               amountCtrl.text.isEmpty
                                   ? ""
-                                  : "${AppData.utils.doubleToSixValues((double.parse(amountCtrl.text) / authService.getSelectCurrency()!.rate) / authService.getETH()!.priceForOne)} ${authService.getETH()!.shortName}",
+                                  : "${AppData.utils.doubleToSixValues((double.parse(amountCtrl.text) / authService.getSelectCurrency()!.rate) / mainCrypt!.priceForOne)} ${mainCrypt!.shortName}",
                               style: TextStyle(
                                 color: AppData.colors.middlePurple
                                     .withOpacity(0.8),

@@ -25,7 +25,13 @@ class Crypt {
   @HiveField(8)
   String tokenAddress;
   @HiveField(9)
-  String? swapAddress;
+  final List<String> swapCrypts;
+  @HiveField(10)
+  final String walletUrl;
+  @HiveField(11)
+  final int swapId;
+  @HiveField(12)
+  String swapTokenAddress;
 
   Crypt({
     this.amount = 0,
@@ -37,6 +43,9 @@ class Crypt {
     required this.shortName,
     this.isChoose = false,
     required this.tokenAddress,
-    required this.swapAddress,
+    required this.swapCrypts,
+    required this.walletUrl,
+    required this.swapId,
+    required this.swapTokenAddress,
   });
 }

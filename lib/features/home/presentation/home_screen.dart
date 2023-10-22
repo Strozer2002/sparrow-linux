@@ -5,6 +5,7 @@ import 'package:rabby/features/home/domain/wallet_type_enum.dart';
 import 'package:rabby/features/home/widget/crypt_tab.dart';
 import 'package:rabby/features/home/widget/home_button.dart';
 import 'package:rabby/features/home/widget/receive_modal.dart';
+import 'package:rabby/features/home/widget/send_modal.dart';
 import 'package:rabby/features/widgets/home_bottom.dart';
 import 'package:rabby/features/widgets/icon_button.dart';
 import 'package:reactive_variables/reactive_variables.dart';
@@ -180,11 +181,11 @@ class _HomeScreenState extends HomeBloc {
                       borderRadiusGeometry: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                       ),
-                      onTap: () => context.push(AppData.routes.sendScreen),
+                      onTap: () => showSendBottomDialog(),
                     ),
                     CryptTab(
                       onTap: () => showReceiveBottomDialog(),
-                      selectWallet: WalletTypeEnum.resive,
+                      selectWallet: WalletTypeEnum.receive,
                       icon: AppData.assets.svg.recive,
                       text: "Receive",
                       selectedWalletType: selectedWalletType,
@@ -340,6 +341,54 @@ class _HomeScreenState extends HomeBloc {
         });
   }
 
+  Future<dynamic> showSendBottomDialog() {
+    return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: AppData.colors.nightBgColor,
+        isDismissible: true,
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    width: 32,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppData.colors.middlePurple.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(
+                        5,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => context.pop(),
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      const Text(
+                        'Choose a crypto to send',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  SendShowModal(crypts: crypts),
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   Widget get activityBody {
     return Container(
       width: double.infinity,
@@ -386,9 +435,9 @@ class _HomeScreenState extends HomeBloc {
                             operationType(
                               transaction:
                                   authService.getTransactions()![index],
-                              send: AppData.assets.svg.vector,
-                              receive: AppData.assets.svg.recive,
-                              swap: const Icon(Icons.swap_vert),
+                              send: AppData.assets.svg.send(),
+                              receive: AppData.assets.svg.receive(),
+                              swap: AppData.assets.svg.swap(),
                             ),
                             const SizedBox(width: 16),
                             Column(
@@ -439,7 +488,7 @@ class _HomeScreenState extends HomeBloc {
                                 receive:
                                     "+${AppData.utils.doubleToFourthValues(authService.getTransactions()![index].price)} ${authService.getTransactions()![index].cryptSymbol}",
                                 swap:
-                                    "-${AppData.utils.doubleToFourthValues(authService.getTransactions()![index].price)} ${authService.getTransactions()![index].cryptSymbol}",
+                                    "+${AppData.utils.doubleToFourthValues(authService.getTransactions()![index].price)} ${authService.getTransactions()![index].cryptSymbol}",
                               ),
                             ),
                             Text(
@@ -476,18 +525,21 @@ class _HomeScreenState extends HomeBloc {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            topImage,
-            const SizedBox(height: 27),
-            Obs(
-              rvList: [selectedScreen],
-              builder: () => body(selectedScreen.value),
-            ),
-            const SizedBox(height: 27),
-          ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              topImage,
+              const SizedBox(height: 27),
+              Obs(
+                rvList: [selectedScreen],
+                builder: () => body(selectedScreen.value),
+              ),
+              const SizedBox(height: 27),
+            ],
+          ),
         ),
       ),
     );

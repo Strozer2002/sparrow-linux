@@ -38,6 +38,7 @@ class Svg {
   SvgPicture get pen => SvgPicture.asset(_name('icons/pen'));
   SvgPicture get phrase => SvgPicture.asset(_name('icons/phrase'));
   SvgPicture get key => SvgPicture.asset(_name('icons/key'));
+
   // bottom nav bar
   SvgPicture get clearAll => SvgPicture.asset(_name('icons/clearAll'));
   SvgPicture settings({
@@ -55,6 +56,34 @@ class Svg {
   }) =>
       SvgPicture.asset(
         _name('icons/wallet'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
+
+  SvgPicture swap({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/swap'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
+  SvgPicture send({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/send'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
+  SvgPicture receive({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/receive'),
         colorFilter: _getColorFilterFromColor(color),
         width: size,
       );

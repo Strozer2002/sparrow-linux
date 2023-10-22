@@ -7,7 +7,11 @@ import '../../../auth/widgets/main_button.dart';
 import 'send_bloc.dart';
 
 class SendAddressScreen extends StatefulWidget {
-  const SendAddressScreen({super.key});
+  final String crypt;
+  const SendAddressScreen({
+    super.key,
+    required this.crypt,
+  });
 
   @override
   State<SendAddressScreen> createState() => _SendAddressScreenState();
@@ -52,7 +56,10 @@ class _SendAddressScreenState extends SendBloc {
               ]),
         onPressed: addressCtrl.text.isEmpty
             ? null
-            : () => context.go(AppData.routes.transactionScreen , extra: addressCtrl.text),
+            : () => context.push(
+                  AppData.routes.transactionScreen,
+                  extra: [addressCtrl.text, widget.crypt],
+                ),
         child: const Text(
           "Preview transaction",
           style: TextStyle(color: Colors.white),

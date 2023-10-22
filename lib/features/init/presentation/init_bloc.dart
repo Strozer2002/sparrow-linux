@@ -63,7 +63,6 @@ abstract class InitBloc extends State<InitPage>
         public: _settingsService.getPrivateKey()!,
         isNew: false,
       );
-      await AppData.utils.web3(_settingsService.getPrivateKey()!);
     }
 
     relocate();

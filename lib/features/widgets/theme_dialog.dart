@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/app_data/app_data.dart';
@@ -30,7 +31,7 @@ class _ThemeDialogWidgetState extends State<ThemeDialogWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Light"),
+                Text("light".tr()),
                 Checkbox(
                   value: settingsService.getTheme() == true,
                   onChanged: (value) => setState(() {
@@ -47,7 +48,7 @@ class _ThemeDialogWidgetState extends State<ThemeDialogWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Dark"),
+                Text("dark".tr()),
                 Checkbox(
                   value: settingsService.getTheme() == false,
                   onChanged: (value) => setState(() {

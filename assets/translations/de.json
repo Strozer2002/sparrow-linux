@@ -1,0 +1,20 @@
+{
+	"app_auto-lock": "Automatische App-Sperre",
+	"auto-lock_timer": "Automatischer Sperrtimer",
+	"change_passcode": "Kennwort ändern",
+	"dark": "Dunkel",
+	"default_currency": "Standardwährung",
+	"general": "Allgemein",
+	"hours": "Std",
+	"language": "Sprache",
+	"light": "Licht",
+	"lock_now": "Jetzt sperren",
+	"minutes": "Protokoll",
+	"protection": "Schutz",
+	"reset_app": "App zurücksetzen",
+	"scan_qr": "QR scannen",
+	"security": "Sicherheit",
+	"settings": "Einstellungen",
+	"theme": "Thema",
+	"touch_id": "Berührungsidentifikation"
+}

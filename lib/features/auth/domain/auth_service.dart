@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:rabby/features/auth/domain/adapters/changes.dart';
 import 'package:rabby/features/auth/domain/adapters/position_by_chain.dart';
 import 'package:rabby/features/auth/domain/adapters/transaction.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
@@ -104,10 +107,29 @@ class AuthService {
     return null;
   }
 
+  List<Crypt> getCryptsByCryptsName(List<String> cryptsName) {
+    User? user = getUser();
+    if (user != null) {
+      List<Crypt> mainList = [];
+      for (int i = 0; cryptsName.length > i; i++) {
+        Crypt crypt = user
+            .portfolio.attributes.positionsDistributionByChain.crypts
+            .firstWhere(
+          (crypt) => crypt.iconName == cryptsName[i],
+        );
+        mainList.add(crypt);
+      }
+      log("mainList $mainList");
+      return mainList;
+    }
+    return [];
+  }
+
   Crypt? getETH() {
     User? user = getUser();
     if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByChain.crypts.firstWhere((eth) => eth.name == "Ethereum");
+      return user.portfolio.attributes.positionsDistributionByChain.crypts
+          .firstWhere((eth) => eth.name == "Ethereum");
     }
     return null;
   }

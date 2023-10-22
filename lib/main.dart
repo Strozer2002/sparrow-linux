@@ -69,6 +69,21 @@ Future<void> main() async {
           title: 'Русский',
           translatedTitle: () => 'russian'.tr(),
         ),
+        AppLocale(
+          langCode: 'de',
+          title: 'Deutsche',
+          translatedTitle: () => 'deutsche'.tr(),
+        ),
+        AppLocale(
+          langCode: 'ja',
+          title: 'Japanese',
+          translatedTitle: () => 'japanese'.tr(),
+        ),
+        AppLocale(
+          langCode: 'zh',
+          title: 'Chinese',
+          translatedTitle: () => 'chinese'.tr(),
+        ),
       ],
       fallbackLocale: AppLocale(
         langCode: 'en',
@@ -107,6 +122,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    final SettingsService settingsService = SettingsService();
     super.didChangeAppLifecycleState(state);
     // Обработка изменений состояния жизненного цикла приложения
 
@@ -114,7 +130,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         print("resume");
         // Приложение в фокусе
-        AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
+        settingsService.relocate();
         break;
       case AppLifecycleState.inactive:
 

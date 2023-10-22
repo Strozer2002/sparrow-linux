@@ -6,6 +6,7 @@ import 'package:rabby/features/auth/presentation/created_success/created_success
 import 'package:rabby/features/auth/presentation/import_address/import_adress.dart';
 import 'package:rabby/features/auth/presentation/import_key/import_key.dart';
 import 'package:rabby/features/auth/presentation/import_seed_phrase/import_seed_phrase.dart';
+import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/manage_crypt.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/select_import/select_import.dart';
@@ -19,6 +20,8 @@ import 'package:rabby/features/send/presentation/send_address/send_address.dart'
 import 'package:rabby/features/send/presentation/success_transaction/succes_transaction.dart';
 import 'package:rabby/features/send/presentation/transaction/transaction.dart';
 import 'package:rabby/features/settings/presentation/settings_screen.dart';
+import 'package:rabby/features/swap/presentation/swap_screen.dart';
+import 'package:rabby/features/widgets/qr_scanner.dart';
 
 import '../../core/navigator_observer.dart';
 import '../app_data.dart';
@@ -90,6 +93,12 @@ class RoutesList {
   String get _settingsScreenName => 'settingsScreen';
   String get settingsScreen => '$init$_settingsScreenName';
 
+  String get _manageCryptScreenName => 'manageCryptScreen';
+  String get manageCryptScreen => '$init$_manageCryptScreenName';
+
+  String get _swapScreenName => 'swapScreen';
+  String get swapScreen => '$init$_swapScreenName';
+
   String get _sendScreenName => 'sendScreen';
   String get sendScreen => '$homeScreen/$_sendScreenName';
 
@@ -104,11 +113,11 @@ class RoutesList {
   String get codeTransactionScreen =>
       '$confirmTransactionScreen/$_codeTransactionScreenName';
 
-  String get _manageCryptScreenName => 'manageCryptScreen';
-  String get manageCryptScreen => '$init$_manageCryptScreenName';
-
   String get _newPassScreenName => 'newPassScreen';
   String get newPassScreen => '$settingsScreen/$_newPassScreenName';
+
+  String get _qrScanScreenName => 'qrScanScreen';
+  String get qrScanScreen => '$settingsScreen/$_qrScanScreenName';
 }
 
 class Routes {
@@ -325,14 +334,16 @@ class Routes {
                   GoRoute(
                     path: AppData.routes._sendScreenName,
                     builder: (BuildContext context, GoRouterState state) {
-                      return const SendAddressScreen();
+                      return SendAddressScreen(
+                        crypt: state.extra as String,
+                      );
                     },
                     routes: [
                       GoRoute(
                         path: AppData.routes._transactionScreenName,
                         builder: (BuildContext context, GoRouterState state) {
                           return TransactionWidget(
-                            address: state.extra as String,
+                            extra: state.extra as List<String>,
                           );
                         },
                         routes: [
@@ -370,6 +381,13 @@ class Routes {
                 routes: const [],
               ),
               GoRoute(
+                path: AppData.routes._swapScreenName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SwapScreen();
+                },
+                routes: const [],
+              ),
+              GoRoute(
                 path: AppData.routes._settingsScreenName,
                 builder: (BuildContext context, GoRouterState state) {
                   return const SettingsScreen();
@@ -381,6 +399,13 @@ class Routes {
                       return SetCodeScreen(
                         changePassword: state.extra as bool,
                       );
+                    },
+                    routes: const [],
+                  ),
+                  GoRoute(
+                    path: AppData.routes._qrScanScreenName,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const QRViewExample();
                     },
                     routes: const [],
                   ),

@@ -146,7 +146,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                             );
                           });
                     },
-                    selectWallet: WalletTypeEnum.resive,
+                    selectWallet: WalletTypeEnum.receive,
                     icon: AppData.assets.svg.recive,
                     text: "Resive",
                     selectedWalletType: widget.selectedWalletType,

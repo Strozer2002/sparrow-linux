@@ -1,11 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/localization/domain/localization_extension.dart';
 import 'package:rabby/features/widgets/duartion.dart';
+import 'package:rabby/features/widgets/localization_dialog.dart';
 
 import '../../../app_data/app_data.dart';
 import '../../protection/widget/protection_sheet.dart';
 import '../../widgets/currency_dialog.dart';
+import '../../widgets/notofication_dialog.dart';
 import '../../widgets/theme_dialog.dart';
 import 'settings_bloc.dart';
 
@@ -19,7 +23,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends SettingsBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text("Settings"),
+      title: Text("settings".tr()),
       leading: IconButton(
         onPressed: () {
           context.go(AppData.routes.homeScreen);
@@ -62,38 +66,38 @@ class _SettingsScreenState extends SettingsBloc {
       child: Column(
         children: [
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.key),
-                SizedBox(width: 12),
-                Text("Lock now"),
+                const Icon(Icons.key),
+                const SizedBox(width: 12),
+                Text("lock_now".tr()),
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
             onTap: () => settingsService.relocateChild(),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.qr_code_scanner),
-                SizedBox(width: 12),
-                Text("Scan QR"),
+                const Icon(Icons.qr_code_scanner),
+                const SizedBox(width: 12),
+                Text("scan_qr".tr()),
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            onTap: () => context.push(AppData.routes.qrScanScreen),
           ),
-          settingField(
-            leftPart: const Row(
-              children: [
-                Icon(Icons.link),
-                SizedBox(width: 12),
-                Text("Connected Sites"),
-              ],
-            ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
-          ),
+          // settingField(
+          //   leftPart: const Row(
+          //     children: [
+          //       Icon(Icons.link),
+          //       SizedBox(width: 12),
+          //       Text("Connected Sites"),
+          //     ],
+          //   ),
+          //   rightPart: AppData.assets.svg.chevron,
+          //   onTap: () {},
+          // ),
         ],
       ),
     );
@@ -108,28 +112,28 @@ class _SettingsScreenState extends SettingsBloc {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Column(
         children: [
+          // settingField(
+          //   leftPart: const Row(
+          //     children: [
+          //       Icon(Icons.key),
+          //       SizedBox(width: 12),
+          //       Text("RPC Node"),
+          //     ],
+          //   ),
+          //   rightPart: AppData.assets.svg.chevron,
+          //   onTap: () {},
+          // ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.key),
-                SizedBox(width: 12),
-                Text("RPC Node"),
-              ],
-            ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
-          ),
-          settingField(
-            leftPart: const Row(
-              children: [
-                Icon(Icons.wb_sunny),
-                SizedBox(width: 12),
-                Text("Theme"),
+                const Icon(Icons.wb_sunny),
+                const SizedBox(width: 12),
+                Text("theme".tr()),
               ],
             ),
             rightPart: Row(
               children: [
-                Text(settingsService.getTheme()! ? "Light" : "Dark"),
+                Text(settingsService.getTheme()! ? "light".tr() : "dark".tr()),
                 const SizedBox(width: 8),
                 AppData.assets.svg.chevron,
               ],
@@ -137,22 +141,27 @@ class _SettingsScreenState extends SettingsBloc {
             onTap: () => showThemeDialog(context),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.translate),
-                SizedBox(width: 12),
-                Text("Language"),
+                const Icon(Icons.translate),
+                const SizedBox(width: 12),
+                Text("language".tr()),
               ],
             ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
+            rightPart: Row(
+              children: [
+                Text(context.appLocale.title),
+                AppData.assets.svg.chevron,
+              ],
+            ),
+            onTap: () => showLocalizationDialog(context),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.attach_money),
-                SizedBox(width: 12),
-                Text("Default Currency"),
+                const Icon(Icons.attach_money),
+                const SizedBox(width: 12),
+                Text("default_currency".tr()),
               ],
             ),
             rightPart: Row(
@@ -164,17 +173,17 @@ class _SettingsScreenState extends SettingsBloc {
             ),
             onTap: () => showCurrencyDialog(context),
           ),
-          settingField(
-            leftPart: const Row(
-              children: [
-                Icon(Icons.volume_down),
-                SizedBox(width: 12),
-                Text("Sound & Vibration"),
-              ],
-            ),
-            rightPart: AppData.assets.svg.chevron,
-            onTap: () {},
-          ),
+          // settingField(
+          //   leftPart: const Row(
+          //     children: [
+          //       Icon(Icons.volume_down),
+          //       SizedBox(width: 12),
+          //       Text("Sound & Vibration"),
+          //     ],
+          //   ),
+          //   rightPart: AppData.assets.svg.chevron,
+          //   onTap: () {},
+          // ),
         ],
       ),
     );
@@ -190,11 +199,11 @@ class _SettingsScreenState extends SettingsBloc {
       child: Column(
         children: [
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.pin_outlined),
-                SizedBox(width: 12),
-                Text("Change Passcode"),
+                const Icon(Icons.pin_outlined),
+                const SizedBox(width: 12),
+                Text("change_passcode".tr()),
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
@@ -202,63 +211,79 @@ class _SettingsScreenState extends SettingsBloc {
                 context.push(AppData.routes.newPassScreen, extra: true),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.touch_app_outlined),
-                SizedBox(width: 12),
-                Text("Touch ID"),
+                const Icon(Icons.touch_app_outlined),
+                const SizedBox(width: 12),
+                Text("touch_id".tr()),
               ],
             ),
-            rightPart: Switch(
-              value: settingsService.getTouchId()!,
-              onChanged: (value) {
-                setState(() {
-                  settingsService.putTouchId(value);
-                });
-              },
-              activeColor: Colors.white,
-              inactiveThumbColor: AppData.colors.middlePurple.withOpacity(0.5),
-              activeTrackColor: AppData.colors.middlePurple,
-              inactiveTrackColor: AppData.colors.middlePurple.withOpacity(0.2),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            rightPart: SizedBox(
+              height: 32,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Switch(
+                  value: settingsService.getTouchId()!,
+                  onChanged: (value) {
+                    setState(() {
+                      settingsService.putTouchId(value);
+                    });
+                  },
+                  activeColor: Colors.white,
+                  inactiveThumbColor:
+                      AppData.colors.middlePurple.withOpacity(0.5),
+                  activeTrackColor: AppData.colors.middlePurple,
+                  inactiveTrackColor:
+                      AppData.colors.middlePurple.withOpacity(0.2),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+              ),
             ),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.lock_reset_outlined),
-                SizedBox(width: 12),
-                Text("App Auto-lock"),
+                const Icon(Icons.lock_reset_outlined),
+                const SizedBox(width: 12),
+                Text("app_auto-lock".tr()),
               ],
             ),
-            rightPart: Switch(
-              value: settingsService.getAutoLock()!,
-              onChanged: (value) {
-                setState(() {
-                  settingsService.putAutoLock(value);
-                });
-              },
-              activeColor: Colors.white,
-              inactiveThumbColor: AppData.colors.middlePurple.withOpacity(0.5),
-              activeTrackColor: AppData.colors.middlePurple,
-              inactiveTrackColor: AppData.colors.middlePurple.withOpacity(0.2),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            rightPart: SizedBox(
+              height: 32,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Switch(
+                  value: settingsService.getAutoLock()!,
+                  onChanged: (value) {
+                    setState(() {
+                      settingsService.putAutoLock(value);
+                    });
+                  },
+                  activeColor: Colors.white,
+                  inactiveThumbColor:
+                      AppData.colors.middlePurple.withOpacity(0.5),
+                  activeTrackColor: AppData.colors.middlePurple,
+                  inactiveTrackColor:
+                      AppData.colors.middlePurple.withOpacity(0.2),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+              ),
             ),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.timelapse_rounded),
-                SizedBox(width: 12),
-                Text("Auto-Lock Timer"),
+                const Icon(Icons.timelapse_rounded),
+                const SizedBox(width: 12),
+                Text("auto-lock_timer".tr()),
               ],
             ),
             rightPart: Row(
               children: [
                 Text(
                   settingsService.getDuration()! > 59
-                      ? "${settingsService.getDuration()! ~/ 60} Hours"
-                      : "${settingsService.getDuration()} Minutes",
+                      ? "${settingsService.getDuration()! ~/ 60} ${"hours".tr()}"
+                      : "${settingsService.getDuration()} ${"minutes".tr()}",
                   style: TextStyle(
                     color: AppData.colors.middlePurple,
                   ),
@@ -270,22 +295,22 @@ class _SettingsScreenState extends SettingsBloc {
             onTap: () => showAutoLockDialog(context),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.security),
-                SizedBox(width: 12),
-                Text("Protection"),
+                const Icon(Icons.security),
+                const SizedBox(width: 12),
+                Text("protection".tr()),
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
             onTap: () => showProtectionDialog(context),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.restart_alt),
-                SizedBox(width: 12),
-                Text("Reset App"),
+                const Icon(Icons.restart_alt),
+                const SizedBox(width: 12),
+                Text("reset_app".tr()),
               ],
             ),
             rightPart: AppData.assets.svg.chevron,
@@ -314,7 +339,7 @@ class _SettingsScreenState extends SettingsBloc {
           ],
         ),
         rightPart: AppData.assets.svg.chevron,
-        onTap: () => settingsService.relocate(),
+        onTap: () => showNotificationDialog(context),
       ),
     );
   }
@@ -426,7 +451,7 @@ class _SettingsScreenState extends SettingsBloc {
                           },
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        const Text("Default Currency"),
+                        Text("default_currency".tr()),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -526,7 +551,7 @@ class _SettingsScreenState extends SettingsBloc {
                           },
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        const Text("Auto-Lock Timer"),
+                        Text("theme".tr()),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -581,6 +606,106 @@ class _SettingsScreenState extends SettingsBloc {
                     ),
                     const SizedBox(height: 30),
                     const ProtectionSheetWidget(),
+                    const SizedBox(height: 20),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+
+    if (result == null) {
+      setState(() {});
+    }
+  }
+
+  Future<dynamic> showNotificationDialog(BuildContext context) async {
+    final result = await showModalBottomSheet(
+        context: context,
+        backgroundColor: AppData.colors.nightBgColor,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppData.colors.middlePurple.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        const Text("Notification"),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const NotificationDialogWidget(),
+                    const SizedBox(height: 20),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+
+    if (result == null) {
+      setState(() {});
+    }
+  }
+
+  Future<dynamic> showLocalizationDialog(BuildContext context) async {
+    final result = await showModalBottomSheet(
+        context: context,
+        backgroundColor: AppData.colors.nightBgColor,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppData.colors.middlePurple.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        Text("language".tr()),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    const LocalizationDialogWidget(),
                     const SizedBox(height: 20),
                   ],
                 )
@@ -672,54 +797,57 @@ class _SettingsScreenState extends SettingsBloc {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 34),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              topSettings,
-              const SizedBox(height: 24),
-              const Text(
-                "General",
-                style: TextStyle(
-                  fontSize: 18,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: appBar,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 34),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                topSettings,
+                const SizedBox(height: 24),
+                Text(
+                  "general".tr(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 18),
-              generalSettings,
-              const SizedBox(height: 24),
-              const Text(
-                "Security",
-                style: TextStyle(
-                  fontSize: 18,
+                const SizedBox(height: 18),
+                generalSettings,
+                const SizedBox(height: 24),
+                Text(
+                  "security".tr(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 18),
-              securitySettings,
-              const SizedBox(height: 24),
-              const Text(
-                "Alert",
-                style: TextStyle(
-                  fontSize: 18,
+                const SizedBox(height: 18),
+                securitySettings,
+                const SizedBox(height: 24),
+                const Text(
+                  "Alert",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 18),
-              alertSettings,
-              const SizedBox(height: 24),
-              const Text(
-                "About",
-                style: TextStyle(
-                  fontSize: 18,
+                const SizedBox(height: 18),
+                alertSettings,
+                const SizedBox(height: 24),
+                const Text(
+                  "About",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 18),
-              aboutSettings,
-              const SizedBox(height: 34),
-              text,
-            ],
+                const SizedBox(height: 18),
+                aboutSettings,
+                const SizedBox(height: 34),
+                text,
+              ],
+            ),
           ),
         ),
       ),

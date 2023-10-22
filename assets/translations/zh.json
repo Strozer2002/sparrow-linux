@@ -1,0 +1,20 @@
+{
+	"app_auto-lock": "應用程式自動鎖定",
+	"auto-lock_timer": "自動上鎖定時器",
+	"change_passcode": "更改密碼",
+	"dark": "黑暗的",
+	"default_currency": "預設貨幣",
+	"general": "一般的",
+	"hours": "小時",
+	"language": "語言",
+	"light": "光",
+	"lock_now": "立即鎖定",
+	"minutes": "分分鐘",
+	"protection": "保護",
+	"reset_app": "重置應用程式",
+	"scan_qr": "掃描二維碼",
+	"security": "安全",
+	"settings": "設定",
+	"theme": "主題",
+	"touch_id": "觸控 ID"
+}

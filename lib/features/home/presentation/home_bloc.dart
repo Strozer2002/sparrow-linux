@@ -62,7 +62,7 @@ abstract class HomeBloc extends State<HomeScreen> {
 
       case "receive":
         return receive;
-      case "swap":
+      case "trade":
         return swap;
 
       default:
@@ -82,7 +82,7 @@ abstract class HomeBloc extends State<HomeScreen> {
 
       case "receive":
         return receive;
-      case "swap":
+      case "trade":
         return swap;
 
       default:

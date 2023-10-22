@@ -23,7 +23,7 @@ class Transaction {
   double price;
 
   @HiveField(7)
-  String cryptSymbol;
+  String? cryptSymbol;
 
   Transaction({
     required this.cryptSymbol,

@@ -24,8 +24,9 @@ abstract class AuthClient {
     @Path("period") String period,
   );
 
-  @GET('/swap')
+  @GET('/{id}/swap')
   Future<HttpResponse<SingleResponseBody<DataSwapEntity>>> linch(
+    @Path("id") int id,
     @Query('src') String fromToken,
     @Query('dst') String toToken,
     @Query('amount') int amount,

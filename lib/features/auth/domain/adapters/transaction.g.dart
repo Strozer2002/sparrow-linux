@@ -17,7 +17,7 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Transaction(
-      cryptSymbol: fields[7] as String,
+      cryptSymbol: fields[7] as String?,
       minedAt: fields[1] as String,
       operationType: fields[0] as String,
       price: fields[6] as double,

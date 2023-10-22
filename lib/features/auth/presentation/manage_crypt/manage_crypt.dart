@@ -71,90 +71,93 @@ class _ManageCryptState extends ManageCryptBloc {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppData.colors.nightBottomNavColor,
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Column(
-            children: [
-              inputText,
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: filterCrypts!.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            AppData.assets.image.crypto(
-                              value: filterCrypts![index].iconName,
-                              width: 30,
-                              height: 30,
-                            ),
-                            const SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  filterCrypts![index].name,
-                                  style: const TextStyle(
-                                    fontSize: 16,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: appBar,
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppData.colors.nightBottomNavColor,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              children: [
+                inputText,
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: filterCrypts!.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              AppData.assets.image.crypto(
+                                value: filterCrypts![index].iconName,
+                                width: 30,
+                                height: 30,
+                              ),
+                              const SizedBox(width: 16),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    filterCrypts![index].name,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '${AppData.utils.doubleToFourthValues(filterCrypts![index].amount)} ${filterCrypts![index].shortName}',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: AppData.colors.middlePurple
-                                        .withOpacity(0.5),
+                                  Text(
+                                    '${AppData.utils.doubleToFourthValues(filterCrypts![index].amount)} ${filterCrypts![index].shortName}',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: AppData.colors.middlePurple
+                                          .withOpacity(0.5),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        Switch(
-                          value: filterCrypts![index].isChoose,
-                          onChanged: (value) {
-                            setState(() {
-                              filterCrypts![index].isChoose = value;
-                            });
-                          },
-                          activeColor: Colors.white,
-                          inactiveThumbColor:
-                              AppData.colors.middlePurple.withOpacity(0.5),
-                          activeTrackColor: AppData.colors.middlePurple,
-                          inactiveTrackColor:
-                              AppData.colors.middlePurple.withOpacity(0.2),
-                        ),
-                      ],
+                                ],
+                              )
+                            ],
+                          ),
+                          Switch(
+                            value: filterCrypts![index].isChoose,
+                            onChanged: (value) {
+                              setState(() {
+                                filterCrypts![index].isChoose = value;
+                              });
+                            },
+                            activeColor: Colors.white,
+                            inactiveThumbColor:
+                                AppData.colors.middlePurple.withOpacity(0.5),
+                            activeTrackColor: AppData.colors.middlePurple,
+                            inactiveTrackColor:
+                                AppData.colors.middlePurple.withOpacity(0.2),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: MainButton(
-          height: 48,
-          width: double.infinity,
-          onPressed: onSave,
-          child: const Text(
-            "Save",
-            style: TextStyle(
-              fontSize: 16,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          child: MainButton(
+            height: 48,
+            width: double.infinity,
+            onPressed: onSave,
+            child: const Text(
+              "Save",
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
         ),

@@ -87,6 +87,7 @@ class _AuthClient implements AuthClient {
 
   @override
   Future<HttpResponse<SingleResponseBody<DataSwapEntity>>> linch(
+    int id,
     String fromToken,
     String toToken,
     int amount,
@@ -114,7 +115,7 @@ class _AuthClient implements AuthClient {
     )
                 .compose(
                   _dio.options,
-                  '/swap',
+                  '/${id}/swap',
                   queryParameters: queryParameters,
                   data: _data,
                 )

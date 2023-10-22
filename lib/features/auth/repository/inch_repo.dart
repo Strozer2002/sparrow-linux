@@ -11,6 +11,7 @@ final class InchRepository extends InchApiRemoteDataSource {
   late final _client = AuthClient(dio);
 
   Future<RemoteCbResult<DataSwapEntity?>> linch({
+    required int id,
     required String fromToken,
     required String toToken,
     required int amount,
@@ -20,6 +21,7 @@ final class InchRepository extends InchApiRemoteDataSource {
   }) =>
       request(
         () => _client.linch(
+          id,
           fromToken,
           toToken,
           amount,

@@ -6,25 +6,33 @@ import 'package:rabby/features/settings/domain/settings_service.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 import 'package:web3dart/web3dart.dart';
 
+import '../../../auth/presentation/manage_crypt/domain/crypt.dart';
+
 abstract class TransactionBloc extends State<TransactionWidget> {
   final TextEditingController amountCtrl = TextEditingController();
   final TextEditingController addressCtrl = TextEditingController();
   final AuthService authService = AuthService();
   final SettingsService settingsService = SettingsService();
   double gasPrice = 0;
+  Crypt? mainCrypt;
   Rv<bool> isStandardTransaction = Rv(true);
   @override
   void initState() {
     super.initState();
 
     amountCtrl.text = '0';
-    addressCtrl.text = widget.address;
+    addressCtrl.text = widget.extra[0];
+    mainCrypt = authService.getCryptByName(widget.extra[1]);
+    transform(0.6);
   }
 
   Future<void> transform(double precent) async {
-    EtherAmount? gasPrice = await AppData.utils.getGasPrice();
+    EtherAmount? gasPrice = await AppData.utils.getGasPrice(
+      walletUrl: mainCrypt!.walletUrl,
+    );
 
     double? amount = await AppData.utils.getGasLimit(
+      crypt: mainCrypt!,
       gasPrice: gasPrice!,
       to: EthereumAddress.fromHex(addressCtrl.text),
       value: EtherAmount.fromUnitAndValue(
@@ -32,7 +40,7 @@ abstract class TransactionBloc extends State<TransactionWidget> {
         AppData.utils.convertEtherToWei(
           (double.parse(amountCtrl.text) /
                   authService.getSelectCurrency()!.rate) /
-              authService.getETH()!.priceForOne,
+              mainCrypt!.priceForOne,
         ),
       ),
       precent: precent,
@@ -43,26 +51,19 @@ abstract class TransactionBloc extends State<TransactionWidget> {
   }
 
   Future<void> transaction() async {
-    EthPrivateKey credentials =
-        EthPrivateKey.fromHex(settingsService.getPrivateKey()!);
-    final address = credentials.address;
-    if (AppData.utils.ethClient != null) {
-      await AppData.utils.ethClient!.sendTransaction(
-        credentials,
-        Transaction(
-          from: address,
-          to: EthereumAddress.fromHex(addressCtrl.text),
-          value: EtherAmount.fromUnitAndValue(
-            EtherUnit.wei,
-            AppData.utils.convertEtherToWei(
-              (double.parse(amountCtrl.text) /
-                      authService.getSelectCurrency()!.rate) /
-                  authService.getETH()!.priceForOne,
-            ),
-          ),
+    await AppData.utils.sendTx(
+      privateKey: settingsService.getPrivateKey()!,
+      toAddress: addressCtrl.text,
+      walletUrl: mainCrypt!.walletUrl,
+      value: EtherAmount.fromUnitAndValue(
+        EtherUnit.wei,
+        AppData.utils.convertEtherToWei(
+          (double.parse(amountCtrl.text) /
+                  authService.getSelectCurrency()!.rate) /
+              mainCrypt!.priceForOne,
         ),
-      );
-      print("send");
-    }
+      ),
+      chainId: mainCrypt!.swapId,
+    );
   }
 }

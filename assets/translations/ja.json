@@ -1,0 +1,20 @@
+{
+	"app_auto-lock": "アプリの自動ロック",
+	"auto-lock_timer": "オートロックタイマー",
+	"change_passcode": "パスコードの変更",
+	"dark": "暗い",
+	"default_currency": "デフォルトの通貨",
+	"general": "一般的な",
+	"hours": "時間",
+	"language": "言語",
+	"light": "ライト",
+	"lock_now": "今すぐロックする",
+	"minutes": "分",
+	"protection": "保護",
+	"reset_app": "アプリをリセットする",
+	"scan_qr": "QRをスキャン",
+	"security": "安全",
+	"settings": "設定",
+	"theme": "テーマ",
+	"touch_id": "タッチID"
+}

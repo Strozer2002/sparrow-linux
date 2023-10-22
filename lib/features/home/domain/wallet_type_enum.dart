@@ -1,4 +1,5 @@
 enum WalletTypeEnum {
   send,
-  resive,
+  receive,
+  swap,
 }
