@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart';
-import 'package:rabby/core/data_source/inch_api.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 import 'package:rabby/features/auth/domain/models/transaction/transaction.dart';
 import 'package:rabby/features/auth/repository/auth_repository.dart';
@@ -540,7 +538,6 @@ class Utils {
     required EtherAmount value,
     required int chainId,
   }) async {
-    final AuthService authService = AuthService();
     Web3Client web3client = Web3Client(walletUrl, Client());
     EthPrivateKey credentials = EthPrivateKey.fromHex(privateKey);
     final address = credentials.address;

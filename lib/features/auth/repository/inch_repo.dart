@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:rabby/core/data_source/inch_api.dart';
-import 'package:rabby/features/auth/domain/models/user_entity.dart';
 import 'package:rabby/features/auth/repository/auth_client.dart';
 
 import '../../../domain/object/general_callback_result.dart';

@@ -6,7 +6,6 @@ import 'package:rabby/features/auth/presentation/created_success/created_success
 import 'package:rabby/features/auth/presentation/import_address/import_adress.dart';
 import 'package:rabby/features/auth/presentation/import_key/import_key.dart';
 import 'package:rabby/features/auth/presentation/import_seed_phrase/import_seed_phrase.dart';
-import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/manage_crypt.dart';
 import 'package:rabby/features/auth/presentation/seed_phrase/seed_phrase.dart';
 import 'package:rabby/features/auth/presentation/select_import/select_import.dart';
