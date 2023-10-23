@@ -22,9 +22,6 @@ abstract class HomeBloc extends State<HomeScreen>
   bool isReload = false;
   int transactionsLength = 0;
 
-  AnimationController? _controller;
-  Animation<double>? animation;
-  Animation<double>? animationBg;
 
   @override
   void didChangeDependencies() {
@@ -56,32 +53,9 @@ abstract class HomeBloc extends State<HomeScreen>
     });
 
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
 
-    animation = Tween<double>(begin: 0.9, end: 1.1).animate(
-      CurvedAnimation(
-        parent: _controller!,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    animationBg = Tween<double>(begin: 5.0, end: 20.0).animate(
-      CurvedAnimation(
-        parent: _controller!,
-        curve: Curves.easeInOut,
-      ),
-    );
-    _controller!.repeat(reverse: true);
   }
 
-  @override
-  dispose() {
-    _controller?.dispose(); // you need this
-    super.dispose();
-  }
 
   Future<void> onReload() async {
     setState(() {

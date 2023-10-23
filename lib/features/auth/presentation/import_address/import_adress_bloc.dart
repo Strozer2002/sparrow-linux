@@ -7,7 +7,7 @@ import 'import_adress.dart';
 
 abstract class ImportAddressBloc extends State<ImportAddress> {
   final AuthService _authService = AuthService();
-
+    
   String get addressString {
     if (_authService.getAddress() != null) {
       return _authService.getAddress()!;
@@ -15,8 +15,6 @@ abstract class ImportAddressBloc extends State<ImportAddress> {
       return "";
     }
   }
-
-  void onSubmitted(String value) {}
 
   void next() => context.push(AppData.routes.manageCryptScreen);
 }

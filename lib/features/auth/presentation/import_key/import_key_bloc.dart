@@ -9,9 +9,11 @@ import 'import_key.dart';
 abstract class ImportKeyBloc extends State<ImportKey> {
   final SettingsService _settingsService = SettingsService();
   final TextEditingController keyCtrl = TextEditingController();
-
+  bool isLoading = false;
   Future<void> next() async {
-    print(keyCtrl.text);
+    setState(() {
+      isLoading = true;
+    });
     await AppData.utils.importData(
       public: keyCtrl.text,
       isNew: false,
@@ -20,5 +22,8 @@ abstract class ImportKeyBloc extends State<ImportKey> {
     if (mounted) {
       context.push(AppData.routes.importAddress);
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 }

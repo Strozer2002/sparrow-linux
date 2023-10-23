@@ -5,49 +5,16 @@ import 'package:rabby/features/settings/domain/settings_service.dart';
 
 import 'init.dart';
 
-abstract class InitBloc extends State<InitPage>
-    with SingleTickerProviderStateMixin {
+abstract class InitBloc extends State<InitPage> {
   final SettingsService _settingsService = SettingsService();
-  AnimationController? _controller;
-  Animation<double>? animation;
-  Animation<double>? animationBg;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-
-    animation = Tween<double>(begin: 0.9, end: 1.1).animate(
-      CurvedAnimation(
-        parent: _controller!,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    animationBg = Tween<double>(begin: 5.0, end: 20.0).animate(
-      CurvedAnimation(
-        parent: _controller!,
-        curve: Curves.easeInOut,
-      ),
-    );
-    _controller!.repeat(reverse: true);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       syncData();
     });
-  }
-
-  @override
-  dispose() {
-    _controller?.dispose(); // you need this
-    super.dispose();
-  }
-
-  void onImageClicked() {
-    print('Картинка нажата!');
   }
 
   Future<void> syncData() async {

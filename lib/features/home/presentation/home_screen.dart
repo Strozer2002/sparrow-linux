@@ -9,6 +9,7 @@ import 'package:rabby/features/home/widget/receive_modal.dart';
 import 'package:rabby/features/home/widget/send_modal.dart';
 import 'package:rabby/features/widgets/home_bottom.dart';
 import 'package:rabby/features/widgets/icon_button.dart';
+import 'package:rabby/features/widgets/loading_widget.dart';
 import 'package:reactive_variables/reactive_variables.dart';
 
 import '../../../app_data/app_data.dart';
@@ -532,37 +533,7 @@ class _HomeScreenState extends HomeBloc {
     return WillPopScope(
       onWillPop: () async => false,
       child: isReload
-          ? Center(
-              child: AnimatedBuilder(
-                animation: animation!,
-                builder: (BuildContext context, Widget? child) {
-                  return Transform.rotate(
-                    angle: animation!.value * 2 * 3.14159265359,
-                    child: Transform.scale(
-                      scale: animation!.value,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color:
-                                  AppData.colors.middlePurple.withOpacity(0.4),
-                              blurRadius: animationBg!.value,
-                              spreadRadius: animationBg!.value,
-                            ),
-                          ],
-                        ),
-                        child: CircleAvatar(
-                          backgroundColor: AppData.colors.middlePurple,
-                          radius: 90 * animation!.value,
-                          child: AppData.assets.svg.rabbit(size: 100),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            )
+          ? const LoadingWidget()
           : Scaffold(
               body: SingleChildScrollView(
                 child: Column(

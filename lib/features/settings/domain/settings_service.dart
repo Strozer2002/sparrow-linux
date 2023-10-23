@@ -43,6 +43,11 @@ class SettingsService {
     }
   }
 
+  void mainRelocate() {
+    if (getPassCode() != null && isRelocate == true) {
+      AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
+    }
+  }
   void relocateChild() =>
       AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
 

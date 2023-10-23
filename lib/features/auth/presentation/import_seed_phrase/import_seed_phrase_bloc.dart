@@ -14,7 +14,7 @@ abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
   int mnemonicCount = 12;
   List<int> possibleCount = [12, 15, 18, 21, 24];
   bool isSubmit = false;
-
+  bool isLoading = false;
   void onClear() {
     setState(() {
       phraseController.text = "";
@@ -31,8 +31,9 @@ abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
   }
 
   Future<void> next() async {
-    print(phraseController.text);
-
+    setState(() {
+      isLoading = true;
+    });
     await AppData.utils.importData(
       public: phraseController.text,
       isNew: false,
@@ -42,5 +43,8 @@ abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
     if (mounted) {
       context.push(AppData.routes.importAddress);
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 }

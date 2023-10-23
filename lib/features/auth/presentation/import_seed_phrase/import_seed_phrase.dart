@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rabby/features/widgets/loading_widget.dart';
 
 import '../../../../app_data/app_data.dart';
 import '../../widgets/main_button.dart';
@@ -196,79 +197,83 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(top: 36, left: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              attention,
-              const SizedBox(height: 23),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return isLoading
+        ? const Scaffold(
+            body: LoadingWidget(),
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.only(top: 36, left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DropdownButton<int>(
-                      value: mnemonicCount,
-                      onChanged: (int? newValue) {
-                        setState(() {
-                          mnemonicCount = newValue!;
-                        });
-                      },
-                      items:
-                          possibleCount.map<DropdownMenuItem<int>>((int value) {
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text("I have a $value- word phrase"),
-                        );
-                      }).toList(),
-                      dropdownColor: Colors.white,
+                    attention,
+                    const SizedBox(height: 23),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DropdownButton<int>(
+                            value: mnemonicCount,
+                            onChanged: (int? newValue) {
+                              setState(() {
+                                mnemonicCount = newValue!;
+                              });
+                            },
+                            items: possibleCount
+                                .map<DropdownMenuItem<int>>((int value) {
+                              return DropdownMenuItem<int>(
+                                value: value,
+                                child: Text("I have a $value- word phrase"),
+                              );
+                            }).toList(),
+                            dropdownColor: Colors.white,
+                          ),
+                          clearAll,
+                        ],
+                      ),
                     ),
-                    clearAll,
+                    phrases,
+                    const SizedBox(height: 20),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "What is a Seed Phrase?",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          "A 12, 18 or 24- word phrase used to control your assets.",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          "Is it safe to import it in Rabby?",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          "A 12, 18 or 24- word phrase used to control your assets.",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
-              phrases,
-              const SizedBox(height: 20),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "What is a Seed Phrase?",
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    "A 12, 18 or 24- word phrase used to control your assets.",
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Is it safe to import it in Rabby?",
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    "A 12, 18 or 24- word phrase used to control your assets.",
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: bottomButton,
-    );
+            ),
+            bottomNavigationBar: bottomButton,
+          );
   }
 }
