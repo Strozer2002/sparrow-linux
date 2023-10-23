@@ -27,10 +27,6 @@ abstract class InitBloc extends State<InitPage>
         curve: Curves.easeInOut,
       ),
     );
-    // _controllerBg = AnimationController(
-    //   vsync: this,
-    //   duration: const Duration(milliseconds: 200),
-    // );
 
     animationBg = Tween<double>(begin: 5.0, end: 20.0).animate(
       CurvedAnimation(
@@ -39,10 +35,15 @@ abstract class InitBloc extends State<InitPage>
       ),
     );
     _controller!.repeat(reverse: true);
-    // _controllerBg!.repeat(reverse: true);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       syncData();
     });
+  }
+
+  @override
+  dispose() {
+    _controller?.dispose(); // you need this
+    super.dispose();
   }
 
   void onImageClicked() {

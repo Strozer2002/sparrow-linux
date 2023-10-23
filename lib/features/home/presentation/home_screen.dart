@@ -91,9 +91,12 @@ class _HomeScreenState extends HomeBloc {
                   ],
                 ),
               ),
-              const Icon(
-                Icons.more_horiz,
-                color: Colors.white,
+              GestureDetector(
+                onTap: onReload,
+                child: const Icon(
+                  Icons.replay_outlined,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
@@ -528,21 +531,53 @@ class _HomeScreenState extends HomeBloc {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              topImage,
-              const SizedBox(height: 27),
-              Obs(
-                rvList: [selectedScreen],
-                builder: () => body(selectedScreen.value),
+      child: isReload
+          ? Center(
+              child: AnimatedBuilder(
+                animation: animation!,
+                builder: (BuildContext context, Widget? child) {
+                  return Transform.rotate(
+                    angle: animation!.value * 2 * 3.14159265359,
+                    child: Transform.scale(
+                      scale: animation!.value,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  AppData.colors.middlePurple.withOpacity(0.4),
+                              blurRadius: animationBg!.value,
+                              spreadRadius: animationBg!.value,
+                            ),
+                          ],
+                        ),
+                        child: CircleAvatar(
+                          backgroundColor: AppData.colors.middlePurple,
+                          radius: 90 * animation!.value,
+                          child: AppData.assets.svg.rabbit(size: 100),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
-              const SizedBox(height: 27),
-            ],
-          ),
-        ),
-      ),
+            )
+          : Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    topImage,
+                    const SizedBox(height: 27),
+                    Obs(
+                      rvList: [selectedScreen],
+                      builder: () => body(selectedScreen.value),
+                    ),
+                    const SizedBox(height: 27),
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }
