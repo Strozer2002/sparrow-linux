@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,7 @@ class SwapScreen extends StatefulWidget {
 class _SwapScreenState extends SwapBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text("Swap"),
+      title: Text("swap".tr()),
       leading: IconButton(
         onPressed: () => context.go(AppData.routes.homeScreen),
         icon: const Icon(
@@ -59,9 +60,9 @@ class _SwapScreenState extends SwapBloc {
                   extra: swap,
                 );
               },
-        child: const Text(
-          "Confirm transaction",
-          style: TextStyle(color: Colors.white),
+        child: Text(
+          "swap".tr(),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );
@@ -90,7 +91,7 @@ class _SwapScreenState extends SwapBloc {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Pay with",
+                        "pay_with".tr(),
                         style: TextStyle(color: AppData.colors.middlePurple),
                       ),
                       DropdownButton<Crypt>(
@@ -118,7 +119,7 @@ class _SwapScreenState extends SwapBloc {
                         controller: amountFromCtrl,
                         onChanged: (value) => setState(() {
                           amountFromCtrl.text = value;
-                          amountToCtrl.text = (AppData.utils.doubleToTwoValues(
+                          amountToCtrl.text = (AppData.utils.doubleToSixValues(
                               (double.parse(amountFromCtrl.text) *
                                       authService.getSelectCurrency()!.rate *
                                       chosenFromCrypt!.priceForOne) /
@@ -173,7 +174,7 @@ class _SwapScreenState extends SwapBloc {
                       ),
                       const SizedBox(height: 50),
                       Text(
-                        "Receive",
+                        "receive".tr(),
                         style: TextStyle(color: AppData.colors.middlePurple),
                       ),
                       DropdownButton<Crypt>(
@@ -201,7 +202,7 @@ class _SwapScreenState extends SwapBloc {
                         onChanged: (value) => setState(() {
                           amountToCtrl.text = value;
                           amountFromCtrl.text = (AppData.utils
-                              .doubleToTwoValues(
+                              .doubleToSixValues(
                                   (double.parse(amountToCtrl.text) *
                                           authService
                                               .getSelectCurrency()!

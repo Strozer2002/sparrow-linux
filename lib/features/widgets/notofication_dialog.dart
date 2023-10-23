@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/app_data/app_data.dart';
 
@@ -26,7 +27,7 @@ class _ThemeDialogWidgetState extends State<NotificationDialogWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Notification"),
+                Text("notification".tr()),
                 Checkbox(
                   value: value,
                   onChanged: (value) => setState(() {

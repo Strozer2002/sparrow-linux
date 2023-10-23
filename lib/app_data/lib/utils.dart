@@ -655,9 +655,9 @@ class Utils {
       int days = difference.inDays;
 
       if (hours < 24) {
-        return '$hours hours $minutes minutes ago';
+        return '$hours ${"hours".tr()} $minutes ${"minutes_ago".tr()}';
       } else {
-        return '$days days ago';
+        return '$days ${"days_ago".tr()}';
       }
     }
   }

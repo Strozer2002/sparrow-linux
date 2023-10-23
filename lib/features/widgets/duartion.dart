@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/app_data/app_data.dart';
 
@@ -36,8 +37,8 @@ class _DurationWidgetState extends State<DurationWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(duration[index] > 59
-                  ? "${duration[index] ~/ 60} Hours"
-                  : "${duration[index]} Minutes"),
+                  ? "${duration[index] ~/ 60} ${"hours".tr()}"
+                  : "${duration[index]} ${"minutes".tr()}"),
               Checkbox(
                 value: duration[index] == selectedDuration,
                 onChanged: (value) => setState(() {

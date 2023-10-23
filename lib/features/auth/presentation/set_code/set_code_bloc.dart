@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/app_data/app_data.dart';
@@ -57,9 +58,9 @@ abstract class SetCodeBloc extends State<SetCodeScreen> {
   String get errorText {
     if (numberText.value.text.length == 6) {
       if (!checkPassword()) {
-        return "Password uncorrected";
+        return "password_uncorrected".tr();
       } else {
-        return 'Password corrected';
+        return 'password_correct'.tr();
       }
     } else {
       return ' ';

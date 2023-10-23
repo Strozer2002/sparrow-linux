@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -69,8 +70,8 @@ class _SuccessTransactionState extends SuccessTransactionBloc {
                     color: AppData.colors.middlePurple.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text(
-                    "Your transaction has been sent.",
+                  child: Text(
+                    "your_transacyion_send".tr(),
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -83,9 +84,9 @@ class _SuccessTransactionState extends SuccessTransactionBloc {
           height: 48,
           width: double.infinity,
           onPressed: () => context.go(AppData.routes.homeScreen),
-          child: const Text(
-            "Continue",
-            style: TextStyle(fontSize: 16),
+          child: Text(
+            "continue".tr(),
+            style: const TextStyle(fontSize: 16),
           ),
         ),
       ),

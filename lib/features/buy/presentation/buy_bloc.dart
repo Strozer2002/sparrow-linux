@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
 
+import '../../auth/presentation/manage_crypt/domain/crypt.dart';
 import 'buy_cash.dart';
 
 abstract class BuyCashBloc extends State<BuyCashScreen> {
@@ -8,8 +9,14 @@ abstract class BuyCashBloc extends State<BuyCashScreen> {
   final TextEditingController amountCtrl = TextEditingController();
   int max = 0;
   String errorText = "";
+  List<Crypt> toCrypts = [];
+  Crypt? chosenToCrypt;
   @override
   void initState() {
+    setState(() {
+      toCrypts = authService.getTrueCrypts()!;
+      chosenToCrypt = toCrypts[0];
+    });
     max = (authService.getWallet()! * authService.getSelectCurrency()!.rate)
         .toInt();
     amountCtrl.text += "1";

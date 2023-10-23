@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_variables/reactive_variables.dart';
@@ -20,7 +21,7 @@ class TransactionWidget extends StatefulWidget {
 class _TransactionWidgetState extends TransactionBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text("Transaction"),
+      title: Text("transaction".tr()),
       leading: IconButton(
         onPressed: () => context.pop(),
         icon: const Icon(
@@ -38,7 +39,7 @@ class _TransactionWidgetState extends TransactionBloc {
         addressCtrl.text.isEmpty
             ? Container()
             : Text(
-                "Rabby cannot recover any lost funds.",
+                "rabby_cannot_recover".tr(),
                 style: TextStyle(
                   color: AppData.colors.middlePurple.withOpacity(0.8),
                 ),
@@ -80,9 +81,9 @@ class _TransactionWidgetState extends TransactionBloc {
                     );
                     // transaction();
                   },
-            child: const Text(
-              "Confirm transaction",
-              style: TextStyle(color: Colors.white),
+            child: Text(
+              "confirm_transaction".tr(),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -219,7 +220,7 @@ class _TransactionWidgetState extends TransactionBloc {
                           textAlignVertical: TextAlignVertical.center,
                           maxLines: 2,
                           decoration: InputDecoration(
-                            labelText: "Send to",
+                            labelText: "send_to".tr(),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: AppData.colors.middlePurple
@@ -253,9 +254,9 @@ class _TransactionWidgetState extends TransactionBloc {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Transaction fee",
-                                    style: TextStyle(
+                                  Text(
+                                    "transaction_fee".tr(),
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 16,
                                     ),
@@ -275,7 +276,7 @@ class _TransactionWidgetState extends TransactionBloc {
                                         const BorderRadius.only(
                                       topLeft: Radius.circular(12),
                                     ),
-                                    text: "Fast",
+                                    text: "fast".tr(),
                                     precent: 0.6,
                                   ),
                                   buyTab(
@@ -284,7 +285,7 @@ class _TransactionWidgetState extends TransactionBloc {
                                         const BorderRadius.only(
                                       topRight: Radius.circular(12),
                                     ),
-                                    text: "Standart",
+                                    text: "standart".tr(),
                                     precent: 0.2,
                                   ),
                                 ],
@@ -306,9 +307,9 @@ class _TransactionWidgetState extends TransactionBloc {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Reception time",
-                                style: TextStyle(
+                              Text(
+                                "reception_time".tr(),
+                                style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 16,
                                 ),
@@ -319,16 +320,16 @@ class _TransactionWidgetState extends TransactionBloc {
                                     ? [
                                         AppData.assets.image.light(),
                                         const SizedBox(width: 4),
-                                        const Text(
-                                          "Instant",
-                                          style: TextStyle(
+                                        Text(
+                                          "instant".tr(),
+                                          style: const TextStyle(
                                             fontSize: 16,
                                           ),
                                         ),
                                         const SizedBox(width: 4),
-                                        const Text(
-                                          "(0 to 30 minutes)",
-                                          style: TextStyle(
+                                        Text(
+                                          "0-30".tr(),
+                                          style: const TextStyle(
                                             color: Colors.grey,
                                             fontSize: 16,
                                           ),
@@ -337,9 +338,9 @@ class _TransactionWidgetState extends TransactionBloc {
                                     : [
                                         AppData.assets.image.eco(),
                                         const SizedBox(width: 4),
-                                        const Text(
-                                          "2 hours in average",
-                                          style: TextStyle(
+                                        Text(
+                                          "2_hours".tr(),
+                                          style: const TextStyle(
                                             fontSize: 16,
                                           ),
                                         ),

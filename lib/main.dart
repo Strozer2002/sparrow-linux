@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         print("resume");
         // Приложение в фокусе
-        settingsService.relocate();
+        settingsService.relocateChild();
         break;
       case AppLifecycleState.inactive:
 

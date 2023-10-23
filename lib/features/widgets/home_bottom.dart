@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
@@ -64,9 +63,9 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Price',
-                  style: TextStyle(
+                Text(
+                  'price'.tr(),
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Colors.grey,
                   ),
@@ -99,10 +98,16 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
               builder: () => Row(
                 children: [
                   CryptTab(
-                    onTap: () => log("HI"),
+                    onTap: () {
+                      context.pop();
+                      context.go(
+                        AppData.routes.sendScreen,
+                        extra: widget.crypt.name,
+                      );
+                    },
                     selectWallet: WalletTypeEnum.send,
                     icon: AppData.assets.svg.vector,
-                    text: "Send",
+                    text: "send".tr(),
                     selectedWalletType: widget.selectedWalletType,
                     borderRadiusGeometry: const BorderRadius.only(
                       topLeft: Radius.circular(12),
@@ -126,8 +131,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                                   children: <Widget>[
                                     Container(
                                       margin: const EdgeInsets.symmetric(
-                                        vertical: 16,
-                                      ),
+                                          vertical: 16),
                                       width: 32,
                                       height: 4,
                                       decoration: BoxDecoration(
@@ -148,7 +152,7 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                     },
                     selectWallet: WalletTypeEnum.receive,
                     icon: AppData.assets.svg.recive,
-                    text: "Resive",
+                    text: "receive".tr(),
                     selectedWalletType: widget.selectedWalletType,
                     borderRadiusGeometry: const BorderRadius.only(
                       topRight: Radius.circular(12),
@@ -334,9 +338,9 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
               const SizedBox(height: 22),
               cryptDiagram,
               const SizedBox(height: 26),
-              const Text(
-                'Balance',
-                style: TextStyle(
+              Text(
+                'balance'.tr(),
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),
@@ -360,8 +364,8 @@ class _HomeBottomDialogState extends State<HomeBottomDialog> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Available",
+                          Text(
+                            "available".tr(),
                           ),
                           Row(
                             children: [

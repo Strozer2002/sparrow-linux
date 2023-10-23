@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +21,7 @@ class SendAddressScreen extends StatefulWidget {
 class _SendAddressScreenState extends SendBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text("Send to address"),
+      title: Text("send_to_address".tr()),
       leading: IconButton(
         onPressed: () => context.go(AppData.routes.homeScreen),
         icon: const Icon(
@@ -60,9 +61,9 @@ class _SendAddressScreenState extends SendBloc {
                   AppData.routes.transactionScreen,
                   extra: [addressCtrl.text, widget.crypt],
                 ),
-        child: const Text(
-          "Preview transaction",
-          style: TextStyle(color: Colors.white),
+        child: Text(
+          "preview_transaction".tr(),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );
@@ -86,8 +87,8 @@ class _SendAddressScreenState extends SendBloc {
                   }),
                   onSubmitted: (value) {},
                   decoration: InputDecoration(
-                    hintText: 'Address',
-                    labelText: "Address",
+                    hintText: 'address'.tr(),
+                    labelText: 'address'.tr(),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppData.colors.middlePurple,
@@ -119,7 +120,7 @@ class _SendAddressScreenState extends SendBloc {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        "Paste from clipboard",
+                        "paste_from_clipboard".tr(),
                         style: TextStyle(
                           color: AppData.colors.middlePurple.withOpacity(0.8),
                         ),
@@ -132,7 +133,7 @@ class _SendAddressScreenState extends SendBloc {
             addressCtrl.text.isEmpty
                 ? Container()
                 : Text(
-                    "Check the address you have copied",
+                    "check_the_address".tr(),
                     style: TextStyle(
                       color: AppData.colors.middlePurple.withOpacity(0.8),
                     ),

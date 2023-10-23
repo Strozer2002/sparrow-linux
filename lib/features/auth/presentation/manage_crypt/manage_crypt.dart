@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/app_data/app_data.dart';
@@ -15,9 +16,9 @@ class ManageCrypt extends StatefulWidget {
 class _ManageCryptState extends ManageCryptBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text(
-        "Manage cryptos",
-        style: TextStyle(
+      title: Text(
+        "manage_cryptos".tr(),
+        style: const TextStyle(
           fontSize: 18,
         ),
       ),
@@ -61,7 +62,7 @@ class _ManageCryptState extends ManageCryptBloc {
             icon: const Icon(Icons.close),
           ), // Suffix icon
 
-          hintText: 'Enter cryptname',
+          hintText: 'enter_crypt'.tr(),
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
         ),
@@ -153,9 +154,9 @@ class _ManageCryptState extends ManageCryptBloc {
             height: 48,
             width: double.infinity,
             onPressed: onSave,
-            child: const Text(
-              "Save",
-              style: TextStyle(
+            child: Text(
+              "save".tr(),
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),

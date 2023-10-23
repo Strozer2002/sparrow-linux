@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rabby/app_data/app_data.dart';
@@ -39,8 +40,8 @@ class _SetCodeScreenState extends SetCodeBloc {
           Text(
             settingsService.getPassCode() != null &&
                     widget.changePassword != true
-                ? "Confirm"
-                : "Set Passcode",
+                ? "confirm".tr()
+                : "set_passcode".tr(),
             style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -53,7 +54,7 @@ class _SetCodeScreenState extends SetCodeBloc {
               settingsService.getPassCode() != null &&
                       widget.changePassword != true
                   ? ""
-                  : "It will be used to unlock your wallet and encrypt local data",
+                  : "it_will_be_use".tr(),
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
@@ -84,7 +85,7 @@ class _SetCodeScreenState extends SetCodeBloc {
               ]),
         width: 200,
         onPressed: goNext,
-        child: const Text("Next"),
+        child: Text("next".tr()),
       ),
     );
   }

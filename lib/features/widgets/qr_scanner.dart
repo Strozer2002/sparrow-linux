@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,7 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   AppBar get appBar {
     return AppBar(
-      title: const Text("Qr scanner"),
+      title: Text("qr_scanner".tr()),
       leading: IconButton(
         onPressed: () {
           context.pop();
@@ -60,9 +61,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                 children: <Widget>[
                   const SizedBox(height: 10),
                   if (result != null)
-                    Text('Data: ${result!.code}')
+                    Text('${"data".tr()}: ${result!.code}')
                   else
-                    const Text('Scan a code'),
+                    Text('scan_code'.tr()),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +79,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                           child: FutureBuilder(
                             future: controller?.getFlashStatus(),
                             builder: (context, snapshot) {
-                              return Text('Flash: ${snapshot.data}');
+                              return Text('${"flash".tr()}: ${snapshot.data}');
                             },
                           ),
                         ),
@@ -96,7 +97,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                             builder: (context, snapshot) {
                               if (snapshot.data != null) {
                                 return Text(
-                                    'Camera facing ${describeEnum(snapshot.data!)}');
+                                    '${"camera_facing".tr()} ${describeEnum(snapshot.data!)}');
                               } else {
                                 return const Text('loading');
                               }
@@ -118,15 +119,16 @@ class _QRViewExampleState extends State<QRViewExample> {
                                   ClipboardData(text: result!.code!),
                                 ).then((_) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text("Address was copied"),
+                                    SnackBar(
+                                      content: Text("address_was_copied".tr()),
                                     ),
                                   );
                                 });
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Text("Copy address"),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text("copy_address".tr()),
                               ),
                             )
                           : Container(),
@@ -135,9 +137,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                         onPressed: () async {
                           await controller?.pauseCamera();
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text("Pause"),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text("pause".tr()),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -145,9 +147,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                         onPressed: () async {
                           await controller?.resumeCamera();
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text("Resume"),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text("resume".tr()),
                         ),
                       ),
                     ],

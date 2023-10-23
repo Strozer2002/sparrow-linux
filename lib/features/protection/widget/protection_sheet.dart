@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rabby/app_data/app_data.dart';
 
@@ -28,7 +29,7 @@ class _ThemeDialogWidgetState extends State<ProtectionSheetWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Create transaction"),
+                Text("create_transaction".tr()),
                 Checkbox(
                   value: settingsService.getConfirmTransaction() == true,
                   onChanged: (value) => setState(() {

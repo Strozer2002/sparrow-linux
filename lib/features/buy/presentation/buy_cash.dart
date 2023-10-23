@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/buy/presentation/buy_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:rabby/features/widgets/numpad.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app_data/app_data.dart';
+import '../../auth/presentation/manage_crypt/domain/crypt.dart';
 import '../../auth/widgets/main_button.dart';
 
 class BuyCashScreen extends StatefulWidget {
@@ -18,7 +20,7 @@ class BuyCashScreen extends StatefulWidget {
 class _BuyCashScreenState extends BuyCashBloc {
   AppBar get appBar {
     return AppBar(
-      title: const Text("Add Cash"),
+      title: Text("add_cash".tr()),
       leading: IconButton(
         onPressed: () => context.go(AppData.routes.homeScreen),
         icon: const Icon(
@@ -87,18 +89,20 @@ class _BuyCashScreenState extends BuyCashBloc {
             ),
           ),
         ),
-        DropdownButton<String>(
-          value: 'One',
-          onChanged: (String? newValue) {
-            print('Selected value: $newValue');
+        DropdownButton<Crypt>(
+          value: chosenToCrypt,
+          onChanged: (Crypt? newValue) {
+            setState(() {
+              chosenToCrypt = newValue!;
+            });
           },
-          items: <String>['One', 'Two', 'Three', 'Four']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
+          items: toCrypts.map<DropdownMenuItem<Crypt>>((Crypt value) {
+            return DropdownMenuItem<Crypt>(
               value: value,
-              child: Text(value),
+              child: Text(value.name),
             );
           }).toList(),
+          dropdownColor: AppData.colors.nightBgColor,
         ),
         NumPad(numberCode: amountCtrl),
       ],
@@ -124,7 +128,7 @@ class _BuyCashScreenState extends BuyCashBloc {
         onPressed: errorText.isNotEmpty
             ? () {}
             : () => launchUrlString("https://www.moonpay.com/"),
-        child: const Text("Buy"),
+        child: Text("buy".tr()),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/auth/domain/auth_service.dart';
@@ -58,7 +59,7 @@ class _ReceiveShowModalState extends State<SendShowModal> {
                 icon: const Icon(Icons.close),
               ), // Suffix icon
 
-              hintText: 'Enter crypt username',
+              hintText: 'enter_crypt'.tr(),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
             ),

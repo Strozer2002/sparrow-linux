@@ -331,11 +331,11 @@ class _SettingsScreenState extends SettingsBloc {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: settingField(
-        leftPart: const Row(
+        leftPart: Row(
           children: [
-            Icon(Icons.notifications_outlined),
-            SizedBox(width: 12),
-            Text("Notification"),
+            const Icon(Icons.notifications_outlined),
+            const SizedBox(width: 12),
+            Text("notification".tr()),
           ],
         ),
         rightPart: AppData.assets.svg.chevron,
@@ -354,11 +354,11 @@ class _SettingsScreenState extends SettingsBloc {
       child: Column(
         children: [
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.settings),
-                SizedBox(width: 12),
-                Text("Version"),
+                const Icon(Icons.settings),
+                const SizedBox(width: 12),
+                Text("version".tr()),
               ],
             ),
             rightPart: Text(
@@ -369,15 +369,15 @@ class _SettingsScreenState extends SettingsBloc {
             ),
           ),
           settingField(
-            leftPart: const Row(
+            leftPart: Row(
               children: [
-                Icon(Icons.edit_document),
-                SizedBox(width: 12),
-                Text("State Logs"),
+                const Icon(Icons.edit_document),
+                const SizedBox(width: 12),
+                Text("state_logs".tr()),
               ],
             ),
             rightPart: Text(
-              "Export",
+              "export".tr(),
               style: TextStyle(
                 color: AppData.colors.middlePurple,
               ),
@@ -395,11 +395,10 @@ class _SettingsScreenState extends SettingsBloc {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text:
-              'This will help support debug any issue you might encounter. Please send to',
-          style: const TextStyle(
+          text: 'this_will_hope'.tr(),
+          style: TextStyle(
             fontSize: 10,
-            color: Colors.black,
+            color: AppData.colors.textColor,
           ),
           children: <TextSpan>[
             TextSpan(
@@ -409,8 +408,8 @@ class _SettingsScreenState extends SettingsBloc {
               ),
               recognizer: TapGestureRecognizer()..onTap = () {},
             ),
-            const TextSpan(
-              text: ' or support only.',
+            TextSpan(
+              text: ' ${'or_support_only'.tr()}',
             ),
           ],
         ),
@@ -501,7 +500,7 @@ class _SettingsScreenState extends SettingsBloc {
                           },
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        const Text("Auto-Lock Timer"),
+                        Text("auto-lock_timer".tr()),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -601,7 +600,7 @@ class _SettingsScreenState extends SettingsBloc {
                           },
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        const Text("Protection"),
+                        Text("protection".tr()),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -651,7 +650,7 @@ class _SettingsScreenState extends SettingsBloc {
                           },
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        const Text("Notification"),
+                        Text("notification".tr()),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -723,7 +722,7 @@ class _SettingsScreenState extends SettingsBloc {
     final TextEditingController resetCtrl = TextEditingController();
     Widget cancelButton = TextButton(
       child: Text(
-        "Cancel",
+        "cancel".tr(),
         style: TextStyle(
           color: AppData.colors.middlePurple,
         ),
@@ -734,7 +733,7 @@ class _SettingsScreenState extends SettingsBloc {
     );
     Widget continueButton = TextButton(
       child: Text(
-        "Continue",
+        "continue".tr(),
         style: TextStyle(
           color: AppData.colors.middlePurple,
         ),
@@ -753,19 +752,18 @@ class _SettingsScreenState extends SettingsBloc {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       backgroundColor: AppData.colors.nightBgColor,
-      title: const Center(
+      title: Center(
         child: Column(
           children: [
-            Icon(Icons.restart_alt),
-            Text("Reset App"),
+            const Icon(Icons.restart_alt),
+            Text("reset_app".tr()),
           ],
         ),
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-              "This will delete all the data you have created on Arbitrum. After making sure that you have a proper backup, ENTER “RESET” to reset the App"),
+          Text("reset_wallet_description".tr()),
           const SizedBox(height: 10),
           TextField(
             controller: resetCtrl,
@@ -827,18 +825,18 @@ class _SettingsScreenState extends SettingsBloc {
                 const SizedBox(height: 18),
                 securitySettings,
                 const SizedBox(height: 24),
-                const Text(
-                  "Alert",
-                  style: TextStyle(
+                Text(
+                  "alert".tr(),
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
                 const SizedBox(height: 18),
                 alertSettings,
                 const SizedBox(height: 24),
-                const Text(
-                  "About",
-                  style: TextStyle(
+                Text(
+                  "about".tr(),
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),

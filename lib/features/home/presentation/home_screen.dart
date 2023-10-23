@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rabby/features/home/domain/home_screen_enum.dart';
@@ -79,7 +80,7 @@ class _HomeScreenState extends HomeBloc {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Today’s Profit",
+                      "today_profit".tr(),
                       style: TextStyle(
                         fontSize: 12,
                         color: authService.getChangesAbsoluteWallet()! < 0
@@ -120,7 +121,7 @@ class _HomeScreenState extends HomeBloc {
                             ? Colors.white
                             : Colors.white.withOpacity(0.4),
                       ),
-                      text: "Wallet",
+                      text: "wallet".tr(),
                       selectedScreen: selectedScreen,
                     ),
                     const SizedBox(width: 6),
@@ -132,7 +133,7 @@ class _HomeScreenState extends HomeBloc {
                             ? Colors.white
                             : Colors.white.withOpacity(0.4),
                       ),
-                      text: "Activity",
+                      text: "activity".tr(),
                       selectedScreen: selectedScreen,
                     ),
                   ],
@@ -163,9 +164,9 @@ class _HomeScreenState extends HomeBloc {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Wallet',
-                style: TextStyle(
+              Text(
+                'wallet'.tr(),
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),
@@ -176,7 +177,7 @@ class _HomeScreenState extends HomeBloc {
                     CryptTab(
                       selectWallet: WalletTypeEnum.send,
                       icon: AppData.assets.svg.vector,
-                      text: "Send",
+                      text: "send".tr(),
                       selectedWalletType: selectedWalletType,
                       borderRadiusGeometry: const BorderRadius.only(
                         topLeft: Radius.circular(12),
@@ -187,7 +188,7 @@ class _HomeScreenState extends HomeBloc {
                       onTap: () => showReceiveBottomDialog(),
                       selectWallet: WalletTypeEnum.receive,
                       icon: AppData.assets.svg.recive,
-                      text: "Receive",
+                      text: "receive".tr(),
                       selectedWalletType: selectedWalletType,
                       borderRadiusGeometry: const BorderRadius.only(
                         topRight: Radius.circular(12),
@@ -323,9 +324,9 @@ class _HomeScreenState extends HomeBloc {
                         onPressed: () => context.pop(),
                         icon: const Icon(Icons.arrow_back),
                       ),
-                      const Text(
-                        'Choose a crypto to receive',
-                        style: TextStyle(
+                      Text(
+                        'choose_receive'.tr(),
+                        style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
@@ -371,9 +372,9 @@ class _HomeScreenState extends HomeBloc {
                         onPressed: () => context.pop(),
                         icon: const Icon(Icons.arrow_back),
                       ),
-                      const Text(
-                        'Choose a crypto to send',
-                        style: TextStyle(
+                      Text(
+                        'choose_send'.tr(),
+                        style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
@@ -401,10 +402,10 @@ class _HomeScreenState extends HomeBloc {
                 borderRadius: BorderRadius.circular(10),
               ),
               width: double.infinity,
-              child: const Text(
-                "Your activity will appear here!",
+              child: Text(
+                "yout_activity".tr(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                 ),
               ),
@@ -446,9 +447,9 @@ class _HomeScreenState extends HomeBloc {
                                 operationType(
                                   transaction:
                                       authService.getTransactions()![index],
-                                  send: const Text("Send"),
-                                  receive: const Text("Receive"),
-                                  swap: const Text("Swap"),
+                                  send: Text("send".tr()),
+                                  receive: Text("receive".tr()),
+                                  swap: Text("swap".tr()),
                                 ),
                                 Text(
                                   AppData.utils.formatAddressWallet(

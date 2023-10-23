@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -28,9 +29,9 @@ class _QrCodeModalState extends State<QrCodeModal> {
                   onPressed: () => context.pop(),
                   icon: const Icon(Icons.arrow_back),
                 ),
-                const Text(
-                  'Receive',
-                  style: TextStyle(
+                Text(
+                  'receive'.tr(),
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
@@ -81,9 +82,9 @@ class _QrCodeModalState extends State<QrCodeModal> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "My Tokenname address",
-                        style: TextStyle(
+                      Text(
+                        "my_token_address".tr(),
+                        style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
@@ -116,8 +117,8 @@ class _QrCodeModalState extends State<QrCodeModal> {
                   ClipboardData(text: authService.getAddress()!),
                 ).then((_) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Address was copied"),
+                    SnackBar(
+                      content: Text("address_was_copied".tr()),
                     ),
                   );
                 });
@@ -133,7 +134,7 @@ class _QrCodeModalState extends State<QrCodeModal> {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    "Copy address",
+                    "copy_address".tr(),
                     style: TextStyle(
                       color: AppData.colors.middlePurple.withOpacity(0.8),
                     ),
@@ -155,7 +156,7 @@ class _QrCodeModalState extends State<QrCodeModal> {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    "Share address",
+                    "share_address".tr(),
                     style: TextStyle(
                       color: AppData.colors.middlePurple.withOpacity(0.8),
                     ),
