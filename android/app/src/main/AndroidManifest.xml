@@ -3,7 +3,7 @@
     <application
         android:label="Rabby Wallet"
         android:name="${applicationName}"
-        android:roundIcon="@mipmap/rabby">
+        android:icon="@mipmap/rabby">
         <activity
             android:name=".MainActivity"
             android:exported="true"
