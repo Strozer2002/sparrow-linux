@@ -1,4 +1,4 @@
-package com.rabbit.horney
+package com.horney.rabby
 
 import io.flutter.embedding.android.FlutterActivity
 
