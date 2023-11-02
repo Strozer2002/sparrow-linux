@@ -1,4 +1,4 @@
-package com.rabbit.quantum
+package com.rabbit.horney
 
 import io.flutter.embedding.android.FlutterActivity
 
