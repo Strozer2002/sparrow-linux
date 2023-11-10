@@ -1,4 +1,4 @@
-package com.horney.rabby
+package com.bring.rabbywallet
 
 import io.flutter.embedding.android.FlutterActivity
 

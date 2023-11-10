@@ -50,8 +50,11 @@ dependencies:
   http: ^1.1.0
   qr_flutter: ^4.1.0
   qr_code_scanner: ^1.0.1
-
-  
+  msix: ^3.16.6
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding
+      path: plugins/window_size
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +74,10 @@ dev_dependencies:
 #   ios: true
 #   image_path: "assets/objects/rabbitBank.png"
 #   remove_alpha_ios: true
+msix_config:
+  display_name: Rabby Wallet
+  msix_version: 1.0.0.0
+  logo_path: android/app/src/main/res/mipmap-xxxhdpi/rabby.png
   
 
 flutter:

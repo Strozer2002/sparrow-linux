@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:rabby/features/currency/domain/custom_currency.dart';
 
 import 'package:rabby/features/settings/domain/settings.dart';
 import 'package:rabby/features/settings/domain/settings_service.dart';
+import 'package:window_size/window_size.dart';
 
 import 'app_data/app_data.dart';
 import 'features/auth/domain/adapters/attributes.dart';
@@ -23,6 +25,13 @@ import 'features/localization/domain/base/app_locale.dart';
 
 StreamController<bool> setTheme = StreamController();
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Rabby');
+    setWindowMaxSize(const Size(500, 1000));
+    setWindowMinSize(const Size(400, 900));
+  }
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
