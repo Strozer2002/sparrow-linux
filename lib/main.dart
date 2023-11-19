@@ -34,6 +34,7 @@ Future<void> main() async {
     setWindowMaxSize(const Size(500, 1000));
     setWindowMinSize(const Size(400, 900));
   }
+
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
