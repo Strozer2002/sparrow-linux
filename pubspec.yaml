@@ -75,9 +75,15 @@ dev_dependencies:
 #   image_path: "assets/objects/rabbitBank.png"
 #   remove_alpha_ios: true
 msix_config:
-  display_name: Rabby Wallet
+  display_name: Rabby Wallet  
   msix_version: 1.0.0.0
   logo_path: android/app/src/main/res/mipmap-xxxhdpi/rabby.png
+  publisher_display_name: Rabby Product
+  identity_name: 33646RabbyProduct.RabbyWallet
+  publisher: CN=EBD00BA9-9DA3-44C5-9C9F-AC0666330280
+  store: true
+
+  
   
 
 flutter:

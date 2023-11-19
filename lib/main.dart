@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rabby/features/auth/domain/adapters/transaction.dart';
 import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
+import 'package:rabby/features/calculator/domain/calculate_crypt.dart';
+import 'package:rabby/features/calculator/domain/calculate_list.dart';
 import 'package:rabby/features/currency/domain/custom_currency.dart';
 
 import 'package:rabby/features/settings/domain/settings.dart';
@@ -46,17 +48,22 @@ Future<void> main() async {
   Hive.registerAdapter(SettingsAdapter());
   Hive.registerAdapter(TransactionAdapter());
   Hive.registerAdapter(CustomCurrencyAdapter());
+  Hive.registerAdapter(CalculateCryptAdapter());
+  Hive.registerAdapter(CalculateListAdapter());
 
   await Hive.openBox<User>('user');
   await Hive.openBox<Settings>('settings');
+  await Hive.openBox<CalculateList>('calculate_list');
 
   // final SettingsService settingsService = SettingsService();
   // settingsService.putPassCode("111111");
 
   // Box box = await Hive.openBox<User>('user');
   // Box box2 = await Hive.openBox<Settings>('settings');
+  // Box box3 = await Hive.openBox<List<CalculateCrypt>>('calculate_list');
   // box.clear();
   // box2.clear();
+  // box3.clear();
 
   runApp(
     EasyLocalization(

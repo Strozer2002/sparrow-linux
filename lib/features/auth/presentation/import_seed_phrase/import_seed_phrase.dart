@@ -41,7 +41,7 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
           ),
         ),
       ),
-      child: mnemonicList == null
+      child: mnemonicList.any((element) => element.isEmpty)
           ? MainButton(
               gradient: LinearGradient(colors: [
                 AppData.colors.middlePurple.withOpacity(0.5),
@@ -54,7 +54,7 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
               ),
             )
           : MainButton(
-              gradient: mnemonicList!.length < mnemonicCount
+              gradient: mnemonicList.length < mnemonicCount
                   ? LinearGradient(colors: [
                       AppData.colors.middlePurple.withOpacity(0.5),
                       AppData.colors.middlePurple.withOpacity(0.5)
@@ -63,7 +63,7 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
                       AppData.colors.middlePurple,
                       AppData.colors.middlePurple,
                     ]),
-              onPressed: mnemonicList!.length < mnemonicCount ? null : next,
+              onPressed: mnemonicList.length < mnemonicCount ? null : next,
               child: const Text(
                 "Confirm",
                 style: TextStyle(color: Colors.white),
@@ -139,31 +139,32 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
                 ),
               ),
               const SizedBox(width: 8),
-              index == 0 && !isSubmit
-                  ? Expanded(
-                      child: TextField(
-                        onChanged: (value) {
-                          setState(() {
-                            phraseController.text = value;
-                          });
-                        },
-                        onSubmitted: onSubmitted,
-                        controller: phraseController,
-                        decoration: const InputDecoration(
-                          labelText: 'Here...',
-                          border: InputBorder.none,
-                        ),
+              Expanded(
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      controllers[index].text = value;
+                    });
+                  },
+                  onSubmitted: (value) {
+                    setState(() {
+                      mnemonicList[index] = value;
+                      controllers[index].text = '';
+                    });
+                  },
+                  controller: controllers[index],
+                  decoration: InputDecoration(
+                    label: Text(
+                      " ${mnemonicList.length <= index ? "" : mnemonicList[index]}",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
                       ),
-                    )
-                  : mnemonicList == null
-                      ? Container()
-                      : Text(
-                          " ${mnemonicList!.length <= index ? "" : mnemonicList?[index]}",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -173,25 +174,54 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
   }
 
   Widget get clearAll {
-    return TextButton(
-      onPressed: onClear,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.clear_all_rounded,
-            color: AppData.colors.middlePurple,
+    return Column(
+      children: [
+        IconButton(
+          onPressed: onClear,
+          icon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.clear_all_rounded,
+                color: AppData.colors.middlePurple,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                "Clear All",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: AppData.colors.middlePurple,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 6),
-          Text(
-            "Clear All",
-            style: TextStyle(
-              fontSize: 14,
-              color: AppData.colors.middlePurple,
-            ),
+        ),
+        IconButton(
+          onPressed: () async {
+            ClipboardData? data = await Clipboard.getData('text/plain');
+            setState(() {
+              phraseController.text = data!.text!;
+              onSubmitted(phraseController.text);
+            });
+          },
+          icon: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.content_paste_go,
+                color: AppData.colors.middlePurple,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                "Paste All",
+                style: TextStyle(
+                  color: AppData.colors.middlePurple,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -221,6 +251,11 @@ class _ImportSeedPhraseState extends ImportSeedPhraseBloc {
                             onChanged: (int? newValue) {
                               setState(() {
                                 mnemonicCount = newValue!;
+                                mnemonicList = List.filled(mnemonicCount, "");
+                                controllers = List.generate(
+                                  mnemonicCount,
+                                  (index) => TextEditingController(),
+                                );
                               });
                             },
                             items: possibleCount

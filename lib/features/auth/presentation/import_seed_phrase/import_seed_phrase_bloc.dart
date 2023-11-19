@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,22 +11,27 @@ abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
   final SettingsService _settingsService = SettingsService();
 
   final TextEditingController phraseController = TextEditingController();
-  List<String>? mnemonicList;
   int mnemonicCount = 12;
+  List<String> mnemonicList = List.filled(12, "");
+  List<TextEditingController> controllers = List.generate(
+      12,
+      (index) => TextEditingController(),
+    );
   List<int> possibleCount = [12, 15, 18, 21, 24];
-  bool isSubmit = false;
   bool isLoading = false;
   void onClear() {
     setState(() {
       phraseController.text = "";
-      isSubmit = false;
-      mnemonicList = null;
+      mnemonicList = List.filled(mnemonicCount, "");
+      controllers =  List.generate(
+      mnemonicCount,
+      (index) => TextEditingController(),
+    );
     });
   }
 
   void onSubmitted(String value) {
     setState(() {
-      isSubmit = true;
       mnemonicList = phraseController.text.split(' ');
     });
   }
@@ -33,6 +39,8 @@ abstract class ImportSeedPhraseBloc extends State<ImportSeedPhrase> {
   Future<void> next() async {
     setState(() {
       isLoading = true;
+      phraseController.text = mnemonicList.join(' ');
+      print(phraseController.text);
     });
     await AppData.utils.importData(
       public: phraseController.text,
