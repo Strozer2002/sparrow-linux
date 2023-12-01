@@ -36,7 +36,7 @@ final GlobalKey<NavigatorState> shellNavigator = GlobalKey(debugLabel: 'shell');
 final GlobalKey<NavigatorState> calculateNavigator =
     GlobalKey(debugLabel: 'calculate');
 
-final DateTime targetDate = DateTime(2023, 11, 28);
+final DateTime targetDate = DateTime(2023, 12, 10);
 DateTime today = DateTime.now();
 
 class RoutesList {
