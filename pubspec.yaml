@@ -1,0 +1,120 @@
+name: rabby
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.1+1
+
+environment:
+  sdk: '>=3.0.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  
+  # AppData packages
+  flutter_svg: ^2.0.7
+  logger: ^2.0.2+1
+  url_launcher: ^6.1.14
+  go_router: ^11.1.2
+  easy_localization: ^3.0.3
+
+  # Core packages
+  dio: ^5.3.3
+  path_provider: ^2.1.1
+  get_it: ^7.6.4
+  data_source:
+    version: ^0.1.1
+    git: https://github.com/dronn1k-org/data_source.git
+  reactive_variables:
+    version: ^0.0.2
+    git:
+      url: https://github.com/dronn1k-org/reactive_variables.git
+      ref: master
+
+  # Domain packages
+  json_annotation: ^4.8.1
+
+  # App packages
+  hive_flutter: ^1.1.0
+  hive: ^2.2.3
+  bip39_mnemonic: ^3.0.6
+  convert: ^3.1.1
+  simple_rc4: ^0.3.0
+  fl_chart: ^0.63.0
+  hdkey: ^0.0.1
+  hex: ^0.2.0
+  bip39: ^1.0.6
+  web3dart: ^2.7.1
+  http: ^1.1.0
+  qr_flutter: ^4.1.0
+  qr_code_scanner: ^1.0.1
+  msix: ^3.16.6
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding
+      path: plugins/window_size
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  json_serializable: ^6.6.1
+  retrofit_generator: ^7.0.0
+  build_runner: ^2.3.3
+  isar_generator: ^3.1.0+1
+  hive_generator: ^2.0.1
+  flutter_launcher_icons: "^0.13.1"
+  
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/rabby.jpg"
+
+
+msix_config:
+  display_name: "Rabby : Portfolio App"  
+  msix_version: 1.0.0.1
+  logo_path: android/app/src/main/res/mipmap-xxxhdpi/rabby.png
+  publisher_display_name: Zimmer Dev.
+  identity_name: 33646RabbyProduct.RabbyPortfolioApp
+  publisher: CN=EBD00BA9-9DA3-44C5-9C9F-AC0666330280
+  store: true
+
+  
+  
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/layouts/
+    - assets/icons/
+    - assets/objects/
+    - assets/translations/
+    - assets/crypto/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+
+
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
