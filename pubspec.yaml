@@ -71,7 +71,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "android/app/src/main/res/mipmap-xxxhdpi/rabby.png"
+  image_path: "assets/rabby.jpg"
 
 
 msix_config:

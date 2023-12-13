@@ -1,4 +1,4 @@
-package com.tracker.rabby
+package com.mywallet.rabby
 
 import io.flutter.embedding.android.FlutterActivity
 
