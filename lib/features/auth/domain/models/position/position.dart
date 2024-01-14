@@ -1,18 +1,19 @@
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rabby/features/auth/domain/models/position/position_attributes.dart';
+import 'package:sparrow/features/auth/domain/models/position/position_attributes.dart';
 
 part 'position.g.dart';
 
 @JsonSerializable(createFactory: true)
 class PositionEntity implements DTO {
-  final String type;
+  final List<String>? positions;
 
-  final PositionAttributesEntity attributes;
+  @JsonKey(name: "aggregation_in_progress")
+  final bool aggregationInProgress;
 
-  const PositionEntity( {
-    required this.type,
-    required this.attributes,
+  const PositionEntity({
+    required this.positions,
+    required this.aggregationInProgress,
   });
 
   factory PositionEntity.fromJson(Map<String, dynamic> json) =>

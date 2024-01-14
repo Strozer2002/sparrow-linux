@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
-import 'package:rabby/features/settings/domain/settings.dart';
+import 'package:sparrow/features/settings/domain/settings.dart';
 
 import '../../../app_data/app_data.dart';
 
@@ -39,17 +39,16 @@ class SettingsService {
     if (getPassCode() != null && isRelocate == true) {
       print("Relocate resume");
       isRelocate = false;
-      AppData.routesConfig.routerConfig.go(AppData.routes.setCode);
     }
   }
 
   void mainRelocate() {
     if (getPassCode() != null && isRelocate == true) {
-      AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
     }
   }
+
   void relocateChild() =>
-      AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
+      AppData.routesConfig.routerConfig.push(AppData.routes.welcomeScreen);
 
   void lockApp(bool value) {
     print("Relocate $value");
@@ -63,7 +62,7 @@ class SettingsService {
             getAutoLock() == true) {
           print("Relocate with ${getDuration()} min");
           isRelocate = false;
-          AppData.routesConfig.routerConfig.push(AppData.routes.setCode);
+          AppData.routesConfig.routerConfig.push(AppData.routes.welcomeScreen);
         }
       });
     }

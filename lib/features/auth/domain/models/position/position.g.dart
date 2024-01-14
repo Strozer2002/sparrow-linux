@@ -8,13 +8,14 @@ part of 'position.dart';
 
 PositionEntity _$PositionEntityFromJson(Map<String, dynamic> json) =>
     PositionEntity(
-      type: json['type'] as String,
-      attributes: PositionAttributesEntity.fromJson(
-          json['attributes'] as Map<String, dynamic>),
+      positions: (json['positions'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      aggregationInProgress: json['aggregation_in_progress'] as bool,
     );
 
 Map<String, dynamic> _$PositionEntityToJson(PositionEntity instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'attributes': instance.attributes,
+      'positions': instance.positions,
+      'aggregation_in_progress': instance.aggregationInProgress,
     };

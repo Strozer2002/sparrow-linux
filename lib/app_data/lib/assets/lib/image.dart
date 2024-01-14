@@ -32,8 +32,9 @@ class ImageCollection {
         height: height,
         fit: fit ?? BoxFit.contain,
       );
-  Image rabbyIcon({double? width, double? height, BoxFit? fit}) => Image.asset(
-        _name('icons/rabbyIcon.png'),
+  Image sparrowIcon({double? width, double? height, BoxFit? fit}) =>
+      Image.asset(
+        _name('icons/sparrowIcon.png'),
         width: width,
         height: height,
         fit: fit ?? BoxFit.contain,
@@ -46,6 +47,14 @@ class ImageCollection {
       );
   Image eco({double? width, double? height, BoxFit? fit}) => Image.asset(
         _name('icons/eco.png'),
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+      );
+
+  Image sparrow_logo48({double? width, double? height, BoxFit? fit}) =>
+      Image.asset(
+        _name('icons/sparrow_logo48.png'),
         width: width,
         height: height,
         fit: fit ?? BoxFit.contain,

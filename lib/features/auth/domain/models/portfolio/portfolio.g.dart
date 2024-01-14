@@ -8,15 +8,14 @@ part of 'portfolio.dart';
 
 PortfolioEntity _$PortfolioEntityFromJson(Map<String, dynamic> json) =>
     PortfolioEntity(
-      type: json['type'] as String,
-      id: json['id'] as String,
-      attributes:
-          AttributesEntity.fromJson(json['attributes'] as Map<String, dynamic>),
+      totalValue: json['total_value'] as int?,
+      absoluteChange: json['absolute_change_24h'] as int?,
+      relativeChange: json['relative_change_24h'] as int?,
     );
 
 Map<String, dynamic> _$PortfolioEntityToJson(PortfolioEntity instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'id': instance.id,
-      'attributes': instance.attributes,
+      'total_value': instance.totalValue,
+      'absolute_change_24h': instance.absoluteChange,
+      'relative_change_24h': instance.relativeChange,
     };

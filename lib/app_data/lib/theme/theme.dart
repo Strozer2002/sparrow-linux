@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rabby/features/settings/domain/settings_service.dart';
+import 'package:sparrow/features/settings/domain/settings_service.dart';
 
 import '../../app_data.dart';
 import 'lib/box_decoration.dart';
@@ -26,7 +26,7 @@ class AppTheme {
 
   ThemeData themeData(BuildContext context) => ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: AppData.colors.nightBgColor,
+        scaffoldBackgroundColor: AppData.colors.backgroundColor,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppData.colors.sky600,
           secondary: Colors.white,

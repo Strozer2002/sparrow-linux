@@ -8,7 +8,7 @@ part of 'custom_currency.dart';
 
 class CustomCurrencyAdapter extends TypeAdapter<CustomCurrency> {
   @override
-  final int typeId = 11;
+  final int typeId = 20;
 
   @override
   CustomCurrency read(BinaryReader reader) {

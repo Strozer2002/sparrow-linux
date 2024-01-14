@@ -27,12 +27,26 @@ class Svg {
       );
 
   // SvgPicture get formDefault => SvgPicture.asset(_name('form-default'));
+  SvgPicture get switch_off => SvgPicture.asset(_name('icons/switch_off'));
+  SvgPicture get switch_yellow => SvgPicture.asset(_name('icons/switch_yelow'));
+  SvgPicture get switch_green => SvgPicture.asset(_name('icons/switch_green'));
+  SvgPicture get switch_blue => SvgPicture.asset(_name('icons/switch_blue'));
+  SvgPicture get tools => SvgPicture.asset(_name('icons/tools'));
+  SvgPicture get server => SvgPicture.asset(_name('icons/server'));
+  SvgPicture get eye => SvgPicture.asset(_name('icons/eye'));
+  SvgPicture get access => SvgPicture.asset(_name('icons/access'));
+
+  SvgPicture get transactions => SvgPicture.asset(_name('icons/transactions'));
+  SvgPicture get send => SvgPicture.asset(_name('icons/send'));
+
+  SvgPicture get receive => SvgPicture.asset(_name('icons/receive'));
+  SvgPicture get address => SvgPicture.asset(_name('icons/address'));
+  SvgPicture get settings => SvgPicture.asset(_name('icons/settings'));
 
   SvgPicture get logo => SvgPicture.asset(_name('icons/logo'));
   SvgPicture get chevron => SvgPicture.asset(_name('icons/chevron'));
   SvgPicture get plus => SvgPicture.asset(_name('icons/plus'));
   SvgPicture get importPlus => SvgPicture.asset(_name('icons/importPlus'));
-  SvgPicture get import => SvgPicture.asset(_name('icons/import'));
   SvgPicture get wallets => SvgPicture.asset(_name('icons/wallets'));
   SvgPicture get lock => SvgPicture.asset(_name('icons/lock'));
   SvgPicture get pen => SvgPicture.asset(_name('icons/pen'));
@@ -41,21 +55,22 @@ class Svg {
 
   // bottom nav bar
   SvgPicture get clearAll => SvgPicture.asset(_name('icons/clearAll'));
-  SvgPicture settings({
-    Color? color,
-    double? size,
-  }) =>
-      SvgPicture.asset(
-        _name('icons/settings'),
-        colorFilter: _getColorFilterFromColor(color),
-        width: size,
-      );
+
   SvgPicture wallet({
     Color? color,
     double? size,
   }) =>
       SvgPicture.asset(
         _name('icons/wallet'),
+        colorFilter: _getColorFilterFromColor(color),
+        width: size,
+      );
+  SvgPicture import({
+    Color? color,
+    double? size,
+  }) =>
+      SvgPicture.asset(
+        _name('icons/import'),
         colorFilter: _getColorFilterFromColor(color),
         width: size,
       );
@@ -69,24 +84,7 @@ class Svg {
         colorFilter: _getColorFilterFromColor(color),
         width: size,
       );
-  SvgPicture send({
-    Color? color,
-    double? size,
-  }) =>
-      SvgPicture.asset(
-        _name('icons/send'),
-        colorFilter: _getColorFilterFromColor(color),
-        width: size,
-      );
-  SvgPicture receive({
-    Color? color,
-    double? size,
-  }) =>
-      SvgPicture.asset(
-        _name('icons/receive'),
-        colorFilter: _getColorFilterFromColor(color),
-        width: size,
-      );
+
   SvgPicture get walletSend => SvgPicture.asset(_name('icons/walletSend'));
   SvgPicture get walletPlus => SvgPicture.asset(_name('icons/walletPlus'));
   //home

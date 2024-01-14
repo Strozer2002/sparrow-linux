@@ -1,6 +1,6 @@
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rabby/features/auth/domain/models/changes.dart';
+import 'package:sparrow/features/auth/domain/models/changes.dart';
 
 import '../quantity.dart';
 import 'fungible_info.dart';

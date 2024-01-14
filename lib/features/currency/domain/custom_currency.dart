@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'custom_currency.g.dart';
 
-@HiveType(typeId: 11)
+@HiveType(typeId: 20)
 class CustomCurrency {
   @HiveField(0)
   String name;

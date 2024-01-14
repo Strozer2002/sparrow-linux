@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rabby/app_data/app_data.dart';
-import 'package:rabby/features/auth/presentation/welcome/welcome.dart';
+import 'package:sparrow/app_data/app_data.dart';
+import 'package:sparrow/features/auth/presentation/welcome/welcome.dart';
 
 abstract class WelcomeBloc extends State<WelcomeScreen> {
   @override
@@ -15,9 +15,7 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
   int selectedScreen = 0;
 
   // width for topNavigation
-  double pickedWidth = 16;
-  double unpickedWidth = 6;
-
+  bool isSwitch = false;
   // logic for screens
   void goNextScreen() {
     setState(() {
@@ -25,23 +23,13 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
     });
   }
 
-  void toSkipScreens() {
+  void goBackScreen() {
     setState(() {
-      selectedScreen = 3;
+      selectedScreen = selectedScreen - 1;
     });
-  }
-
-  // logic for links
-  void toManyMore() {
-    log("$selectedScreen");
-  }
-
-  void toTermsOfUse() {
-    log("$selectedScreen");
   }
 
   // logic for wallets
   void toCreateNewAddress() =>
       context.push(AppData.routes.createWalletScreenScreen);
-  void toImportAddress() => context.push(AppData.routes.selectImport);
 }

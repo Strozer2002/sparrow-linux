@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rabby/features/widgets/loading_widget.dart';
+import 'package:sparrow/features/widgets/loading_widget.dart';
 
 import 'init_bloc.dart';
 

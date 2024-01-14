@@ -1,6 +1,6 @@
 {
-    "name": "rabby",
-    "description": "Rabby wallet - crypto wallet",
+    "name": "sparrow",
+    "description": "Sparrow wallet - crypto wallet",
     "version": "1.0.0",
     "content_security_policy": {
         "extension_pages": "script-src 'self' ;object-src 'self'"

@@ -8,7 +8,7 @@ part of 'portfolio.dart';
 
 class PortfolioAdapter extends TypeAdapter<Portfolio> {
   @override
-  final int typeId = 2;
+  final int typeId = 11;
 
   @override
   Portfolio read(BinaryReader reader) {
@@ -17,9 +17,9 @@ class PortfolioAdapter extends TypeAdapter<Portfolio> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Portfolio(
-      type: fields[0] as String,
-      id: fields[1] as String,
-      attributes: fields[2] as Attributes,
+      totalValue: fields[0] as int?,
+      absoluteChange: fields[1] as int?,
+      relativeChange: fields[2] as int?,
     );
   }
 
@@ -28,11 +28,11 @@ class PortfolioAdapter extends TypeAdapter<Portfolio> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.type)
+      ..write(obj.totalValue)
       ..writeByte(1)
-      ..write(obj.id)
+      ..write(obj.absoluteChange)
       ..writeByte(2)
-      ..write(obj.attributes);
+      ..write(obj.relativeChange);
   }
 
   @override

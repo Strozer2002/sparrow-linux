@@ -1,23 +1,21 @@
 import 'package:hive/hive.dart';
 
-import 'attributes.dart';
-
 part 'portfolio.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 11)
 class Portfolio {
   @HiveField(0)
-  String type;
+  int? totalValue;
 
   @HiveField(1)
-  String id;
+  int? absoluteChange;
 
   @HiveField(2)
-  Attributes attributes;
+  int? relativeChange;
 
   Portfolio({
-    required this.type,
-    required this.id,
-    required this.attributes,
+    required this.totalValue,
+    required this.absoluteChange,
+    required this.relativeChange,
   });
 }

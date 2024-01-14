@@ -27,8 +27,7 @@ base class OrdinalRemoteDataSource
 
   @override
   HeadersType headers = {
-    'Content-Type': 'application/json',
-    'accept': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
   };
 
   @override

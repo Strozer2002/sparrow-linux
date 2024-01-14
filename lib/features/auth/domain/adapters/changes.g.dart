@@ -8,7 +8,7 @@ part of 'changes.dart';
 
 class ChangesAdapter extends TypeAdapter<Changes> {
   @override
-  final int typeId = 7;
+  final int typeId = 16;
 
   @override
   Changes read(BinaryReader reader) {

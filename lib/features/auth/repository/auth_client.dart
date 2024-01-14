@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:rabby/features/diagrammes/domain/diagram.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../domain/object/single_response_body.dart';
-import '../../swap/domain/data_swap_entity.dart';
 import '../domain/models/user_entity.dart';
 import 'domain/register/register_body.dart';
 
@@ -18,20 +16,6 @@ abstract class AuthClient {
     @Body() RegisterBody body,
   );
 
-  @GET('/{address}/getChart/{period}')
-  Future<HttpResponse<SingleResponseBody<DiagramEntity>>> periods(
-    @Path("address") String address,
-    @Path("period") String period,
-  );
 
-  @GET('/{id}/swap')
-  Future<HttpResponse<SingleResponseBody<DataSwapEntity>>> linch(
-    @Path("id") int id,
-    @Query('src') String fromToken,
-    @Query('dst') String toToken,
-    @Query('amount') int amount,
-    @Query('from') String fromAddress,
-    @Query('slippage') double slippage,
-    @Query('disableEstimate') bool disableEstimate,
-  );
+ 
 }

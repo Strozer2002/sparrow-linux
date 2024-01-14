@@ -8,7 +8,7 @@ part of 'position_by_type.dart';
 
 class PositionByTypeAdapter extends TypeAdapter<PositionByType> {
   @override
-  final int typeId = 5;
+  final int typeId = 13;
 
   @override
   PositionByType read(BinaryReader reader) {

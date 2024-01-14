@@ -1,10 +1,9 @@
 import 'package:hive/hive.dart';
-
-import '../../presentation/manage_crypt/domain/crypt.dart';
+import 'package:sparrow/features/crypt/domain/crypt.dart';
 
 part 'position_by_chain.g.dart';
 
-@HiveType(typeId: 4)
+@HiveType(typeId: 14)
 class PositionByChain {
   @HiveField(0)
   List<Crypt> crypts;

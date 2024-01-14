@@ -8,7 +8,7 @@ part of 'position_by_chain.dart';
 
 class PositionByChainAdapter extends TypeAdapter<PositionByChain> {
   @override
-  final int typeId = 4;
+  final int typeId = 14;
 
   @override
   PositionByChain read(BinaryReader reader) {

@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'transaction.g.dart';
 
-@HiveType(typeId: 10)
+@HiveType(typeId: 19)
 class Transaction {
   @HiveField(0)
   String operationType;

@@ -12,7 +12,7 @@ class ColorsCollection {
   }
 
   /// Цвет фона страниц
-  Color get backgroundColor => Colors.white;
+  Color get backgroundColor => const Color(0xffC5C5C5);
   Color get backgroundBlackColor => Colors.black;
 
   /// Цвет фона страниц, который чуть темнее, чем [backgroundColor]

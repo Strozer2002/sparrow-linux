@@ -7,7 +7,7 @@ import 'total.dart';
 
 part 'attributes.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 12)
 class Attributes {
   @HiveField(0)
   PositionByType positionsDistributionByType;

@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'position_by_type.g.dart';
 
-@HiveType(typeId: 5)
+@HiveType(typeId: 13)
 class PositionByType {
   @HiveField(0)
   double wallet;

@@ -66,16 +66,19 @@ class _LoadingWidgetState extends State<LoadingWidget>
                     borderRadius: BorderRadius.circular(100.0),
                     boxShadow: [
                       BoxShadow(
-                        color: AppData.colors.middlePurple.withOpacity(0.4),
+                        color: Colors.white.withOpacity(0.4),
                         blurRadius: animationBg!.value,
                         spreadRadius: animationBg!.value,
                       ),
                     ],
                   ),
                   child: CircleAvatar(
-                    backgroundColor: AppData.colors.middlePurple,
-                    radius: 90 * animation!.value,
-                    child: AppData.assets.svg.rabbit(size: 100),
+                    backgroundColor: Colors.white,
+                    radius: 50 * animation!.value,
+                    child: AppData.assets.image.sparrow_logo48(
+                      width: 50,
+                      height: 50,
+                    ),
                   ),
                 ),
               ),

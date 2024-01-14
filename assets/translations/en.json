@@ -54,7 +54,7 @@
 	"price": "Price",
 	"protection": "Protection",
 	"qr_scanner": "QR Scanner",
-	"rabby_cannot_recover": "Rabby cannot recover any lost funds.",
+	"sparrow_cannot_recover": "Sparrow cannot recover any lost funds.",
 	"receive": "Receive",
 	"reception_time": "Reception time",
 	"reset_app": "Reset App",

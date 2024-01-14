@@ -1,7 +1,8 @@
 import 'package:data_source/callback_result/callback_result.dart';
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rabby/domain/interface/general_ressponse_body.dart';
+
+import '../interface/general_ressponse_body.dart';
 
 part 'single_response_body.g.dart';
 

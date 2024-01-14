@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'changes.g.dart';
 
-@HiveType(typeId: 7)
+@HiveType(typeId: 16)
 class Changes {
   @HiveField(0)
   double? absoluteId;

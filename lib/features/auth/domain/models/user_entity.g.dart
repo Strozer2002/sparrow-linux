@@ -16,7 +16,6 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
               ? null
               : PositionEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nft: json['nft'] as Map<String, dynamic>?,
       portfolio:
           PortfolioEntity.fromJson(json['portfolio'] as Map<String, dynamic>),
     );
@@ -26,6 +25,5 @@ Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
       'address': instance.address,
       'transactions': instance.transactions,
       'positions': instance.positions,
-      'nft': instance.nft,
       'portfolio': instance.portfolio,
     };

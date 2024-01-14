@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:rabby/app_data/app_data.dart';
-import 'package:rabby/features/auth/domain/auth_service.dart';
+import 'package:sparrow/app_data/app_data.dart';
+import 'package:sparrow/features/auth/domain/auth_service.dart';
 
 class QrCodeModal extends StatefulWidget {
   const QrCodeModal({super.key});

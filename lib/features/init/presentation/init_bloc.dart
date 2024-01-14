@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rabby/app_data/app_data.dart';
-import 'package:rabby/features/settings/domain/settings_service.dart';
+import 'package:sparrow/app_data/app_data.dart';
+import 'package:sparrow/features/settings/domain/settings_service.dart';
 
 import 'init.dart';
 
@@ -38,11 +38,14 @@ abstract class InitBloc extends State<InitPage> {
 
   Future<void> relocate() async {
     if (mounted) {
-      if (_settingsService.getPassCode() == null) {
+      if (_settingsService.getMnemonicSentence() == null) {
         context.push(AppData.routes.welcomeScreen);
       } else {
-        final result = await context.push<bool?>(AppData.routes.setCode);
-        if (result == true && mounted) {
+        // final result = await context.push<bool?>(AppData.routes.setCode);
+        // if (result == true && mounted) {
+        //   context.go(AppData.routes.homeScreen);
+        // }
+        if (mounted) {
           context.go(AppData.routes.homeScreen);
         }
       }

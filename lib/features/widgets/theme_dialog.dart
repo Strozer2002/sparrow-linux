@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rabby/app_data/app_data.dart';
+import 'package:sparrow/app_data/app_data.dart';
 
 import '../../main.dart';
 import '../settings/domain/settings_service.dart';

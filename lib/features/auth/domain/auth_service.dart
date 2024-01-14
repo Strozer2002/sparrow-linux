@@ -1,12 +1,5 @@
-import 'dart:developer';
-
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:rabby/features/auth/domain/adapters/position_by_chain.dart';
-import 'package:rabby/features/auth/domain/adapters/transaction.dart';
-import 'package:rabby/features/auth/presentation/manage_crypt/domain/crypt.dart';
-import 'package:rabby/features/currency/domain/custom_currency.dart';
-
 import 'adapters/user.dart';
 
 class AuthService {
@@ -42,127 +35,26 @@ class AuthService {
     return null;
   }
 
-  CustomCurrency? getSelectCurrency() {
-    List<CustomCurrency>? currencies = getCurrencies();
-    return currencies.firstWhere((element) => element.isChoose == true);
-  }
-
-  void setSelectCurrency(CustomCurrency currency) {
+  int? getBalance() {
     User? user = getUser();
     if (user != null) {
-      CustomCurrency oldCurrency = getSelectCurrency()!;
-      oldCurrency.isChoose = false;
-      currency.isChoose = true;
-      putUser(user);
-    }
-  }
-
-  void putCurrency(List<CustomCurrency> currencies) {
-    User? user = getUser();
-    if (user != null) {
-      user.currencies = currencies;
-      putUser(user);
-    }
-  }
-
-  List<CustomCurrency> getCurrencies() {
-    User? user = getUser();
-    if (user != null) {
-      return user.currencies;
-    }
-    return [];
-  }
-
-  PositionByChain? getPositionByChain() {
-    User? user = getUser();
-    if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByChain;
+      return user.sumBalance;
     }
     return null;
   }
 
-  void putCrypts(List<Crypt>? crypts) {
+  int? getMem() {
     User? user = getUser();
     if (user != null) {
-      user.portfolio.attributes.positionsDistributionByChain.crypts = crypts!;
-      putUser(user);
-    }
-  }
-
-  Crypt? getCryptByName(String name) {
-    User? user = getUser();
-    if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByChain.crypts
-          .firstWhere((crypt) => crypt.name == name);
+      return user.sumMem;
     }
     return null;
   }
 
-  List<Crypt>? getCrypts() {
+  int? getTxCount() {
     User? user = getUser();
     if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByChain.crypts;
-    }
-    return null;
-  }
-
-  List<Crypt> getCryptsByCryptsName(List<String> cryptsName) {
-    User? user = getUser();
-    if (user != null) {
-      List<Crypt> mainList = [];
-      for (int i = 0; cryptsName.length > i; i++) {
-        Crypt crypt = user
-            .portfolio.attributes.positionsDistributionByChain.crypts
-            .firstWhere(
-          (crypt) => crypt.iconName == cryptsName[i],
-        );
-        mainList.add(crypt);
-      }
-      log("mainList $mainList");
-      return mainList;
-    }
-    return [];
-  }
-
-  Crypt? getETH() {
-    User? user = getUser();
-    if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByChain.crypts
-          .firstWhere((eth) => eth.name == "Ethereum");
-    }
-    return null;
-  }
-
-  List<Crypt>? getTrueCrypts() {
-    User? user = getUser();
-    if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByChain.crypts
-          .where((crypt) => crypt.isChoose)
-          .toList();
-    }
-    return null;
-  }
-
-  double? getWallet() {
-    User? user = getUser();
-    if (user != null) {
-      return user.portfolio.attributes.positionsDistributionByType.wallet;
-    }
-    return null;
-  }
-
-  double? getChangesAbsoluteWallet() {
-    User? user = getUser();
-    if (user != null) {
-      return user.portfolio.attributes.changes.absoluteId;
-    }
-    return null;
-  }
-
-  List<Transaction>? getTransactions() {
-    User? user = getUser();
-    if (user != null) {
-      return user.transactions;
+      return user.txCount;
     }
     return null;
   }

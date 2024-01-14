@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'settings.g.dart';
 
-@HiveType(typeId: 9)
+@HiveType(typeId: 18)
 class Settings {
   @HiveField(0)
   String? mnemonicSentence;

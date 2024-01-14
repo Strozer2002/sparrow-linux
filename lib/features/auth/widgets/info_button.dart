@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rabby/app_data/app_data.dart';
+import 'package:sparrow/app_data/app_data.dart';
 
 class InfoButton extends StatefulWidget {
   final Widget prefixIcon;

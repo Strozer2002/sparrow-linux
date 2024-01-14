@@ -54,7 +54,7 @@
 	"price": "価格",
 	"protection": "保護",
 	"qr_scanner": "QRスキャナー",
-	"rabby_cannot_recover": "ラビは失われた資金を取り戻すことはできません。",
+	"sparrow_cannot_recover": "ラビは失われた資金を取り戻すことはできません。",
 	"receive": "受け取る",
 	"reception_time": "受付時間",
 	"reset_app": "アプリをリセットする",

@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'total.g.dart';
 
-@HiveType(typeId: 6)
+@HiveType(typeId: 15)
 class Total {
   @HiveField(0)
   double positions;

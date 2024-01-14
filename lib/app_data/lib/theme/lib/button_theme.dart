@@ -98,4 +98,34 @@ class ButtonThemeCollection {
           color: AppData.colors.gray300,
         ),
       );
+  ButtonStyle get deleteElevatedButton => ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
+        textStyle: AppData.theme.text.s14w600,
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        alignment: Alignment.center,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        side: BorderSide(
+          color: AppData.colors.gray300,
+        ),
+      );
+  ButtonStyle get acceptElevatedButton => ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+        textStyle: AppData.theme.text.s14w600,
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        alignment: Alignment.center,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        side: BorderSide(
+          color: AppData.colors.gray300,
+        ),
+      );
 }
