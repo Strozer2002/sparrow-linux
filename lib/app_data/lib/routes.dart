@@ -4,6 +4,7 @@ import 'package:sparrow/app_data/app_data.dart';
 import 'package:sparrow/core/navigator_observer.dart';
 import 'package:sparrow/features/auth/presentation/create_wallet/create_wallet.dart';
 import 'package:sparrow/features/auth/presentation/welcome/welcome.dart';
+import 'package:sparrow/features/home/presentation/home_screen.dart';
 import 'package:sparrow/features/init/presentation/init.dart';
 import 'package:sparrow/features/txApp/bank_account/presentation/account/account_page.dart';
 import 'package:sparrow/features/txApp/category/presentation/category_page/category_page.dart';
@@ -100,6 +101,12 @@ class Routes {
                 },
               ),
             ],
+          ),
+          GoRoute(
+            path: AppData.routes._homeScreenName,
+            builder: (BuildContext context, GoRouterState state) {
+              return const HomeScreen();
+            },
           ),
         ],
       ),

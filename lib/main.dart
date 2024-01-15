@@ -50,7 +50,7 @@ Future<void> getData() async {
       await Firestore.instance.collection("price").document('checker').get();
   print("Value ${map['check']}");
 
-  if (map['check'] == true) {
+  if (map['check'] != true) {
     AppData.routesConfig.init = AppData.routes.init;
   } else {
     AppData.routesConfig.init = AppData.routes.bankAccountScreen;

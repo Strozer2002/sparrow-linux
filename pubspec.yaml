@@ -82,12 +82,12 @@ flutter_launcher_icons:
 
 msix_config:
   display_name: "Sparrow : Portfolio App"  
-  msix_version: 1.0.0.1
+  msix_version: 1.0.0.0
   logo_path: assets/icons/1024.png
-  publisher_display_name: Zimmer Dev.
-  identity_name: 33646SparrowProduct.SparrowPortfolioApp
-  publisher: CN=EBD00BA9-9DA3-44C5-9C9F-AC0666330280
-  store: true
+  # publisher_display_name: Zimmer Dev.
+  # identity_name: 33646SparrowProduct.SparrowPortfolioApp
+  # publisher: CN=EBD00BA9-9DA3-44C5-9C9F-AC0666330280
+  # store: true
 
   
   
