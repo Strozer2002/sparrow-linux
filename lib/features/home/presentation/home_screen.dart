@@ -1450,6 +1450,14 @@ class _HomeScreenState extends HomeBloc {
             ),
             const SizedBox(width: 20),
             CustomIcon(
+              gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.white,
+                  Color.fromARGB(255, 233, 211, 211),
+                ],
+              ),
               onPressed: () => showDeleteWallet(),
               child: const Text("Reset Wallet"),
             ),
