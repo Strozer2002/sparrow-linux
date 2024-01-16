@@ -27,7 +27,7 @@ class _HomeScreenState extends HomeBloc {
       case 1:
         return AppData.assets.svg.send;
       case 2:
-        return AppData.assets.svg.receive;
+        return AppData.assets.svg.receive();
       case 3:
         return AppData.assets.svg.address;
       case 4:
@@ -112,6 +112,7 @@ class _HomeScreenState extends HomeBloc {
                 "Transactions",
                 style: TextStyle(
                   fontSize: 16,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
               SizedBox(
@@ -237,7 +238,8 @@ class _HomeScreenState extends HomeBloc {
               const Text(
                 "Send",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
               Row(
@@ -249,24 +251,31 @@ class _HomeScreenState extends HomeBloc {
                   ),
                   Expanded(
                     flex: 4,
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          payToCtrl.text = value;
-                        });
-                      },
-                      controller: payToCtrl,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(10),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        disabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppData.colors.backgroundColor, width: 1),
+                    child: SizedBox(
+                      height: 35,
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            payToCtrl.text = value;
+                          });
+                        },
+                        style: const TextStyle(fontSize: 14),
+                        controller: payToCtrl,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppData.colors.backgroundColor,
+                                width: 1),
+                          ),
                         ),
                       ),
                     ),
@@ -282,24 +291,31 @@ class _HomeScreenState extends HomeBloc {
                   ),
                   Expanded(
                     flex: 4,
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          labelToCtrl.text = value;
-                        });
-                      },
-                      controller: labelToCtrl,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(10),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        disabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppData.colors.backgroundColor, width: 1),
+                    child: SizedBox(
+                      height: 35,
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            labelToCtrl.text = value;
+                          });
+                        },
+                        style: const TextStyle(fontSize: 14),
+                        controller: labelToCtrl,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppData.colors.backgroundColor,
+                                width: 1),
+                          ),
                         ),
                       ),
                     ),
@@ -310,34 +326,41 @@ class _HomeScreenState extends HomeBloc {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Expanded(
-                    flex: 2,
+                    flex: 10,
                     child: Text("Amount:"),
                   ),
                   Expanded(
-                    flex: 3,
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          amountToCtrl.text = value;
-                        });
-                      },
-                      keyboardType: TextInputType.number,
-                      controller: amountToCtrl,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,8}$')),
-                      ],
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(10),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        disabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppData.colors.backgroundColor, width: 1),
+                    flex: 16,
+                    child: SizedBox(
+                      height: 35,
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            amountToCtrl.text = value;
+                          });
+                        },
+                        style: const TextStyle(fontSize: 14),
+                        keyboardType: TextInputType.number,
+                        controller: amountToCtrl,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d+\.?\d{0,8}$')),
+                        ],
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppData.colors.backgroundColor,
+                                width: 1),
+                          ),
                         ),
                       ),
                     ),
@@ -358,6 +381,7 @@ class _HomeScreenState extends HomeBloc {
                           color: AppData.colors.gray200,
                         )),
                     child: DropdownButton<String>(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       iconSize: 24,
                       elevation: 16,
                       underline: const SizedBox(),
@@ -393,7 +417,8 @@ class _HomeScreenState extends HomeBloc {
                   const Text(
                     "Fee",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                   Row(
@@ -456,42 +481,36 @@ class _HomeScreenState extends HomeBloc {
                     child: Text("Range:"),
                   ),
                   Expanded(
-                    flex: 4,
+                    flex: 5,
                     child: SliderTheme(
                       data: SliderThemeData(
-                        inactiveTrackColor:
-                            sliderValue < 600 ? Colors.blue : Colors.red,
-                        thumbColor:
-                            sliderValue < 600 ? Colors.white : Colors.red,
-                        valueIndicatorColor:
-                            sliderValue < 600 ? Colors.blue : Colors.red,
-                        activeTrackColor:
-                            sliderValue < 600 ? Colors.blue : Colors.red,
-                        inactiveTickMarkColor:
-                            sliderValue < 600 ? Colors.blue : Colors.red,
+                        inactiveTrackColor: sliderColor,
+                        thumbColor: sliderColor,
+                        valueIndicatorColor: sliderColor,
+                        activeTrackColor: sliderColor,
+                        inactiveTickMarkColor: sliderColor,
                       ),
                       child: Slider(
                         value: sliderValue,
                         min: minValue,
                         max: maxValue,
-                        divisions: 9,
+                        divisions: 1024,
                         onChanged: (value) {
                           setState(() {
                             sliderValue = value;
                             print("sliderValue $sliderValue");
                           });
                         },
-                        label: calculateLabel(
-                            sliderValue), // Отображаемое значение
+                        label: sliderValue.toString(), // Отображаемое значение
                       ),
                     ),
                   ),
                 ],
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
+                  const Expanded(
                     flex: 2,
                     child: Text("Rate:"),
                   ),
@@ -500,8 +519,8 @@ class _HomeScreenState extends HomeBloc {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("20.00 sats/vB"),
-                        Text("High Priority"),
+                        Text("$sliderValue sats/vB"),
+                        Text(sliderText),
                       ],
                     ),
                   )
@@ -511,34 +530,41 @@ class _HomeScreenState extends HomeBloc {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Expanded(
-                    flex: 2,
+                    flex: 10,
                     child: Text("Fee:"),
                   ),
                   Expanded(
-                    flex: 3,
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          feeToCtrl.text = value;
-                        });
-                      },
-                      keyboardType: TextInputType.number,
-                      controller: feeToCtrl,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d+\.?\d{0,8}$')),
-                      ],
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(10),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        disabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppData.colors.backgroundColor, width: 1),
+                    flex: 16,
+                    child: SizedBox(
+                      height: 35,
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            feeToCtrl.text = value;
+                          });
+                        },
+                        style: const TextStyle(fontSize: 14),
+                        keyboardType: TextInputType.number,
+                        controller: feeToCtrl,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d+\.?\d{0,8}$')),
+                        ],
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppData.colors.backgroundColor,
+                                width: 1),
+                          ),
                         ),
                       ),
                     ),
@@ -559,6 +585,7 @@ class _HomeScreenState extends HomeBloc {
                           color: AppData.colors.gray200,
                         )),
                     child: DropdownButton<String>(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       iconSize: 24,
                       elevation: 16,
                       underline: const SizedBox(),
@@ -711,6 +738,7 @@ class _HomeScreenState extends HomeBloc {
                         "Receive",
                         style: TextStyle(
                           fontSize: 16,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                       SizedBox(
@@ -793,17 +821,17 @@ class _HomeScreenState extends HomeBloc {
                           ],
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: Text("Derivation:"),
                             ),
                             Expanded(
                               flex: 4,
-                              child: Text("m/84’/0’/0’/0/7"),
+                              child: Text("m/84’/0’/0’/0/$currentAddress"),
                             )
                           ],
                         ),
@@ -848,7 +876,7 @@ class _HomeScreenState extends HomeBloc {
                   ),
                   child: QrImageView(
                     backgroundColor: Colors.white,
-                    data: authService.getAddress().toString(),
+                    data: authService.getAddress(currentAddress).toString(),
                     size: 180,
                   ),
                 ),
@@ -873,6 +901,7 @@ class _HomeScreenState extends HomeBloc {
                   "Required ScriptPubKey",
                   style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 SizedBox(
@@ -896,7 +925,7 @@ class _HomeScreenState extends HomeBloc {
                             border: Border.all(
                                 color: AppData.colors.backgroundColor),
                           ),
-                          child: const Text("OP_0 <wpkh>"),
+                          child: Text("OP_0 <$sqrText>"),
                         ),
                       )
                     ],
@@ -906,6 +935,7 @@ class _HomeScreenState extends HomeBloc {
                   "Output Descriptor",
                   style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 SizedBox(
@@ -929,8 +959,7 @@ class _HomeScreenState extends HomeBloc {
                             border: Border.all(
                                 color: AppData.colors.backgroundColor),
                           ),
-                          child: const Text(
-                              "wpkh (02b1cde2Badf99395e0bbe83e08b02b1cde2Badf99395e0bbe83e08b02b1cde2Badf99395e0bbe83e08b)"),
+                          child: Text(addressText),
                         ),
                       )
                     ],
@@ -942,8 +971,15 @@ class _HomeScreenState extends HomeBloc {
         ),
         const SizedBox(height: 50),
         CustomIcon(
-          onPressed: () => setState(() {}),
-          child: const Text("Get Next Address"),
+          width: 150,
+          onPressed: isLoadingAddress ? null : () => addAddress(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              AppData.assets.svg.receive(color: Colors.black, size: 14),
+              const Text("Get Next Address"),
+            ],
+          ),
         ),
       ],
     );
@@ -958,6 +994,7 @@ class _HomeScreenState extends HomeBloc {
           "Receive Addresses",
           style: TextStyle(
             fontSize: 16,
+            fontWeight: FontWeight.w800,
           ),
         ),
         const SizedBox(height: 10),
@@ -1003,9 +1040,32 @@ class _HomeScreenState extends HomeBloc {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: ListView.separated(
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => const Text(
-                          "bclqfxrpfvxyyszpc27d91ch0r7tfpu29gnnu83ma"),
-                      itemCount: 50,
+                      itemBuilder: (context, index) => Row(
+                        children: [
+                          Text(
+                            authService.getAddress(index)!,
+                          ),
+                          const SizedBox(width: 10),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  currentAddress = index;
+                                  address =
+                                      authService.getAddress(currentAddress)!;
+                                });
+                                currentScreen = 2;
+                              },
+                              child: AppData.assets.svg.receive(
+                                color: Colors.black,
+                                size: 14,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      itemCount: authService.getAddresses()!.length,
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
                     ),
@@ -1020,6 +1080,7 @@ class _HomeScreenState extends HomeBloc {
           "Change Addresses",
           style: TextStyle(
             fontSize: 16,
+            fontWeight: FontWeight.w800,
           ),
         ),
         const SizedBox(height: 10),
@@ -1065,9 +1126,10 @@ class _HomeScreenState extends HomeBloc {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: ListView.separated(
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => const Text(
-                          "bclqfxrpfvxyyszpc27d91ch0r7tfpu29gnnu83ma"),
-                      itemCount: 50,
+                      itemBuilder: (context, index) => Text(
+                        authService.getAddress(index)!,
+                      ),
+                      itemCount: authService.getAddresses()!.length,
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
                     ),
@@ -1098,108 +1160,179 @@ class _HomeScreenState extends HomeBloc {
                   "Settings",
                   style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
-                      flex: 1,
-                      child: Text("Policy Type:"),
-                    ),
                     Expanded(
-                      flex: 4,
-                      child: Row(
+                      flex: 12,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.white,
-                                    AppData.colors.gray200,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text("Policy Type:"),
+                              ),
+                              Expanded(
+                                flex: 4,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.white,
+                                              AppData.colors.gray200,
+                                            ],
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                          ),
+                                          border: Border.all(
+                                            color: AppData.colors.gray200,
+                                          )),
+                                      child: DropdownButton<String>(
+                                        underline: const SizedBox(),
+                                        dropdownColor:
+                                            AppData.colors.backgroundColor,
+                                        value: policyType,
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            policyType = newValue!;
+                                          });
+                                        },
+                                        items:
+                                            policyTypeItems.map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                    const SizedBox()
                                   ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
                                 ),
-                                border: Border.all(
-                                  color: AppData.colors.gray200,
-                                )),
-                            child: DropdownButton<String>(
-                              underline: const SizedBox(),
-                              dropdownColor: AppData.colors.backgroundColor,
-                              value: policyType,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  policyType = newValue!;
-                                });
-                              },
-                              items: policyTypeItems.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
+                              ),
+                            ],
                           ),
-                          const SizedBox()
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text("Script Type:"),
+                              ),
+                              Expanded(
+                                flex: 4,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.white,
+                                              AppData.colors.gray200,
+                                            ],
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                          ),
+                                          border: Border.all(
+                                            color: AppData.colors.gray200,
+                                          )),
+                                      child: DropdownButton<String>(
+                                        underline: const SizedBox(),
+                                        dropdownColor:
+                                            AppData.colors.backgroundColor,
+                                        value: scriptType,
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            scriptType = newValue!;
+                                          });
+                                        },
+                                        items:
+                                            scriptTypeItems.map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                    const SizedBox()
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Expanded(
-                      flex: 1,
-                      child: Text("Script Type:"),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.white,
-                                    AppData.colors.gray200,
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
+                    policyType == 'Single Signature'
+                        ? Container()
+                        : Expanded(
+                            flex: 8,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Expanded(
+                                  flex: 2,
+                                  child: Text("Cosigners:"),
                                 ),
-                                border: Border.all(
-                                  color: AppData.colors.gray200,
-                                )),
-                            child: DropdownButton<String>(
-                              underline: const SizedBox(),
-                              dropdownColor: AppData.colors.backgroundColor,
-                              value: scriptType,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  scriptType = newValue!;
-                                });
-                              },
-                              items: scriptTypeItems.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
+                                Expanded(
+                                  flex: 4,
+                                  child: SliderTheme(
+                                    data: SliderThemeData(
+                                      inactiveTrackColor: sliderValue < 600
+                                          ? Colors.blue
+                                          : Colors.red,
+                                      thumbColor: sliderValue < 600
+                                          ? Colors.white
+                                          : Colors.red,
+                                      valueIndicatorColor: sliderValue < 600
+                                          ? Colors.blue
+                                          : Colors.red,
+                                      activeTrackColor: sliderValue < 600
+                                          ? Colors.blue
+                                          : Colors.red,
+                                      inactiveTickMarkColor: sliderValue < 600
+                                          ? Colors.blue
+                                          : Colors.red,
+                                    ),
+                                    child: Slider(
+                                      value: countKeyStores.toDouble(),
+                                      min: 1,
+                                      max: 10,
+                                      divisions: 9,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          countKeyStores = value.toInt();
+                                          print("sliderValue $countKeyStores");
+                                        });
+                                      },
+                                      label: countKeyStores
+                                          .toString(), // Отображаемое значение
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox()
-                        ],
-                      ),
-                    ),
                   ],
                 ),
+                const SizedBox(height: 10),
                 const Text(
                   "Script Policy",
                   style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 Row(
@@ -1220,7 +1353,7 @@ class _HomeScreenState extends HomeBloc {
                           border:
                               Border.all(color: AppData.colors.backgroundColor),
                         ),
-                        child: const Text("wpkh(Keystore1)"),
+                        child: Text(descriptorText),
                       ),
                     )
                   ],
@@ -1234,6 +1367,7 @@ class _HomeScreenState extends HomeBloc {
           "Keystores",
           style: TextStyle(
             fontSize: 16,
+            fontWeight: FontWeight.w800,
           ),
         ),
         Expanded(
@@ -1306,6 +1440,21 @@ class _HomeScreenState extends HomeBloc {
             ),
           ),
         ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CustomIcon(
+              onPressed: () {},
+              child: const Text("Apply"),
+            ),
+            const SizedBox(width: 20),
+            CustomIcon(
+              onPressed: () => showDeleteWallet(),
+              child: const Text("Reset Wallet"),
+            ),
+          ],
+        )
       ],
     );
   }
@@ -1332,11 +1481,6 @@ class _HomeScreenState extends HomeBloc {
       padding: const EdgeInsets.only(top: 2, right: 5),
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 1,
-            color: AppData.colors.backgroundColor,
-          ),
           const SizedBox(height: 10),
           GridView.builder(
             shrinkWrap: true,
@@ -1344,49 +1488,57 @@ class _HomeScreenState extends HomeBloc {
               crossAxisCount: 3,
               crossAxisSpacing: 25,
               mainAxisSpacing: 10,
-              childAspectRatio: 3 / 1,
+              childAspectRatio: 5 / 1,
             ),
             itemBuilder: (context, index) => Row(
               children: [
                 Text(
-                  "${index + 1}.",
+                  index < 9 ? "   ${index + 1}." : "${index + 1}.",
                   style: const TextStyle(
                     fontSize: 12,
                   ),
                 ),
-                const SizedBox(width: 2),
+                const SizedBox(width: 5),
                 Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      setState(() {
-                        controllers[index].text = value;
-                      });
-                    },
-                    onSubmitted: (value) {
-                      setState(() {
-                        mnemonicList[index] = value;
-                        controllers[index].text = '';
-                      });
-                    },
-                    controller: controllers[index],
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(10),
-                      label: Text(
-                        " ${mnemonicList.length <= index ? "" : mnemonicList[index]}",
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                  child: SizedBox(
+                    height: 30,
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          controllers[index].text = value;
+                        });
+                      },
+                      onSubmitted: (value) {
+                        setState(() {
+                          mnemonicList[index] = value;
+                          controllers[index].text = '';
+                        });
+                      },
+                      controller: controllers[index],
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(5),
+                        label: Text(
+                          " ${mnemonicList.length <= index ? "" : mnemonicList[index]}",
+                          style: const TextStyle(
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 1),
-                      ),
-                      disabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 1),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: AppData.colors.backgroundColor, width: 1),
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 1),
+                        ),
+                        disabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 1),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: AppData.colors.backgroundColor, width: 1),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 1),
+                        ),
                       ),
                     ),
                   ),
@@ -1395,13 +1547,14 @@ class _HomeScreenState extends HomeBloc {
             ),
             itemCount: mnemonicCount,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           Row(
             children: [
               const Text("Passphrase:"),
               const SizedBox(width: 5),
               SizedBox(
                 width: 300,
+                height: 30,
                 child: TextField(
                   onChanged: (value) {
                     setState(() {
@@ -1409,6 +1562,7 @@ class _HomeScreenState extends HomeBloc {
                     });
                   },
                   controller: phraseCtrl,
+                  style: const TextStyle(fontSize: 12),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(10),
                     border: const OutlineInputBorder(
@@ -1421,12 +1575,15 @@ class _HomeScreenState extends HomeBloc {
                       borderSide: BorderSide(
                           color: AppData.colors.backgroundColor, width: 1),
                     ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 1),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1440,7 +1597,7 @@ class _HomeScreenState extends HomeBloc {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 40),
           Container(
             width: double.infinity,
             height: 1,
@@ -1454,15 +1611,20 @@ class _HomeScreenState extends HomeBloc {
   Future<dynamic> showBottomDialog() {
     return showDialog(
       context: context,
+      barrierColor: Colors.white.withOpacity(0.5),
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0.0),
+          ),
           content: Container(
+            height: 600,
             decoration: BoxDecoration(
               border: Border.all(color: AppData.colors.backgroundColor),
+              color: Colors.white,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -1487,139 +1649,191 @@ class _HomeScreenState extends HomeBloc {
                       padding: const EdgeInsets.all(20),
                       width: 600,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AppData.assets.svg.key,
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Mnemonic Words (BIP39)"),
-                                    Row(
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => setState(() {
+                                isViewMnemonic = !isViewMnemonic;
+                                context.pop();
+                                showBottomDialog();
+                              }),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppData.assets.svg.key,
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        const Text("Create or enter seed"),
-                                        TextButton(
-                                          onPressed: () => setState(() {
-                                            isViewMnemonic = !isViewMnemonic;
-
-                                            context.pop();
-                                            showBottomDialog();
-                                          }),
-                                          child: const Text("Details"),
+                                        const Text("Mnemonic Words (BIP39)"),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Create or enter seed",
+                                              style: TextStyle(
+                                                color: AppData
+                                                    .colors.backgroundColor,
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () => setState(() {
+                                                isViewMnemonic =
+                                                    !isViewMnemonic;
+                                                context.pop();
+                                                showBottomDialog();
+                                              }),
+                                              child: const Text("Details"),
+                                            )
+                                          ],
                                         )
                                       ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.white,
-                                        AppData.colors.gray200,
-                                      ],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
                                     ),
-                                    border: Border.all(
-                                      color: AppData.colors.gray200,
-                                    )),
-                                child: DropdownButton<int>(
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  underline: const SizedBox(),
-                                  dropdownColor: AppData.colors.backgroundColor,
-                                  value: mnemonicCount,
-                                  onChanged: (int? newValue) {
-                                    setState(() {
-                                      mnemonicCount = newValue!;
-                                      mnemonicList =
-                                          List.filled(mnemonicCount, "");
-                                      controllers = List.generate(
-                                        mnemonicCount,
-                                        (index) => TextEditingController(),
-                                      );
+                                  ),
+                                  Container(
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.white,
+                                            AppData.colors.gray200,
+                                          ],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                        ),
+                                        border: Border.all(
+                                          color: AppData.colors.gray200,
+                                        )),
+                                    child: DropdownButton<int>(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      iconSize: 24,
+                                      elevation: 16,
+                                      underline: const SizedBox(),
+                                      dropdownColor:
+                                          AppData.colors.backgroundColor,
+                                      value: mnemonicCount,
+                                      onChanged: (int? newValue) {
+                                        setState(() {
+                                          isViewMnemonic = true;
+                                          mnemonicCount = newValue!;
+                                          mnemonicList =
+                                              List.filled(mnemonicCount, "");
+                                          controllers = List.generate(
+                                            mnemonicCount,
+                                            (index) => TextEditingController(),
+                                          );
 
-                                      context.pop();
-                                      showBottomDialog();
-                                    });
-                                  },
-                                  items: possibleCount.map((int value) {
-                                    return DropdownMenuItem<int>(
-                                      value: value,
-                                      child: Text("Use $value words"),
-                                    );
-                                  }).toList(),
-                                ),
+                                          context.pop();
+                                          showBottomDialog();
+                                        });
+                                      },
+                                      items: possibleCount.map((int value) {
+                                        return DropdownMenuItem<int>(
+                                          value: value,
+                                          child: Text("Use $value words"),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            width: double.infinity,
+                            height: 1,
+                            color: AppData.colors.backgroundColor,
                           ),
                           isViewMnemonic ? phrases : Container(),
                           const SizedBox(height: 20),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AppData.assets.svg.key,
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Master Private Key (BIP32)"),
-                                    Row(
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => setState(() {
+                                isViewPrivateKey = !isViewPrivateKey;
+                                context.pop();
+                                showBottomDialog();
+                              }),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AppData.assets.svg.key,
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        const Text("Extended key import"),
-                                        TextButton(
-                                          onPressed: () => setState(() {
-                                            isViewPrivateKey =
-                                                !isViewPrivateKey;
+                                        const Text(
+                                            "Master Private Key (BIP32)"),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Extended key import",
+                                              style: TextStyle(
+                                                color: AppData
+                                                    .colors.backgroundColor,
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () => setState(() {
+                                                isViewPrivateKey =
+                                                    !isViewPrivateKey;
 
-                                            context.pop();
-                                            showBottomDialog();
-                                          }),
-                                          child: const Text("Details"),
+                                                context.pop();
+                                                showBottomDialog();
+                                              }),
+                                              child: const Text("Details"),
+                                            )
+                                          ],
                                         )
                                       ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              CustomIcon(
-                                onPressed: () => setState(() {
-                                  isViewPrivateKey = !isViewPrivateKey;
+                                    ),
+                                  ),
+                                  CustomIcon(
+                                    onPressed: () => setState(() {
+                                      isViewPrivateKey = !isViewPrivateKey;
 
-                                  context.pop();
-                                  showBottomDialog();
-                                }),
-                                child: const Text("Enter Privat Key"),
+                                      context.pop();
+                                      showBottomDialog();
+                                    }),
+                                    child: const Text("Enter Private Key"),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
+                          const SizedBox(height: 20),
+                          Container(
+                            width: double.infinity,
+                            height: 1,
+                            color: AppData.colors.backgroundColor,
+                          ),
+                          const SizedBox(height: 20),
                           isViewPrivateKey
                               ? Column(
                                   children: [
-                                    Container(
-                                      width: double.infinity,
-                                      height: 1,
-                                      color: AppData.colors.backgroundColor,
-                                    ),
                                     const SizedBox(height: 10),
                                     Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        const Text("Private Key:"),
-                                        const SizedBox(width: 5),
                                         SizedBox(
                                           width: 300,
                                           child: TextField(
+                                            maxLines: 5,
+                                            style:
+                                                const TextStyle(fontSize: 12),
                                             onChanged: (value) {
                                               setState(() {
                                                 privateKeyCtrl.text = value;
@@ -1640,6 +1854,12 @@ class _HomeScreenState extends HomeBloc {
                                                     color: Colors.blue,
                                                     width: 1),
                                               ),
+                                              focusedBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                    width: 1),
+                                              ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     color: AppData
@@ -1649,14 +1869,14 @@ class _HomeScreenState extends HomeBloc {
                                             ),
                                           ),
                                         ),
+                                        const SizedBox(width: 20),
+                                        CustomIcon(
+                                          onPressed: () => import(),
+                                          child: const Text("Import Keystore"),
+                                        ),
                                       ],
                                     ),
-                                    const SizedBox(height: 20),
-                                    CustomIcon(
-                                      onPressed: () => import(),
-                                      child: const Text("Create Keystore"),
-                                    ),
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 30),
                                     Container(
                                       width: double.infinity,
                                       height: 1,
@@ -1675,19 +1895,9 @@ class _HomeScreenState extends HomeBloc {
             ),
           ),
           actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomIcon(
-                  width: 200,
-                  onPressed: () => context.pop(),
-                  child: const Text("xpub / Watch Only Wallet"),
-                ),
-                CustomIcon(
-                  onPressed: () => context.pop(),
-                  child: const Text("Cancel"),
-                ),
-              ],
+            CustomIcon(
+              onPressed: () => context.pop(),
+              child: const Text("Cancel"),
             )
           ],
         );
@@ -1701,6 +1911,9 @@ class _HomeScreenState extends HomeBloc {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
           content: Container(
             height: 500,
             width: 500,
@@ -1716,7 +1929,7 @@ class _HomeScreenState extends HomeBloc {
             ),
             child: QrImageView(
               backgroundColor: Colors.white,
-              data: authService.getAddress().toString(),
+              data: authService.getAddress(currentAddress).toString(),
               size: 50,
             ),
           ),
@@ -1725,112 +1938,197 @@ class _HomeScreenState extends HomeBloc {
     );
   }
 
+  Future<dynamic> showDeleteWallet() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: const Text(
+          "You really want reset your wallet?",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24),
+        ),
+        actionsAlignment: MainAxisAlignment.spaceEvenly,
+        actions: [
+          CustomIcon(
+            onPressed: () {
+              authService.boxClear();
+              settingsService.boxClear();
+              context.go(AppData.routes.welcomeScreen);
+            },
+            child: const Text("Apply"),
+          ),
+          CustomIcon(
+            onPressed: () => context.pop(),
+            child: const Text("Close"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 53),
-        child: Container(
-          // margin: const EdgeInsets.symmetric(vertical: 30),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: isLoading
-              ? const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      LoadingWidget(),
-                      Text("Loading wallet"),
-                    ],
-                  ),
-                )
-              : Column(
+        // margin: const EdgeInsets.symmetric(vertical: 30),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: isLoading
+            ? const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 30),
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.zero,
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: AppData.colors.backgroundColor),
-                          color: Colors.white,
+                    LoadingWidget(),
+                    Text("Loading wallet"),
+                  ],
+                ),
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Container(
+                    margin: const EdgeInsets.only(left: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.blue,
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.wallet,
+                          size: 12,
                         ),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                Expanded(flex: 1, child: buttons),
-                              ],
+                        const SizedBox(width: 5),
+                        const Text("Wallet"),
+                        const SizedBox(width: 5),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () => showDeleteWallet(),
+                            child: const Icon(
+                              Icons.close,
+                              size: 12,
                             ),
-                            Expanded(
-                              flex: 4,
-                              child: SizedBox(
-                                width: 500,
-                                child: Container(
-                                  padding: const EdgeInsets.all(25),
-                                  margin: const EdgeInsets.only(right: 30),
-                                  child: body,
-                                ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: AppData.colors.backgroundColor),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Expanded(flex: 1, child: buttons),
+                            ],
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: SizedBox(
+                              width: 500,
+                              child: Container(
+                                padding: const EdgeInsets.all(25),
+                                margin: const EdgeInsets.only(right: 30),
+                                child: body,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        connectivityResult == ConnectivityResult.none
+                            ? const Row(
+                                children: [
+                                  Text(
+                                      "Connection failed: Null Pointer Error (null)"),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    "Server Preferences",
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(titleConnect),
+                        Row(
+                          children: [
+                            const Icon(Icons.cast_connected_rounded),
+                            const SizedBox(width: 4),
+                            Switch(
+                              value: isSwitch,
+                              onChanged: (bool change) async {
+                                setState(() {
+                                  isSwitch = change;
+                                });
+                                if (isSwitch) {
+                                  setState(() {
+                                    titleConnect = "Connected...";
+                                  });
+                                  await Future.delayed(
+                                      const Duration(seconds: 5));
+                                  setState(() {
+                                    titleConnect = "";
+                                  });
+                                } else {
+                                  setState(() {
+                                    titleConnect = "Disconnected...";
+                                  });
+                                  await Future.delayed(
+                                      const Duration(seconds: 5));
+                                  setState(() {
+                                    titleConnect = "";
+                                  });
+                                }
+                              },
+                              activeTrackColor: Colors.yellow,
+                              inactiveThumbColor: AppData.colors.gray300,
+                              trackOutlineColor:
+                                  MaterialStateProperty.resolveWith(
+                                (final Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.selected)) {
+                                    return null;
+                                  }
+
+                                  return AppData.colors.gray300;
+                                },
+                              ),
+                              thumbColor: MaterialStateProperty.resolveWith(
+                                (final Set<MaterialState> states) {
+                                  return Colors.white;
+                                },
                               ),
                             ),
                           ],
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          connectivityResult == ConnectivityResult.none
-                              ? const Row(
-                                  children: [
-                                    Text(
-                                        "Connection failed: Null Pointer Error (null)"),
-                                    SizedBox(width: 4),
-                                    Text(
-                                      "Server Preferences",
-                                      style: TextStyle(
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Container(),
-                          Row(
-                            children: [
-                              const Icon(Icons.cast_connected_rounded),
-                              const SizedBox(width: 4),
-                              Switch(
-                                value: isSwitch,
-                                onChanged: (bool change) => setState(() {
-                                  isSwitch = change;
-                                }),
-                                activeTrackColor: Colors.yellow,
-                                inactiveThumbColor: AppData.colors.gray300,
-                                trackOutlineColor:
-                                    MaterialStateProperty.resolveWith(
-                                  (final Set<MaterialState> states) {
-                                    if (states
-                                        .contains(MaterialState.selected)) {
-                                      return null;
-                                    }
-
-                                    return AppData.colors.gray300;
-                                  },
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-        ),
+                  )
+                ],
+              ),
       ),
     );
   }

@@ -17,7 +17,7 @@ class UserAdapter extends TypeAdapter<User> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return User(
-      address: fields[0] as String,
+      address: (fields[0] as List).cast<String>(),
       sumBalance: fields[5] as int,
       sumMem: fields[7] as int,
       txCount: fields[6] as int,

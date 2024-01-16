@@ -31,6 +31,12 @@ class AppTheme {
           primary: AppData.colors.sky600,
           secondary: Colors.white,
         ),
+        dialogTheme: DialogTheme(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          shadowColor: Colors.white,
+        ),
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: AppData.colors.textColor,
               displayColor: AppData.colors.textColor,

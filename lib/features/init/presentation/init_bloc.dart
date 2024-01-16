@@ -18,21 +18,6 @@ abstract class InitBloc extends State<InitPage> {
   }
 
   Future<void> syncData() async {
-    if (_settingsService.getMnemonicSentence() != null &&
-        _settingsService.getPrivateKey() == null) {
-      await AppData.utils
-          .getPrivateKey(_settingsService.getMnemonicSentence()!);
-      await AppData.utils.importData(
-        public: _settingsService.getMnemonicSentence()!,
-        isNew: false,
-      );
-    } else if (_settingsService.getPrivateKey() != null) {
-      await AppData.utils.importData(
-        public: _settingsService.getPrivateKey()!,
-        isNew: false,
-      );
-    }
-
     relocate();
   }
 

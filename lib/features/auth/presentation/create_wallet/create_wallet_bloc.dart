@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:sparrow/app_data/app_data.dart';
-import 'package:sparrow/features/auth/domain/auth_service.dart';
 import 'package:sparrow/features/currency/domain/custom_currency.dart';
 import 'package:sparrow/features/settings/domain/settings_service.dart';
 
@@ -14,7 +12,6 @@ import 'create_wallet.dart';
 
 abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   final SettingsService _settingsService = SettingsService();
-  final AuthService _authService = AuthService();
   bool isLoading = false;
   bool isGeneral = true;
   Mnemonic? mnemonic;
@@ -24,15 +21,15 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   String displayUnit = 'Auto';
   List<String> displayUnitItems = [
     'Auto',
-    'Option 2',
-    'Option 3',
+    'mempool.space',
+    'oxt.me',
   ];
 
   String feeRates = 'mempool.space';
   List<String> feeRatesItems = [
     'mempool.space',
-    'Option 2',
-    'Option 3',
+    'blockstream.info',
+    'None',
   ];
 
   CustomCurrency? currency;
@@ -41,8 +38,8 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   String exchange = 'Coingecko';
   List<String> exchangeItems = [
     'Coingecko',
-    'Option 2',
-    'Option 3',
+    'Coinbase',
+    'None',
   ];
 
   bool isWalletLoad = true;
@@ -57,10 +54,22 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   String url = 'bitcoin.lukechilds.co';
   List<String> urlItems = [
     'bitcoin.lukechilds.co',
-    'Option 2',
-    'Option 3',
+    'electrum.blockstream.info',
   ];
   bool useProxy = false;
+
+  int mnemonicCount = 12;
+  List<String> mnemonicList = List.filled(12, "");
+  List<TextEditingController> controllers = List.generate(
+    12,
+    (index) => TextEditingController(),
+  );
+  final TextEditingController phraseCtrl = TextEditingController();
+  final TextEditingController phraseController = TextEditingController();
+  final TextEditingController privateKeyCtrl = TextEditingController();
+  List<int> possibleCount = [12, 15, 18, 21, 24];
+  bool isViewMnemonic = false;
+  bool isViewPrivateKey = false;
 
   @override
   void initState() {
@@ -136,5 +145,83 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  int get counts {
+    switch (mnemonicCount) {
+      case 12:
+        return 128;
+      case 15:
+        return 160;
+      case 18:
+        return 192;
+      case 21:
+        return 224;
+      case 24:
+        return 256;
+      default:
+        return 128;
+    }
+  }
+
+  void generateNew() {
+    setState(() {
+      Mnemonic mnemonic = Mnemonic.generate(
+        Language.english,
+        passphrase: "Something",
+        entropyLength: counts,
+      );
+
+      mnemonicList = mnemonic.sentence.split(' ');
+      for (int i = 0; i < mnemonicList.length; i++) {
+        controllers[i].text = mnemonicList[i];
+      }
+    });
+  }
+
+  Future<void> import() async {
+    setState(() {
+      if (phraseCtrl.text.isEmpty) {
+        bool isSnack = false;
+        for (int i = 0; i < controllers.length; i++) {
+          if (controllers[i].text.isEmpty) {
+            if (!isSnack) {
+              Clipboard.setData(
+                const ClipboardData(text: "Hi"),
+              ).then((_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("One of required fields is empty"),
+                  ),
+                );
+              });
+              isSnack = true;
+            }
+            isLoading = false;
+            print(phraseController.text);
+          } else {
+            isLoading = true;
+          }
+        }
+        phraseController.text = mnemonicList.join(' ');
+      } else {
+        isLoading = true;
+        phraseController.text = phraseCtrl.text;
+      }
+    });
+    if (isLoading == true) {
+      context.pop();
+      await AppData.utils.importData(
+        public: phraseController.text,
+        isNew: false,
+      );
+      _settingsService.putMnemonicSentence(phraseController.text);
+      if (mounted) {
+        context.go(AppData.routes.homeScreen);
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 }

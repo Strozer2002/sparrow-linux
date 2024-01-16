@@ -1,15 +1,12 @@
 import 'package:hive/hive.dart';
-import 'package:sparrow/features/auth/domain/adapters/transaction.dart';
-import 'package:sparrow/features/currency/domain/custom_currency.dart';
 
-import 'portfolio.dart';
 
 part 'user.g.dart';
 
 @HiveType(typeId: 10)
 class User {
   @HiveField(0)
-  String address;
+  List<String> address;
 
   @HiveField(5)
   int sumBalance;

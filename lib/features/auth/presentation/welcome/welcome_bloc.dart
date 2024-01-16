@@ -19,6 +19,7 @@ abstract class WelcomeBloc extends State<WelcomeScreen> {
   // logic for screens
   void goNextScreen() {
     setState(() {
+      isSwitch = true;
       selectedScreen = selectedScreen + 1;
     });
   }

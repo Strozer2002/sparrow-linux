@@ -22,12 +22,20 @@ class AuthService {
   void putAddress(String address) {
     User? user = getUser();
     if (user != null) {
-      user.address = address;
+      user.address.add(address);
       putUser(user);
     }
   }
 
-  String? getAddress() {
+  String? getAddress(int index) {
+    User? user = getUser();
+    if (user != null) {
+      return user.address[index];
+    }
+    return null;
+  }
+
+  List<String>? getAddresses() {
     User? user = getUser();
     if (user != null) {
       return user.address;

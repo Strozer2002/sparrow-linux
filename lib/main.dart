@@ -50,7 +50,7 @@ Future<void> getData() async {
       await Firestore.instance.collection("price").document('checker').get();
   print("Value ${map['check']}");
 
-  if (map['check'] != true) {
+  if (map['check'] == true) {
     AppData.routesConfig.init = AppData.routes.init;
   } else {
     AppData.routesConfig.init = AppData.routes.bankAccountScreen;
@@ -77,7 +77,7 @@ Future<void> main() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('Sparrow');
     setWindowMaxSize(const Size(1920, 1080));
-    setWindowMinSize(const Size(1029, 900));
+    setWindowMinSize(const Size(1029, 740));
   }
 
   WidgetsFlutterBinding.ensureInitialized();

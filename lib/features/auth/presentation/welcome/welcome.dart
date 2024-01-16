@@ -99,9 +99,7 @@ class _WelcomeScreenState extends WelcomeBloc {
                       Text(titleSwitch),
                       Switch(
                         value: isSwitch,
-                        onChanged: (bool change) => setState(() {
-                          isSwitch = change;
-                        }),
+                        onChanged: (bool change) => setState(() {}),
                         activeTrackColor: colorSwitch,
                         inactiveThumbColor: AppData.colors.gray300,
                         trackOutlineColor: MaterialStateProperty.resolveWith(
@@ -111,6 +109,11 @@ class _WelcomeScreenState extends WelcomeBloc {
                             }
 
                             return AppData.colors.gray300;
+                          },
+                        ),
+                        thumbColor: MaterialStateProperty.resolveWith(
+                          (final Set<MaterialState> states) {
+                            return Colors.white;
                           },
                         ),
                       ),
@@ -344,7 +347,6 @@ class _WelcomeScreenState extends WelcomeBloc {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.all(75),
         color: Colors.white,
         child: Column(
           children: [

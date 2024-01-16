@@ -39,7 +39,6 @@ class Svg {
   SvgPicture get transactions => SvgPicture.asset(_name('icons/transactions'));
   SvgPicture get send => SvgPicture.asset(_name('icons/send'));
 
-  SvgPicture get receive => SvgPicture.asset(_name('icons/receive'));
   SvgPicture get address => SvgPicture.asset(_name('icons/address'));
   SvgPicture get settings => SvgPicture.asset(_name('icons/settings'));
 
@@ -75,12 +74,12 @@ class Svg {
         width: size,
       );
 
-  SvgPicture swap({
+  SvgPicture receive({
     Color? color,
     double? size,
   }) =>
       SvgPicture.asset(
-        _name('icons/swap'),
+        _name('icons/receive'),
         colorFilter: _getColorFilterFromColor(color),
         width: size,
       );
