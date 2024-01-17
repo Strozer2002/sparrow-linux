@@ -1,9 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sparrow/features/auth/presentation/welcome/welcome_bloc.dart';
-import 'package:sparrow/features/auth/widgets/main_button.dart';
-import 'package:sparrow/features/auth/widgets/info_button.dart';
 import 'package:sparrow/features/widgets/custom_button.dart';
 
 import '../../../../app_data/app_data.dart';

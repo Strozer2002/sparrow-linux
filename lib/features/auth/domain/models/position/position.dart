@@ -1,6 +1,5 @@
 import 'package:data_source/dto/dto.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:sparrow/features/auth/domain/models/position/position_attributes.dart';
 
 part 'position.g.dart';
 
