@@ -58,6 +58,6 @@ abstract class ExchangeBloc extends State<ExchangePage> {
   //....................
 
   // Page settings
-  String get isEmptyList => "У вас нет ни одного курса валют";
+  String get isEmptyList => "You have not courses";
   //....................
 }

@@ -69,7 +69,7 @@ abstract class OperationBloc extends State<OperationPage> {
   void onExpense() => currentType.value = CategoryType.expense;
 
   String get isEmptyList =>
-      "У вас нет операций : ${currentType.value == CategoryType.expense ? "Расходов" : "Доходов"}";
+      "You have not operations : ${currentType.value == CategoryType.expense ? "Expense" : "Income"}";
 
   //....................
 }

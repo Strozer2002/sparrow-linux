@@ -41,13 +41,13 @@ class _DeleteOperationState extends State<DeleteOperation> {
     if (widget.operation.bankAccount.currency.name ==
         widget.operation.category.currency.name) {
       exchangeAmount = widget.operation.amount;
-      // Если расход то снимаем со счета
+      // Если расход то снимаем со bank account а
       if (widget.operation.category.type == CategoryType.expense) {
         widget.operation.bankAccount.amount += exchangeAmount;
 
         await accountService.updateAccount(widget.operation.bankAccount);
       }
-      // Если доход то ставим на счет
+      // Если доход то ставим на bank account
       else if (widget.operation.category.type == CategoryType.income) {
         widget.operation.bankAccount.amount -= exchangeAmount;
         await accountService.updateAccount(widget.operation.bankAccount);
@@ -56,7 +56,7 @@ class _DeleteOperationState extends State<DeleteOperation> {
       widget.operation.category.amount -= exchangeAmount;
       await categoryService.updateCategory(widget.operation.category);
 
-      // Удаляем операцию
+      // Удаляем operation
       await widget.onDelete?.call(widget.operation);
       if (mounted) {
         context.pop();
@@ -88,13 +88,13 @@ class _DeleteOperationState extends State<DeleteOperation> {
 
         print(
             "from to into = ${fromToInto.amountFrom}    ${fromToInto.amountInto}");
-        // Если расход то ставим на  счет
+        // Если расход то ставим на  bank account
         if (widget.operation.category.type == CategoryType.expense) {
           widget.operation.bankAccount.amount += widget.operation.amount;
 
           await accountService.updateAccount(widget.operation.bankAccount);
         }
-        // Если доход то снимаем со счета
+        // Если доход то снимаем со bank account а
         else if (widget.operation.category.type == CategoryType.income) {
           widget.operation.bankAccount.amount -= widget.operation.amount;
           await accountService.updateAccount(widget.operation.bankAccount);
@@ -103,7 +103,7 @@ class _DeleteOperationState extends State<DeleteOperation> {
         widget.operation.category.amount -= exchangeAmount;
         await categoryService.updateCategory(widget.operation.category);
 
-        // Удаляем операцию
+        // Удаляем operation
         await widget.onDelete?.call(widget.operation);
         if (mounted) {
           context.pop();
@@ -127,13 +127,13 @@ class _DeleteOperationState extends State<DeleteOperation> {
 
         print(
             " into to from  =    ${intoToFrom.amountInto}   ${intoToFrom.amountFrom} ");
-        // Если расход то ставим на  счет
+        // Если расход то ставим на  bank account
         if (widget.operation.category.type == CategoryType.expense) {
           widget.operation.bankAccount.amount += widget.operation.amount;
 
           await accountService.updateAccount(widget.operation.bankAccount);
         }
-        // Если доход то снимаем со счета
+        // Если доход то снимаем со bank account а
         else if (widget.operation.category.type == CategoryType.income) {
           widget.operation.bankAccount.amount -= widget.operation.amount;
           await accountService.updateAccount(widget.operation.bankAccount);
@@ -142,7 +142,7 @@ class _DeleteOperationState extends State<DeleteOperation> {
         widget.operation.category.amount -= exchangeAmount;
         await categoryService.updateCategory(widget.operation.category);
 
-        // Удаляем операцию
+        // Удаляем operation
         await widget.onDelete?.call(widget.operation);
         if (mounted) {
           context.pop();
@@ -154,7 +154,7 @@ class _DeleteOperationState extends State<DeleteOperation> {
           context: context,
           builder: (context) => AlertDialog(
             title: Text(
-                "Вы не может произвести операцию, создайте курс валют ${widget.operation.bankAccount.currency.name} : ${widget.operation.category.currency.name}"),
+                "You cant create operation, create course ${widget.operation.bankAccount.currency.name} : ${widget.operation.category.currency.name}"),
           ),
         );
         return;
@@ -172,7 +172,7 @@ class _DeleteOperationState extends State<DeleteOperation> {
               return AlertDialog(
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Удалить операцию?",
+                  "Delete operation?",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: Row(
@@ -199,14 +199,14 @@ class _DeleteOperationState extends State<DeleteOperation> {
 
                         context.pop();
                       },
-                      child: const Text("Да"),
+                      child: const Text("Yes"),
                     ),
                     ElevatedButton(
                       style: AppData.theme.button.deleteElevatedButton,
                       onPressed: () {
                         context.pop();
                       },
-                      child: const Text("Нет"),
+                      child: const Text("No"),
                     ),
                   ],
                 ),

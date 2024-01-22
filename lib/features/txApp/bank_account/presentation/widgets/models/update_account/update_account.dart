@@ -28,7 +28,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите название счета",
+          "Enter bank account name",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -51,7 +51,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите потраченную сумму",
+          "Enter sum",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -80,7 +80,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете валюту",
+          "Enter currency",
           style: AppData.theme.text.s16w500,
         ),
         Row(
@@ -96,7 +96,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете основную валюту",
+                        "Choose main currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -127,7 +127,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open list currency'),
               ),
             ),
             AnimatedSwitcher(
@@ -147,7 +147,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете иконку",
+          "Choose icon",
           style: AppData.theme.text.s16w500,
         ),
         Row(
@@ -157,7 +157,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
               onPressed: pickIcon,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text('Открыть список иконок'),
+                child: Text('Open icon list'),
               ),
             ),
             AnimatedSwitcher(
@@ -175,7 +175,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете цвет иконки",
+          "Choose icon color",
           style: AppData.theme.text.s16w500,
         ),
         BlockPicker(
@@ -192,7 +192,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onUpdateAccount(),
-        child: const Text("Изменить счет"),
+        child: const Text("Update bank account"),
       ),
     );
   }
@@ -214,7 +214,7 @@ class _UpdateAccountState extends UpdateAccountBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Изменение счета",
+                  "Updating bank account ",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

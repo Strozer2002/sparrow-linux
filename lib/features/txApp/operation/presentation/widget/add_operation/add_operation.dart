@@ -29,7 +29,7 @@ class _AddCategoryState extends AddOperationBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите потраченную сумму",
+          "Enter sum",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -62,7 +62,7 @@ class _AddCategoryState extends AddOperationBloc {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(date.value != null
                 ? DateFormat("yMMMd").format(date.value!)
-                : 'Выберете дату'),
+                : 'Choose date'),
           ),
         ),
       ],
@@ -74,7 +74,7 @@ class _AddCategoryState extends AddOperationBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете категорию",
+          "Choose category",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -89,7 +89,7 @@ class _AddCategoryState extends AddOperationBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете категорию",
+                        "Choose category",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -120,7 +120,7 @@ class _AddCategoryState extends AddOperationBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список категорий'),
+                child: Text('Open category list'),
               ),
             ),
             const SizedBox(height: 10),
@@ -143,7 +143,7 @@ class _AddCategoryState extends AddOperationBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете счет",
+          "Choose bank account ",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -158,7 +158,7 @@ class _AddCategoryState extends AddOperationBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете счет",
+                        "Choose bank account ",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -189,7 +189,7 @@ class _AddCategoryState extends AddOperationBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список счетов'),
+                child: Text('Open list bank accounts'),
               ),
             ),
             const SizedBox(height: 10),
@@ -212,7 +212,7 @@ class _AddCategoryState extends AddOperationBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onCreateOperation(),
-        child: const Text("Создать операцию"),
+        child: const Text("Create operation"),
       ),
     );
   }
@@ -236,7 +236,7 @@ class _AddCategoryState extends AddOperationBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Создание категории",
+                  "Creation category",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

@@ -38,7 +38,7 @@ class _DeleteCategoryState extends State<DeleteCategory> {
               return AlertDialog(
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Удалить категорию?",
+                  "Delete category?",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: Row(
@@ -64,14 +64,14 @@ class _DeleteCategoryState extends State<DeleteCategory> {
 
                         context.pop();
                       },
-                      child: const Text("Да"),
+                      child: const Text("Yes"),
                     ),
                     ElevatedButton(
                       style: AppData.theme.button.deleteElevatedButton,
                       onPressed: () {
                         context.pop();
                       },
-                      child: const Text("Нет"),
+                      child: const Text("No"),
                     ),
                   ],
                 ),

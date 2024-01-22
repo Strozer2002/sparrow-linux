@@ -84,7 +84,7 @@ abstract class CategoryBloc extends State<CategoryPage> {
   void onExpense() => currentType.value = CategoryType.expense;
 
   String get isEmptyList =>
-      "У вас нет категорий : ${currentType.value == CategoryType.expense ? "Расходов" : "Доходов"}";
+      "You have not categories : ${currentType.value == CategoryType.expense ? "Expense" : "Income"}";
 
   String get allAmountForCategoryType =>
       "${getSumTypeCategory(tempCategories.value)} ${currencySymbol.value!}";

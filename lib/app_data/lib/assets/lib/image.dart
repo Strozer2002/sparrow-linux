@@ -34,7 +34,7 @@ class ImageCollection {
       );
   Image sparrowIcon({double? width, double? height, BoxFit? fit}) =>
       Image.asset(
-        _name('icons/sparrowIcon.png'),
+        _name('icons/10241.png'),
         width: width,
         height: height,
         fit: fit ?? BoxFit.contain,

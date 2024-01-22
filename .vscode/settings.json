@@ -1,3 +1,4 @@
 {
-    "dart.flutterSdkPath": "E:\\BlackNotes\\flutter_windows_3.13.6\\flutter"
+    "dart.flutterSdkPath": "E:\\BlackNotes\\flutter_windows_3.13.6\\flutter",
+    "cmake.sourceDirectory": "E:/BlackNotes/Flutter_projects/sparrow/build/windows/x64/extracted/firebase_cpp_sdk_windows"
 }

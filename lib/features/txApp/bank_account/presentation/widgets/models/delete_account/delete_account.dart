@@ -39,7 +39,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
               return AlertDialog(
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Удалить счет?",
+                  "Do you want delete bank account?",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: Row(
@@ -65,12 +65,12 @@ class _DeleteAccountState extends State<DeleteAccount> {
 
                         context.pop();
                       },
-                      child: const Text("Да"),
+                      child: const Text("Yes"),
                     ),
                     ElevatedButton(
                       style: AppData.theme.button.deleteElevatedButton,
                       onPressed: () => context.pop(),
-                      child: const Text("Нет"),
+                      child: const Text("No"),
                     ),
                   ],
                 ),

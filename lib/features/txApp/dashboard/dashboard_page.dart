@@ -26,6 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         actions: [
           Container(
             padding: const EdgeInsets.only(right: 10),

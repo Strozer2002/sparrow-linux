@@ -30,7 +30,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите название категории",
+          "Enter category name",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -53,7 +53,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите потраченную сумму",
+          "Enter sum",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -82,7 +82,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете валюту",
+          "Choose currency",
           style: AppData.theme.text.s16w500,
         ),
         Row(
@@ -98,7 +98,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете основную валюту",
+                        "Choose main currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -129,7 +129,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open list currency'),
               ),
             ),
             AnimatedSwitcher(
@@ -149,7 +149,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете иконку",
+          "Choose icon",
           style: AppData.theme.text.s16w500,
         ),
         Row(
@@ -159,7 +159,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
               onPressed: pickIcon,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text('Открыть список иконок'),
+                child: Text('Open icon list'),
               ),
             ),
             AnimatedSwitcher(
@@ -177,7 +177,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете цвет иконки",
+          "Choose icon color",
           style: AppData.theme.text.s16w500,
         ),
         BlockPicker(
@@ -203,14 +203,14 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
               onPressed: () => categoryType.value = CategoryType.expense,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text('Расход'),
+                child: Text('Expense'),
               ),
             ),
             ElevatedButton(
               onPressed: () => categoryType.value = CategoryType.income,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text('Доход'),
+                child: Text('Income'),
               ),
             ),
           ],
@@ -224,7 +224,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onUpdateCategory(),
-        child: const Text("Изменить категорию"),
+        child: const Text("Update category"),
       ),
     );
   }
@@ -247,7 +247,7 @@ class _UpdateCategoryState extends UpdateCategoryBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Изменение категории",
+                  "Updating category",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

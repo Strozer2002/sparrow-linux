@@ -12,6 +12,7 @@ import 'package:sparrow/features/txApp/dashboard/dashboard_page.dart';
 import 'package:sparrow/features/txApp/exchange_currency/presentation/exchange_page/exchange_page.dart';
 import 'package:sparrow/features/txApp/operation/presentation/operation_page/operation_page.dart';
 import 'package:sparrow/features/txApp/pincode/pincode.dart';
+import 'package:sparrow/features/txApp/welcome/welcome.dart';
 
 final _routes = RoutesList();
 
@@ -45,6 +46,9 @@ class RoutesList {
   // ---------------------
 
   // Dashboard
+  //// Bank Account
+  String get _welcomeTxScreenName => 'welcomeTxScreen';
+  String get welcomeTxScreen => '/$_welcomeTxScreenName';
   // Bank Account
   String get _bankAccountScreenName => 'bankAccountScreen';
   String get bankAccountScreen => '/$_bankAccountScreenName';
@@ -109,6 +113,13 @@ class Routes {
             },
           ),
         ],
+      ),
+
+      GoRoute(
+        path: AppData.routes.welcomeTxScreen,
+        builder: (context, state) => WelcomeTxAppScreen(
+          key: state.pageKey,
+        ),
       ),
 
       //Tx App

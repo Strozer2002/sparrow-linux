@@ -1485,133 +1485,204 @@ class _HomeScreenState extends HomeBloc {
   }
 
   Widget get phrases {
-    return Container(
-      padding: const EdgeInsets.only(top: 2, right: 5),
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 25,
-              mainAxisSpacing: 10,
-              childAspectRatio: 5 / 1,
-            ),
-            itemBuilder: (context, index) => Row(
-              children: [
-                Text(
-                  index < 9 ? "   ${index + 1}." : "${index + 1}.",
-                  style: const TextStyle(
-                    fontSize: 12,
+    return RawKeyboardListener(
+      focusNode: FocusNode(),
+      onKey: (RawKeyEvent event) async {
+        if (event is RawKeyDownEvent &&
+            event.logicalKey == LogicalKeyboardKey.keyV &&
+            event.isControlPressed) {
+          await Future.delayed(const Duration(milliseconds: 10));
+          ClipboardData? clipboardData =
+              await Clipboard.getData(Clipboard.kTextPlain);
+
+          if (clipboardData?.text != null) {
+            String clipboardText = clipboardData!.text!;
+            List<String> words = clipboardText.split(' ');
+
+            for (int i = 0; i < words.length; i++) {
+              controllers[i].text = words[i];
+            }
+
+            if (mounted) {
+              context.pop();
+            }
+            showBottomDialog();
+            print('Слова из буфера обмена: $words');
+          }
+          print('Ctrl+V нажато');
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.only(top: 2, right: 5),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 25,
+                mainAxisSpacing: 10,
+                childAspectRatio: 5 / 1,
+              ),
+              itemBuilder: (BuildContext context, index) => Row(
+                children: [
+                  Text(
+                    index < 9 ? "   ${index + 1}." : "${index + 1}.",
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                Expanded(
-                  child: SizedBox(
-                    height: 30,
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          controllers[index].text = value;
-                        });
-                      },
-                      onSubmitted: (value) {
-                        setState(() {
-                          mnemonicList[index] = value;
-                          controllers[index].text = '';
-                        });
-                      },
-                      controller: controllers[index],
-                      style: const TextStyle(
-                        fontSize: 12,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(5),
-                        label: Text(
-                          " ${mnemonicList.length <= index ? "" : mnemonicList[index]}",
-                          style: const TextStyle(
-                            fontSize: 12,
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: SizedBox(
+                      height: 30,
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            controllers[index].text = value;
+                          });
+                        },
+                        onSubmitted: (value) {
+                          setState(() {
+                            mnemonicList[index] = value;
+                            controllers[index].text = '';
+                          });
+                        },
+                        controller: controllers[index],
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(5),
+                          label: Text(
+                            " ${mnemonicList.length <= index ? "" : mnemonicList[index]}",
+                            style: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppData.colors.backgroundColor,
+                                width: 1),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 1,
+                            ),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 1,
+                            ),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 1,
+                            ),
+                          ),
+                          errorText: isError[index] ? "is empty" : null,
+                          errorStyle: const TextStyle(
+                            fontSize: 0,
                           ),
                         ),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        disabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: AppData.colors.backgroundColor, width: 1),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              itemCount: mnemonicCount,
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const Text("Passphrase:"),
+                const SizedBox(width: 5),
+                SizedBox(
+                  width: 300,
+                  height: 30,
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        phraseCtrl.text = value;
+                      });
+                    },
+                    controller: phraseCtrl,
+                    style: const TextStyle(fontSize: 12),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(10),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue, width: 1),
+                      ),
+                      disabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue, width: 1),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: AppData.colors.backgroundColor, width: 1),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue, width: 1),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            itemCount: mnemonicCount,
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              const Text("Passphrase:"),
-              const SizedBox(width: 5),
-              SizedBox(
-                width: 300,
-                height: 30,
-                child: TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      phraseCtrl.text = value;
-                    });
+            const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                isCorrectMnemonic
+                    ? CustomIcon(
+                        onPressed: () => generateNew(),
+                        child: const Text("General New"),
+                      )
+                    : const Row(
+                        children: [
+                          Icon(
+                            Icons.error,
+                            color: Colors.red,
+                            size: 15,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Invalid Mnemonic")
+                        ],
+                      ),
+                CustomIcon(
+                  onPressed: () async {
+                    final res = await import();
+                    if (res) {
+                      setState(() {
+                        isCorrectMnemonic = false;
+                      });
+                      context.pop();
+                      showBottomDialog();
+                    }
                   },
-                  controller: phraseCtrl,
-                  style: const TextStyle(fontSize: 12),
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(10),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 1),
-                    ),
-                    disabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 1),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppData.colors.backgroundColor, width: 1),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 1),
-                    ),
-                  ),
+                  child: const Text("Import Wallet"),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomIcon(
-                onPressed: () => generateNew(),
-                child: const Text("General New"),
-              ),
-              CustomIcon(
-                onPressed: () => import(),
-                child: const Text("Create Keystore"),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          Container(
-            width: double.infinity,
-            height: 1,
-            color: AppData.colors.backgroundColor,
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(height: 40),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: AppData.colors.backgroundColor,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1736,7 +1807,10 @@ class _HomeScreenState extends HomeBloc {
                                             mnemonicCount,
                                             (index) => TextEditingController(),
                                           );
-
+                                          isError = List.generate(
+                                            mnemonicCount,
+                                            (index) => false,
+                                          );
                                           context.pop();
                                           showBottomDialog();
                                         });
@@ -1764,11 +1838,15 @@ class _HomeScreenState extends HomeBloc {
                           MouseRegion(
                             cursor: SystemMouseCursors.click,
                             child: GestureDetector(
-                              onTap: () => setState(() {
-                                isViewPrivateKey = !isViewPrivateKey;
-                                context.pop();
-                                showBottomDialog();
-                              }),
+                              onTap: () {
+                                setState(() {
+                                  isViewPrivateKey = !isViewPrivateKey;
+                                });
+                                if (mounted) {
+                                  context.pop();
+                                  showBottomDialog();
+                                }
+                              },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1904,7 +1982,10 @@ class _HomeScreenState extends HomeBloc {
           ),
           actions: <Widget>[
             CustomIcon(
-              onPressed: () => context.pop(),
+              onPressed: () {
+                onClear();
+                context.pop();
+              },
               child: const Text("Cancel"),
             )
           ],

@@ -34,14 +34,14 @@ class _CategoryPageState extends CategoryBloc {
                     fit: FlexFit.tight,
                     child: ElevatedButton(
                       onPressed: onExpense,
-                      child: const Text("Расходы"),
+                      child: const Text("Expense"),
                     ),
                   ),
                   Flexible(
                     fit: FlexFit.tight,
                     child: ElevatedButton(
                       onPressed: onIncome,
-                      child: const Text("Доходы"),
+                      child: const Text("Income"),
                     ),
                   ),
                 ],

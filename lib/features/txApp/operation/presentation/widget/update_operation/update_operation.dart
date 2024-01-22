@@ -31,7 +31,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите потраченную сумму",
+          "Enter sum",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -64,7 +64,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(date.value != null
                 ? DateFormat("yMMMd").format(date.value!)
-                : 'Выберете дату'),
+                : 'Choose date'),
           ),
         ),
       ],
@@ -76,7 +76,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете категорию",
+          "Choose category",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -91,7 +91,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете категорию",
+                        "Choose category",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -122,7 +122,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список категорий'),
+                child: Text('Open category list'),
               ),
             ),
             const SizedBox(height: 10),
@@ -145,7 +145,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете счет",
+          "Choose bank account ",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -160,7 +160,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете счет",
+                        "Choose bank account ",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -191,7 +191,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список счетов'),
+                child: Text('Open list bank accounts'),
               ),
             ),
             const SizedBox(height: 10),
@@ -214,7 +214,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onUpdateCategory(),
-        child: const Text("Изменить операцию"),
+        child: const Text("Update operation"),
       ),
     );
   }
@@ -237,7 +237,7 @@ class _UpdateOperationState extends UpdateOperationBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Создание категории",
+                  "Creation category",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

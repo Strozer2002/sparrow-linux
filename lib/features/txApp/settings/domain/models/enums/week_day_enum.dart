@@ -5,19 +5,19 @@ part 'week_day_enum.g.dart';
 @HiveType(typeId: 6)
 enum WeekDay {
   @HiveField(0)
-  monday("Понедельник"),
+  monday("Monday"),
   @HiveField(1)
-  tuesday('Вторник'),
+  tuesday('Tuesday'),
   @HiveField(2)
-  wednesday("Среда"),
+  wednesday("Wednesday"),
   @HiveField(3)
-  thursday("Четверг"),
+  thursday("Thursday"),
   @HiveField(4)
-  friday('Пятница'),
+  friday('Friday'),
   @HiveField(5)
-  saturday("Суббота"),
+  saturday("Saturday"),
   @HiveField(6)
-  sunday("Воскресенье");
+  sunday("Sunday");
 
   const WeekDay(this.name);
 

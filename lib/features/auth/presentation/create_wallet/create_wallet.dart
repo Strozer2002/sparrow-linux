@@ -864,7 +864,7 @@ class _CreateWalletScreenState extends CreateWalletBloc {
                 mainAxisSpacing: 10,
                 childAspectRatio: 5 / 1,
               ),
-              itemBuilder: (context, index) => Row(
+              itemBuilder: (BuildContext context, index) => Row(
                 children: [
                   Text(
                     index < 9 ? "   ${index + 1}." : "${index + 1}.",
@@ -914,8 +914,26 @@ class _CreateWalletScreenState extends CreateWalletBloc {
                                 width: 1),
                           ),
                           focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.blue, width: 1),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 1,
+                            ),
+                          ),
+                          errorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 1,
+                            ),
+                          ),
+                          focusedErrorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 1,
+                            ),
+                          ),
+                          errorText: isError[index] ? "is empty" : null,
+                          errorStyle: const TextStyle(
+                            fontSize: 0,
                           ),
                         ),
                       ),
@@ -965,12 +983,33 @@ class _CreateWalletScreenState extends CreateWalletBloc {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                isCorrectMnemonic
+                    ? CustomIcon(
+                        onPressed: () => generateNew(),
+                        child: const Text("General New"),
+                      )
+                    : const Row(
+                        children: [
+                          Icon(
+                            Icons.error,
+                            color: Colors.red,
+                            size: 15,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Invalid Mnemonic")
+                        ],
+                      ),
                 CustomIcon(
-                  onPressed: () => generateNew(),
-                  child: const Text("General New"),
-                ),
-                CustomIcon(
-                  onPressed: () => import(),
+                  onPressed: () async {
+                    final res = await import();
+                    if (res) {
+                      setState(() {
+                        isCorrectMnemonic = false;
+                      });
+                      context.pop();
+                      showBottomDialog();
+                    }
+                  },
                   child: const Text("Import Wallet"),
                 ),
               ],
@@ -1107,7 +1146,10 @@ class _CreateWalletScreenState extends CreateWalletBloc {
                                             mnemonicCount,
                                             (index) => TextEditingController(),
                                           );
-
+                                          isError = List.generate(
+                                            mnemonicCount,
+                                            (index) => false,
+                                          );
                                           context.pop();
                                           showBottomDialog();
                                         });
@@ -1135,11 +1177,15 @@ class _CreateWalletScreenState extends CreateWalletBloc {
                           MouseRegion(
                             cursor: SystemMouseCursors.click,
                             child: GestureDetector(
-                              onTap: () => setState(() {
-                                isViewPrivateKey = !isViewPrivateKey;
-                                context.pop();
-                                showBottomDialog();
-                              }),
+                              onTap: () {
+                                setState(() {
+                                  isViewPrivateKey = !isViewPrivateKey;
+                                });
+                                if (mounted) {
+                                  context.pop();
+                                  showBottomDialog();
+                                }
+                              },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1275,7 +1321,10 @@ class _CreateWalletScreenState extends CreateWalletBloc {
           ),
           actions: <Widget>[
             CustomIcon(
-              onPressed: () => context.pop(),
+              onPressed: () {
+                onClear();
+                context.pop();
+              },
               child: const Text("Cancel"),
             )
           ],

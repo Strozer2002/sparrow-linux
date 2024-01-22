@@ -42,7 +42,7 @@ class _PasswordInputPageState extends State<PasswordInputPage> {
         context.go(AppData.routes.bankAccountScreen);
       } else {
         setState(() {
-          _errorText = "Неверный пароль";
+          _errorText = "Wrong password";
         });
       }
     }
@@ -54,7 +54,7 @@ class _PasswordInputPageState extends State<PasswordInputPage> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Введите пароль'),
+          title: const Text('Enter password'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -67,12 +67,12 @@ class _PasswordInputPageState extends State<PasswordInputPage> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: 'Пароль',
+                    labelText: 'Password',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Введите пароль';
+                      return 'Enter password';
                     }
                     return null;
                   },
@@ -87,7 +87,7 @@ class _PasswordInputPageState extends State<PasswordInputPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submit,
-                  child: const Text('Войти'),
+                  child: const Text('Enter'),
                 ),
               ],
             ),

@@ -69,7 +69,7 @@ class _AccountCardState extends State<AccountCard> {
                       scrollable: true,
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете действия",
+                        "Choose ",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: Row(
@@ -77,7 +77,7 @@ class _AccountCardState extends State<AccountCard> {
                         children: [
                           Column(
                             children: [
-                              const Text("Изменить"),
+                              const Text("Change"),
                               UpdateAccount(
                                 account: widget.account,
                                 onChange: widget.onChange,
@@ -86,7 +86,7 @@ class _AccountCardState extends State<AccountCard> {
                           ),
                           Column(
                             children: [
-                              const Text("Удалить"),
+                              const Text("Delete"),
                               DeleteAccount(
                                 account: widget.account,
                                 onDelete: widget.onDelete,

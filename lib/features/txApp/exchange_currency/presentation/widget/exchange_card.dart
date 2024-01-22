@@ -59,7 +59,7 @@ class _ExchangeCardState extends State<ExchangeCard> {
                     scrollable: true,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Выберете действия",
+                      "Choose method",
                       style: AppData.theme.text.s18w700,
                     ),
                     content: Row(
@@ -67,7 +67,7 @@ class _ExchangeCardState extends State<ExchangeCard> {
                       children: [
                         Column(
                           children: [
-                            const Text("Изменить"),
+                            const Text("Update"),
                             UpdateExchange(
                               onChange: widget.onChange,
                               exchangeCurrency: widget.exchangeCurrency,
@@ -76,7 +76,7 @@ class _ExchangeCardState extends State<ExchangeCard> {
                         ),
                         Column(
                           children: [
-                            const Text("Удалить"),
+                            const Text("Delete"),
                             DeleteExchange(
                               exchangeCurrency: widget.exchangeCurrency,
                               onDelete: widget.onDelete,

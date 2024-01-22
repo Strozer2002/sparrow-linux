@@ -75,7 +75,7 @@ abstract class UpdateCategoryBloc extends State<UpdateCategory> {
       r'([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?';
 
   String get chooseCategoryTypeText =>
-      "Выберете тип категории : ${categoryType.value == null ? "" : categoryType.value == CategoryType.income ? "Доход" : "Расход"}";
+      "Choose тип категории : ${categoryType.value == null ? "" : categoryType.value == CategoryType.income ? "Income" : "Expense"}";
 
   //........................
 

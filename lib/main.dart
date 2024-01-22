@@ -53,7 +53,7 @@ Future<void> getData() async {
   if (map['check'] == true) {
     AppData.routesConfig.init = AppData.routes.init;
   } else {
-    AppData.routesConfig.init = AppData.routes.bankAccountScreen;
+    AppData.routesConfig.init = AppData.routes.welcomeTxScreen;
   }
 }
 

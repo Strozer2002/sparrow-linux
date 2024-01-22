@@ -28,7 +28,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите сумму из курса",
+          "Enter sum from course",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -57,7 +57,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите сумму в курс",
+          "Enter sum in course",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -86,7 +86,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете валюту с курса",
+          "Choose currency from course",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -101,7 +101,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете валюту",
+                        "Choose currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -133,7 +133,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open list currency'),
               ),
             ),
             const SizedBox(height: 10),
@@ -151,7 +151,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете валюту в курса",
+          "Choose currency в курса",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -166,7 +166,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете валюту",
+                        "Choose currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -198,7 +198,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open list currency'),
               ),
             ),
             const SizedBox(height: 10),
@@ -216,7 +216,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onUpdateExchange(),
-        child: const Text("Изменить курс"),
+        child: const Text("Update course"),
       ),
     );
   }
@@ -238,7 +238,7 @@ class _UpdateExchangeState extends UpdateExchangeBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Создание курса",
+                  "Creation course",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

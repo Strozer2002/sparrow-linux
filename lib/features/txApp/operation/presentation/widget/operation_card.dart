@@ -72,7 +72,7 @@ class _CategoryCardState extends State<OperationCard> {
                     scrollable: true,
                     backgroundColor: Colors.white,
                     title: Text(
-                      "Выберете действия",
+                      "Choose method",
                       style: AppData.theme.text.s18w700,
                     ),
                     content: Row(
@@ -80,7 +80,7 @@ class _CategoryCardState extends State<OperationCard> {
                       children: [
                         Column(
                           children: [
-                            const Text("Изменить"),
+                            const Text("Update"),
                             UpdateOperation(
                               onChange: widget.onChange,
                               operation: widget.operation,
@@ -89,7 +89,7 @@ class _CategoryCardState extends State<OperationCard> {
                         ),
                         Column(
                           children: [
-                            const Text("Удалить"),
+                            const Text("Delete"),
                             DeleteOperation(
                               operation: widget.operation,
                               onDelete: widget.onDelete,

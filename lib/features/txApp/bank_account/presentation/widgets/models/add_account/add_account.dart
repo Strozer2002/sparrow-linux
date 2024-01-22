@@ -27,7 +27,7 @@ class _AddAccountState extends AddAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите название счета",
+          "Enter bank account name",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -50,7 +50,7 @@ class _AddAccountState extends AddAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите потраченную сумму",
+          "Enter sum",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -79,7 +79,7 @@ class _AddAccountState extends AddAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете валюту",
+          "Choose currency",
           style: AppData.theme.text.s16w500,
         ),
         Row(
@@ -95,7 +95,7 @@ class _AddAccountState extends AddAccountBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете основную валюту",
+                        "Choose main currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -126,7 +126,7 @@ class _AddAccountState extends AddAccountBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open currency list'),
               ),
             ),
             AnimatedSwitcher(
@@ -146,7 +146,7 @@ class _AddAccountState extends AddAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете иконку",
+          "Choose icon",
           style: AppData.theme.text.s16w500,
         ),
         Row(
@@ -156,7 +156,7 @@ class _AddAccountState extends AddAccountBloc {
               onPressed: pickIcon,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Text('Открыть список иконок'),
+                child: Text('Choose icon list'),
               ),
             ),
             AnimatedSwitcher(
@@ -174,7 +174,7 @@ class _AddAccountState extends AddAccountBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Выберете цвет иконки",
+          "Choose color icon",
           style: AppData.theme.text.s16w500,
         ),
         BlockPicker(
@@ -191,7 +191,7 @@ class _AddAccountState extends AddAccountBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onCreateAccount(),
-        child: const Text("Создать счет"),
+        child: const Text("Create bank account"),
       ),
     );
   }
@@ -213,7 +213,7 @@ class _AddAccountState extends AddAccountBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Создание счета",
+                  "Creation bank account",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

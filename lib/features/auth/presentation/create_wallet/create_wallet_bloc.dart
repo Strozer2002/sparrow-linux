@@ -15,6 +15,7 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   bool isLoading = false;
   bool isGeneral = true;
   Mnemonic? mnemonic;
+  bool isCorrectMnemonic = true;
 
   String r = '';
 
@@ -64,9 +65,14 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
     12,
     (index) => TextEditingController(),
   );
+  List<bool> isError = List.generate(
+    12,
+    (index) => false,
+  );
   final TextEditingController phraseCtrl = TextEditingController();
   final TextEditingController phraseController = TextEditingController();
   final TextEditingController privateKeyCtrl = TextEditingController();
+
   List<int> possibleCount = [12, 15, 18, 21, 24];
   bool isViewMnemonic = false;
   bool isViewPrivateKey = false;
@@ -75,6 +81,20 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
   void initState() {
     initCurrencies();
     super.initState();
+  }
+
+  void onClear() {
+    setState(() {
+      isCorrectMnemonic = true;
+      privateKeyCtrl.text = "";
+      phraseCtrl.text = "";
+      phraseController.text = "";
+      mnemonicList = List.filled(mnemonicCount, "");
+      controllers = List.generate(
+        mnemonicCount,
+        (index) => TextEditingController(),
+      );
+    });
   }
 
   Future<void> initCurrencies() async {
@@ -179,36 +199,42 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
     });
   }
 
-  Future<void> import() async {
-    setState(() {
-      if (phraseCtrl.text.isEmpty) {
-        bool isSnack = false;
-        for (int i = 0; i < controllers.length; i++) {
-          if (controllers[i].text.isEmpty) {
-            if (!isSnack) {
-              Clipboard.setData(
-                const ClipboardData(text: "Hi"),
-              ).then((_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("One of required fields is empty"),
-                  ),
-                );
-              });
-              isSnack = true;
-            }
-            isLoading = false;
-            print(phraseController.text);
-          } else {
-            isLoading = true;
+  Future<bool> import() async {
+    if (phraseCtrl.text.isEmpty) {
+      bool isSnack = false;
+      for (int i = 0; i < controllers.length; i++) {
+        if (controllers[i].text.isEmpty) {
+          if (!isSnack) {
+            Clipboard.setData(
+              const ClipboardData(text: "Hi"),
+            ).then((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("One of required fields is empty"),
+                ),
+              );
+            });
+            setState(() {
+              isError[i] = true;
+            });
+            isSnack = true;
+            return true;
           }
+          isLoading = false;
+          print(phraseController.text);
+        } else {
+          setState(() {
+            isError[i] = false;
+          });
+          isLoading = true;
         }
-        phraseController.text = mnemonicList.join(' ');
-      } else {
-        isLoading = true;
-        phraseController.text = phraseCtrl.text;
       }
-    });
+      phraseController.text = mnemonicList.join(' ');
+    } else {
+      isLoading = true;
+      phraseController.text = phraseCtrl.text;
+    }
+
     if (isLoading == true) {
       context.pop();
       await AppData.utils.importData(
@@ -223,5 +249,6 @@ abstract class CreateWalletBloc extends State<CreateWalletScreen> {
         isLoading = false;
       });
     }
+    return false;
   }
 }

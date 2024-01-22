@@ -83,14 +83,14 @@ abstract class UpdateOperationBloc extends State<UpdateOperation> {
     if (newAccount.value!.currency.name == newCategory.value!.currency.name) {
       exchangeAmount =
           amountCtrl.text.isNotEmpty ? double.parse(amountCtrl.text) : 0;
-      // Если расход то снимаем со счета
+      // Если расход то снимаем со bank account а
       if (newCategory.value!.type == CategoryType.expense) {
         newAccount.value!.amount += widget.operation.amount;
         newAccount.value!.amount -=
             amountCtrl.text.isNotEmpty ? double.parse(amountCtrl.text) : 0;
         await accountService.updateAccount(newAccount.value!);
       }
-      // Если доход то ставим на счет
+      // Если доход то ставим на bank account
       else if (newCategory.value!.type == CategoryType.income) {
         newAccount.value!.amount -= widget.operation.amount;
         newAccount.value!.amount +=
@@ -142,14 +142,14 @@ abstract class UpdateOperationBloc extends State<UpdateOperation> {
                 (fromToInto.amountFrom / fromToInto.amountInto)
             : 0;
         print("from to into");
-        // Если расход то снимаем со счета
+        // Если расход то снимаем со bank account а
         if (newCategory.value!.type == CategoryType.expense) {
           newAccount.value!.amount += widget.operation.amount;
           newAccount.value!.amount -=
               amountCtrl.text.isNotEmpty ? double.parse(amountCtrl.text) : 0;
           await accountService.updateAccount(newAccount.value!);
         }
-        // Если доход то ставим на счет
+        // Если доход то ставим на bank account
         else {
           if (newCategory.value!.type == CategoryType.income) {
             newAccount.value!.amount -= widget.operation.amount;
@@ -164,7 +164,7 @@ abstract class UpdateOperationBloc extends State<UpdateOperation> {
 
         newCategory.value!.amount += exchangeAmount;
         await categoryService.updateCategory(newCategory.value!);
-        // Добавляем операцию
+        // Добавляем operation
         final operation = Operation(
           id: widget.operation.id,
           date: date.value!,
@@ -197,14 +197,14 @@ abstract class UpdateOperationBloc extends State<UpdateOperation> {
                 (intoToFrom.amountInto / intoToFrom.amountFrom)
             : 0;
         print("  into to from");
-        // Если расход то снимаем со счета
+        // Если расход то снимаем со bank account а
         if (newCategory.value!.type == CategoryType.expense) {
           newAccount.value!.amount += widget.operation.amount;
           newAccount.value!.amount -=
               amountCtrl.text.isNotEmpty ? double.parse(amountCtrl.text) : 0;
           await accountService.updateAccount(newAccount.value!);
         }
-        // Если доход то ставим на счет
+        // Если доход то ставим на bank account
         else {
           if (newCategory.value!.type == CategoryType.income) {
             newAccount.value!.amount -= widget.operation.amount;
@@ -219,7 +219,7 @@ abstract class UpdateOperationBloc extends State<UpdateOperation> {
         newCategory.value!.amount += exchangeAmount;
         await categoryService.updateCategory(newCategory.value!);
 
-        // Добавляем операцию
+        // Добавляем operation
         final operation = Operation(
           id: widget.operation.id,
           date: date.value!,
@@ -240,7 +240,7 @@ abstract class UpdateOperationBloc extends State<UpdateOperation> {
           context: context,
           builder: (context) => AlertDialog(
             title: Text(
-                "Вы не может произвести операцию, создайте курс валют ${widget.operation.bankAccount.currency.name} : ${widget.operation.category.currency.name}"),
+                "Вы не может произвести operation, создайте курс валют ${widget.operation.bankAccount.currency.name} : ${widget.operation.category.currency.name}"),
           ),
         );
         return null;

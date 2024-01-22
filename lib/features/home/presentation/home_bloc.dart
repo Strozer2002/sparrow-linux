@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_rc4/simple_rc4.dart';
 import 'package:sparrow/app_data/app_data.dart';
@@ -32,6 +33,11 @@ abstract class HomeBloc extends State<HomeScreen> {
   int currentScreen = 0;
   bool isSwitch = false;
   String titleConnect = "";
+  bool isCorrectMnemonic = true;
+  List<bool> isError = List.generate(
+    12,
+    (index) => false,
+  );
 
   String policyType = 'Single Signature';
   List<String> policyTypeItems = [
@@ -42,7 +48,7 @@ abstract class HomeBloc extends State<HomeScreen> {
   int countKeyStores = 1;
 
   String calculateCountKeyStores(double value) {
-    // Функция для расчета отметки на основе значения слайдера
+    // Функция для раbank account а отметки на основе значения слайдера
     List<int> labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     int index = (value / (maxValue - minValue) * (labels.length - 1)).round();
     return labels[index].toString();
@@ -211,6 +217,7 @@ abstract class HomeBloc extends State<HomeScreen> {
 
   void onClear() {
     setState(() {
+      isCorrectMnemonic = true;
       payToCtrl.text = "";
       amountToCtrl.text = "";
       labelToCtrl.text = "";
@@ -258,34 +265,57 @@ abstract class HomeBloc extends State<HomeScreen> {
     });
   }
 
-  Future<void> import() async {
-    setState(() {
-      if (phraseCtrl.text.isEmpty) {
-        for (int i = 0; i < controllers.length; i++) {
-          if (controllers[i].text.isEmpty) {
-            return;
+  Future<bool> import() async {
+    if (phraseCtrl.text.isEmpty) {
+      bool isSnack = false;
+      for (int i = 0; i < controllers.length; i++) {
+        if (controllers[i].text.isEmpty) {
+          if (!isSnack) {
+            Clipboard.setData(
+              const ClipboardData(text: "Hi"),
+            ).then((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("One of required fields is empty"),
+                ),
+              );
+            });
+            setState(() {
+              isError[i] = true;
+            });
+            isSnack = true;
+            return true;
           }
+          isLoading = false;
+          print(phraseController.text);
+        } else {
+          setState(() {
+            isError[i] = false;
+          });
+          isLoading = true;
         }
-        phraseController.text = mnemonicList.join(' ');
-      } else {
-        phraseController.text = phraseCtrl.text;
       }
-      context.pop();
+      phraseController.text = mnemonicList.join(' ');
+    } else {
       isLoading = true;
-      print(phraseController.text);
-    });
-    await AppData.utils.importData(
-      public: phraseController.text,
-      isNew: false,
-    );
-    settingsService.putMnemonicSentence(phraseController.text);
-    if (mounted) {
-      onClear();
-      context.go(AppData.routes.homeScreen);
+      phraseController.text = phraseCtrl.text;
     }
-    setState(() {
-      isLoading = false;
-    });
+
+    if (isLoading == true) {
+      context.pop();
+      await AppData.utils.importData(
+        public: phraseController.text,
+        isNew: false,
+      );
+      settingsService.putMnemonicSentence(phraseController.text);
+      if (mounted) {
+        context.go(AppData.routes.homeScreen);
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }
+    return false;
   }
 
   Future<void> importKey() async {

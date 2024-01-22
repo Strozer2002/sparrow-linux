@@ -21,7 +21,7 @@ class _AccountPageState extends AccountBloc {
               rvList: [accounts],
               builder: (BuildContext context) => accounts.value.isEmpty
                   ? const Center(
-                      child: Text("У вас нет счетов"),
+                      child: Text("You have not bank accounts"),
                     )
                   : Obs(
                       rvList: [accounts],

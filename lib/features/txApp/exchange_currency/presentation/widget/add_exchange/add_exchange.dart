@@ -26,7 +26,7 @@ class _AddExchangeState extends AddExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите сумму из курса",
+          "Enter sum from course",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -55,7 +55,7 @@ class _AddExchangeState extends AddExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Введите сумму в курс",
+          "Enter sum in course",
           style: AppData.theme.text.s16w500,
         ),
         Container(
@@ -84,7 +84,7 @@ class _AddExchangeState extends AddExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете валюту с курса",
+          "Choose currency from course",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -99,7 +99,7 @@ class _AddExchangeState extends AddExchangeBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете валюту",
+                        "Choose currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -131,7 +131,7 @@ class _AddExchangeState extends AddExchangeBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open list currency'),
               ),
             ),
             const SizedBox(height: 10),
@@ -149,7 +149,7 @@ class _AddExchangeState extends AddExchangeBloc {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Выберете валюту в курса",
+          "Choose currency в курса",
           style: AppData.theme.text.s16w500,
         ),
         Column(
@@ -164,7 +164,7 @@ class _AddExchangeState extends AddExchangeBloc {
                     return AlertDialog(
                       backgroundColor: Colors.white,
                       title: Text(
-                        "Выберете валюту",
+                        "Choose currency",
                         style: AppData.theme.text.s18w700,
                       ),
                       content: SizedBox(
@@ -196,7 +196,7 @@ class _AddExchangeState extends AddExchangeBloc {
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Открыть список валют'),
+                child: Text('Open list currency'),
               ),
             ),
             const SizedBox(height: 10),
@@ -214,7 +214,7 @@ class _AddExchangeState extends AddExchangeBloc {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onCreateExchange(),
-        child: const Text("Создать курс"),
+        child: const Text("Create course"),
       ),
     );
   }
@@ -236,7 +236,7 @@ class _AddExchangeState extends AddExchangeBloc {
                 scrollable: true,
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Создание курса",
+                  "Creation course",
                   style: AppData.theme.text.s18w700,
                 ),
                 content: SizedBox(

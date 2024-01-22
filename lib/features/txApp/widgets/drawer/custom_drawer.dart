@@ -32,7 +32,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                 return AlertDialog(
                   backgroundColor: Colors.white,
                   title: Text(
-                    "Выберете основную валюту",
+                    "Choose main currency",
                     style: AppData.theme.text.s18w700,
                   ),
                   content: SizedBox(
@@ -71,7 +71,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
           child: Column(
             children: [
               Text(
-                "Основная валюта",
+                "Main currency",
                 style: AppData.theme.text.s14w500,
               ),
               Text(
@@ -100,7 +100,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                 return AlertDialog(
                   backgroundColor: Colors.white,
                   title: Text(
-                    "Выберете основной экран",
+                    "Choose main screen",
                     style: AppData.theme.text.s18w700,
                   ),
                   content: SizedBox(
@@ -139,7 +139,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
           child: Column(
             children: [
               Text(
-                "Начальный экран",
+                "Main screen",
                 style: AppData.theme.text.s14w500,
               ),
               Text(
@@ -168,7 +168,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                 return AlertDialog(
                   backgroundColor: Colors.white,
                   title: Text(
-                    "Напишите пароль",
+                    "Enter password",
                     style: AppData.theme.text.s18w700,
                   ),
                   content: Column(
@@ -193,7 +193,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                               });
                             },
                             child: const Text(
-                              "Удалить",
+                              "Delete",
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -211,7 +211,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                                 });
                               }
                             },
-                            child: const Text("Установить"),
+                            child: const Text("Create"),
                           ),
                         ],
                       ),
@@ -224,11 +224,11 @@ class _CustomDrawerState extends CustomDrawerBloc {
           child: Column(
             children: [
               Text(
-                "Наличие пароля",
+                "Password",
                 style: AppData.theme.text.s14w500,
               ),
               Text(
-                isPassword.value ? "Есть пароль" : "Нет пароля",
+                isPassword.value ? "Yes" : "No",
                 style: AppData.theme.text.s18w700
                     .copyWith(color: AppData.colors.sky700),
               ),
@@ -253,7 +253,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                 return AlertDialog(
                   backgroundColor: Colors.white,
                   title: Text(
-                    "Выберете первый день недели",
+                    "Choose first day of week",
                     style: AppData.theme.text.s18w700,
                   ),
                   content: SizedBox(
@@ -292,7 +292,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
           child: Column(
             children: [
               Text(
-                "Первый день недели",
+                "First day of week",
                 style: AppData.theme.text.s14w500,
               ),
               Text(
@@ -319,7 +319,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                 return AlertDialog(
                   backgroundColor: Colors.white,
                   title: Text(
-                    "Точно импортировать данные?",
+                    "Import data?",
                     style: AppData.theme.text.s18w700,
                     textAlign: TextAlign.center,
                   ),
@@ -327,7 +327,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Ваши локальные данные будут удалены",
+                        "You local data will be delete",
                         style: AppData.theme.text.s16w500,
                       ),
                       const SizedBox(height: 10),
@@ -345,14 +345,14 @@ class _CustomDrawerState extends CustomDrawerBloc {
                                 context.go(AppData.routes.bankAccountScreen);
                               }
                             },
-                            child: const Text("Да"),
+                            child: const Text("Yes"),
                           ),
                           ElevatedButton(
                             style: AppData.theme.button.deleteElevatedButton,
                             onPressed: () {
                               context.pop();
                             },
-                            child: const Text("Нет"),
+                            child: const Text("No"),
                           ),
                         ],
                       ),
@@ -362,7 +362,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
               });
         },
         child: Text(
-          "Импортировать данные",
+          "Import data",
           style:
               AppData.theme.text.s18w700.copyWith(color: AppData.colors.sky700),
         ),
@@ -380,12 +380,12 @@ class _CustomDrawerState extends CustomDrawerBloc {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "1money",
+                "Sparrow Wallet",
                 style: AppData.theme.text.s28w700,
               ),
               const SizedBox(height: 50),
               Text(
-                "Настройки",
+                "Settings",
                 style: AppData.theme.text.s18w700,
               ),
               const SizedBox(height: 25),
@@ -400,7 +400,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
               Container(height: 1, color: AppData.colors.gray300),
               const SizedBox(height: 25),
               Text(
-                "Данные",
+                "Data",
                 style: AppData.theme.text.s18w700,
               ),
               const SizedBox(height: 25),
