@@ -380,7 +380,7 @@ class _CustomDrawerState extends CustomDrawerBloc {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Sparrow Wallet",
+                "Open Portfolio : ToolBack",
                 style: AppData.theme.text.s28w700,
               ),
               const SizedBox(height: 50),

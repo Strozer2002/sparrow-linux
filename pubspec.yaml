@@ -81,7 +81,7 @@ flutter_launcher_icons:
 
 
 msix_config:
-  display_name: "Sparrow Wallet : Portfolio App"  
+  display_name: "Open Portfolio : ToolBack"  
   msix_version: 1.0.0.0
   logo_path: assets/icons/1024.png
   publisher_display_name: TAN MY SON DESIGN

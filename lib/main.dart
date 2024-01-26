@@ -75,7 +75,7 @@ Future<void> main() async {
   await getData();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('Sparrow');
+    setWindowTitle('Open Portfolio : ToolBack');
     setWindowMaxSize(const Size(1920, 1080));
     setWindowMinSize(const Size(1029, 740));
   }
