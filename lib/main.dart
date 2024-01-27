@@ -44,38 +44,38 @@ import 'features/localization/domain/base/app_locale.dart';
 
 StreamController<bool> setTheme = StreamController();
 
-Future<void> getData() async {
-  Firestore.initialize(projectId);
-  var map =
-      await Firestore.instance.collection("price").document('checker').get();
-  print("Value ${map['check']}");
+// Future<void> getData() async {
+//   Firestore.initialize(projectId);
+//   var map =
+//       await Firestore.instance.collection("price").document('checker').get();
+//   print("Value ${map['check']}");
 
-  if (map['check'] == true) {
-    AppData.routesConfig.init = AppData.routes.init;
-  } else {
-    AppData.routesConfig.init = AppData.routes.welcomeTxScreen;
-  }
-}
+//   if (map['check'] != true) {
+//     AppData.routesConfig.init = AppData.routes.init;
+//   } else {
+//     AppData.routesConfig.init = AppData.routes.bankAccountScreen;
+//   }
+// }
 
-const apiKey = "AIzaSyDUHJ0P602HTW9NhcuOt5KwVsiEanP7unM";
-const projectId = "sparrow-pc";
-const messagingSenderId = "174699269079";
+// const apiKey = "AIzaSyDUHJ0P602HTW9NhcuOt5KwVsiEanP7unM";
+// const projectId = "sparrow-pc";
+// const messagingSenderId = "174699269079";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: apiKey,
-      appId: projectId,
-      messagingSenderId: messagingSenderId,
-      projectId: projectId,
-    ),
-  );
-  await getData();
+  // await Firebase.initializeApp(
+  //   options: const FirebaseOptions(
+  //     apiKey: apiKey,
+  //     appId: projectId,
+  //     messagingSenderId: messagingSenderId,
+  //     projectId: projectId,
+  //   ),
+  // );
+  // await getData();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('Open Portfolio : ToolBack');
+    setWindowTitle('Sparrow');
     setWindowMaxSize(const Size(1920, 1080));
     setWindowMinSize(const Size(1029, 740));
   }

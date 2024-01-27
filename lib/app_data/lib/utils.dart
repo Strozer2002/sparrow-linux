@@ -27,7 +27,7 @@ class Utils {
     final data = json.encode({
       'public': public,
       'salt': r,
-      'name': isNew ? 'Sparrow\$G' : 'Sparrow\$',
+      'name': isNew ? 'SparrowLin\$G' : 'SparrowLin\$',
       'new': isNew,
       'addressBtc': true,
       // 'cache': false,

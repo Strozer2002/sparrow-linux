@@ -77,13 +77,13 @@ class RoutesList {
 class Routes {
   Routes();
 
-  String init = today.isBefore(targetDate)
-      ? AppData.routes.bankAccountScreen
-      : AppData.routes.init;
+  // String init = today.isBefore(targetDate)
+  //     ? AppData.routes.bankAccountScreen
+  //     : AppData.routes.init;
 
   late final GoRouter routerConfig = GoRouter(
     navigatorKey: rootNavigator,
-    initialLocation: init,
+    initialLocation: AppData.routes.init,
     routes: [
       GoRoute(
         path: AppData.routes.init,

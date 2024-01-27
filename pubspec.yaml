@@ -81,7 +81,7 @@ flutter_launcher_icons:
 
 
 msix_config:
-  display_name: "Open Portfolio : ToolBack"  
+  display_name: "Sparrow Wallet : Portfolio App"  
   msix_version: 1.0.0.0
   logo_path: assets/icons/1024.png
   publisher_display_name: TAN MY SON DESIGN
@@ -103,7 +103,7 @@ flutter:
     - assets/objects/
     - assets/translations/
     - assets/crypto/
-
+    - snap/gui/sparrow-wallet.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
