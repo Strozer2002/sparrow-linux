@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0.0
-Name=Sparrow Wallet
-Comment=Sparrow Wallet : Bitcoin Wallet
-Exec=sparrow-wallet
-Icon=${SNAP}/meta/gui/sparrow-wallet.png 
-Terminal=false
-Type=Application

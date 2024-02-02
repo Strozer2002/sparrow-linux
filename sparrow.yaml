@@ -24,6 +24,6 @@ modules:
       - install -Dm644 sparrow/com.craigrow.sparrow.desktop /app/share/applications/com.craigrow.sparrow.desktop
     sources:
       - type: archive
-        path: sparrow-wallet.tar.xz
+        path: sparrow.tar.xz
         sha256: 2ce299791449a53f46e5456b0dcd479d82a99093a9d6ebe197e4bef29592d819
         dest: sparrow

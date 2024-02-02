@@ -103,7 +103,7 @@ flutter:
     - assets/objects/
     - assets/translations/
     - assets/crypto/
-    - snap/gui/sparrow-wallet.png
+    - snap/gui/sparrow.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
